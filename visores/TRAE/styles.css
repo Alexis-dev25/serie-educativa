@@ -1,0 +1,72 @@
+body {
+    background-image: url("vsc-fondo.png");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+::selection {
+    background-color: orangered;
+    color: #fff;
+}
+a::selection{
+    background-color: orangered;
+    color: #fff;
+}
+a{
+    color:orangered;
+}
+h1 {
+    background-color: #111;
+    text-align: start;
+    color: whitesmoke;
+    border: 3px solid orangered;
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+section {
+    background-color: #1111116c;
+    color: whitesmoke;
+    border: 3px solid orangered;
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+h1, h2 , h3 {
+    color: whitesmoke;
+    text-align: center;
+}
+div, .code {
+    background-color: #1111112f;
+    color:white;
+    padding: 5px 20px;
+    margin-top: 15px;
+    text-align: left;
+    border: 2px solid orangered;
+    border-radius: 10px;
+}
+.tabla {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100% auto;
+    border-collapse: collapse;
+}
+
+.tabla th, .tabla td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid orangered;
+}
+.links{
+    color: red;
+    text-align: center;
+}
+.trae {
+    margin-right: 40px;
+}

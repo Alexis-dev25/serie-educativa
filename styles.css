@@ -1,0 +1,77 @@
+body {
+    background-image: url("fondo.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+::selection {
+    background-color: purple;
+    color: white;
+}
+a{
+    color: cyan;
+}
+h1 {
+    background-color: #111;
+    color: whitesmoke;
+    border: 3px solid purple;
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+section {
+    background-color: #111;
+    color: whitesmoke;
+    border: 3px solid purple;
+    padding: 20px;
+    margin: 10px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+h1, h2 , h3 {
+    color: whitesmoke;
+    text-align: center;
+}
+div {
+    background-color: #111;
+    color:white;
+    padding: 10px;
+    margin-top: 15px;
+    text-align: left;
+    border: 2px solid rgb(43, 173, 253);
+    border-radius: 10px;
+}
+.l{
+    text-align: center;
+}
+.html-css {
+    border-color: darkorange;
+}
+.dhtml-css {
+    border-color: #003fd3;
+}
+.java, .djava {
+    border-color: rgb(255, 176, 30);
+}
+.js, .djs {
+    border-color: rgb(255, 255, 31);
+}
+.python {
+    border-color: #46abd3;
+}
+.dpython {
+    border-color: #ffdc13;
+}
+.sql, .dsql {
+    border-color: darkorange;
+}
+.vsc, .dvsc {
+    border-color: #29B6F6;
+}
+.trae, .dtrae {
+    border-color: orangered;
+}

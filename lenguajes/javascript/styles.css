@@ -1,0 +1,55 @@
+body {
+    background-color: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+::selection {
+    background-color: rgb(255, 255, 31);
+    color: #222;
+}
+a::selection{
+    background-color: rgb(255, 255, 31);
+    color: #222;
+}
+a{
+    color:rgb(255, 255, 31);
+}
+h1 {
+    background-color: #111;
+    color: whitesmoke;
+    border: 3px solid rgb(255, 255, 31);
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+section {
+    background-color: #111;
+    color: whitesmoke;
+    border: 3px solid rgb(255, 255, 31);
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+h1, h2 , h3 {
+    color: whitesmoke;
+    text-align: center;
+}
+div, .code {
+    background-color: #111;
+    color:white;
+    padding: 5px 20px;
+    margin-top: 15px;
+    text-align: left;
+    border: 2px solid rgb(255, 255, 31);
+    border-radius: 10px;
+}
+.links{
+    color: red;
+    text-align: center;
+}
+.js {
+    margin-right: 40px;
+}

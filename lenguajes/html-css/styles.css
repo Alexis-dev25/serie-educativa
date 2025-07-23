@@ -1,0 +1,60 @@
+body {
+    background: linear-gradient(to bottom, rgb(233, 128, 0), #163264);
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+::selection {
+    background-color: #578aff;
+    color: white;
+}
+a::selection{
+    color: whitesmoke;
+}
+a{
+    color:#578aff;
+}
+.title1,.html, .intro, .text, .info, .carac, .usos, .vent-desvent {
+    border: 3px solid darkorange;
+}
+.title2,.css, .css-intro, .css-text, .css-info, .css-carac, .css-usos, .css-vent-desvent {
+    border: 3px solid #003fd3;
+}
+h1, h2 {
+    background-color: #111;
+    color: whitesmoke;
+    border: 3px solid white;
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+section {
+    background: #111;
+    color: whitesmoke;
+    border: 3px solid black;
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+h1, h2 , h3 {
+    color: whitesmoke;
+    text-align: center;
+}
+div {
+    background-color: #111;
+    color:white;
+    padding: 5px 20px;
+    margin-top: 15px;
+    text-align: left;
+    border: 2px solid black;
+    border-radius: 10px;    
+}
+.links, .mas, .mi-opinion{
+    border: 2px solid white;
+    text-align: center;
+}
+.css-icon, .html-icon {
+    margin-right: 40px;
+}

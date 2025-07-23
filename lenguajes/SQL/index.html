@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>SQL</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <h1>¿Qué es SQL?</h1>
+    <section class="intro">
+        <div class="text">
+            <h2>Introducción</h2>
+            <p>SQL (Structured Query Language) es un lenguaje específico diseñado para gestionar y manipular bases de datos relacionales. Fue desarrollado por IBM en los años 70 y se ha convertido en el estándar para trabajar con sistemas de bases de datos como MySQL, PostgreSQL, SQL Server, SQLite, Oracle, entre otros.</p>
+    </div>
+    </section>
+    <section class="info">
+        <h2>Más Informarción</h2>
+        <div class="carac">
+            <h3>Características principales</h3>
+            <ul>
+                <li>
+                    <p>Permite consultar, insertar, actualizar y eliminar datos en bases de datos.</p>
+                </li>
+                <li>
+                    <p>Usa una sintaxis estructurada basada en comandos.</p>
+                </li>
+                <li>
+                    <p>Trabaja con tablas relacionadas entre sí.</p>
+                </li>
+                <li>
+                    <p>Es declarativo: le dices qué hacer, no cómo hacerlo.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="commands">
+            <h3>Comandos</h3>
+            <table class="tabla">
+                <thead>
+                    <th>Comando</th>
+                    <th>Función</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SELECT</td>
+                        <td>Recupera datos de una tabla</td>
+                    </tr>
+                    <tr>
+                        <td>INSERT</td>
+                        <td>Agrega nuevos registros</td>
+                    </tr>
+                    <tr>
+                        <td>UPDATE</td>
+                        <td>Modifica datos existentes</td>
+                    </tr>
+                    <tr>
+                        <td>DELETE</td>
+                        <td>Elimina registros</td>
+                    </tr>
+                    <tr>
+                        <td>CREATE</td>
+                        <td>Crea bases de datos, tablas u otros objeto</td>
+                    </tr>
+                    <tr>
+                        <td>DROP</td>
+                        <td>Elimina bases de datos o tablas</td>
+                    </tr>
+                    <tr>
+                        <td>WHERE</td>
+                        <td>Filtra registros según condiciones</td>
+                    </tr>
+                    <tr>
+                        <td>JOIN</td>
+                        <td>Combina datos de varias tablas</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="vent-desvent">
+            <h3>Ventajas y Desventajas</h3>
+            <h4>Ventajas</h4>
+            <ul>
+                <li>
+                    <p>Ideal para almacenar grandes volúmenes de datos.</p>
+                </li>
+                <li>
+                    <p>Muy eficiente para realizar búsquedas, filtros y reportes.</p>
+                </li>
+                <li>
+                    <p>Lenguaje estándar en el mundo empresarial y de software.</p>
+                </li>
+            </ul>
+            <h4>Desventajas</h4>
+            <ul>
+                <li>
+                    <p>No está diseñado para tareas fuera del ámbito de bases de datos.</p>
+                </li>
+                <li>
+                    <p>Requiere entender bien la estructura de las tablas y relaciones.</p>
+                </li>
+                <li>
+                    <p>Algunas variaciones según el sistema (MySQL ≠ Oracle en algunos detalles).</p>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h3>Ejemplo!</h3>
+            <pre class="code"><code>
+-- Crear una tabla
+CREATE TABLE usuarios (
+id INT PRIMARY KEY,
+nombre VARCHAR(50),
+edad INT
+);
+-- Insertar datos
+INSERT INTO usuarios (id, nombre, edad)
+VALUES (1, 'user', 18);
+-- Consultar datos
+SELECT * FROM usuarios;
+-- Filtrar datos
+SELECT nombre FROM usuarios WHERE edad > 12;
+            </code></pre>
+        </div>
+    </section>
+    <section class="mas">
+        <h2>Un poco más!</h2>
+        <div class="links">
+            <h3>Links</h3>
+            <a href="https://www.w3schools.com/sql/" target="blank" class="sql">
+                <img src="sql.png" alt="sql" width="100" height="100">
+            </a>
+            <a href="https://github.com/Alexis-dev25" target="blank" class="social-icon">
+                <img src="github.png" alt="github" width="100" height="100">
+            </a>
+        </div>    
+    </section>
+</body>
+</html>

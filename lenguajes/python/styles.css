@@ -1,0 +1,53 @@
+body {
+    background-color: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+::selection {
+    color: #222;
+    background-color: #ffdc13;
+}
+a::selection{
+    color: #222;
+    background-color: #ffdc13;
+}
+a{
+    color:#ffdc13;
+}
+h1 {
+    background-color: #151922;
+    color: whitesmoke;
+    border: 3px solid #273f79;
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+section {
+    background-color: #151922;
+    color: whitesmoke;
+    border: 3px solid #46abd3;
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+h1, h2 , h3 {
+    text-align: center;
+}
+div, .code {
+    background-color: #151922;
+    color:white;
+    padding: 5px 20px;
+    margin-top: 15px;
+    text-align: left;
+    border: 2px solid #ffdc13;
+    border-radius: 10px;
+}
+.links{
+    text-align: center;
+}
+.python {
+    margin-right: 40px;
+}

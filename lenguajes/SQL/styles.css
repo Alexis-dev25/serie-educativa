@@ -1,0 +1,69 @@
+body {
+    background-color: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+::selection {
+    background-color: #578aff;
+}
+a::selection{
+    color: whitesmoke;
+}
+a{
+    color:#578aff;
+}
+h1 {
+    background-color: #151922;
+    color: whitesmoke;
+    border: 3px solid darkorange;
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+section {
+    background-color: #151922;
+    color: whitesmoke;
+    border: 3px solid darkorange;
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+h1, h2 , h3 {
+    text-align: center;
+}
+.tabla {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla th, .tabla td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid darkorange;
+}
+
+.tabla th {
+    background-color: rgb(255, 205, 111);
+    color: #111;
+}
+
+div, .code {
+    background-color: #151922;
+    color:white;
+    padding: 5px 20px;
+    margin-top: 15px;
+    text-align: left;
+    border: 2px solid darkorange;
+    border-radius: 10px;
+}
+.links{
+    text-align: center;
+}
+.sql {
+    margin-right: 40px;
+}
