@@ -1,17 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: #111;
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
+    padding: 15px;
+    min-height: 100vh;
 }
+
 ::selection {
     background-color: #578aff;
 }
+
 a::selection{
     color: whitesmoke;
 }
+
 a{
     color:#578aff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #fff;
 }
 h1 {
     background-color: #151922;
@@ -66,4 +83,98 @@ div, .code {
 }
 .sql {
     margin-right: 40px;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Media Queries para diseño responsive */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        padding: 8px 15px;
+        width: 90%;
+    }
+
+    section {
+        padding: 15px;
+        width: 90%;
+    }
+
+    div, .code {
+        padding: 5px 15px;
+        margin-top: 10px;
+    }
+
+    .sql {
+        margin-right: 20px;
+    }
+
+    .tabla {
+        font-size: 0.9em;
+    }
+
+    .tabla th, .tabla td {
+        padding: 6px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        padding: 8px 10px;
+    }
+
+    section {
+        padding: 10px;
+    }
+
+    div, .code {
+        padding: 5px 10px;
+        font-size: 0.9em;
+    }
+
+    .sql {
+        margin-right: 10px;
+        display: block;
+        margin: 10px auto;
+    }
+
+    .tabla {
+        font-size: 0.8em;
+    }
+
+    .tabla th, .tabla td {
+        padding: 4px;
+    }
+}
+
+/* Mejoras para pantallas más grandes */
+@media screen and (min-width: 1200px) {
+    section {
+        padding: 30px;
+    }
+
+    div, .code {
+        transition: transform 0.3s ease;
+    }
+
+    div:hover, .code:hover {
+        transform: scale(1.02);
+    }
+
+    .tabla {
+        transition: all 0.3s ease;
+    }
+
+    .tabla:hover {
+        transform: scale(1.01);
+    }
 }

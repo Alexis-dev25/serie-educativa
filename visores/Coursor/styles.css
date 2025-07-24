@@ -1,5 +1,5 @@
 body {
-    background-image: url("trae-fondo.png");
+    background-image: url("cursor-fondo.png");
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
@@ -9,21 +9,21 @@ body {
     text-align: center;
 }
 ::selection {
-    background-color: orangered;
-    color: #fff;
+    background-color: white;
+    color: #111;
 }
 a::selection{
-    background-color: orangered;
-    color: #fff;
+    background-color: white;
+    color: #111;
 }
 a{
-    color:orangered;
+    color:rgb(146, 146, 146);
 }
 h1 {
     background-color: #111;
     text-align: start;
     color: whitesmoke;
-    border: 3px solid orangered;
+    border: 3px solid white;
     padding: 10px 20px;
     margin: 20px auto;
     max-width: 700px;
@@ -34,7 +34,7 @@ h1 {
 section {
     background-color: #1111116c;
     color: whitesmoke;
-    border: 3px solid orangered;
+    border: 3px solid white;
     padding: 10px 20px;
     margin: 20px auto;
     max-width: 700px;
@@ -50,7 +50,7 @@ div, .code {
     padding: 5px 20px;
     margin-top: 15px;
     text-align: left;
-    border: 2px solid orangered;
+    border: 2px solid white;
     border-radius: 10px;
 }
 .tabla {
@@ -63,12 +63,12 @@ div, .code {
 .tabla th, .tabla td {
     padding: 8px;
     text-align: center;
-    border: 1px solid orangered;
+    border: 1px solid white;
 }
 .links{
     color: red;
     text-align: center;
 }
-.trae {
+.cursor {
     margin-right: 40px;
 }

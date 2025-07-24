@@ -1,3 +1,10 @@
+/* Estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-image: url("fondo.jpg");
     background-position: center;
@@ -6,13 +13,22 @@ body {
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
+    padding: 20px;
 }
+
 ::selection {
     background-color: purple;
     color: white;
 }
-a{
+
+a {
     color: cyan;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #fff;
 }
 h1 {
     background-color: #111;
@@ -21,8 +37,10 @@ h1 {
     padding: 10px 20px;
     margin: 20px auto;
     max-width: 700px;
+    width: 90%;
     border-radius: 10px;
 }
+
 section {
     background-color: #111;
     color: whitesmoke;
@@ -30,6 +48,7 @@ section {
     padding: 20px;
     margin: 10px auto;
     max-width: 700px;
+    width: 90%;
     border-radius: 10px;
 }
 h1, h2 , h3 {
@@ -74,4 +93,59 @@ div {
 }
 .trae, .dtrae {
     border-color: orangered;
+}
+
+/* Media Queries para diseño responsive */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        padding: 8px 15px;
+    }
+
+    section {
+        padding: 15px;
+    }
+
+    div {
+        margin: 10px 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        padding: 8px 10px;
+    }
+
+    section {
+        padding: 10px;
+    }
+
+    div {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+}
+
+/* Mejoras para pantallas más grandes */
+@media screen and (min-width: 1200px) {
+    section {
+        padding: 30px;
+    }
+
+    div {
+        transition: transform 0.3s ease;
+    }
+
+    div:hover {
+        transform: scale(1.02);
+    }
 }
