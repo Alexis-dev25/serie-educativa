@@ -94,7 +94,9 @@ div {
 .trae, .dtrae {
     border-color: orangered;
 }
-
+.cursor, .dcursor{
+    border-color: #fff;
+}
 /* Media Queries para diseño responsive */
 @media screen and (max-width: 768px) {
     body {
