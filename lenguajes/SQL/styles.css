@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #111;
+    background-image: url("sql-fondo.png");
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
@@ -31,7 +31,7 @@ a:hover {
     color: #fff;
 }
 h1 {
-    background-color: #151922;
+    background-color: #1111116c;
     color: whitesmoke;
     border: 3px solid darkorange;
     padding: 10px 20px;
@@ -40,7 +40,7 @@ h1 {
     border-radius: 10px;
 }
 section {
-    background-color: #151922;
+    background-color: #1111116c;
     color: whitesmoke;
     border: 3px solid darkorange;
     padding: 10px 20px;

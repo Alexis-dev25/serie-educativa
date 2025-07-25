@@ -5,7 +5,7 @@
 }
 
 body {
-    background: linear-gradient(to bottom, rgb(233, 128, 0), #163264);
+    background-image: url("html-css-fondo.png");
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
@@ -49,7 +49,7 @@ h1, h2 {
 }
 
 section {
-    background: #111;
+    background: #1111116c;
     color: whitesmoke;
     border: 3px solid black;
     padding: 10px 20px;
@@ -63,7 +63,7 @@ h1, h2 , h3 {
     text-align: center;
 }
 div {
-    background-color: #111;
+    background-color: #1111116c;
     color:white;
     padding: 5px 20px;
     margin-top: 15px;

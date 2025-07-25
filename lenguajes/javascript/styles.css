@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #111;
+    background-image: url("js-fondo.png");
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
@@ -42,7 +42,7 @@ h1 {
     border-radius: 10px;
 }
 section {
-    background-color: #111;
+    background-color: #1111116c;
     color: whitesmoke;
     border: 3px solid rgb(255, 255, 31);
     padding: 10px 20px;
@@ -55,7 +55,7 @@ h1, h2 , h3 {
     text-align: center;
 }
 div, .code {
-    background-color: #111;
+    background-color: #1111116c;
     color:white;
     padding: 5px 20px;
     margin-top: 15px;

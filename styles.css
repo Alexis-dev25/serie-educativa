@@ -6,7 +6,7 @@
 }
 
 body {
-    background-image: url("fondo.jpg");
+    background-image: url("fondo.png");
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
