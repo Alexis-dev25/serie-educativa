@@ -83,7 +83,7 @@ const rl = readline.createInterface({
 let caras  = ["sello", "cruz"];
 let cpu = elegirAleatorio(caras);
 console.log("Opciones: (Sello)  (Cara)");
-rl.question("¿Que cara escojes? ".toLocaleLowerCase() , function(user){
+rl.question("¿Que cara escojes?".toLocaleLowerCase(),function(user){
     if (user == cpu) {
         console.log("Ganaste!!")
     }

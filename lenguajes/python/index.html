@@ -102,15 +102,15 @@ print(" ")
 letters = ["a", "b", "c", "d", "e", "f"]
 numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9" "0"]
 simbols = ["@", "#", "$", "%", "&", "*", "=", "+", "-", "^"]
-company = input("Danos el nombre de la compañía para la que quieres el password: ")
+company = input("company: ")
 # generar caracteres aleatorios
-random_letters = random.sample(letters, 6)
-random_numbers = random.sample(numbers, 2)
-random_symbol = random.sample(simbols, 1)
+r_letters = random.sample(letters, 6)
+r_numbers = random.sample(numbers, 2)
+r_symbol = random.sample(simbols, 1)
 
 #combinar los caracteres
-password_parts = random_letters + random_numbers + random_symbol + [company]
-random.shuffle(password_parts)
+password_parts = r_letters+r_numbers+r_symbol+[company]
+r.shuffle(password_parts)
 
 #crear la contraseña final
 password = "".join(password_parts)
