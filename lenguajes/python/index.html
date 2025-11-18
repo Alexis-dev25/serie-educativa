@@ -95,26 +95,7 @@
         <h2>Para aprender 🧠</h2>
         <div>
             <h3>Ejemplo!</h3>
-            <pre class="code"><code>
-# generador de contraseñas (ejemplo)                
-import random
-print(" ")                
-letters = ["a", "b", "c", "d", "e", "f"]
-numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-simbols = ["@", "#", "$", "%", "&", "*", "=", "+", "-", "^"]
-company = input("company: ")
-# generar caracteres aleatorios
-r_letters = random.sample(letters, 6)
-r_numbers = random.sample(numbers, 2)
-r_symbol = random.sample(simbols, 1)
-
-# combinar los caracteres
-password_parts = r_letters + r_numbers + r_symbol + [company]
-random.shuffle(password_parts)
-# crear la contraseña finalpassword = "".join(password_parts)
-print(" ")
-print(f"Tu password es: {password}")
-            </code></pre>
+            <a href="ejemplo.py" download>Descargar Ejemplo</a>
         </div>
     </section>
     <section class="mas">

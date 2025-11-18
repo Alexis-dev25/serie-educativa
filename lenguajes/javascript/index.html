@@ -67,34 +67,7 @@
         <h2>Para aprender 🧠</h2>
         <div>
             <h3>Ejemplo!</h3>
-            <pre class="code"><code>
-function elegirAleatorio(lista) {
-        let indice = Math.floor(Math.random() * lista.length);
-        return lista[indice];
-}
-
-const readline = require('readline');
-
-const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-});
-
-let caras  = ["sello", "cruz"];
-let cpu = elegirAleatorio(caras);
-console.log("Opciones: (Sello)  (Cara)");
-rl.question("¿Que cara escojes?", function(user){
-    user = (user || "").toLowerCase();
-    if (user == cpu) {
-        console.log("Ganaste!!")
-    }
-    else {
-        console.log("Has perdido!! cayó" , cpu)
-    }
-    rl.close();
-});
-
-            </code></pre>
+            <a href="ejemplo.js" download>Descargar Ejemplo</a>
         </div>
     </section>
     <section>
