@@ -83,13 +83,15 @@ const rl = readline.createInterface({
 let caras  = ["sello", "cruz"];
 let cpu = elegirAleatorio(caras);
 console.log("Opciones: (Sello)  (Cara)");
-rl.question("¿Que cara escojes?".toLocaleLowerCase(),function(user){
+rl.question("¿Que cara escojes?", function(user){
+    user = (user || "").toLowerCase();
     if (user == cpu) {
         console.log("Ganaste!!")
     }
     else {
-        console.log("Has perdido!! callo" , cpu)
+        console.log("Has perdido!! cayó" , cpu)
     }
+    rl.close();
 });
 
             </code></pre>
@@ -142,10 +144,10 @@ rl.question("¿Que cara escojes?".toLocaleLowerCase(),function(user){
         <div class="links">
             <h3>Links</h3>
             <p>(este link de JavaScript no es oficial lleva a una guia para aprenderlo)</p>
-            <a href="https://lenguajejs.com/javascript/" target="blank" class="js">
+            <a href="https://lenguajejs.com/javascript/" target="_blank" rel="noopener noreferrer" class="js">
                 <img src="javascript.png" alt="js" width="100" height="100">
             </a>
-            <a href="https://github.com/Alexis-dev25" target="blank" class="social-icon">
+            <a href="https://github.com/Alexis-dev25" target="_blank" rel="noopener noreferrer" class="social-icon">
                 <img src="github.png" alt="github" width="100" height="100">
             </a>
         </div>    

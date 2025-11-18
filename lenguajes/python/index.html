@@ -96,26 +96,24 @@
         <div>
             <h3>Ejemplo!</h3>
             <pre class="code"><code>
-                #generador de contraseñas
-                import random
-                print(" ")
-                letters = ["a", "b", "c", "d", "e", "f"]
-                numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9" "0"]
-                simbols = ["@", "#", "$", "%", "&", "*", "=", "+", "-", "^"]
-                company = input("company: ")
-                # generar caracteres aleatorios
-                r_letters = random.sample(letters, 6)
-                r_numbers = random.sample(numbers, 2)
-                r_symbol = random.sample(simbols, 1)
+# generador de contraseñas (ejemplo)                
+import random
+print(" ")                
+letters = ["a", "b", "c", "d", "e", "f"]
+numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+simbols = ["@", "#", "$", "%", "&", "*", "=", "+", "-", "^"]
+company = input("company: ")
+# generar caracteres aleatorios
+r_letters = random.sample(letters, 6)
+r_numbers = random.sample(numbers, 2)
+r_symbol = random.sample(simbols, 1)
 
-                #combinar los caracteres
-                password_parts = r_letters+r_numbers+r_symbol+[company]
-                r.shuffle(password_parts)
-
-                #crear la contraseña final
-                password = "".join(password_parts)
-                print(" ")
-                print(f"Tu password es: {password}")
+# combinar los caracteres
+password_parts = r_letters + r_numbers + r_symbol + [company]
+random.shuffle(password_parts)
+# crear la contraseña finalpassword = "".join(password_parts)
+print(" ")
+print(f"Tu password es: {password}")
             </code></pre>
         </div>
     </section>
@@ -130,10 +128,10 @@
         </div>
         <div class="links">
             <h3>Links</h3>
-            <a href="https://www.python.org" target="blank" class="python">
-                <img src="python.png" alt="pyhon" width="100" height="100">
+            <a href="https://www.python.org" target="_blank" rel="noopener noreferrer" class="python">
+                <img src="python.png" alt="python" width="100" height="100">
             </a>
-            <a href="https://github.com/Alexis-dev25" target="blank" class="social-icon">
+            <a href="https://github.com/Alexis-dev25" target="_blank" rel="noopener noreferrer" class="social-icon">
                 <img src="github.png" alt="github" width="100" height="100">
             </a>
         </div>    
