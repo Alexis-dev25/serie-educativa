@@ -97,6 +97,9 @@ div {
 .cursor, .dcursor{
     border-color: #fff;
 }
+.fb{
+    text-align: center;
+}
 /* Media Queries para diseño responsive */
 @media screen and (max-width: 768px) {
     body {
