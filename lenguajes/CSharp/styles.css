@@ -1,0 +1,136 @@
+
+body {
+    background-image: url("csharp-fondo.png");
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 15px;
+    min-height: 100vh;
+}
+
+::selection {
+    background-color: purple;
+    color: #ffffff;
+}
+a{
+    color:rgb(207, 0, 207);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: rgb(255, 125, 255);
+}
+p {
+    text-align: left;
+}
+h1 {
+    background-color: #111;
+    color: whitesmoke;
+    border: 3px solid purple;
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+section {
+    background-color: #1111116c;
+    color: whitesmoke;
+    border: 3px solid purple;
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+h1, h2 , h3 {
+    color: whitesmoke;
+    text-align: center;
+}
+div {
+    background-color: #1111116c;
+    color:white;
+    padding: 5px 20px;
+    margin-top: 15px;
+    text-align: left;
+    border: 2px solid purple;
+    border-radius: 10px;
+}
+.links{
+    text-align: center;
+}
+.csharp {
+    margin-right: 40px;
+    max-width: 100%;
+    height: auto;
+}
+.codigo, .recom {
+    text-align: center;
+}
+
+/* Media Queries para diseño responsive */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        padding: 8px 15px;
+        width: 90%;
+    }
+
+    section {
+        padding: 15px;
+        width: 90%;
+    }
+
+    div, .code {
+        padding: 5px 15px;
+        margin-top: 10px;
+    }
+
+    .csharp {
+        margin-right: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        padding: 8px 10px;
+    }
+
+    section {
+        padding: 10px;
+    }
+
+    div, .code {
+        padding: 5px 10px;
+        font-size: 0.9em;
+    }
+
+    .csharp {
+        margin-right: 10px;
+        display: block;
+        margin: 10px auto;
+    }
+}
+
+/* Mejoras para pantallas más grandes */
+@media screen and (min-width: 1200px) {
+    section {
+        padding: 30px;
+    }
+
+    div, .code {
+        transition: transform 0.3s ease;
+    }
+
+    div:hover, .code:hover {
+        transform: scale(1.02);
+    }
+}
