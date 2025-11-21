@@ -11,7 +11,7 @@ body {
 }
 
 ::selection {
-    background-color: purple;
+    background-color: rgb(77, 0, 165);
     color: white;
 }
 
@@ -26,12 +26,12 @@ ul {
     margin: 10px auto;
 }
 a:hover {
-    color: #6000df;
+    color: rgb(77, 0, 165);
 }
 h1 {
     background-color: #111;
     color: whitesmoke;
-    border: 3px solid purple;
+    border: 3px solid rgb(77, 0, 165);
     padding: 10px 20px;
     margin: 20px auto;
     max-width: 700px;
@@ -41,7 +41,7 @@ h1 {
 section {
     background-color: #111;
     color: whitesmoke;
-    border: 3px solid purple;
+    border: 3px solid rgb(77, 0, 165);
     padding: 20px;
     margin: 10px auto;
     max-width: 700px;
@@ -87,6 +87,9 @@ div {
 }
 .sql, .dsql {
     border-color: darkorange;
+}
+.cs, .dcs {
+    border-color: purple;
 }
 .vsc, .dvsc {
     border-color: #29B6F6;
