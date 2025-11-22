@@ -1,6 +1,7 @@
 
 body {
     background-image: url("html-css-fondo.png");
+    background-position: center;
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;

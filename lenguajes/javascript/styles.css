@@ -1,6 +1,9 @@
 
 body {
     background-image: url("js-fondo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
