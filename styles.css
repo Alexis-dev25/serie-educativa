@@ -31,12 +31,19 @@ a:hover {
 h1, input {
     background-color: #111;
     color: whitesmoke;
-    border: 3px solid rgb(77, 0, 165);
+    border: 3px solid rgb(49, 49, 49);
     padding: 10px 20px;
     margin: 20px auto;
     max-width: 700px;
     width: 90%;
     border-radius: 10px;
+    outline: none;
+}
+input:hover {
+    border-color: rgb(77, 0, 165);
+}
+input:focus {
+    border-color: rgb(81, 188, 255);
 }
 section {
     background-color: #111;
@@ -60,9 +67,6 @@ div {
     text-align: left;
     border: 2px solid rgb(43, 173, 253);
     border-radius: 10px;
-}
-::placeholder {
-    color: gray;
 }
 .foto {
     margin-top: 20px;

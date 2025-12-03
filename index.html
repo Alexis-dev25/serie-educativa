@@ -24,18 +24,7 @@
             <li><a href="#cursor-section">Cursor</a></li>
         </ul>
 
-        <script>
-        const buscador = document.getElementById("buscador");
-        const lista = document.getElementById("lista").getElementsByTagName("li");
-
-        buscador.addEventListener("keyup", function() {
-            let filtro = buscador.value.toLowerCase();
-            for (let i = 0; i < lista.length; i++) {
-            let texto = lista[i].textContent.toLowerCase();
-            lista[i].style.display = texto.includes(filtro) ? "" : "none";
-            }
-            });
-        </script>
+        <script src="buscador.js"></script>
     </section>
     <section class="intro">
         <h2>Introducción</h2>
