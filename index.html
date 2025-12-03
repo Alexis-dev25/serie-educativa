@@ -9,6 +9,34 @@
 </head>
 <body>
     <h1>Serie Educativa 📚</h1>
+    <section class="temas">
+        <h2>Temas</h2>
+        <input type="text" id="buscador" placeholder="Buscar...🔍">
+        <ul id="lista">
+            <li><a href="#html-css-section">HTML/CSS</a></li>
+            <li><a href="#java-section">Java</a></li>
+            <li><a href="#js-section">JavaScript</a></li>
+            <li><a href="#python-section">Python</a></li>
+            <li><a href="#sql-section">SQL</a></li>
+            <li><a href="#cs-section">C#</a></li>
+            <li><a href="#vsc-section">VS Code</a></li>
+            <li><a href="#trae-section">TRAE</a></li>
+            <li><a href="#cursor-section">Cursor</a></li>
+        </ul>
+
+        <script>
+        const buscador = document.getElementById("buscador");
+        const lista = document.getElementById("lista").getElementsByTagName("li");
+
+        buscador.addEventListener("keyup", function() {
+            let filtro = buscador.value.toLowerCase();
+            for (let i = 0; i < lista.length; i++) {
+            let texto = lista[i].textContent.toLowerCase();
+            lista[i].style.display = texto.includes(filtro) ? "" : "none";
+            }
+            });
+        </script>
+    </section>
     <section class="intro">
         <h2>Introducción</h2>
         <div class="text-intro">
@@ -18,30 +46,6 @@
             <p>¿Está perfecta? No. ¿Está hecha con ganas? Absolutamente.</p>
             <p>Porque a veces, lo que empieza como un proyecto escolar termina siendo algo mucho más personal.</p>
             <p>Gracias por visitar. Espero que aprendas algo nuevo… o al menos te inspires a crear tu propia versión.</p>
-        </div>
-    </section>
-    <section class="temas">
-        <h2>¿Qué verás?</h2>
-        <div class="languajes">
-            <h3>Lenguajes 💻</h3>
-            <ul>
-                <li><a href="#html-css-section">HTML/CSS</a></li>
-                <li><a href="#java-section">Java</a></li>
-                <li><a href="#js-section">JavaScript</a></li>
-                <li><a href="#python-section">Python</a></li>
-                <li><a href="#sql-section">SQL</a></li>
-                <li><a href="#cs-section">C#</a></li>
-                <li>Cooming soon...</li>
-            </ul>
-        </div>
-        <div class="visores">
-            <h3>Visores/Editores de código</h3>
-            <ul>
-                <li><a href="#vsc-section">VS Code</a></li>
-                <li><a href="#trae-section">TRAE</a></li>
-                <li><a href="#cursor-section">Cursor</a></li>
-                <li>Cooming soon...</li>
-            </ul>
         </div>
     </section>
     <section>
@@ -60,7 +64,7 @@
                 <p>Este link te llevara a una decripción más detallada de estos 
                     lenguajes de programación
                 </p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/html-css" target="_blank" rel="noopener noreferrer" class="foto">
+                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/html-css" rel="noopener noreferrer" class="foto">
                     <img src="assets/html-css.png" alt="html-css" width="100" height="100">
                 </a>
             </div>
@@ -75,7 +79,7 @@
                 <p>Este link te llevara a una decripción más detallada de estos 
                     lenguajes de programación
                 </p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/java" target="_blank" rel="noopener noreferrer" class="foto">
+                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/java" rel="noopener noreferrer" class="foto">
                     <img src="assets/java.png" alt="java" width="100" height="100">
                 </a>
                 </div>
@@ -91,7 +95,7 @@
             </div>
             <div class="l djs">
                 <p>Este link te llevara a una decripción más detallada de estos lenguajes de programación</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/javascript" target="_blank" rel="noopener noreferrer" class="foto">
+                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/javascript" rel="noopener noreferrer" class="foto">
                     <img src="assets/javascript.png" alt="js" width="100" height="100">
                 </a>
                 </div>
@@ -105,7 +109,7 @@
             </div>
             <div class="l dpython">
                 <p>Este link te llevara a una decripción más detallada de estos lenguajes de programación</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/python" target="_blank" rel="noopener noreferrer" class="foto">
+                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/python" rel="noopener noreferrer" class="foto">
                     <img src="assets/python.png" alt="python" width="100" height="100">
                 </a>
                 </div>
@@ -119,7 +123,7 @@
             </div>
             <div class="l dsql">
                 <p>Este link te llevara a una decripción más detallada de estos lenguajes de programación</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/SQL" target="_blank" rel="noopener noreferrer" class="foto">
+                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/SQL" rel="noopener noreferrer" class="foto">
                     <img src="assets/sql.png" alt="sql" width="100" height="100">
                 </a>
             </div>
@@ -132,7 +136,7 @@
             </div>
             <div class="l dcs">
                 <p>Este link te llevara a una decripción más detallada de estos lenguajes de programación</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/CSharp" target="_blank" rel="noopener noreferrer" class="foto">
+                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/CSharp" rel="noopener noreferrer" class="foto">
                     <img src="assets/csharp.png" alt="sql" width="100" height="100">
                 </a>
             </div>
@@ -150,7 +154,7 @@
             </div>
             <div class="l dvsc">
                 <p>Este link te llevara a una decripción más detallada de estos visores de código</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/visores/VSC" target="_blank" rel="noopener noreferrer" class="foto">
+                <a href="https://alexis-dev25.github.io/serie-educativa/visores/VSC" rel="noopener noreferrer" class="foto">
                     <img src="assets/vsc.png" alt="vsc" width="100" height="100">
                 </a>
             </div>
@@ -165,7 +169,7 @@
             </div>
             <div class="l dtrae">
                 <p>Este link te llevara a una decripción más detallada de estos visores de código</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/visores/TRAE" target="_blank" rel="noopener noreferrer" class="foto">
+                <a href="https://alexis-dev25.github.io/serie-educativa/visores/TRAE" rel="noopener noreferrer" class="foto">
                     <img src="assets/trae.png" alt="trae" width="100" height="100">
                 </a>
             </div>
@@ -180,7 +184,7 @@
             </div>
             <div class="l dcursor">
                 <p>Este link te llevara a una decripción más detallada de estos visores de código</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/visores/Coursor" target="_blank" rel="noopener noreferrer" class="foto">
+                <a href="https://alexis-dev25.github.io/serie-educativa/visores/Coursor" rel="noopener noreferrer" class="foto">
                     <img src="assets/cursor.png" alt="cursor" width="100" height="100">
                 </a>
             </div>

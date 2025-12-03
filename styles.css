@@ -28,7 +28,7 @@ ul {
 a:hover {
     color: rgb(77, 0, 165);
 }
-h1 {
+h1, input {
     background-color: #111;
     color: whitesmoke;
     border: 3px solid rgb(77, 0, 165);
@@ -48,7 +48,7 @@ section {
     width: 90%;
     border-radius: 10px;
 }
-h1, h2 , h3 {
+h1, h2 , h3, input {
     color: whitesmoke;
     text-align: center;
 }
@@ -60,6 +60,9 @@ div {
     text-align: left;
     border: 2px solid rgb(43, 173, 253);
     border-radius: 10px;
+}
+::placeholder {
+    color: gray;
 }
 .foto {
     margin-top: 20px;
