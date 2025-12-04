@@ -1,10 +1,18 @@
 const buscador = document.getElementById("buscador");
-    const lista = document.getElementById("lista").getElementsByTagName("li");
 
-    buscador.addEventListener("keyup", function() {
-        let filtro = buscador.value.toLowerCase();
-        for (let i = 0; i < lista.length; i++) {
-        let texto = lista[i].textContent.toLowerCase();
-        lista[i].style.display = texto.includes(filtro) ? "" : "none";
-        }
+// Selecciona todos los elementos <li> dentro de la lista
+const items = document.querySelectorAll("#lista li");
+
+// Escuchar cambios en el input (keyup + input para mayor compatibilidad)
+function filtrarPorTitulo() {
+    const filtro = buscador.value.trim().toLowerCase();
+    items.forEach(li => {
+        const titulo = li.querySelector("h2");
+        const textoTitulo = titulo ? titulo.textContent.trim().toLowerCase() : "";
+        // Mostrar u ocultar el <li> según si el título contiene el filtro
+        li.style.display = textoTitulo.includes(filtro) ? "" : "none";
     });
+}
+
+buscador.addEventListener("keyup", filtrarPorTitulo);
+buscador.addEventListener("input", filtrarPorTitulo);

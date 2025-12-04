@@ -98,6 +98,12 @@ div {
 .cs, .dcs {
     border-color: purple;
 }
+.linux {
+    border-color: whitesmoke;
+}
+.dlinux {
+    border-color: #ffdc13;
+}
 .vsc, .dvsc {
     border-color: #29B6F6;
 }

@@ -1,0 +1,63 @@
+body {
+    background-image: url("linux.png");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+::selection {
+    background-color: white;
+    color: #111;
+}
+a::selection{
+    background-color: white;
+    color: #111;
+}
+a{
+    color:rgb(146, 146, 146);
+}
+h1 {
+    background-color: #111;
+    text-align: start;
+    color: whitesmoke;
+    border: 3px solid white;
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+
+    
+}
+section {
+    background-color: #1111116c;
+    color: whitesmoke;
+    border: 3px solid white;
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+}
+h1, h2 , h3 {
+    color: #ffdc13;
+    text-align: center;
+}
+div {
+    background-color: #1111112f;
+    color:white;
+    padding: 5px 20px;
+    margin-top: 15px;
+    text-align: left;
+    border: 2px solid #ffdc13;
+    border-radius: 10px;
+}
+
+.links{
+    color: red;
+    text-align: center;
+}
+.linux {
+    margin-right: 40px;
+}

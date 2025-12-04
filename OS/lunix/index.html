@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>linux</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="linux.png" type="image/x-icon">
+</head>
+<body>
+    <h1>¿Qué es linux OS? <img src="linux.png" alt="linux" width="50" height="50"></h1>
+    <section class="intro">
+        <div class="text">
+            <h2>Introducción</h2>
+            <p>Linux nació como un proyecto personal de Linus Torvalds en 1991 con la 
+                intención de crear un núcleo (kernel) libre inspirado en Unix y Minix; 
+                su código se liberó bajo la Licencia Pública General de GNU (GPL v2) 
+                para garantizar libertad de uso y modificación. Desde entonces ha crecido 
+                hasta convertirse en un proyecto colaborativo global que impulsa 
+                infraestructuras críticas y dispositivos de consumo.</p>
+    </div>
+    </section>
+    <section class="info">
+        <h2>Más Informarción</h2>
+        <div class="carac">
+            <h3>Arquitectura del kernel</h3>
+            <p>El kernel de Linux es monolítico pero modular: 
+                el núcleo central gestiona memoria, procesos, planificación y controladores, 
+                mientras que los módulos cargables permiten añadir soporte de hardware y 
+                funcionalidades sin recompilar el kernel. Esta modularidad facilita la 
+                extensibilidad y la optimización por plataforma, desde microcontroladores 
+                hasta supercomputadoras. El kernel expone interfaces (syscalls) que permiten 
+                a las capas superiores —daemons, servicios y entornos de usuario interactuar 
+                con el hardware de forma abstracta.</p>
+        </div>
+        <div>
+            <h3>Componentes y cómo interactúan</h3>
+            <p>Un sistema Linux típico combina: kernel, utilidades del proyecto GNU (shells, 
+                compiladores, herramientas de texto), un sistema de inicio (systemd u otros), 
+                y un entorno gráfico opcional (X11/Wayland + gestores de ventanas). El kernel 
+                gestiona recursos; el espacio de usuario ejecuta procesos y servicios; y el 
+                sistema de archivos virtual (VFS) unifica acceso a dispositivos y archivos. 
+                La comunicación entre procesos usa señales, pipes, sockets y mecanismos 
+                avanzados como epoll para I/O eficiente, lo que hace a Linux muy adecuado 
+                para cargas concurrentes y redes.</p>
+        </div>
+        <div>
+            <h3>Diseño, filosofía y ventajas</h3>
+            <p>Linux fue creado para ser abierto, auditables y colaborativo; 
+                su modelo de desarrollo distribuido permite revisiones públicas y contribuciones 
+                de empresas y voluntarios. Ventajas clave: estabilidad en servidores, alto 
+                rendimiento en redes, amplia compatibilidad de hardware mediante drivers, y 
+                seguridad por diseño (permisos, namespaces, cgroups). Además, la existencia de 
+                múltiples distribuciones permite adaptar el sistema a necesidades específicas, 
+                desde seguridad reforzada hasta entornos ligeros para hardware antiguo.</p>
+        </div>
+        <div>
+            <h3>Casos de uso y evolución</h3>
+            <p>Hoy Linux domina en servidores, nube, contenedores (Docker, Kubernetes), dispositivos 
+                embebidos y Android; su evolución ha sido constante, con millones de líneas de código 
+                y un ecosistema que abarca desde distribuciones de escritorio hasta kernels optimizados 
+                para IoT y supercomputación. Esa versatilidad responde exactamente al propósito original: 
+                un núcleo libre y adaptable para construir sistemas operativos robustos y personalizados.</p>
+        </div>
+    </section>
+    <section class="mas">
+        <div class="links">
+            <h2>Links</h2>
+            <a href="https://www.linux.org/pages/download/" target="_blank" rel="noopener noreferrer" class="linux">
+                <img src="linux.png" alt="linux" width="100" height="100">
+            </a>
+            <a href="https://github.com/Alexis-dev25" target="_blank" rel="noopener noreferrer" class="social-icon">
+                <img src="github.png" alt="github" width="100" height="100">
+            </a>
+        </div>    
+    </section>
+</body>
+</html>
