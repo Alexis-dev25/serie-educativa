@@ -9,18 +9,18 @@ body {
     text-align: center;
 }
 ::selection {
-    background-color: white;
+    background-color: #ffdc13;
     color: #111;
 }
 a::selection{
-    background-color: white;
-    color: #111;
+    background-color: #5c5c5c;
+    color: #dddddd;
 }
 a{
-    color:rgb(146, 146, 146);
+    color:#ffdc13;
 }
 h1 {
-    background-color: #111;
+    background-color: #1111116c;
     text-align: start;
     color: whitesmoke;
     border: 3px solid white;
@@ -60,5 +60,4 @@ div {
 }
 .linux {
     margin-right: 40px;
-
 }
