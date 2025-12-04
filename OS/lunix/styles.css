@@ -1,5 +1,5 @@
 body {
-    background-image: url("linux.png");
+    background-image: url("linux-fondo.png");
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
@@ -60,4 +60,5 @@ div {
 }
 .linux {
     margin-right: 40px;
+
 }
