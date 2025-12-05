@@ -16,7 +16,7 @@
 /* Dark mode defaults when user prefers dark */
 @media (prefers-color-scheme: dark){
   :root{
-    --bg: #0b1220;
+    --bg: #111111;
     --surface: #071026;
     --text: #e6eef8;
     --muted: #9aa6b2;
@@ -31,7 +31,7 @@
 
 /* Explicit theme overrides via attribute (set by theme.js) */
 :root[data-theme="dark"]{
-  --bg: #0b1220;
+  --bg: #111111;
   --surface: #071026;
   --text: #e6eef8;
   --muted: #9aa6b2;
