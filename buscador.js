@@ -1,18 +1,31 @@
 const buscador = document.getElementById("buscador");
 
-// Selecciona todos los elementos <li> dentro de la lista
-const items = document.querySelectorAll("#lista li");
+// Selecciona todos los elementos <li> (tarjetas) dentro de la lista
+const items = Array.from(document.querySelectorAll("#lista .point"));
 
-// Escuchar cambios en el input (keyup + input para mayor compatibilidad)
+// Debounce para evitar ejecutar la búsqueda en cada pulsación muy rápido
+function debounce(fn, wait = 150) {
+    let t;
+    return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); };
+}
+
 function filtrarPorTitulo() {
-    const filtro = buscador.value.trim().toLowerCase();
+    const filtro = (buscador.value || "").trim().toLowerCase();
+    if (!filtro) {
+        // mostrar todos
+        items.forEach(li => li.classList.remove('hidden'));
+        return;
+    }
     items.forEach(li => {
-        const titulo = li.querySelector("h2");
-        const textoTitulo = titulo ? titulo.textContent.trim().toLowerCase() : "";
-        // Mostrar u ocultar el <li> según si el título contiene el filtro
-        li.style.display = textoTitulo.includes(filtro) ? "" : "none";
+        const titulo = li.querySelector('h2');
+        const texto = titulo ? titulo.textContent.trim().toLowerCase() : '';
+        li.classList.toggle('hidden', !texto.includes(filtro));
     });
 }
 
-buscador.addEventListener("keyup", filtrarPorTitulo);
-buscador.addEventListener("input", filtrarPorTitulo);
+const filtrarDebounced = debounce(filtrarPorTitulo, 150);
+buscador.addEventListener('input', filtrarDebounced);
+buscador.addEventListener('keyup', (e) => { if (e.key === 'Enter') filtrarPorTitulo(); });
+
+// Inicializar (por si hay texto prellenado)
+filtrarPorTitulo();

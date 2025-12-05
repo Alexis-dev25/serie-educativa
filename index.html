@@ -3,191 +3,137 @@
 <head>
     <title>Serie-Educativa</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-</head>
-<body>
-    <h1>Serie Educativa 📚</h1>
-    <section class="intro">
-        <h2>Introducción</h2>
-        <div class="text-intro">
-            <p>Bienvenido a mi rincón de código</p>
-            <p>Esta página nació de una mezcla entre curiosidad, pasión y muchas horas frente a la pantalla. No fue hecha por una empresa ni por un equipo de expertos, sino por mí —un estudiante de 14 años con ganas de entender el mundo de la programación y compartirlo sin filtros ni complicaciones.</p>
-            <p>Aquí encontrarás los lenguajes más populares, explicados de forma clara, junto con visores de código para que puedas experimentar sin tener que abrir mil pestañas. No hay anuncios, no hay distracciones, solo contenido directo y útil.</p>
-            <p>¿Está perfecta? No. ¿Está hecha con ganas? Absolutamente.</p>
-            <p>Porque a veces, lo que empieza como un proyecto escolar termina siendo algo mucho más personal.</p>
-            <p>Gracias por visitar. Espero que aprendas algo nuevo… o al menos te inspires a crear tu propia versión.</p>
-        </div>
-    </section>
-    <section class="temas">
-        <h2>Temas</h2>
-        <input type="text" id="buscador" placeholder="Buscar...🔍">
-        <ul id="lista">
-            <li id="point">
-                <section id="html-css-section" class="html-css">
-                    <h2>HTML/CSS</h2>
-                    <div class="dhtml-css">
-                        <p>La base del intenet y las páginas web, HTML y CSS, 
-                    Tu navegador es capas de interpretar los archivos ".html", 
-                    estos son la estructura de una página, 
-                    dan las indicaciones a tu nevegador de como mostrar la página, 
-                    mientras tanto CSS dota a la página de una buena presentación, 
-                    se encarga de lo gráfico y lo estético.</p>
-                    </div>
-                    <div class="l dhtml-css">
-                        <p>Este link te llevara a una decripción más detallada de estos 
-                    lenguajes de programación
-                        </p>
-                        <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/html-css" rel="noopener noreferrer" class="foto">
-                            <img src="assets/html-css.png" alt="html-css" width="100" height="100">
-                        </a>
-                    </div>
-                </section></li>
-            <li id="point"><section id="java-section" class="java">
-            <h2>Java</h2>
-            <div class="djava">
-                <p>Java es un lenjuage complicado, 
-                    tiene un próposito general y variado</p>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Serie-Educativa</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <meta name="description" content="Serie educativa: pequeños artículos y visores de código para aprender lenguajes.">
+    </head>
+    <body>
+        <header class="site-header">
+            <h1>Serie Educativa 📚</h1>
+            <div class="controls">
+                <button id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">🌓</button>
             </div>
-            <div class="l djava">
-                <p>Este link te llevara a una decripción más detallada de estos 
-                    lenguajes de programación
-                </p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/java" rel="noopener noreferrer" class="foto">
-                    <img src="assets/java.png" alt="java" width="100" height="100">
-                </a>
-                </div>
-        </section></li>
-            <li id="point"><section id="js-section" class="js">
-            <h2>JavaScript</h2>
-            <div class="djs">
-                <p>JavaScript es una de las bases de la web moderna 
-                    otorga interactividad a las páginas web, registra, 
-                    arroja y guarda información de uso rápido, 
-                    inputs, botones y resultados.
-                </p>
+        </header>
+
+        <section class="intro">
+            <h2>Introducción</h2>
+            <div class="text-intro">
+                <p>Bienvenido a mi rincón de código</p>
+                <p>Esta página nació de una mezcla entre curiosidad, pasión y muchas horas frente a la pantalla. No fue hecha por una empresa ni por un equipo de expertos, sino por mí —un estudiante de 14 años con ganas de entender el mundo de la programación y compartirlo sin filtros ni complicaciones.</p>
+                <p>Aquí encontrarás los lenguajes más populares, explicados de forma clara, junto con visores de código para que puedas experimentar sin tener que abrir mil pestañas. No hay anuncios, no hay distracciones, solo contenido directo y útil.</p>
+                <p>¿Está perfecta? No. ¿Está hecha con ganas? Absolutamente.</p>
+                <p>Porque a veces, lo que empieza como un proyecto escolar termina siendo algo mucho más personal.</p>
+                <p>Gracias por visitar. Espero que aprendas algo nuevo… o al menos te inspires a crear tu propia versión.</p>
             </div>
-            <div class="l djs">
-                <p>Este link te llevara a una decripción más detallada de estos lenguajes de programación</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/javascript" rel="noopener noreferrer" class="foto">
-                    <img src="assets/javascript.png" alt="js" width="100" height="100">
-                </a>
-                </div>
-        </section></li>
-            <li id="point"><section id="python-section" class="python">
-            <h2>Python</h2>
-            <div class="dpython">
-                <p>Python es un lenguaje con la sintaxis más fácil de aprender, 
-                    es muy parecida al inglés y cuenta con múltiples librerias.
-                </p>
+        </section>
+
+        <section class="temas">
+            <h2>Temas</h2>
+            <input type="text" id="buscador" placeholder="Buscar...🔍" aria-label="Buscar temas">
+            <ul id="lista">
+                <li class="point">
+                    <section id="html-css-section" class="html-css">
+                        <h2>HTML/CSS</h2>
+                        <div class="dhtml-css">
+                            <p>La base del intenet y las páginas web, HTML y CSS, Tu navegador es capas de interpretar los archivos ".html", estos son la estructura de una página, dan las indicaciones a tu nevegador de como mostrar la página, mientras tanto CSS dota a la página de una buena presentación, se encarga de lo gráfico y lo estético.</p>
+                        </div>
+                        <div class="l dhtml-css">
+                            <p>Este link te llevara a una decripción más detallada de estos lenguajes de programación</p>
+                            <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/html-css" rel="noopener noreferrer" class="foto">
+                                <img src="assets/html-css.png" alt="html-css" width="100" height="100">
+                            </a>
+                        </div>
+                    </section>
+                </li>
+                <li class="point">
+                    <section id="java-section" class="java">
+                        <h2>Java</h2>
+                        <div class="djava"><p>Java es un lenjuage complicado, tiene un próposito general y variado</p></div>
+                        <div class="l djava">
+                            <p>Este link te llevara a una decripción más detallada de estos lenguajes de programación</p>
+                            <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/java" rel="noopener noreferrer" class="foto"><img src="assets/java.png" alt="java" width="100" height="100"></a>
+                        </div>
+                    </section>
+                </li>
+                <li class="point">
+                    <section id="js-section" class="js">
+                        <h2>JavaScript</h2>
+                        <div class="djs"><p>JavaScript es una de las bases de la web moderna otorga interactividad a las páginas web, registra, arroja y guarda información de uso rápido, inputs, botones y resultados.</p></div>
+                        <div class="l djs"><a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/javascript" rel="noopener noreferrer" class="foto"><img src="assets/javascript.png" alt="js" width="100" height="100"></a></div>
+                    </section>
+                </li>
+                <li class="point">
+                    <section id="python-section" class="python">
+                        <h2>Python</h2>
+                        <div class="dpython"><p>Python es un lenguaje con la sintaxis más fácil de aprender, es muy parecida al inglés y cuenta con múltiples librerias.</p></div>
+                        <div class="l dpython"><a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/python" rel="noopener noreferrer" class="foto"><img src="assets/python.png" alt="python" width="100" height="100"></a></div>
+                    </section>
+                </li>
+                <li class="point">
+                    <section id="sql-section" class="sql">
+                        <h2>SQL</h2>
+                        <div class="dsql"><p>SQL permite crear una base de datos, su sintaxis se basa en tablas, sería como un excel, pero SQL no cuenta con una interfaz gáfica.</p></div>
+                        <div class="l dsql"><a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/SQL" rel="noopener noreferrer" class="foto"><img src="assets/sql.png" alt="sql" width="100" height="100"></a></div>
+                    </section>
+                </li>
+                <li class="point">
+                    <section id="cs-section" class="cs">
+                        <h2>C# / CSharp</h2>
+                        <div class="dcs"><p>C# es un lenguaje muy usado para el desarrollo de apss y programas, funcionando incluso para el desarrollo de apss móviles.</p></div>
+                        <div class="l dcs"><a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/CSharp" rel="noopener noreferrer" class="foto"><img src="assets/csharp.png" alt="cs" width="100" height="100"></a></div>
+                    </section>
+                </li>
+                <li class="point">
+                    <section id="vsc-section" class="vsc">
+                        <h2>VSC</h2>
+                        <div class="dvsc"><p>Visual Studio Code es un editor de código fuente gratuito y potente, que soporta múltiples lenguajes de programación y ofrece características como depuración, contrul de versiones Git integrado y extensiones personalizables.</p></div>
+                        <div class="l dvsc"><a href="https://alexis-dev25.github.io/serie-educativa/visores/VSC" rel="noopener noreferrer" class="foto"><img src="assets/vsc.png" alt="vsc" width="100" height="100"></a></div>
+                    </section>
+                </li>
+                <li class="point">
+                    <section id="trae-section" class="trae">
+                        <h2>TRAE</h2>
+                        <div class="dtrae"><p>TRAE (Terminal RAE) es una herramienta de línea de comandos que permite consultar el diccionario de la Real Academia Españula directamente desde la terminal.</p></div>
+                        <div class="l dtrae"><a href="https://alexis-dev25.github.io/serie-educativa/visores/TRAE" rel="noopener noreferrer" class="foto"><img src="assets/trae.png" alt="trae" width="100" height="100"></a></div>
+                    </section>
+                </li>
+                <li class="point">
+                    <section id="cursor-section" class="cursor">
+                        <h2>Cursor</h2>
+                        <div class="dcursor"><p>Cursor es un editor de código moderno que integra inteligencia artificial para ayudarte a programar más eficientemente.</p></div>
+                        <div class="l dcursor"><a href="https://alexis-dev25.github.io/serie-educativa/visores/Coursor" rel="noopener noreferrer" class="foto"><img src="assets/cursor.png" alt="cursor" width="100" height="100"></a></div>
+                    </section>
+                </li>
+                <li class="point">
+                    <section id="linux-section" class="linux">
+                        <h2>Linux</h2>
+                        <div class="dlinux"><p>Linux es un núcleo de sistema operativo creado en 1991 por Linus Torvalds; sirve como base de distribuciones usadas en servidores y escritorios.</p></div>
+                        <div class="l dlinux"><a href="https://alexis-dev25.github.io/serie-educativa/OS/Lunix" rel="noopener noreferrer" class="foto"><img src="assets/linux.png" alt="linux" width="100" height="100"></a></div>
+                    </section>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Feedback 📙</h2>
+            <div class="fb">
+                <p>¿Tienes comentarios o sugerencias? Escríbeme a:</p>
+                <p>tu opinión y/o sugerencia es importante</p>
+                <a href="mailto:feedback.serie.educativa@gmail.com">feedback@gmail.com</a>
+                <p>-</p>
+                <a href="#top">Subir 👆</a>
             </div>
-            <div class="l dpython">
-                <p>Este link te llevara a una decripción más detallada de estos lenguajes de programación</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/python" rel="noopener noreferrer" class="foto">
-                    <img src="assets/python.png" alt="python" width="100" height="100">
-                </a>
-                </div>
-        </section></li>
-            <li id="point"><section id="sql-section" class="sql">
-            <h2>SQL</h2>
-            <div class="dsql">
-                <p>SQL permite crear una base de datos, su sintaxis se basa en tablas, 
-                    sería como un excel, pero SQL no cuenta con una interfaz gáfica.
-                </p>
-            </div>
-            <div class="l dsql">
-                <p>Este link te llevara a una decripción más detallada de estos lenguajes de programación</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/SQL" rel="noopener noreferrer" class="foto">
-                    <img src="assets/sql.png" alt="sql" width="100" height="100">
-                </a>
-            </div>
-        </section></li>
-            <li id="point"><section id="cs-section" class="cs">
-            <h2>C# / CSharp</h2>
-            <div class="dcs">
-                <p>C# es un lenguaje muy usado para el desarrollo de apss y programas, 
-                    funcionando incluso para el desarrollo de apss móviles.</p>
-            </div>
-            <div class="l dcs">
-                <p>Este link te llevara a una decripción más detallada de estos lenguajes de programación</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/lenguajes/CSharp" rel="noopener noreferrer" class="foto">
-                    <img src="assets/csharp.png" alt="cs" width="100" height="100">
-                </a>
-            </div>
-        </section></li>
-            <li id="point"><section id="vsc-section" class="vsc">
-            <h2>VSC</h2>
-            <div class="dvsc">
-                <p>Visual Studio Code es un editor de código fuente gratuito y potente, 
-                    que soporta múltiples lenguajes de programación y ofrece características 
-                    como depuración, contrul de versiones Git integrado y extensiones personalizables.
-                </p>
-            </div>
-            <div class="l dvsc">
-                <p>Este link te llevara a una decripción más detallada de estos visores de código</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/visores/VSC" rel="noopener noreferrer" class="foto">
-                    <img src="assets/vsc.png" alt="vsc" width="100" height="100">
-                </a>
-            </div>
-        </section></li>
-            <li id="point"><section id="trae-section" class="trae">
-            <h2>TRAE</h2>
-            <div class="dtrae">
-                <p>TRAE (Terminal RAE) es una herramienta de línea de comandos que permite 
-                    consultar el diccionario de la Real Academia Españula directamente desde 
-                    la terminal, facilitando el acceso rápido a definiciones mientras programas.
-                </p>
-            </div>
-            <div class="l dtrae">
-                <p>Este link te llevara a una decripción más detallada de estos visores de código</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/visores/TRAE" rel="noopener noreferrer" class="foto">
-                    <img src="assets/trae.png" alt="trae" width="100" height="100">
-                </a>
-            </div>
-        </section></li>
-            <li id="point"><section id="cursor-section" class="cursor">
-            <h2>Cursor</h2>
-            <div class="dcursor">
-                <p>Cursor es un editor de código moderno que integra inteligencia artificial 
-                    para ayudarte a programar más eficientemente, ofreciendo sugerencias 
-                    contextuales y ayudándote a entender y escribir código más rápido.
-                </p>
-            </div>
-            <div class="l dcursor">
-                <p>Este link te llevara a una decripción más detallada de estos visores de código</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/visores/Coursor" rel="noopener noreferrer" class="foto">
-                    <img src="assets/cursor.png" alt="cursor" width="100" height="100">
-                </a>
-            </div>
-        </section></li>
-        <li id="point"><section id="linux-section" class="linux">
-            <h2>Linux</h2>
-            <div class="dlinux">
-                <p>Linux es un núcleo de sistema operativo creado en 1991 por Linus Torvalds para ofrecer un sistema libre, 
-                    modular y portable; hoy sirve como base de miles de distribuciones usadas en servidores, 
-                    dispositivos embebidos y escritorios.</p>
-            </div>
-            <div class="l dlinux">
-                <p>Este link te llevara a una decripción más detallada sobre este sistema operativo</p>
-                <a href="https://alexis-dev25.github.io/serie-educativa/OS/lunix" rel="noopener noreferrer" class="foto">
-                    <img src="assets/linux.png" alt="linux" width="100" height="100">
-                </a>
-            </div>
-        </section></li>
-        </ul>
+        </section>
+
+        <script src="theme.js"></script>
         <script src="buscador.js"></script>
-    </section>
-    <section>
-        <h2>Feedback 📙</h2>
-        <div class="fb">
-            <p>¿Tienes comentarios o sugerencias? Escríbeme a:</p>
-            <p>tu opinión y/o sugerencia es importante</p>
-            <a href="mailto:feedback.serie.educativa@gmail.com">feedback@gmail.com</a>
-            <p>-</p>
-            <a href="#top">Subir 👆</a>
-        </div>
+    </body>
+    </html>
     </section>
 </body>
-
 </html>
