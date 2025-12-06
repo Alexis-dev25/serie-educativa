@@ -159,7 +159,28 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     <script src="counter.js"></script>
+        <section>
+            <div class="comments-section">
+    <h3>💬 Comentarios de Estudiantes</h3>
     
+    <!-- Formulario para nuevo comentario -->
+    <div class="comment-form">
+        <textarea id="comment-text" class="comment-text" placeholder="Escribe tu comentario anónimo... (máx. 500 caracteres)" maxlength="500" rows="4"></textarea>
+        <div class="comment-form-footer">
+            <span id="char-count">0/500</span>
+            <button id="submit-comment" class="comment-submit-btn">
+                📤 Publicar Comentario
+            </button>
+        </div>
+        <p class="comment-note">Los comentarios son anónimos y se comparten entre todos los estudiantes</p>
+    </div>
+    
+    <!-- Lista de comentarios -->
+    <div class="comments-list" id="comments-list">
+        <div class="loading-comments">Cargando comentarios...</div>
+    </div>
+</div>
+        </section>
         <section>
             <h2>Feedback 📙</h2>
             <div class="fb">
