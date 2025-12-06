@@ -1,348 +1,203 @@
+// CONFIGURACIÓN (reemplaza con tus datos)
 const firebaseConfig = {
-    apiKey: "AIzaSyABC123...",
-    authDomain: "tu-proyecto.firebaseapp.com",
-    databaseURL: "https://tu-proyecto-default-rtdb.firebaseio.com",
-    projectId: "tu-proyecto",
-    storageBucket: "tu-proyecto.appspot.com",
-    messagingSenderId: "123456789",
-    appId: "1:123456789:web:abc123def456"
+    apiKey: "TU_API_KEY",
+    authDomain: "TU_PROYECTO.firebaseapp.com",
+    databaseURL: "https://TU_PROYECTO-default-rtdb.firebaseio.com",
+    projectId: "TU_PROYECTO",
+    storageBucket: "TU_PROYECTO.appspot.com",
+    messagingSenderId: "TU_SENDER_ID",
+    appId: "TU_APP_ID"
 };
 
-// Inicializar Firebase
-try {
+// INICIALIZACIÓN SEGURA
+if (typeof firebase === 'undefined') {
+    console.error('Firebase SDK no cargado');
+} else if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
-} catch (error) {
-    console.log("Firebase ya inicializado");
+    console.log('Firebase inicializado');
+} else {
+    console.log('Usando Firebase ya inicializado');
 }
 
-const database = firebase.database();
+// VARIABLE GLOBAL (sin const/let si ya existe)
+if (typeof database === 'undefined') {
+    var database = firebase.database();
+}
 
-class GitHubStats {
+// ========== CLASE PRINCIPAL ==========
+class CounterSystem {
     constructor() {
-        this.stats = { totalVisits: 0, totalLikes: 0, todayVisits: 0 };
-        this.userLiked = localStorage.getItem('userLiked') === 'true';
         this.userId = this.getUserId();
+        this.userLiked = localStorage.getItem('liked_' + this.userId) === 'true';
         this.init();
     }
     
     getUserId() {
-        let userId = localStorage.getItem('githubUserId');
-        if (!userId) {
-            userId = 'gh_' + Date.now() + Math.random().toString(36).substr(2, 9);
-            localStorage.setItem('githubUserId', userId);
+        let id = localStorage.getItem('visitorId');
+        if (!id) {
+            id = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('visitorId', id);
         }
-        return userId;
+        return id;
     }
     
     async init() {
-        try {
-            await this.registerVisit();
-            this.setupRealtimeListeners();
-        } catch (error) {
-            console.log("Usando modo offline:", error);
-            this.useOfflineMode();
-        }
+        await this.registerVisit();
+        this.listenToStats();
     }
     
     async registerVisit() {
-        const today = new Date().toISOString().split('T')[0];
-        const visitRef = database.ref('visits/' + today + '/' + this.userId);
-        
-        const snapshot = await visitRef.once('value');
-        if (!snapshot.exists()) {
-            await visitRef.set({
-                timestamp: firebase.database.ServerValue.TIMESTAMP,
-                source: 'github_pages'
+        try {
+            const today = new Date().toISOString().split('T')[0];
+            await database.ref('visits/' + today + '/' + this.userId).set({
+                timestamp: Date.now(),
+                source: 'github'
             });
             
-            // Incrementar contadores
-            const todayRef = database.ref('stats/today');
-            todayRef.transaction(current => (current || 0) + 1);
-            
-            const totalRef = database.ref('stats/total');
-            totalRef.transaction(current => (current || 0) + 1);
+            // Actualizar contadores
+            database.ref('stats/totalVisits').transaction(c => (c || 0) + 1);
+            database.ref('stats/visitsToday').transaction(c => (c || 0) + 1);
+        } catch (error) {
+            console.log('Error registrando visita:', error);
         }
     }
     
-    setupRealtimeListeners() {
-        // Escuchar estadísticas
+    listenToStats() {
+        // Escuchar estadísticas en tiempo real
         database.ref('stats').on('value', (snapshot) => {
             const data = snapshot.val() || {};
-            this.stats.totalVisits = data.total || 0;
-            this.stats.totalLikes = data.likes || 0;
-            this.stats.todayVisits = data.today || 0;
-            this.display();
+            this.updateDisplay(data);
         });
         
-        // Verificar like del usuario
-        database.ref('userLikes/' + this.userId).once('value', (snapshot) => {
-            if (snapshot.exists()) {
+        // Verificar si ya dio like
+        database.ref('likes/' + this.userId).once('value', (snap) => {
+            if (snap.exists()) {
                 this.userLiked = true;
-                localStorage.setItem('userLiked', 'true');
-                this.updateButton();
+                this.updateLikeButton();
             }
         });
+    }
+    
+    updateDisplay(data) {
+        const visits = data.totalVisits || 0;
+        const likes = data.totalLikes || 0;
+        const today = data.visitsToday || 0;
+        
+        // Actualizar HTML
+        if (document.getElementById('total-visits')) {
+            document.getElementById('total-visits').textContent = 
+                this.formatNumber(visits);
+        }
+        if (document.getElementById('total-likes')) {
+            document.getElementById('total-likes').textContent = 
+                this.formatNumber(likes);
+        }
+        if (document.getElementById('today-visits')) {
+            document.getElementById('today-visits').textContent = today;
+        }
+        if (document.getElementById('engagement')) {
+            const engagement = visits > 0 ? ((likes / visits) * 100).toFixed(1) + '%' : '0%';
+            document.getElementById('engagement').textContent = engagement;
+        }
     }
     
     async addLike() {
-        if (!this.userLiked) {
+        if (!this.userLiked && database) {
             try {
                 // Registrar like del usuario
-                await database.ref('userLikes/' + this.userId).set({
-                    timestamp: firebase.database.ServerValue.TIMESTAMP,
-                    from: 'github_pages'
+                await database.ref('likes/' + this.userId).set({
+                    timestamp: Date.now(),
+                    userAgent: navigator.userAgent.substring(0, 100)
                 });
                 
                 // Incrementar contador global
-                await database.ref('stats/likes').transaction(current => (current || 0) + 1);
+                await database.ref('stats/totalLikes').transaction(c => (c || 0) + 1);
                 
                 this.userLiked = true;
-                localStorage.setItem('userLiked', 'true');
+                localStorage.setItem('liked_' + this.userId, 'true');
                 
-                this.updateButton();
-                this.showConfetti();
-                this.showSuccessMessage();
+                this.updateLikeButton();
+                this.showSuccess();
                 
-                return true;
             } catch (error) {
-                console.error("Error con Firebase:", error);
-                this.showOfflineMessage();
-                return false;
+                console.error('Error dando like:', error);
+                this.showError();
             }
         }
-        return false;
     }
     
-    useOfflineMode() {
-        const localStats = JSON.parse(localStorage.getItem('localStats')) || {
-            total: 0,
-            likes: 0,
-            today: 0
-        };
-        
-        localStats.total++;
-        localStats.today++;
-        
-        this.stats.totalVisits = localStats.total;
-        this.stats.totalLikes = localStats.likes;
-        this.stats.todayVisits = localStats.today;
-        
-        localStorage.setItem('localStats', JSON.stringify(localStats));
-        this.display();
-    }
-    
-    display() {
-        const format = (num) => {
-            if (num >= 1000000) return (num/1000000).toFixed(1) + 'M';
-            if (num >= 1000) return (num/1000).toFixed(1) + 'k';
-            return num;
-        };
-        
-        document.getElementById('total-visits').textContent = format(this.stats.totalVisits);
-        document.getElementById('total-likes').textContent = format(this.stats.totalLikes);
-        document.getElementById('today-visits').textContent = this.stats.todayVisits;
-        
-        const engagement = this.stats.totalVisits > 0 ?
-            ((this.stats.totalLikes / this.stats.totalVisits) * 100).toFixed(1) + '%' : '0%';
-        document.getElementById('engagement').textContent = engagement;
-    }
-    
-    updateButton() {
-        if (this.userLiked) {
-            const btn = document.getElementById('edu-like-btn');
-            btn.innerHTML = '✅ ¡Gracias!';
+    updateLikeButton() {
+        const btn = document.getElementById('edu-like-btn');
+        if (btn && this.userLiked) {
+            btn.innerHTML = '<span class="btn-icon">✅</span> <span class="btn-text">¡Gracias!</span>';
             btn.classList.add('liked');
             btn.disabled = true;
         }
     }
     
-    showConfetti() {
-        // ... código de confetti (mismo que antes)
+    formatNumber(num) {
+        if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+        if (num >= 1000) return (num / 1000).toFixed(1) + 'k';
+        return num;
     }
     
-    showSuccessMessage() {
-        alert('¡Gracias por tu like! Tu apoyo ayuda a que más estudiantes encuentren este contenido.');
-    }
-    
-    showOfflineMessage() {
-        alert('Modo offline activado. Tu like se guardará localmente.');
-    }
-}
-
-// Inicializar cuando la página cargue
-document.addEventListener('DOMContentLoaded', () => {
-    window.statsSystem = new GitHubStats();
-    
-    document.getElementById('edu-like-btn').addEventListener('click', async () => {
-        await window.statsSystem.addLike();
-    });
-});
-// Inicializar Firebase
-try {
-    firebase.initializeApp(firebaseConfig);
-} catch (error) {
-    console.log("Firebase ya inicializado");
-}
-
-const database = firebase.database();
-
-class GitHubStats {
-    constructor() {
-        this.stats = { totalVisits: 0, totalLikes: 0, todayVisits: 0 };
-        this.userLiked = localStorage.getItem('userLiked') === 'true';
-        this.userId = this.getUserId();
-        this.init();
-    }
-    
-    getUserId() {
-        let userId = localStorage.getItem('githubUserId');
-        if (!userId) {
-            userId = 'gh_' + Date.now() + Math.random().toString(36).substr(2, 9);
-            localStorage.setItem('githubUserId', userId);
-        }
-        return userId;
-    }
-    
-    async init() {
-        try {
-            await this.registerVisit();
-            this.setupRealtimeListeners();
-        } catch (error) {
-            console.log("Usando modo offline:", error);
-            this.useOfflineMode();
+    showSuccess() {
+        // Confetti simple
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    width: 10px;
+                    height: 10px;
+                    background: #${Math.floor(Math.random()*16777215).toString(16)};
+                    border-radius: 50%;
+                    z-index: 9999;
+                    pointer-events: none;
+                    left: ${Math.random() * 100}vw;
+                    top: -10px;
+                `;
+                document.body.appendChild(confetti);
+                
+                confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight}px) rotate(360deg)`, opacity: 0 }
+                ], {
+                    duration: 1000 + Math.random() * 2000,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)'
+                }).onfinish = () => confetti.remove();
+            }, i * 30);
         }
     }
     
-    async registerVisit() {
-        const today = new Date().toISOString().split('T')[0];
-        const visitRef = database.ref('visits/' + today + '/' + this.userId);
-        
-        const snapshot = await visitRef.once('value');
-        if (!snapshot.exists()) {
-            await visitRef.set({
-                timestamp: firebase.database.ServerValue.TIMESTAMP,
-                source: 'github_pages'
+    showError() {
+        alert('Hubo un error. Por favor, recarga la página e inténtalo de nuevo.');
+    }
+}
+
+// ========== INICIALIZAR CUANDO EL DOM ESTÉ LISTO ==========
+document.addEventListener('DOMContentLoaded', function() {
+    // Crear instancia
+    window.pageCounter = new CounterSystem();
+    
+    // Configurar botón
+    const likeBtn = document.getElementById('edu-like-btn');
+    if (likeBtn) {
+        likeBtn.addEventListener('click', function() {
+            window.pageCounter.addLike();
+        });
+    }
+    
+    // Atajo para profesor (Ctrl+Shift+L para ver stats)
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.shiftKey && e.key === 'L') {
+            e.preventDefault();
+            const stats = database.ref('stats');
+            stats.once('value').then(snap => {
+                console.log('📊 ESTADÍSTICAS PARA EL PROFESOR:');
+                console.log(snap.val());
+                alert('Estadísticas en consola (F12)');
             });
-            
-            // Incrementar contadores
-            const todayRef = database.ref('stats/today');
-            todayRef.transaction(current => (current || 0) + 1);
-            
-            const totalRef = database.ref('stats/total');
-            totalRef.transaction(current => (current || 0) + 1);
         }
-    }
-    
-    setupRealtimeListeners() {
-        // Escuchar estadísticas
-        database.ref('stats').on('value', (snapshot) => {
-            const data = snapshot.val() || {};
-            this.stats.totalVisits = data.total || 0;
-            this.stats.totalLikes = data.likes || 0;
-            this.stats.todayVisits = data.today || 0;
-            this.display();
-        });
-        
-        // Verificar like del usuario
-        database.ref('userLikes/' + this.userId).once('value', (snapshot) => {
-            if (snapshot.exists()) {
-                this.userLiked = true;
-                localStorage.setItem('userLiked', 'true');
-                this.updateButton();
-            }
-        });
-    }
-    
-    async addLike() {
-        if (!this.userLiked) {
-            try {
-                // Registrar like del usuario
-                await database.ref('userLikes/' + this.userId).set({
-                    timestamp: firebase.database.ServerValue.TIMESTAMP,
-                    from: 'github_pages'
-                });
-                
-                // Incrementar contador global
-                await database.ref('stats/likes').transaction(current => (current || 0) + 1);
-                
-                this.userLiked = true;
-                localStorage.setItem('userLiked', 'true');
-                
-                this.updateButton();
-                this.showConfetti();
-                this.showSuccessMessage();
-                
-                return true;
-            } catch (error) {
-                console.error("Error con Firebase:", error);
-                this.showOfflineMessage();
-                return false;
-            }
-        }
-        return false;
-    }
-    
-    useOfflineMode() {
-        const localStats = JSON.parse(localStorage.getItem('localStats')) || {
-            total: 0,
-            likes: 0,
-            today: 0
-        };
-        
-        localStats.total++;
-        localStats.today++;
-        
-        this.stats.totalVisits = localStats.total;
-        this.stats.totalLikes = localStats.likes;
-        this.stats.todayVisits = localStats.today;
-        
-        localStorage.setItem('localStats', JSON.stringify(localStats));
-        this.display();
-    }
-    
-    display() {
-        const format = (num) => {
-            if (num >= 1000000) return (num/1000000).toFixed(1) + 'M';
-            if (num >= 1000) return (num/1000).toFixed(1) + 'k';
-            return num;
-        };
-        
-        document.getElementById('total-visits').textContent = format(this.stats.totalVisits);
-        document.getElementById('total-likes').textContent = format(this.stats.totalLikes);
-        document.getElementById('today-visits').textContent = this.stats.todayVisits;
-        
-        const engagement = this.stats.totalVisits > 0 ?
-            ((this.stats.totalLikes / this.stats.totalVisits) * 100).toFixed(1) + '%' : '0%';
-        document.getElementById('engagement').textContent = engagement;
-    }
-    
-    updateButton() {
-        if (this.userLiked) {
-            const btn = document.getElementById('edu-like-btn');
-            btn.innerHTML = '✅ ¡Gracias!';
-            btn.classList.add('liked');
-            btn.disabled = true;
-        }
-    }
-    
-    showConfetti() {
-        // ... código de confetti (mismo que antes)
-    }
-    
-    showSuccessMessage() {
-        alert('¡Gracias por tu like! Tu apoyo ayuda a que más estudiantes encuentren este contenido.');
-    }
-    
-    showOfflineMessage() {
-        alert('Modo offline activado. Tu like se guardará localmente.');
-    }
-}
-
-// Inicializar cuando la página cargue
-document.addEventListener('DOMContentLoaded', () => {
-    window.statsSystem = new GitHubStats();
-    
-    document.getElementById('edu-like-btn').addEventListener('click', async () => {
-        await window.statsSystem.addLike();
     });
 });
