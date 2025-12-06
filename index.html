@@ -163,16 +163,46 @@
             <div class="comments-section">
     <h3>💬 Comentarios de Estudiantes</h3>
     
-    <!-- Formulario para nuevo comentario -->
+    <!-- Advertencia de moderación -->
+    <div class="moderation-warning">
+        <p>⚠️ <strong>Normas de la comunidad:</strong></p>
+        <ul>
+            <li>Sé respetuoso con todos</li>
+            <li>No se permiten insultos ni lenguaje ofensivo</li>
+            <li>Comentarios relacionados únicamente con programación</li>
+            <li>No spam ni contenido comercial</li>
+            <li>Los comentarios son moderados automáticamente</li>
+        </ul>
+    </div>
+    
+    <!-- Formulario -->
     <div class="comment-form">
-        <textarea id="comment-text" class="comment-text" placeholder="Escribe tu comentario anónimo... (máx. 500 caracteres)" maxlength="500" rows="4"></textarea>
+        <textarea id="comment-text" class="comment-text" placeholder="Comparte tus dudas, ejemplos o comentarios sobre programación... (máx. 500 caracteres)"maxlength="500" rows="4"></textarea>
         <div class="comment-form-footer">
             <span id="char-count">0/500</span>
-            <button id="submit-comment" class="comment-submit-btn">
-                📤 Publicar Comentario
-            </button>
+            <div>
+                <button id="preview-comment" class="preview-btn">
+                    👁️ Vista Previa
+                </button>
+                <button id="submit-comment" class="comment-submit-btn">
+                    📤 Publicar Comentario
+                </button>
+            </div>
         </div>
-        <p class="comment-note">Los comentarios son anónimos y se comparten entre todos los estudiantes</p>
+        <p class="comment-note">
+            Los comentarios son anónimos, moderados y se comparten entre todos los visitantes.
+            <br>
+            <small>Presiona Ctrl+Enter para publicar rápido</small>
+        </p>
+    </div>
+    
+    <!-- Vista previa -->
+    <div id="comment-preview" class="comment-preview" style="display: none;">
+        <h4>Vista previa de tu comentario:</h4>
+        <div class="preview-content"></div>
+        <button onclick="document.getElementById('comment-preview').style.display = 'none'">
+            Cerrar vista previa
+        </button>
     </div>
     
     <!-- Lista de comentarios -->
@@ -180,6 +210,7 @@
         <div class="loading-comments">Cargando comentarios...</div>
     </div>
 </div>
+    <script src="comments.js"></script>
         </section>
         <section>
             <h2>Feedback 📙</h2>
