@@ -814,21 +814,20 @@ handleCommentsSnapshot(snapshot) {
     
     getUserFriendlyMessage(moderationResult) {
         const messages = {
-            'Texto inválido': 'El comentario no es válido',
-            'El comentario es muy corto': 'El comentario debe tener al menos 3 caracteres',
-            'El comentario es muy largo': 'El comentario no puede exceder 500 caracteres',
-            'Contiene palabras no permitidas': 'El comentario contiene lenguaje inapropiado',
-            'Intento de evadir filtro detectado': 'Por favor, usa lenguaje apropiado',
-            'Combinación de palabras peligrosa detectada': 'El comentario podría interpretarse como amenazante',
-            'Repetición excesiva de caracteres': 'Evita repetir caracteres innecesariamente',
-            'Posible intento de dividir palabras prohibidas': 'Usa lenguaje apropiado',
-            'Lenguaje amenazante detectado': 'No se permiten comentarios amenazantes',
-            'Demasiados enlaces (posible spam)': 'No se permiten múltiples enlaces',
-            'Contenido sospechoso de spam/comercial': 'No se permite contenido comercial',
-            'Uso excesivo de mayúsculas': 'Por favor, no uses mayúsculas excesivas'
+            'Texto inválido': '❌ El comentario no es válido.',
+            'El comentario está vacío': '❌ Por favor escribe algo.',
+            'El comentario debe tener al menos 3 caracteres': '❌ Tu comentario es muy corto (mínimo 3 caracteres).',
+            'El comentario no puede exceder 500 caracteres': '❌ Tu comentario es muy largo (máximo 500 caracteres).',
+            'Contiene lenguaje inapropiado (palabra ofensiva detectada)': '⚠️ Tu comentario contiene lenguaje inapropiado. Por favor, sé respetuoso.',
+            'Posible intento de evadir filtro de contenido': '⚠️ Detectamos un intento de evasión de filtro. Por favor, usa lenguaje apropiado.',
+            'Repetición excesiva de caracteres detectada': '⚠️ Evita repetir caracteres excesivamente (ej: "jajajaja").',
+            'Detectado posible spam o contenido comercial': '🚫 No se permite contenido comercial, URLs ni emails.',
+            'Lenguaje amenazante detectado': '🚫 No se permiten comentarios amenazantes. Todos nos merecemos respeto.',
+            'El comentario está vacío': '❌ Tu comentario no puede estar vacío.'
         };
         
-        return messages[moderationResult.reason] || 'El comentario no cumple con nuestras normas. Por favor, sé respetuoso.';
+        const reason = moderationResult.reason;
+        return messages[reason] || '❌ El comentario no cumple con nuestras normas. Por favor, sé respetuoso y constructivo.';
     }
     
     saveModerationLog(originalText, result) {
