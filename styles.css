@@ -17,7 +17,7 @@
 @media (prefers-color-scheme: dark){
   :root{
     --bg: #111111;
-    --surface: #071026;
+    --surface: #111;
     --text: #e6eef8;
     --muted: #9aa6b2;
     --accent: #8b5cf6;
@@ -32,7 +32,7 @@
 /* Explicit theme overrides via attribute (set by theme.js) */
 :root[data-theme="dark"]{
   --bg: #111111;
-  --surface: #071026;
+  --surface: #111;
   --text: #e6eef8;
   --muted: #9aa6b2;
   --accent: #8b5cf6;
