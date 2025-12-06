@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Serie-Educativa</title>
         <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="counter.css">
         <link rel="icon" href="favicon.ico" type="image/x-icon">
         <meta name="description" content="Serie educativa: pequeños artículos y visores de código para aprender lenguajes.">
     </head>
@@ -118,7 +119,46 @@
                 </li>
             </ul>
         </section>
-
+    <div class="edu-counter" id="edu-counter">
+        <div class="edu-header">
+            <span class="edu-icon">📚</span>
+            <h3>Estadísticas Globales</h3>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span class="stat-number" id="total-visits">0</span>
+                <span class="stat-label">Visitas Totales</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number" id="total-likes">0</span>
+                <span class="stat-label">Likes Totales</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number" id="today-visits">0</span>
+                <span class="stat-label">Visitas Hoy</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number" id="engagement">0%</span>
+                <span class="stat-label">Engagement</span>
+            </div>
+        </div>
+        
+        <div class="like-section">
+            <button class="edu-like-btn pulse" id="edu-like-btn">
+                <span class="btn-icon">👍</span>
+                <span class="btn-text">Apoya este contenido</span>
+            </button>
+            <p class="support-text">
+                Tu like ayuda a otros estudiantes
+            </p>
+        </div>
+    </div>
+    
+    <!-- Firebase SDK + tu código -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="counter_firebase.js"></script>
         <section>
             <h2>Feedback 📙</h2>
             <div class="fb">
@@ -129,47 +169,6 @@
                 <a href="#top">Subir 👆</a>
             </div>
         </section>
-
-        <!-- SOLO esta parte en tu HTML existente -->
-<div class="edu-counter" id="edu-counter">
-    <div class="edu-header">
-        <span class="edu-icon">📚</span>
-        <h3>Estadísticas</h3>
-    </div>
-    
-    <div class="stats-grid">
-        <div class="stat-box">
-            <span class="stat-number" id="total-visits">0</span>
-            <span class="stat-label">Visitas</span>
-        </div>
-        <div class="stat-box">
-            <span class="stat-number" id="total-likes">0</span>
-            <span class="stat-label">Likes</span>
-        </div>
-        <div class="stat-box">
-            <span class="stat-number" id="today-visits">0</span>
-            <span class="stat-label">Hoy</span>
-        </div>
-        <div class="stat-box">
-            <span class="stat-number" id="engagement">0%</span>
-            <span class="stat-label">Engagement</span>
-        </div>
-    </div>
-    
-    <div class="like-section">
-        <button class="edu-like-btn pulse" id="edu-like-btn">
-            <span class="btn-icon">👍</span>
-            <span class="btn-text" id="like-btn-text">Apoya esta página</span>
-        </button>
-        <p class="support-text">
-            Tu apoyo motiva a seguir creando contenido
-        </p>
-    </div>
-</div>
-
-<!-- ENLACES a los archivos CSS y JS -->
-<link rel="stylesheet" href="counter.css">
-<script src="counter.js" defer></script>
         <script src="theme.js"></script>
         <script src="buscador.js"></script>
     </body>
