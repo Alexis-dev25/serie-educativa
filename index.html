@@ -160,22 +160,28 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     <script>
         // Configuración proporcionada por el usuario
-        const firebaseConfig = {
-            apiKey: "AIzaSyCbm7LYeDnXJTk9bJJs9FyOvkmqxMs7f8U",
-            authDomain: "serie-educativa.firebaseapp.com",
-            databaseURL: "https://serie-educativa-default-rtdb.firebaseio.com",
-            projectId: "serie-educativa",
-            storageBucket: "serie-educativa.firebasestorage.app",
-            messagingSenderId: "419592658892",
-            appId: "1:419592658892:web:11a70ffa88f853a4920769",
-            measurementId: "G-81N5THENWD"
-        };
+        if (!window.firebaseConfig) {
+            window.firebaseConfig = {
+                apiKey: "AIzaSyCbm7LYeDnXJTk9bJJs9FyOvkmqxMs7f8U",
+                authDomain: "serie-educativa.firebaseapp.com",
+                databaseURL: "https://serie-educativa-default-rtdb.firebaseio.com",
+                projectId: "serie-educativa",
+                storageBucket: "serie-educativa.firebasestorage.app",
+                messagingSenderId: "419592658892",
+                appId: "1:419592658892:web:11a70ffa88f853a4920769",
+                measurementId: "G-81N5THENWD"
+            };
+        }
 
-        // Inicializar Firebase
+        // Inicializar Firebase (usa window.firebaseConfig para evitar redeclaraciones)
         try {
             if (typeof firebase !== 'undefined') {
-                firebase.initializeApp(firebaseConfig);
-                console.log('Firebase inicializado con la configuración proporcionada');
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(window.firebaseConfig);
+                    console.log('Firebase inicializado con la configuración proporcionada');
+                } else {
+                    console.log('Firebase ya estaba inicializado');
+                }
             } else {
                 console.warn('SDK de Firebase no cargado aún. La inicialización fallará si se llama ahora.');
             }

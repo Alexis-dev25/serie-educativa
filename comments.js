@@ -420,48 +420,7 @@ showPreview() {
         this.showMessage('Escribe algo para ver la vista previa', 'info');
         return;
     }
-
-    async migrateLocalToFirebase() {
-        if (this.useLocal && (!window.firebase || !firebase.apps || firebase.apps.length === 0)) {
-            this.showMessage('Firebase no está disponible. Inicializa Firebase primero.', 'error');
-            return;
-        }
-
-        const key = 'comments_local';
-        const stored = JSON.parse(localStorage.getItem(key) || '[]');
-        if (!stored.length) {
-            this.showMessage('No hay comentarios locales para migrar.', 'info');
-            return;
-        }
-
-        try {
-            this.showMessage('Iniciando migración a Firebase...', 'success');
-            for (const c of stored) {
-                const data = {
-                    text: c.text || '',
-                    author: c.author || 'Anónimo',
-                    userId: c.userId || 'local',
-                    timestamp: c.timestamp || Date.now(),
-                    likes: c.likes || 0,
-                    likedBy: c.likedBy || {}
-                };
-                await this.commentsRef.push().set(data);
-            }
-
-            // Borrar locales tras migrar
-            localStorage.removeItem(key);
-            this.showMessage('Migración completada. Comentarios movidos a Firebase.', 'success');
-            // Forzar recarga desde Firebase
-            this.useLocal = false;
-            this.database = firebase.database();
-            this.commentsRef = this.database.ref('comments');
-            this.updateModeIndicator();
-            this.loadComments();
-        } catch (err) {
-            console.error('Error migrando comentarios:', err);
-            this.showMessage('Error migrando comentarios: ' + (err.message || err), 'error');
-        }
-    }
+    
     
     // Verificar moderación
     if (this.moderator && this.moderator.moderate) {
@@ -539,6 +498,48 @@ showPreview() {
     // Desplazarse a la vista previa
     previewDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
+
+    async migrateLocalToFirebase() {
+        if (this.useLocal && (!window.firebase || !firebase.apps || firebase.apps.length === 0)) {
+            this.showMessage('Firebase no está disponible. Inicializa Firebase primero.', 'error');
+            return;
+        }
+
+        const key = 'comments_local';
+        const stored = JSON.parse(localStorage.getItem(key) || '[]');
+        if (!stored.length) {
+            this.showMessage('No hay comentarios locales para migrar.', 'info');
+            return;
+        }
+
+        try {
+            this.showMessage('Iniciando migración a Firebase...', 'success');
+            for (const c of stored) {
+                const data = {
+                    text: c.text || '',
+                    author: c.author || 'Anónimo',
+                    userId: c.userId || 'local',
+                    timestamp: c.timestamp || Date.now(),
+                    likes: c.likes || 0,
+                    likedBy: c.likedBy || {}
+                };
+                await this.commentsRef.push().set(data);
+            }
+
+            // Borrar locales tras migrar
+            localStorage.removeItem(key);
+            this.showMessage('Migración completada. Comentarios movidos a Firebase.', 'success');
+            // Forzar recarga desde Firebase
+            this.useLocal = false;
+            this.database = firebase.database();
+            this.commentsRef = this.database.ref('comments');
+            this.updateModeIndicator();
+            this.loadComments();
+        } catch (err) {
+            console.error('Error migrando comentarios:', err);
+            this.showMessage('Error migrando comentarios: ' + (err.message || err), 'error');
+        }
+    }
     async submitComment() {
     console.log("submitComment llamado");
     

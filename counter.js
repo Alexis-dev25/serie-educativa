@@ -14,16 +14,16 @@ function waitForFirebase() {
     });
 }
 
-// Configuración Firebase - REEMPLAZA CON TUS DATOS REALES
-const firebaseConfig = {
-  apiKey: "AIzaSyCbm7LYeDnXJTk9bJJs9FyOvkmqxMs7f8U",
-  authDomain: "serie-educativa.firebaseapp.com",
-  databaseURL: "https://serie-educativa-default-rtdb.firebaseio.com",
-  projectId: "serie-educativa",
-  storageBucket: "serie-educativa.firebasestorage.app",
-  messagingSenderId: "419592658892",
-  appId: "1:419592658892:web:11a70ffa88f853a4920769",
-  measurementId: "G-81N5THENWD"
+// Configuración Firebase - usa `window.firebaseConfig` si ya existe, sino usa estos valores
+const firebaseConfigLocal = window.firebaseConfig || {
+    apiKey: "AIzaSyCbm7LYeDnXJTk9bJJs9FyOvkmqxMs7f8U",
+    authDomain: "serie-educativa.firebaseapp.com",
+    databaseURL: "https://serie-educativa-default-rtdb.firebaseio.com",
+    projectId: "serie-educativa",
+    storageBucket: "serie-educativa.firebasestorage.app",
+    messagingSenderId: "419592658892",
+    appId: "1:419592658892:web:11a70ffa88f853a4920769",
+    measurementId: "G-81N5THENWD"
 };
 
 // Clase principal
@@ -41,7 +41,7 @@ class FirebaseStats {
             
             // Inicializar Firebase
             if (!firebase.apps.length) {
-                firebase.initializeApp(firebaseConfig);
+                firebase.initializeApp(firebaseConfigLocal);
                 console.log("Firebase inicializado correctamente");
             } else {
                 console.log("Firebase ya estaba inicializado");
