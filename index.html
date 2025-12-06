@@ -210,7 +210,27 @@
         <div class="loading-comments">Cargando comentarios...</div>
     </div>
 </div>
-    <script src="comments.js"></script>
+    <script src="moderation.js"></script>
+    <script>
+    // Cargar comments.js dinámicamente
+    const script = document.createElement('script');
+    script.src = 'comments.js';
+    script.onload = function() {
+        console.log('comments.js cargado exitosamente');
+    };
+    script.onerror = function() {
+        console.error('Error cargando comments.js - creando versión de emergencia');
+        
+        // Versión de emergencia
+        const emergencyScript = document.createElement('script');
+        emergencyScript.textContent = `
+            console.log('Usando sistema de comentarios de emergencia');
+            // Código básico de emergencia aquí
+        `;
+        document.head.appendChild(emergencyScript);
+    };
+    document.head.appendChild(script);
+</script>
         </section>
         <section>
             <h2>Feedback 📙</h2>
