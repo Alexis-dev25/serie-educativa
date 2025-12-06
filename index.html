@@ -156,7 +156,10 @@
     </div>
     
     <!-- Firebase SDK + tu código -->
-    <script type="module" src="counter.js"></script>
+    <script type="module">
+        import { miFuncion } from './counter.js';
+        miFuncion();
+    </script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     
@@ -178,4 +181,5 @@
 </body>
 
 </html>
+
 
