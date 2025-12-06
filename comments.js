@@ -183,165 +183,6 @@ forceDisplayComments() {
         document.body.appendChild(container);
     }
     
-    addStyles() {
-        if (document.getElementById('comments-styles')) return;
-        
-        const styles = document.createElement('style');
-        styles.id = 'comments-styles';
-        styles.textContent = `
-            .comments-section {
-                max-width: 800px;
-                margin: 40px auto;
-                padding: 20px;
-                background: white;
-                border-radius: 15px;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-                font-family: Arial, sans-serif;
-            }
-            
-            .comment-form {
-                margin-bottom: 30px;
-            }
-            
-            .comment-form textarea {
-                width: 100%;
-                padding: 15px;
-                border: 2px solid #ddd;
-                border-radius: 10px;
-                font-family: inherit;
-                font-size: 16px;
-                resize: vertical;
-                transition: border 0.3s;
-            }
-            
-            .comment-form textarea:focus {
-                outline: none;
-                border-color: #3498db;
-            }
-            
-            .comment-form-footer {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-top: 10px;
-            }
-            
-            #char-count {
-                font-size: 14px;
-                color: #7f8c8d;
-            }
-            
-            .comment-submit-btn {
-                background: linear-gradient(135deg, #3498db, #2980b9);
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 25px;
-                cursor: pointer;
-                font-weight: bold;
-                transition: all 0.3s;
-            }
-            
-            .comment-submit-btn:hover:not(:disabled) {
-                transform: translateY(-2px);
-                box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-            }
-            
-            .comment-submit-btn:disabled {
-                background: #95a5a6;
-                cursor: not-allowed;
-            }
-            
-            .comment-note {
-                font-size: 12px;
-                color: #95a5a6;
-                margin-top: 10px;
-                text-align: center;
-            }
-            
-            .comments-list {
-                margin-top: 30px;
-            }
-            
-            .comment-card {
-                background: #f8f9fa;
-                border-radius: 10px;
-                padding: 15px;
-                margin-bottom: 15px;
-                border-left: 4px solid #3498db;
-                animation: fadeIn 0.5s;
-            }
-            
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(10px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            
-            .comment-header {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 10px;
-                font-size: 14px;
-            }
-            
-            .comment-author {
-                font-weight: bold;
-                color: #2c3e50;
-            }
-            
-            .comment-time {
-                color: #7f8c8d;
-            }
-            
-            .comment-content {
-                line-height: 1.5;
-                color: #333;
-                white-space: pre-wrap;
-                word-break: break-word;
-            }
-            
-            .comment-actions {
-                display: flex;
-                gap: 15px;
-                margin-top: 10px;
-            }
-            
-            .comment-like-btn {
-                background: none;
-                border: none;
-                color: #7f8c8d;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                gap: 5px;
-                font-size: 14px;
-            }
-            
-            .comment-like-btn:hover {
-                color: #e74c3c;
-            }
-            
-            .comment-like-btn.liked {
-                color: #e74c3c;
-            }
-            
-            .loading-comments {
-                text-align: center;
-                padding: 20px;
-                color: #7f8c8d;
-            }
-            
-            .empty-comments {
-                text-align: center;
-                padding: 40px;
-                color: #95a5a6;
-                font-style: italic;
-            }
-        `;
-        
-        document.head.appendChild(styles);
-    }
-    
     setupEventListeners() {
     console.log("Configurando event listeners...");
     
@@ -439,11 +280,12 @@ showPreview() {
         previewDiv.id = 'comment-preview';
         previewDiv.className = 'comment-preview';
         previewDiv.style.cssText = `
-            background: #f8f9fa;
+            background: var(--bg);
+            color: var(--text);
             border-radius: 10px;
             padding: 20px;
             margin: 20px 0;
-            border: 2px dashed #3498db;
+            border: 2px dashed #db3434ff;
             font-family: Arial, sans-serif;
         `;
         
@@ -458,16 +300,16 @@ showPreview() {
     
     // Contenido de la vista previa
     previewDiv.innerHTML = `
-        <h4 style="margin-top: 0; color: #2c3e50;">👁️ Vista Previa de tu Comentario:</h4>
-        <div class="preview-content" style="background: white; padding: 15px; border-radius: 5px; margin: 10px 0; min-height: 50px;">
-            <div class="preview-header" style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px;">
-                <span style="font-weight: bold; color: #2c3e50;">${this.userName}</span>
+        <h4 style="margin-top: 0; color: var(--text);">👁️ Vista Previa de tu Comentario:</h4>
+        <div class="preview-content" style="background: var(--bg); padding: 15px; border-radius: 5px; margin: 10px 0; min-height: 50px;">
+            <div class="preview-header" style="display: flex; background: var(--bg); justify-content: space-between; margin-bottom: 10px; font-size: 14px;">
+                <span style="font-weight: bold; color: var(--text); background: var(--bg);">${this.userName}</span>
                 <span style="color: #7f8c8d;">Ahora mismo</span>
             </div>
-            <div class="preview-text" style="line-height: 1.5; color: #333; white-space: pre-wrap; word-break: break-word;">
+            <div class="preview-text" style="line-height: 1.5; color: var(--text); background: var(--bg); white-space: pre-wrap; word-break: break-word;">
                 ${this.escapeHtml(text)}
             </div>
-            <div class="preview-actions" style="margin-top: 10px;">
+            <div class="preview-actions" style="margin-top: 10px; background: var(--bg);">
                 <button class="preview-like-btn" style="background: none; border: none; color: #7f8c8d; cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 14px;">
                     🤍 <span>0</span>
                 </button>
