@@ -268,24 +268,6 @@ if (document.readyState === 'loading') {
 } else {
     initApp();
 }
-
-// 1. Cache de Firebase
-localStorage.setItem('firebase_cache', JSON.stringify({
-    data: window.statsSystem.stats,
-    timestamp: Date.now()
-}));
-
-// 2. Offline support mejorado
-if (!navigator.onLine) {
-    document.getElementById('edu-like-btn').innerHTML = '🌐 Conéctate para dar like';
-    document.getElementById('edu-like-btn').style.background = '#95a5a6';
-}
-
-// 3. Performance
-window.addEventListener('beforeunload', () => {
-    // Limpiar listeners de Firebase si es necesario
-});
-
 // Crea un "reporte para el profesor"
 function generateTeacherReport() {
     const stats = window.statsSystem ? window.statsSystem.stats : {};
