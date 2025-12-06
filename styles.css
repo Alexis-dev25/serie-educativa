@@ -119,6 +119,7 @@ section{
     margin-bottom: 30px;
 }
 .comment-text {
+  color: var(--text);
   background-color: var(--bg);
 }
 .comment-form textarea {

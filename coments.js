@@ -187,7 +187,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-    generateRandomName() {
+    generateRandomName(); {
         const names = [
             "Estudiante Curioso", "Programador Novato", "Aprendiz de Código",
             "Explorador Digital", "Navegante del Saber", "Buscador de Conocimiento",
@@ -197,12 +197,12 @@ document.addEventListener('keydown', (e) => {
         return names[Math.floor(Math.random() * names.length)];
     }
     
-    init() {
+    init(); {
         this.setupEventListeners();
         this.loadComments();
     }
     
-    setupEventListeners() {
+    setupEventListeners(); {
         // Contador de caracteres
         const textarea = document.getElementById('comment-text');
         const charCount = document.getElementById('char-count');
@@ -234,7 +234,7 @@ document.addEventListener('keydown', (e) => {
         });
     }
     
-    async submitComment() {
+    async submitComment(); {
         const textarea = document.getElementById('comment-text');
         const text = textarea.value.trim();
         const submitBtn = document.getElementById('submit-comment');
@@ -283,7 +283,7 @@ document.addEventListener('keydown', (e) => {
         }
     }
     
-    loadComments() {
+    loadComments(); {
         // Escuchar comentarios en tiempo real
         this.commentsRef.orderByChild('timestamp').on('value', (snapshot) => {
             const comments = [];
@@ -300,7 +300,7 @@ document.addEventListener('keydown', (e) => {
         });
     }
     
-    displayComments(comments) {
+    displayComments(comments); {
         const container = document.getElementById('comments-list');
         
         if (comments.length === 0) {
@@ -335,7 +335,7 @@ document.addEventListener('keydown', (e) => {
         container.innerHTML = html;
     }
     
-    async likeComment(commentId) {
+    async likeComment(commentId); {
         try {
             const commentRef = this.database.ref(`comments/${commentId}`);
             const likeRef = this.database.ref(`comments/${commentId}/likedBy/${this.userId}`);
@@ -358,7 +358,7 @@ document.addEventListener('keydown', (e) => {
         }
     }
     
-    getTimeAgo(timestamp) {
+    getTimeAgo(timestamp); {
         const seconds = Math.floor((Date.now() - timestamp) / 1000);
         
         const intervals = {
@@ -381,13 +381,13 @@ document.addEventListener('keydown', (e) => {
         return 'justo ahora';
     }
     
-    escapeHtml(text) {
+    escapeHtml(text); {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
     }
     
-    showMessage(message, type) {
+    showMessage(message, type); {
         const messageEl = document.createElement('div');
         messageEl.style.cssText = `
             position: fixed;
