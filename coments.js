@@ -4,8 +4,6 @@ class CommentSystem {
         this.database = firebase.database();
         this.commentsRef = this.database.ref('comments');
         this.moderator = new CommentModerator();
-        
-        // Historial de moderación (para admin)
         this.moderationHistory = JSON.parse(localStorage.getItem('moderationHistory')) || [];
         this.userId = localStorage.getItem('githubUserId') || 'anonymous_' + Math.random().toString(36).substr(2, 9);
         this.userName = this.generateRandomName();
@@ -248,40 +246,7 @@ class CommentSystem {
             setTimeout(() => messageEl.remove(), 300);
         }, 3000);
     }
-}
-async submitComment() {
-        const textarea = document.getElementById('comment-text');
-        const text = textarea.value.trim();
-        const submitBtn = document.getElementById('submit-comment');
-        
-        if (!text) {
-            this.showMessage('Por favor escribe un comentario', 'error');
-            return;
-        }
-        
-        // 1. Moderar el texto
-        const moderationResult = this.moderator.moderate(text);
-        
-        if (!moderationResult.safe) {
-            // Mostrar mensaje específico de moderación
-            const userMessage = this.getUserFriendlyMessage(moderationResult);
-            this.showMessage(userMessage, 'error');
-            
-            // Guardar en historial de moderación
-            this.saveModerationLog(text, moderationResult);
-            
-            // Opcional: ofrecer versión censurada
-            if (this.shouldOfferCensoredVersion(moderationResult)) {
-                this.offerCensoredVersion(text);
-            }
-            
-            return;
-        }
-        
-        // 2. Si pasa moderación, continuar...
-        // ... resto del código de submitComment ...
-    }
-    
+
     getUserFriendlyMessage(moderationResult) {
         const messages = {
             'Texto inválido': 'El comentario no es válido',
