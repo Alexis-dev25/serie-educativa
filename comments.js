@@ -73,6 +73,32 @@ class CommentSystem {
             this.setup();
         }
     }
+    // Agrega esta función y llámala después de init
+forceDisplayComments() {
+    console.log("Forzando visualización de comentarios...");
+    
+    if (!this.database) {
+        console.error("Database no disponible");
+        return;
+    }
+    
+    // Obtener comentarios directamente
+    this.commentsRef.once('value')
+        .then(snapshot => {
+            if (snapshot.exists()) {
+                console.log(`Encontrados ${snapshot.numChildren()} comentarios`);
+                this.handleCommentsSnapshot(snapshot);
+            } else {
+                console.log("No hay comentarios");
+                this.displayComments([]);
+            }
+        })
+        .catch(error => {
+            console.error("Error forzando visualización:", error);
+        });
+}
+
+// Llamar desde consola: window.commentSystem.forceDisplayComments()
     
     setup() {
         console.log("Configurando sistema de comentarios...");
@@ -97,10 +123,7 @@ class CommentSystem {
                 <h3>💬 Comentarios de Estudiantes</h3>
                 
                 <div class="comment-form">
-                    <textarea id="comment-text" 
-                              placeholder="Comparte tus dudas, ejemplos o comentarios sobre programación... (máx. 500 caracteres)"
-                              maxlength="500" 
-                              rows="4"></textarea>
+                    <textarea id="comment-text" placeholder="Comparte tus dudas, ejemplos o comentarios sobre programación... (máx. 500 caracteres)"maxlength="500" rows="4"></textarea>
                     <div class="comment-form-footer">
                         <span id="char-count">0/500</span>
                         <button id="submit-comment" class="comment-submit-btn">
@@ -285,166 +308,388 @@ class CommentSystem {
     }
     
     setupEventListeners() {
+    console.log("Configurando event listeners...");
+    
+    // Esperar un momento para asegurar que el DOM esté listo
+    setTimeout(() => {
         const textarea = document.getElementById('comment-text');
         const charCount = document.getElementById('char-count');
         const submitBtn = document.getElementById('submit-comment');
+        const previewBtn = document.getElementById('preview-comment');
         
-        if (!textarea || !charCount || !submitBtn) {
-            console.error("Elementos del formulario no encontrados");
+        console.log("Elementos encontrados:", {
+            textarea: !!textarea,
+            charCount: !!charCount,
+            submitBtn: !!submitBtn,
+            previewBtn: !!previewBtn
+        });
+        
+        if (!textarea) {
+            console.error("Textarea no encontrado, creando...");
+            this.createCommentSection();
             return;
         }
         
         // Contador de caracteres
         textarea.addEventListener('input', () => {
             const length = textarea.value.length;
-            charCount.textContent = `${length}/500`;
-            
-            if (length > 450) {
-                charCount.style.color = '#e74c3c';
-            } else if (length > 400) {
-                charCount.style.color = '#f39c12';
-            } else {
-                charCount.style.color = '#7f8c8d';
+            if (charCount) {
+                charCount.textContent = `${length}/500`;
+                charCount.style.color = length > 450 ? '#e74c3c' : length > 400 ? '#f39c12' : '#7f8c8d';
             }
         });
         
         // Enviar comentario
-        submitBtn.addEventListener('click', () => {
-            this.submitComment();
-        });
+        if (submitBtn) {
+            submitBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log("Botón de enviar clickeado");
+                this.submitComment();
+            });
+        }
+        
+        // Vista previa
+        if (previewBtn) {
+            previewBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log("Botón de vista previa clickeado");
+                this.showPreview();
+            });
+        }
         
         // Enviar con Ctrl+Enter
         textarea.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key === 'Enter') {
+                e.preventDefault();
+                console.log("Ctrl+Enter detectado");
                 this.submitComment();
             }
+            
+            // Shift+Enter para vista previa
+            if (e.shiftKey && e.key === 'Enter') {
+                e.preventDefault();
+                this.showPreview();
+            }
         });
+        
+    }, 100); // Pequeño delay para asegurar DOM
+}
+    
+showPreview() {
+    const textarea = document.getElementById('comment-text');
+    if (!textarea) return;
+    
+    const text = textarea.value.trim();
+    
+    if (!text) {
+        this.showMessage('Escribe algo para ver la vista previa', 'info');
+        return;
     }
     
-    async submitComment() {
-        const textarea = document.getElementById('comment-text');
-        const submitBtn = document.getElementById('submit-comment');
-        
-        if (!textarea || !submitBtn) return;
-        
-        const text = textarea.value.trim();
-        
-        if (!text) {
-            this.showMessage('Por favor escribe un comentario', 'error');
+    // Verificar moderación
+    if (this.moderator && this.moderator.moderate) {
+        const moderationResult = this.moderator.moderate(text);
+        if (!moderationResult.safe) {
+            this.showMessage(`Vista previa rechazada: ${moderationResult.reason}`, 'error');
             return;
-        }
-        
-        // Verificar moderación
-        if (this.moderator && this.moderator.moderate) {
-            const moderationResult = this.moderator.moderate(text);
-            
-            if (!moderationResult.safe) {
-                const userMessage = this.getUserFriendlyMessage(moderationResult);
-                this.showMessage(userMessage, 'error');
-                
-                // Guardar en historial
-                this.saveModerationLog(text, moderationResult);
-                return;
-            }
-        } else if (text.length > 500) {
-            this.showMessage('El comentario es muy largo (máx. 500 caracteres)', 'error');
-            return;
-        }
-        
-        // Deshabilitar botón temporalmente
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '⏳ Publicando...';
-        
-        try {
-            const commentData = {
-                text: text,
-                author: this.userName,
-                userId: this.userId,
-                timestamp: firebase.database.ServerValue.TIMESTAMP,
-                likes: 0,
-                likedBy: {}
-            };
-            
-            // Guardar en Firebase
-            const newCommentRef = this.commentsRef.push();
-            await newCommentRef.set(commentData);
-            
-            // Limpiar textarea
-            textarea.value = '';
-            document.getElementById('char-count').textContent = '0/500';
-            
-            this.showMessage('¡Comentario publicado!', 'success');
-            
-        } catch (error) {
-            console.error('Error publicando comentario:', error);
-            this.showMessage('Error al publicar. Intenta nuevamente.', 'error');
-        } finally {
-            // Restaurar botón
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '📤 Publicar Comentario';
         }
     }
+    
+    // Crear o actualizar vista previa
+    let previewDiv = document.getElementById('comment-preview');
+    
+    if (!previewDiv) {
+        previewDiv = document.createElement('div');
+        previewDiv.id = 'comment-preview';
+        previewDiv.className = 'comment-preview';
+        previewDiv.style.cssText = `
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed #3498db;
+            font-family: Arial, sans-serif;
+        `;
+        
+        const textareaParent = textarea.parentElement;
+        if (textareaParent) {
+            textareaParent.parentElement.insertBefore(previewDiv, textareaParent.nextSibling);
+        } else {
+            document.getElementById('comments-list').insertBefore(previewDiv, 
+                document.getElementById('comments-list').firstChild);
+        }
+    }
+    
+    // Contenido de la vista previa
+    previewDiv.innerHTML = `
+        <h4 style="margin-top: 0; color: #2c3e50;">👁️ Vista Previa de tu Comentario:</h4>
+        <div class="preview-content" style="background: white; padding: 15px; border-radius: 5px; margin: 10px 0; min-height: 50px;">
+            <div class="preview-header" style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px;">
+                <span style="font-weight: bold; color: #2c3e50;">${this.userName}</span>
+                <span style="color: #7f8c8d;">Ahora mismo</span>
+            </div>
+            <div class="preview-text" style="line-height: 1.5; color: #333; white-space: pre-wrap; word-break: break-word;">
+                ${this.escapeHtml(text)}
+            </div>
+            <div class="preview-actions" style="margin-top: 10px;">
+                <button class="preview-like-btn" style="background: none; border: none; color: #7f8c8d; cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 14px;">
+                    🤍 <span>0</span>
+                </button>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button onclick="window.commentSystem.submitComment()" 
+                    style="background: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                ✅ Publicar ahora
+            </button>
+            <button onclick="document.getElementById('comment-preview').remove()" 
+                    style="background: #e74c3c; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                ❌ Cancelar
+            </button>
+            <button onclick="document.getElementById('comment-text').focus()" 
+                    style="background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                ✏️ Editar
+            </button>
+        </div>
+        <div style="margin-top: 10px; font-size: 12px; color: #95a5a6;">
+            <strong>Recordatorio:</strong> Tu nombre será "${this.userName}" y no podrás editarlo después.
+        </div>
+    `;
+    
+    // Asegurarse de que esté visible
+    previewDiv.style.display = 'block';
+    
+    // Desplazarse a la vista previa
+    previewDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+    async submitComment() {
+    console.log("submitComment llamado");
+    
+    const textarea = document.getElementById('comment-text');
+    const submitBtn = document.getElementById('submit-comment');
+    
+    if (!textarea || !submitBtn) {
+        console.error("Elementos no encontrados");
+        this.showMessage('Error: elementos del formulario no encontrados', 'error');
+        return;
+    }
+    
+    const text = textarea.value.trim();
+    console.log("Texto a enviar:", text.substring(0, 50) + (text.length > 50 ? '...' : ''));
+    
+    if (!text) {
+        this.showMessage('Por favor escribe un comentario', 'error');
+        return;
+    }
+    
+    // Verificar moderación
+    if (this.moderator && this.moderator.moderate) {
+        console.log("Verificando moderación...");
+        const moderationResult = this.moderator.moderate(text);
+        
+        if (!moderationResult.safe) {
+            console.log("Comentario rechazado:", moderationResult.reason);
+            const userMessage = this.getUserFriendlyMessage(moderationResult);
+            this.showMessage(userMessage, 'error');
+            
+            // Guardar en historial
+            this.saveModerationLog(text, moderationResult);
+            return;
+        }
+        console.log("Comentario aprobado por moderación");
+    } else if (text.length > 500) {
+        this.showMessage('El comentario es muy largo (máx. 500 caracteres)', 'error');
+        return;
+    }
+    
+    // Deshabilitar botón temporalmente
+    submitBtn.disabled = true;
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '⏳ Publicando...';
+    
+    try {
+        console.log("Preparando datos para Firebase...");
+        const commentData = {
+            text: text,
+            author: this.userName,
+            userId: this.userId,
+            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            likes: 0,
+            likedBy: {}
+        };
+        
+        console.log("Datos a enviar:", commentData);
+        
+        // Guardar en Firebase
+        const newCommentRef = this.commentsRef.push();
+        console.log("Referencia creada:", newCommentRef.key);
+        
+        await newCommentRef.set(commentData);
+        console.log("Comentario guardado en Firebase");
+        
+        // Limpiar textarea
+        textarea.value = '';
+        
+        // Actualizar contador
+        const charCount = document.getElementById('char-count');
+        if (charCount) {
+            charCount.textContent = '0/500';
+            charCount.style.color = '#7f8c8d';
+        }
+        
+        // Eliminar vista previa si existe
+        const previewDiv = document.getElementById('comment-preview');
+        if (previewDiv) {
+            previewDiv.remove();
+        }
+        
+        this.showMessage('¡Comentario publicado! Aparecerá en la lista en segundos.', 'success');
+        
+        // Enfocar el textarea de nuevo
+        setTimeout(() => {
+            if (textarea) textarea.focus();
+        }, 500);
+        
+    } catch (error) {
+        console.error('Error publicando comentario:', error);
+        this.showMessage(`Error: ${error.message}`, 'error');
+    } finally {
+        // Restaurar botón
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+    }
+}
     
     loadComments() {
-        try {
-            // Escuchar comentarios en tiempo real
-            this.commentsRef.orderByChild('timestamp').on('value', (snapshot) => {
-                const comments = [];
-                snapshot.forEach((childSnapshot) => {
-                    const comment = childSnapshot.val();
-                    comment.id = childSnapshot.key;
-                    comments.push(comment);
-                });
-                
-                // Ordenar por timestamp (más reciente primero)
-                comments.sort((a, b) => b.timestamp - a.timestamp);
-                
-                this.displayComments(comments);
-            }, (error) => {
-                console.error("Error cargando comentarios:", error);
-                this.showCommentsError();
-            });
-        } catch (error) {
-            console.error("Error inicializando listeners:", error);
-            this.showCommentsError();
-        }
-    }
+    console.log("Cargando comentarios desde Firebase...");
     
-    displayComments(comments) {
-        const container = document.getElementById('comments-list');
-        if (!container) return;
-        
-        if (comments.length === 0) {
-            container.innerHTML = '<div class="empty-comments">No hay comentarios aún. ¡Sé el primero!</div>';
+    try {
+        // Obtener referencia a la lista de comentarios
+        const commentsList = document.getElementById('comments-list');
+        if (!commentsList) {
+            console.error("Elemento comments-list no encontrado");
             return;
         }
         
-        let html = '';
+        // Mostrar mensaje de carga
+        commentsList.innerHTML = '<div class="loading-comments">⏳ Cargando comentarios...</div>';
         
-        comments.forEach(comment => {
+        // Configurar listener para comentarios en tiempo real
+        this.commentsRef.orderByChild('timestamp').on('value', 
+            (snapshot) => {
+                console.log("Nuevos datos recibidos de Firebase");
+                this.handleCommentsSnapshot(snapshot);
+            },
+            (error) => {
+                console.error("Error en listener de comentarios:", error);
+                this.showCommentsError();
+            }
+        );
+        
+    } catch (error) {
+        console.error("Error inicializando loadComments:", error);
+        this.showCommentsError();
+    }
+}
+
+handleCommentsSnapshot(snapshot) {
+    console.log("Procesando snapshot...");
+    
+    const comments = [];
+    
+    // Verificar si hay datos
+    if (!snapshot.exists()) {
+        console.log("No hay comentarios en Firebase");
+        this.displayComments([]);
+        return;
+    }
+    
+    // Recorrer todos los comentarios
+    snapshot.forEach((childSnapshot) => {
+        try {
+            const comment = childSnapshot.val();
+            comment.id = childSnapshot.key;
+            comments.push(comment);
+            console.log(`Comentario ${comment.id}: ${comment.author} - ${comment.text?.substring(0, 30)}...`);
+        } catch (err) {
+            console.error("Error procesando comentario:", err);
+        }
+    });
+    
+    console.log(`Total de comentarios encontrados: ${comments.length}`);
+    
+    // Ordenar por timestamp (más reciente primero)
+    comments.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+    
+    // Mostrar comentarios
+    this.displayComments(comments);
+}
+    
+    displayComments(comments) {
+    console.log("Mostrando", comments.length, "comentarios");
+    
+    const container = document.getElementById('comments-list');
+    if (!container) {
+        console.error("Contenedor de comentarios no encontrado");
+        return;
+    }
+    
+    // Si no hay comentarios
+    if (comments.length === 0) {
+        container.innerHTML = `
+            <div class="empty-comments">
+                <p>📝 No hay comentarios aún</p>
+                <p><small>¡Sé el primero en comentar!</small></p>
+            </div>
+        `;
+        return;
+    }
+    
+    let html = '';
+    
+    comments.forEach(comment => {
+        try {
+            // Validar datos del comentario
+            if (!comment.text || !comment.author) {
+                console.warn("Comentario inválido:", comment);
+                return;
+            }
+            
             const timeAgo = this.getTimeAgo(comment.timestamp);
             const isLiked = comment.likedBy && comment.likedBy[this.userId];
+            const likeCount = comment.likes || 0;
             
             html += `
-                <div class="comment-card" data-id="${comment.id}">
+                <div class="comment-card" data-id="${comment.id || ''}">
                     <div class="comment-header">
-                        <span class="comment-author">${comment.author}</span>
+                        <span class="comment-author">${this.escapeHtml(comment.author)}</span>
                         <span class="comment-time">${timeAgo}</span>
                     </div>
                     <div class="comment-content">${this.escapeHtml(comment.text)}</div>
                     <div class="comment-actions">
                         <button class="comment-like-btn ${isLiked ? 'liked' : ''}" 
-                                onclick="window.commentSystem.likeComment('${comment.id}')">
+                                onclick="window.commentSystem.likeComment('${comment.id}')"
+                                ${isLiked ? 'title="Ya te gusta"' : 'title="Dar like"'}>
                             ${isLiked ? '❤️' : '🤍'} 
-                            <span class="like-count">${comment.likes || 0}</span>
+                            <span class="like-count">${likeCount}</span>
                         </button>
                     </div>
                 </div>
             `;
-        });
-        
-        container.innerHTML = html;
-    }
+        } catch (error) {
+            console.error("Error generando HTML para comentario:", error, comment);
+        }
+    });
+    
+    // Añadir contador de comentarios
+    const header = `<div style="margin-bottom: 15px; color: #7f8c8d; font-size: 14px;">
+        <strong>${comments.length}</strong> comentario${comments.length !== 1 ? 's' : ''}
+    </div>`;
+    
+    container.innerHTML = header + html;
+    
+    console.log("Comentarios renderizados exitosamente");
+}
     
     showCommentsError() {
         const container = document.getElementById('comments-list');
@@ -483,17 +728,75 @@ class CommentSystem {
     }
     
     getTimeAgo(timestamp) {
-        if (!timestamp) return 'reciente';
-        
-        const seconds = Math.floor((Date.now() - timestamp) / 1000);
-        
-        if (seconds < 60) return 'justo ahora';
-        if (seconds < 3600) return `hace ${Math.floor(seconds / 60)} min`;
-        if (seconds < 86400) return `hace ${Math.floor(seconds / 3600)} h`;
-        if (seconds < 2592000) return `hace ${Math.floor(seconds / 86400)} días`;
-        if (seconds < 31536000) return `hace ${Math.floor(seconds / 2592000)} meses`;
-        return `hace ${Math.floor(seconds / 31536000)} años`;
+    if (!timestamp || timestamp === 0) {
+        return 'reciente';
     }
+    
+    // Asegurar que timestamp sea número
+    const ts = Number(timestamp);
+    if (isNaN(ts)) {
+        return 'reciente';
+    }
+    
+    const now = Date.now();
+    const seconds = Math.floor((now - ts) / 1000);
+    
+    // Si es futuro o muy reciente
+    if (seconds < 0) return 'en el futuro';
+    if (seconds < 10) return 'justo ahora';
+    if (seconds < 60) return `hace ${seconds} segundos`;
+    
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `hace ${minutes} minuto${minutes !== 1 ? 's' : ''}`;
+    
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `hace ${hours} hora${hours !== 1 ? 's' : ''}`;
+    
+    const days = Math.floor(hours / 24);
+    if (days < 7) return `hace ${days} día${days !== 1 ? 's' : ''}`;
+    
+    const weeks = Math.floor(days / 7);
+    if (weeks < 4) return `hace ${weeks} semana${weeks !== 1 ? 's' : ''}`;
+    
+    // Mostrar fecha completa si es muy antiguo
+    return new Date(ts).toLocaleDateString('es-ES', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+    });
+}
+    // Agrega esta función a la clase CommentSystem
+    debugFirebase() {
+        console.log("=== DEBUG FIREBASE ===");
+        
+        if (!this.database) {
+            console.error("Database no disponible");
+            return;
+        }
+        
+        // Verificar conexión
+        const connectedRef = this.database.ref(".info/connected");
+        connectedRef.on("value", (snap) => {
+            console.log("Conectado a Firebase:", snap.val() ? "Sí" : "No");
+        });
+        
+        // Verificar comentarios directamente
+        this.commentsRef.once('value')
+            .then((snapshot) => {
+                console.log("Comentarios en Firebase:", snapshot.numChildren());
+                
+                snapshot.forEach((child) => {
+                    console.log(`- ${child.key}:`, child.val());
+                });
+            })
+            .catch(error => {
+                console.error("Error obteniendo comentarios:", error);
+            });
+        
+        console.log("=== FIN DEBUG ===");
+}
+
+// Llamar desde consola: window.commentSystem.debugFirebase()
     
     escapeHtml(text) {
         const div = document.createElement('div');
@@ -517,8 +820,7 @@ class CommentSystem {
             'Uso excesivo de mayúsculas': 'Por favor, no uses mayúsculas excesivas'
         };
         
-        return messages[moderationResult.reason] || 
-               'El comentario no cumple con nuestras normas. Por favor, sé respetuoso.';
+        return messages[moderationResult.reason] || 'El comentario no cumple con nuestras normas. Por favor, sé respetuoso.';
     }
     
     saveModerationLog(originalText, result) {

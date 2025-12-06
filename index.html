@@ -177,40 +177,27 @@
     
     <!-- Formulario -->
     <div class="comment-form">
-        <textarea id="comment-text" class="comment-text" placeholder="Comparte tus dudas, ejemplos o comentarios sobre programación... (máx. 500 caracteres)"maxlength="500" rows="4"></textarea>
-        <div class="comment-form-footer">
-            <span id="char-count">0/500</span>
-            <div>
-                <button id="preview-comment" class="preview-btn">
-                    👁️ Vista Previa
-                </button>
-                <button id="submit-comment" class="comment-submit-btn">
-                    📤 Publicar Comentario
-                </button>
-            </div>
+    <textarea id="comment-text" class="comment-text" placeholder="Comparte tus dudas, ejemplos o comentarios sobre programación..."maxlength="500" rows="4"></textarea>
+    
+    <div class="comment-form-footer">
+        <span id="char-count">0/500</span>
+        <div>
+            <!-- BOTÓN DE VISTA PREVIA -->
+            <button type="button" id="preview-comment" class="preview-btn">
+                👁️ Vista Previa
+            </button>
+            
+            <!-- BOTÓN DE PUBLICAR -->
+            <button type="button" id="submit-comment" class="comment-submit-btn">
+                📤 Publicar Comentario
+            </button>
         </div>
-        <p class="comment-note">
-            Los comentarios son anónimos, moderados y se comparten entre todos los visitantes.
-            <br>
-            <small>Presiona Ctrl+Enter para publicar rápido</small>
-        </p>
     </div>
     
-    <!-- Vista previa -->
-    <div id="comment-preview" class="comment-preview" style="display: none;">
-        <h4>Vista previa de tu comentario:</h4>
-        <div class="preview-content"></div>
-        <button onclick="document.getElementById('comment-preview').style.display = 'none'">
-            Cerrar vista previa
-        </button>
-    </div>
-    
-    <!-- Lista de comentarios -->
-    <div class="comments-list" id="comments-list">
-        <div class="loading-comments">Cargando comentarios...</div>
-    </div>
+    <p class="comment-note">
+        <small>💡 Consejo: Presiona Ctrl+Enter para publicar rápido, Shift+Enter para vista previa</small>
+    </p>
 </div>
-    <script src="moderation.js"></script>
     <script>
     // Cargar comments.js dinámicamente
     const script = document.createElement('script');
@@ -244,6 +231,73 @@
         </section>
         <script src="theme.js"></script>
         <script src="buscador.js"></script>
+        <script>
+// Script de diagnóstico
+console.log("=== DIAGNÓSTICO COMENTARIOS ===");
+
+// Esperar a que cargue todo
+setTimeout(() => {
+    // 1. Verificar Firebase
+    console.log("1. Firebase disponible:", typeof firebase !== 'undefined');
+    console.log("2. Firebase apps:", firebase ? firebase.apps.length : 0);
+    
+    // 2. Verificar commentSystem
+    const cs = window.commentSystem;
+    console.log("3. commentSystem:", cs ? "Sí" : "No");
+    
+    if (cs) {
+        console.log("4. Database:", cs.database ? "Sí" : "No");
+        console.log("5. commentsRef:", cs.commentsRef ? "Sí" : "No");
+        console.log("6. userId:", cs.userId);
+        
+        // 3. Verificar comentarios manualmente
+        if (cs.database) {
+            console.log("7. Verificando comentarios directamente...");
+            
+            cs.database.ref('comments').once('value')
+                .then(snapshot => {
+                    console.log("8. Total comentarios en Firebase:", snapshot.numChildren());
+                    
+                    if (snapshot.exists()) {
+                        snapshot.forEach(child => {
+                            const comment = child.val();
+                            console.log(`   - ${child.key}: ${comment.author} - "${comment.text?.substring(0, 50)}..."`);
+                        });
+                    } else {
+                        console.log("8. No hay comentarios en Firebase");
+                    }
+                })
+                .catch(error => {
+                    console.error("8. Error obteniendo comentarios:", error);
+                });
+        }
+    }
+    
+    // 4. Verificar elementos HTML
+    console.log("9. comments-list existe:", document.getElementById('comments-list') ? "Sí" : "No");
+    console.log("10. comment-form existe:", document.getElementById('comment-text') ? "Sí" : "No");
+    
+    // 5. Verificar estilos
+    const styles = Array.from(document.styleSheets).filter(ss => 
+        ss.href && ss.href.includes('comments') || 
+        Array.from(ss.cssRules || []).some(rule => 
+            rule.selectorText && rule.selectorText.includes('comment')
+        )
+    );
+    console.log("11. Estilos de comentarios cargados:", styles.length);
+    
+    console.log("=== FIN DIAGNÓSTICO ===");
+    
+    // Habilitar comando para forzar recarga
+    window.reloadComments = function() {
+        if (window.commentSystem && window.commentSystem.loadComments) {
+            console.log("Forzando recarga de comentarios...");
+            window.commentSystem.loadComments();
+        }
+    };
+    
+}, 3000);
+</script>
     </body>
     </html>
     </section>
