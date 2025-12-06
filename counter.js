@@ -1,17 +1,3 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCbm7LYeDnXJTk9bJJs9FyOvkmqxMs7f8U",
-  authDomain: "serie-educativa.firebaseapp.com",
-  databaseURL: "https://serie-educativa-default-rtdb.firebaseio.com",
-  projectId: "serie-educativa",
-  storageBucket: "serie-educativa.firebasestorage.app",
-  messagingSenderId: "419592658892",
-  appId: "1:419592658892:web:11a70ffa88f853a4920769",
-  measurementId: "G-81N5THENWD"
-};
-
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
