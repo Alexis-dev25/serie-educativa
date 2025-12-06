@@ -17,15 +17,16 @@ function checkFirebase() {
 // Sistema de Comentarios
 class CommentSystem {
     constructor() {
-        if (!checkFirebase()) {
-            console.error("No se puede iniciar CommentSystem - Firebase no disponible");
-            return;
+        // Detectar si Firebase está disponible e inicializado; si no, usar localStorage como fallback
+        this.useLocal = !checkFirebase();
+        if (this.useLocal) {
+            console.warn("Firebase no disponible o no inicializado. Usando localStorage para comentarios (modo fallback).");
+        } else {
+            console.log("Iniciando CommentSystem con Firebase...");
         }
-        
-        console.log("Iniciando CommentSystem...");
-        
-        this.database = firebase.database();
-        this.commentsRef = this.database.ref('comments');
+
+        this.database = this.useLocal ? null : firebase.database();
+        this.commentsRef = this.useLocal ? null : this.database.ref('comments');
         this.userId = this.getUserId();
         this.userName = this.generateRandomName();
         
@@ -40,8 +41,41 @@ class CommentSystem {
         })();
         
         this.moderationHistory = JSON.parse(localStorage.getItem('moderationHistory')) || [];
-        
+
+        // Indicador de modo y auto-check para el caso en que Firebase se cargue después
         this.init();
+
+        // Intentar detectar si Firebase aparece más tarde (por ejemplo si el usuario pega la config)
+        if (this.useLocal) {
+            let attempts = 0;
+            const maxAttempts = 15; // ~30s
+            const checkLater = setInterval(() => {
+                attempts++;
+                if (checkFirebase()) {
+                    clearInterval(checkLater);
+                    console.log('Firebase detectado después de la inicialización. Ahora se puede habilitar.');
+                    // No migramos automáticamente pero habilitamos API para el usuario
+                    this.database = firebase.database();
+                    this.commentsRef = this.database.ref('comments');
+                    this.updateModeIndicator();
+                    console.info('Llama a window.commentSystem.migrateLocalToFirebase() para mover comentarios locales a Firebase.');
+                } else if (attempts >= maxAttempts) {
+                    clearInterval(checkLater);
+                }
+            }, 2000);
+        }
+    }
+
+    updateModeIndicator() {
+        const el = document.getElementById('comment-mode');
+        if (!el) return;
+        if (this.useLocal) {
+            el.textContent = 'Modo: local (usando localStorage)';
+            el.style.color = '#e67e22';
+        } else {
+            el.textContent = 'Modo: Firebase (en línea)';
+            el.style.color = '#2ecc71';
+        }
     }
     
     getUserId() {
@@ -110,6 +144,7 @@ forceDisplayComments() {
         }
         
         this.setupEventListeners();
+        this.updateModeIndicator();
         this.loadComments();
     }
     
@@ -385,6 +420,48 @@ showPreview() {
         this.showMessage('Escribe algo para ver la vista previa', 'info');
         return;
     }
+
+    async migrateLocalToFirebase() {
+        if (this.useLocal && (!window.firebase || !firebase.apps || firebase.apps.length === 0)) {
+            this.showMessage('Firebase no está disponible. Inicializa Firebase primero.', 'error');
+            return;
+        }
+
+        const key = 'comments_local';
+        const stored = JSON.parse(localStorage.getItem(key) || '[]');
+        if (!stored.length) {
+            this.showMessage('No hay comentarios locales para migrar.', 'info');
+            return;
+        }
+
+        try {
+            this.showMessage('Iniciando migración a Firebase...', 'success');
+            for (const c of stored) {
+                const data = {
+                    text: c.text || '',
+                    author: c.author || 'Anónimo',
+                    userId: c.userId || 'local',
+                    timestamp: c.timestamp || Date.now(),
+                    likes: c.likes || 0,
+                    likedBy: c.likedBy || {}
+                };
+                await this.commentsRef.push().set(data);
+            }
+
+            // Borrar locales tras migrar
+            localStorage.removeItem(key);
+            this.showMessage('Migración completada. Comentarios movidos a Firebase.', 'success');
+            // Forzar recarga desde Firebase
+            this.useLocal = false;
+            this.database = firebase.database();
+            this.commentsRef = this.database.ref('comments');
+            this.updateModeIndicator();
+            this.loadComments();
+        } catch (err) {
+            console.error('Error migrando comentarios:', err);
+            this.showMessage('Error migrando comentarios: ' + (err.message || err), 'error');
+        }
+    }
     
     // Verificar moderación
     if (this.moderator && this.moderator.moderate) {
@@ -508,48 +585,84 @@ showPreview() {
     submitBtn.innerHTML = '⏳ Publicando...';
     
     try {
-        console.log("Preparando datos para Firebase...");
-        const commentData = {
-            text: text,
-            author: this.userName,
-            userId: this.userId,
-            timestamp: firebase.database.ServerValue.TIMESTAMP,
-            likes: 0,
-            likedBy: {}
-        };
-        
-        console.log("Datos a enviar:", commentData);
-        
-        // Guardar en Firebase
-        const newCommentRef = this.commentsRef.push();
-        console.log("Referencia creada:", newCommentRef.key);
-        
-        await newCommentRef.set(commentData);
-        console.log("Comentario guardado en Firebase");
-        
-        // Limpiar textarea
-        textarea.value = '';
-        
-        // Actualizar contador
-        const charCount = document.getElementById('char-count');
-        if (charCount) {
-            charCount.textContent = '0/500';
-            charCount.style.color = '#7f8c8d';
+        if (this.useLocal) {
+            console.log("Guardando comentario en localStorage (fallback)...");
+
+            const commentsKey = 'comments_local';
+            const stored = JSON.parse(localStorage.getItem(commentsKey) || '[]');
+
+            const commentData = {
+                id: 'local_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+                text: text,
+                author: this.userName,
+                userId: this.userId,
+                timestamp: Date.now(),
+                likes: 0,
+                likedBy: {}
+            };
+
+            stored.push(commentData);
+            localStorage.setItem(commentsKey, JSON.stringify(stored));
+
+            // Limpiar textarea y contador
+            textarea.value = '';
+            const charCount = document.getElementById('char-count');
+            if (charCount) {
+                charCount.textContent = '0/500';
+                charCount.style.color = '#7f8c8d';
+            }
+
+            const previewDiv = document.getElementById('comment-preview');
+            if (previewDiv) previewDiv.remove();
+
+            this.showMessage('¡Comentario publicado (local)!', 'success');
+
+            // Refrescar lista local
+            this.loadComments();
+        } else {
+            console.log("Preparando datos para Firebase...");
+            const commentData = {
+                text: text,
+                author: this.userName,
+                userId: this.userId,
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                likes: 0,
+                likedBy: {}
+            };
+
+            console.log("Datos a enviar:", commentData);
+
+            // Guardar en Firebase
+            const newCommentRef = this.commentsRef.push();
+            console.log("Referencia creada:", newCommentRef.key);
+
+            await newCommentRef.set(commentData);
+            console.log("Comentario guardado en Firebase");
+
+            // Limpiar textarea
+            textarea.value = '';
+
+            // Actualizar contador
+            const charCount = document.getElementById('char-count');
+            if (charCount) {
+                charCount.textContent = '0/500';
+                charCount.style.color = '#7f8c8d';
+            }
+
+            // Eliminar vista previa si existe
+            const previewDiv = document.getElementById('comment-preview');
+            if (previewDiv) {
+                previewDiv.remove();
+            }
+
+            this.showMessage('¡Comentario publicado! Aparecerá en la lista en segundos.', 'success');
+
+            // Enfocar el textarea de nuevo
+            setTimeout(() => {
+                if (textarea) textarea.focus();
+            }, 500);
         }
-        
-        // Eliminar vista previa si existe
-        const previewDiv = document.getElementById('comment-preview');
-        if (previewDiv) {
-            previewDiv.remove();
-        }
-        
-        this.showMessage('¡Comentario publicado! Aparecerá en la lista en segundos.', 'success');
-        
-        // Enfocar el textarea de nuevo
-        setTimeout(() => {
-            if (textarea) textarea.focus();
-        }, 500);
-        
+
     } catch (error) {
         console.error('Error publicando comentario:', error);
         this.showMessage(`Error: ${error.message}`, 'error');
@@ -574,7 +687,27 @@ showPreview() {
         // Mostrar mensaje de carga
         commentsList.innerHTML = '<div class="loading-comments">⏳ Cargando comentarios...</div>';
         
-        // Configurar listener para comentarios en tiempo real
+        if (this.useLocal) {
+            console.log("Cargando comentarios desde localStorage (fallback)...");
+            const stored = JSON.parse(localStorage.getItem('comments_local') || '[]');
+            // Asegurarse de que todos los objetos tengan la estructura esperada
+            const comments = stored.map(c => ({
+                id: c.id || ('local_' + (Date.now())),
+                text: c.text || '',
+                author: c.author || 'Anónimo',
+                userId: c.userId || 'local',
+                timestamp: c.timestamp || Date.now(),
+                likes: c.likes || 0,
+                likedBy: c.likedBy || {}
+            }));
+
+            // Ordenar por timestamp (más reciente primero)
+            comments.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+            this.displayComments(comments);
+            return;
+        }
+
+        // Configurar listener para comentarios en tiempo real (Firebase)
         this.commentsRef.orderByChild('timestamp').on('value', 
             (snapshot) => {
                 console.log("Nuevos datos recibidos de Firebase");
@@ -705,12 +838,44 @@ handleCommentsSnapshot(snapshot) {
     
     async likeComment(commentId) {
         try {
+            if (this.useLocal) {
+                console.log("Registrando like en localStorage (fallback)...");
+                const key = 'comments_local';
+                const stored = JSON.parse(localStorage.getItem(key) || '[]');
+                const idx = stored.findIndex(c => c.id === commentId);
+                if (idx === -1) {
+                    console.warn("Comentario local no encontrado para like:", commentId);
+                    this.showMessage('Comentario no encontrado', 'error');
+                    return;
+                }
+
+                const comment = stored[idx];
+                comment.likedBy = comment.likedBy || {};
+                comment.likes = comment.likes || 0;
+
+                if (comment.likedBy[this.userId]) {
+                    // quitar like
+                    delete comment.likedBy[this.userId];
+                    comment.likes = Math.max(0, comment.likes - 1);
+                } else {
+                    comment.likedBy[this.userId] = true;
+                    comment.likes = (comment.likes || 0) + 1;
+                }
+
+                stored[idx] = comment;
+                localStorage.setItem(key, JSON.stringify(stored));
+
+                // Refrescar visual
+                this.loadComments();
+                return;
+            }
+
             const commentRef = this.database.ref(`comments/${commentId}`);
             const likeRef = this.database.ref(`comments/${commentId}/likedBy/${this.userId}`);
-            
+
             // Verificar si ya dio like
             const snapshot = await likeRef.once('value');
-            
+
             if (snapshot.exists()) {
                 // Quitar like
                 await likeRef.remove();
@@ -885,18 +1050,19 @@ function initCommentSystem() {
     
     // Esperar a que Firebase esté listo
     const checkFirebaseReady = setInterval(() => {
-        if (typeof firebase !== 'undefined' && firebase.apps.length > 0) {
+        // Si Firebase no está cargado (`undefined`) o ya está inicializado, procedemos.
+        if (typeof firebase === 'undefined' || (firebase && firebase.apps && firebase.apps.length > 0)) {
             clearInterval(checkFirebaseReady);
-            console.log("Firebase listo, iniciando CommentSystem");
-            
-            // Crear instancia global
+            console.log("Iniciando CommentSystem (Firebase cargado o no disponible)");
+
+            // Crear instancia global (el constructor decidirá si usa Firebase o localStorage)
             window.commentSystem = new CommentSystem();
-            
+
             // Agregar atajo de teclado para panel de moderación
             document.addEventListener('keydown', (e) => {
                 if (e.ctrlKey && e.shiftKey && e.key === 'M' && window.commentSystem) {
                     e.preventDefault();
-                    window.commentSystem.showModerationPanel();
+                    if (window.commentSystem.showModerationPanel) window.commentSystem.showModerationPanel();
                 }
             });
         }

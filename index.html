@@ -158,10 +158,36 @@
     <!-- Firebase SDK + tu código -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script>
+        // Configuración proporcionada por el usuario
+        const firebaseConfig = {
+            apiKey: "AIzaSyCbm7LYeDnXJTk9bJJs9FyOvkmqxMs7f8U",
+            authDomain: "serie-educativa.firebaseapp.com",
+            databaseURL: "https://serie-educativa-default-rtdb.firebaseio.com",
+            projectId: "serie-educativa",
+            storageBucket: "serie-educativa.firebasestorage.app",
+            messagingSenderId: "419592658892",
+            appId: "1:419592658892:web:11a70ffa88f853a4920769",
+            measurementId: "G-81N5THENWD"
+        };
+
+        // Inicializar Firebase
+        try {
+            if (typeof firebase !== 'undefined') {
+                firebase.initializeApp(firebaseConfig);
+                console.log('Firebase inicializado con la configuración proporcionada');
+            } else {
+                console.warn('SDK de Firebase no cargado aún. La inicialización fallará si se llama ahora.');
+            }
+        } catch (err) {
+            console.error('Error inicializando Firebase:', err);
+        }
+    </script>
     <script src="counter.js"></script>
         <section>
             <div class="comments-section">
-    <h3>💬 Comentarios de Estudiantes</h3>
+    <h3>💬 Comentarios </h3>
+            <div style="margin-top:6px; margin-bottom:12px; font-size:13px; color:#7f8c8d;" id="comment-mode">Modo: comprobando...</div>
     
     <!-- Advertencia de moderación -->
     <div class="moderation-warning">
@@ -197,6 +223,9 @@
     <p class="comment-note">
         <small>💡 Consejo: Presiona Ctrl+Enter para publicar rápido, Shift+Enter para vista previa</small>
     </p>
+    <div class="comments-list" id="comments-list">
+        <div class="loading-comments">⏳ Cargando comentarios...</div>
+    </div>
 </div>
     <script>
     // Cargar comments.js dinámicamente
