@@ -268,3 +268,106 @@ if (document.readyState === 'loading') {
 } else {
     initApp();
 }
+
+// 1. Cache de Firebase
+localStorage.setItem('firebase_cache', JSON.stringify({
+    data: window.statsSystem.stats,
+    timestamp: Date.now()
+}));
+
+// 2. Offline support mejorado
+if (!navigator.onLine) {
+    document.getElementById('edu-like-btn').innerHTML = '🌐 Conéctate para dar like';
+    document.getElementById('edu-like-btn').style.background = '#95a5a6';
+}
+
+// 3. Performance
+window.addEventListener('beforeunload', () => {
+    // Limpiar listeners de Firebase si es necesario
+});
+
+// Crea un "reporte para el profesor"
+function generateTeacherReport() {
+    const stats = window.statsSystem ? window.statsSystem.stats : {};
+    const report = `
+INFORME PARA EL PROFESOR
+========================
+PROYECTO: Página Educativa de Programación
+ESTUDIANTE: [Tu Nombre]
+FECHA: ${new Date().toLocaleDateString('es-ES')}
+
+📈 IMPACTO DEL PROYECTO:
+• Total de Visitas: ${stats.totalVisits || 0}
+• Total de Likes: ${stats.totalLikes || 0}
+• Visitas Únicas Hoy: ${stats.todayVisits || 0}
+• Tasa de Engagement: ${stats.totalVisits ? ((stats.totalLikes/stats.totalVisits)*100).toFixed(1) : 0}%
+
+🛠 TECNOLOGÍAS UTILIZADAS:
+• Frontend: HTML5, CSS3, JavaScript ES6+
+• Backend: Firebase Realtime Database
+• Hosting: GitHub Pages
+• APIs: Firebase SDK, LocalStorage
+
+🎯 OBJETIVOS CUMPLIDOS:
+✓ Sistema de likes funcional
+✓ Estadísticas en tiempo real
+✓ Persistencia de datos
+✓ Interfaz responsive
+✓ Código modular y documentado
+
+🔗 ENLACE: ${window.location.href}
+========================
+"Este proyecto demuestra la aplicación práctica de desarrollo web full-stack"
+    `;
+    
+    // Crear ventana con el reporte
+    const reportWindow = window.open('', '_blank');
+    reportWindow.document.write(`
+        <html>
+        <head>
+            <title>Reporte del Proyecto</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+                pre { background: #f5f5f5; padding: 20px; border-radius: 10px; }
+                .print-btn { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 20px 0; }
+            </style>
+        </head>
+        <body>
+            <h1>📊 Reporte del Proyecto Educativo</h1>
+            <pre>${report}</pre>
+            <button class="print-btn" onclick="window.print()">🖨 Imprimir Reporte</button>
+            <button class="print-btn" onclick="navigator.clipboard.writeText(document.querySelector('pre').innerText)">📋 Copiar Texto</button>
+        </body>
+        </html>
+    `);
+}
+
+// Acceso secreto: Ctrl+Shift+P
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'P') {
+        generateTeacherReport();
+    }
+});
+// En counter.js, agrega al final:
+document.addEventListener('keydown', function(e) {
+    // Ctrl+Shift+L para ver datos completos
+    if (e.ctrlKey && e.shiftKey && e.key === 'L') {
+        e.preventDefault();
+        
+        const stats = window.statsSystem ? window.statsSystem.stats : {};
+        const message = `
+📊 ESTADÍSTICAS COMPLETAS:
+=======================
+👥 Visitas Totales: ${stats.totalVisits || 0}
+❤️  Likes Totales: ${stats.totalLikes || 0}
+📅 Visitas Hoy: ${stats.todayVisits || 0}
+📈 Engagement: ${stats.totalVisits ? ((stats.totalLikes/stats.totalVisits)*100).toFixed(1) : 0}%
+=======================
+🔗 URL: ${window.location.href}
+🕐 Fecha: ${new Date().toLocaleString()}
+        `;
+        
+        console.log(message);
+        alert(message);
+    }
+});
