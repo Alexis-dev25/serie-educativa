@@ -1,63 +1,158 @@
+:root {
+  --bg-light: #f5f5f5;
+  --surface-light: #ffffff;
+  --text-light: #1a1a1a;
+  --accent-linux-yellow: #ffdc13;
+  --accent-linux-white: #ffffff;
+  --bg-dark: #1a1a1a;
+  --surface-dark: #2d2d2d;
+  --text-dark: #e0e0e0;
+}
+
 body {
-    background-image: url("linux-fondo.png");
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
-    background-color: #111;
-    color: white;
+    background-color: var(--bg-light);
+    color: var(--text-light);
     font-family: Arial, sans-serif;
     text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+[data-theme="dark"] body {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+}
+
 ::selection {
-    background-color: #ffdc13;
+    background-color: var(--accent-linux-yellow);
     color: #111;
 }
-a::selection{
-    background-color: #5c5c5c;
-    color: #dddddd;
-}
-a{
-    color:#ffdc13;
-}
-h1 {
-    background-color: #1111116c;
-    text-align: start;
-    color: whitesmoke;
-    border: 3px solid white;
-    padding: 10px 20px;
-    margin: 20px auto;
-    max-width: 700px;
-    border-radius: 10px;
 
-    
+a::selection{
+    background-color: var(--accent-linux-white);
+    color: #111;
 }
-section {
-    background-color: #1111116c;
-    color: whitesmoke;
-    border: 3px solid white;
+
+a{
+    color: var(--accent-linux-yellow);
+}
+
+h1 {
+    background-color: var(--surface-light);
+    text-align: start;
+    color: var(--accent-linux-yellow);
+    border: 3px solid var(--accent-linux-white);
     padding: 10px 20px;
     margin: 20px auto;
     max-width: 700px;
     border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(255, 220, 19, 0.1);
+    transition: all 0.3s ease;
 }
-h1, h2 , h3 {
-    color: #ffdc13;
+
+[data-theme="dark"] h1 {
+    background-color: var(--surface-dark);
+    color: var(--accent-linux-yellow);
+}
+
+section {
+    background-color: var(--surface-light);
+    color: var(--text-light);
+    border: 3px solid var(--accent-linux-white);
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] section {
+    background-color: var(--surface-dark);
+    color: var(--text-dark);
+}
+
+h1, h2, h3 {
+    color: var(--accent-linux-yellow);
     text-align: center;
 }
+
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 {
+    color: var(--accent-linux-yellow);
+}
+
 div {
-    background-color: #1111112f;
-    color:white;
+    background-color: var(--surface-light);
+    color: var(--text-light);
     padding: 5px 20px;
     margin-top: 15px;
     text-align: left;
-    border: 2px solid #ffdc13;
+    border: 2px solid var(--accent-linux-yellow);
     border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] div {
+    background-color: var(--surface-dark);
+    color: var(--text-dark);
 }
 
 .links{
-    color: red;
     text-align: center;
 }
+
 .linux {
     margin-right: 40px;
+}
+
+/* Media Queries para diseño responsive */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        padding: 8px 15px;
+        width: 90%;
+    }
+
+    section {
+        padding: 15px;
+        width: 90%;
+    }
+
+    div {
+        padding: 5px 15px;
+        margin-top: 10px;
+    }
+
+    .linux {
+        margin-right: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        padding: 8px 10px;
+    }
+
+    section {
+        padding: 10px;
+    }
+
+    div {
+        padding: 5px 10px;
+        font-size: 0.9em;
+    }
+
+    .linux {
+        margin-right: 10px;
+        display: block;
+        margin: 10px auto;
+    }
 }

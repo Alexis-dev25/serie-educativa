@@ -1,74 +1,184 @@
+:root {
+  --bg-light: #f0f0f0;
+  --surface-light: #ffffff;
+  --text-light: #2a2a2a;
+  --accent-cursor: #ffffff;
+  --accent-secondary: #929292;
+  --bg-dark: #1a1a1a;
+  --surface-dark: #2d2d2d;
+  --text-dark: #e0e0e0;
+}
+
 body {
-    background-image: url("cursor-fondo.png");
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
-    background-color: #111;
-    color: white;
+    background-color: var(--bg-light);
+    color: var(--text-light);
     font-family: Arial, sans-serif;
     text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
-::selection {
-    background-color: white;
-    color: #111;
-}
-a::selection{
-    background-color: white;
-    color: #111;
-}
-a{
-    color:rgb(146, 146, 146);
-}
-h1 {
-    background-color: #111;
-    text-align: start;
-    color: whitesmoke;
-    border: 3px solid white;
-    padding: 10px 20px;
-    margin: 20px auto;
-    max-width: 700px;
-    border-radius: 10px;
 
-    
+[data-theme="dark"] body {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
 }
-section {
-    background-color: #1111116c;
-    color: whitesmoke;
-    border: 3px solid white;
+
+::selection {
+    background-color: var(--accent-cursor);
+    color: #111;
+}
+
+a::selection{
+    background-color: var(--accent-cursor);
+    color: #111;
+}
+
+a{
+    color: var(--accent-secondary);
+}
+
+h1 {
+    background-color: var(--surface-light);
+    text-align: start;
+    color: var(--text-light);
+    border: 3px solid var(--accent-cursor);
     padding: 10px 20px;
     margin: 20px auto;
     max-width: 700px;
     border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
 }
-h1, h2 , h3 {
-    color: whitesmoke;
+
+[data-theme="dark"] h1 {
+    background-color: var(--surface-dark);
+    color: var(--accent-cursor);
+}
+
+section {
+    background-color: var(--surface-light);
+    color: var(--text-light);
+    border: 3px solid var(--accent-cursor);
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] section {
+    background-color: var(--surface-dark);
+    color: var(--text-dark);
+}
+
+h1, h2, h3 {
     text-align: center;
 }
+
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 {
+    color: var(--accent-cursor);
+}
+
 div, .code {
-    background-color: #1111112f;
-    color:white;
+    background-color: var(--surface-light);
+    color: var(--text-light);
     padding: 5px 20px;
     margin-top: 15px;
     text-align: left;
-    border: 2px solid white;
+    border: 2px solid var(--accent-cursor);
     border-radius: 10px;
+    transition: all 0.3s ease;
 }
+
+[data-theme="dark"] div, [data-theme="dark"] .code {
+    background-color: var(--surface-dark);
+    color: var(--text-dark);
+}
+
 .tabla {
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 100% auto;
+    width: 100%;
     border-collapse: collapse;
 }
 
 .tabla th, .tabla td {
     padding: 8px;
     text-align: center;
-    border: 1px solid white;
+    border: 1px solid var(--accent-cursor);
 }
+
+.tabla th {
+    background-color: var(--accent-cursor);
+    color: #111;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .tabla th {
+    background-color: var(--surface-dark);
+    color: var(--accent-cursor);
+    border: 1px solid var(--accent-cursor);
+}
+
 .links{
-    color: red;
     text-align: center;
 }
+
 .cursor {
     margin-right: 40px;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Media Queries para diseño responsive */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        padding: 8px 15px;
+        width: 90%;
+    }
+
+    section {
+        padding: 15px;
+        width: 90%;
+    }
+
+    div, .code {
+        padding: 5px 15px;
+        margin-top: 10px;
+    }
+
+    .cursor {
+        margin-right: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        padding: 8px 10px;
+    }
+
+    section {
+        padding: 10px;
+    }
+
+    div, .code {
+        padding: 5px 10px;
+        font-size: 0.9em;
+    }
+
+    .cursor {
+        margin-right: 10px;
+        display: block;
+        margin: 10px auto;
+    }
 }

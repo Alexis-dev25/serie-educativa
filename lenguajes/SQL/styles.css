@@ -1,54 +1,91 @@
+:root {
+  --bg-light: #fff0e6;
+  --surface-light: #ffffff;
+  --text-light: #1a1a1a;
+  --accent-sql-orange: #ff8c00;
+  --accent-sql-blue: #0066cc;
+  --bg-dark: #1a1a2e;
+  --surface-dark: #2d2d44;
+  --text-dark: #e0e0e0;
+}
 
 body {
-    background-image: url("sql-fondo.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: white;
+    background-color: var(--bg-light);
+    color: var(--text-light);
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 15px;
     min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] body {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
 }
 
 ::selection {
-    background-color: #578aff;
+    background-color: var(--accent-sql-blue);
+    color: white;
 }
 
 a::selection{
-    color: whitesmoke;
+    background-color: var(--accent-sql-orange);
+    color: white;
 }
 
 a{
-    color:#578aff;
+    color: var(--accent-sql-blue);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #fff;
+    color: var(--accent-sql-orange);
 }
+
 h1 {
-    background-color: #1111116c;
-    color: whitesmoke;
-    border: 3px solid darkorange;
+    background-color: var(--surface-light);
+    color: var(--accent-sql-orange);
+    border: 3px solid var(--accent-sql-orange);
     padding: 10px 20px;
     margin: 20px auto;
     max-width: 700px;
     border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.15);
+    transition: all 0.3s ease;
 }
+
+[data-theme="dark"] h1 {
+    background-color: var(--surface-dark);
+    color: var(--accent-sql-orange);
+}
+
 section {
-    background-color: #1111116c;
-    color: whitesmoke;
-    border: 3px solid darkorange;
+    background-color: var(--surface-light);
+    color: var(--text-light);
+    border: 3px solid var(--accent-sql-orange);
     padding: 10px 20px;
     margin: 20px auto;
     max-width: 700px;
     border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.1);
+    transition: all 0.3s ease;
 }
-h1, h2 , h3 {
+
+[data-theme="dark"] section {
+    background-color: var(--surface-dark);
+    color: var(--text-dark);
+}
+
+h1, h2, h3 {
     text-align: center;
 }
+
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 {
+    color: var(--accent-sql-orange);
+}
+
 .tabla {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -59,26 +96,40 @@ h1, h2 , h3 {
 .tabla th, .tabla td {
     padding: 8px;
     text-align: center;
-    border: 1px solid darkorange;
+    border: 1px solid var(--accent-sql-orange);
 }
 
 .tabla th {
-    background-color: rgb(255, 205, 111);
-    color: #111;
+    background-color: var(--accent-sql-orange);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .tabla th {
+    background-color: var(--accent-sql-blue);
+    color: white;
 }
 
 div, .code {
-    background-color: #151922;
-    color:white;
+    background-color: var(--surface-light);
+    color: var(--text-light);
     padding: 5px 20px;
     margin-top: 15px;
     text-align: left;
-    border: 2px solid darkorange;
+    border: 2px solid var(--accent-sql-orange);
     border-radius: 10px;
+    transition: all 0.3s ease;
 }
+
+[data-theme="dark"] div, [data-theme="dark"] .code {
+    background-color: var(--surface-dark);
+    color: var(--text-dark);
+}
+
 .links{
     text-align: center;
 }
+
 .sql {
     margin-right: 40px;
     max-width: 100%;

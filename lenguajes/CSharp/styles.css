@@ -1,71 +1,116 @@
+:root {
+  --bg-light: #f3e8ff;
+  --surface-light: #ffffff;
+  --text-light: #2c1b4e;
+  --accent-cs: #a855f7;
+  --accent-secondary: #d946ef;
+  --bg-dark: #2d1b4e;
+  --surface-dark: #3d2b5e;
+  --text-dark: #e8d5f2;
+}
 
 body {
-    background-image: url("csharp-fondo.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: white;
+    background-color: var(--bg-light);
+    color: var(--text-light);
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 15px;
     min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] body {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
 }
 
 ::selection {
-    background-color: purple;
+    background-color: var(--accent-cs);
     color: #ffffff;
 }
+
 a{
-    color:rgb(207, 0, 207);
+    color: var(--accent-secondary);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: rgb(255, 125, 255);
+    color: var(--accent-cs);
 }
+
 p {
     text-align: left;
 }
+
 h1 {
-    background-color: #111;
-    color: whitesmoke;
-    border: 3px solid purple;
+    background-color: var(--surface-light);
+    color: var(--accent-secondary);
+    border: 3px solid var(--accent-cs);
     padding: 10px 20px;
     margin: 20px auto;
     max-width: 700px;
     border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.15);
+    transition: all 0.3s ease;
 }
+
+[data-theme="dark"] h1 {
+    background-color: var(--surface-dark);
+    color: var(--accent-secondary);
+}
+
 section {
-    background-color: #1111116c;
-    color: whitesmoke;
-    border: 3px solid purple;
+    background-color: var(--surface-light);
+    color: var(--text-light);
+    border: 3px solid var(--accent-cs);
     padding: 10px 20px;
     margin: 20px auto;
     max-width: 700px;
     border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.1);
+    transition: all 0.3s ease;
 }
-h1, h2 , h3 {
-    color: whitesmoke;
+
+[data-theme="dark"] section {
+    background-color: var(--surface-dark);
+    color: var(--text-dark);
+}
+
+h1, h2, h3 {
     text-align: center;
 }
+
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 {
+    color: var(--accent-secondary);
+}
+
 div {
-    background-color: #1111116c;
-    color:white;
+    background-color: var(--surface-light);
+    color: var(--text-light);
     padding: 5px 20px;
     margin-top: 15px;
     text-align: left;
-    border: 2px solid purple;
+    border: 2px solid var(--accent-secondary);
     border-radius: 10px;
+    transition: all 0.3s ease;
 }
+
+[data-theme="dark"] div {
+    background-color: var(--surface-dark);
+    color: var(--text-dark);
+}
+
 .links{
     text-align: center;
 }
+
 .csharp {
     margin-right: 40px;
     max-width: 100%;
     height: auto;
 }
+
 .codigo, .recom {
     text-align: center;
 }
