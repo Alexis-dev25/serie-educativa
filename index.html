@@ -7,6 +7,8 @@
     <meta name="description" content="Serie educativa: pequeños artículos y visores de código para aprender lenguajes.">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="counter.css">
+    <link rel="stylesheet" href="comments.css">
+    <script src="debug.js"></script>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -177,9 +179,9 @@
                 if (typeof firebase !== 'undefined') {
                     if (!firebase.apps || !firebase.apps.length) {
                         firebase.initializeApp(window.firebaseConfig);
-                        console.log('Firebase inicializado');
+                        window.LOG && window.LOG('Firebase inicializado');
                     } else {
-                        console.log('Firebase ya inicializado');
+                        window.LOG && window.LOG('Firebase ya inicializado');
                     }
                 } else {
                     console.warn('SDK de Firebase no cargado aún');
@@ -194,7 +196,7 @@
             // Ejemplo: reemplaza con tu email (o uid) y/o hash de IP (sha256 corto)
             // window.COMMENT_ADMIN = { emails: ['tu@correo.com'], uids: ['tuUidFirebase'], ipHashes: ['abcd1234ef56'] };
             // Si no estableces esto, deberás identificarte por IP y el hash debe coincidir.
-            window.COMMENT_ADMIN = window.COMMENT_ADMIN || { emails: [alexisgutierrezfv@gmail.com], uids: [], ipHashes: [] };
+            window.COMMENT_ADMIN = window.COMMENT_ADMIN || { emails: ['alexisgutierrezfv@gmail.com'], uids: [], ipHashes: [] };
         </script>
 
         <script src="moderator.js"></script>
@@ -207,10 +209,7 @@
                 <div style="margin-top:6px; margin-bottom:8px; font-size:13px; color:#7f8c8d;" id="comment-mode">Modo: comprobando...</div>
                 <div id="comment-auth" style="margin-bottom:12px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                     <span id="user-status" style="font-size:13px; color:#7f8c8d;">Identidad: visitante</span>
-                    <button id="signin-google" style="padding:6px 10px; border-radius:8px;">Iniciar sesión con Google</button>
-                    <button id="identify-ip" style="padding:6px 10px; border-radius:8px;">Identificar por IP</button>
-                    <button id="local-identity" style="padding:6px 10px; border-radius:8px;">Usar nombre local</button>
-                    <button id="signout-btn" style="padding:6px 10px; border-radius:8px; display:none;">Cerrar sesión</button>
+                    <!-- Los botones de autenticación se han retirado para permitir comentar sin iniciar sesión -->
                 </div>
 
                 <div class="moderation-warning">
@@ -248,7 +247,7 @@
             (function(){
                 const s = document.createElement('script');
                 s.src = 'comments.js';
-                s.onload = () => console.log('comments.js cargado');
+                s.onload = () => { window.LOG && window.LOG('comments.js cargado'); };
                 s.onerror = () => {
                     console.error('Error cargando comments.js - cargando fallback mínimo');
                     const emergency = document.createElement('script');
@@ -275,21 +274,23 @@
 
         <script>
             // Script de diagnóstico (no intrusivo)
-            console.log('=== DIAGNÓSTICO COMENTARIOS ===');
-            setTimeout(() => {
-                console.log('1. Firebase disponible:', typeof firebase !== 'undefined');
-                console.log('2. Firebase apps:', (typeof firebase !== 'undefined' && firebase.apps) ? firebase.apps.length : 0);
-                const cs = window.commentSystem;
-                console.log('3. commentSystem:', cs ? 'Sí' : 'No');
-                if (cs) {
-                    console.log('4. Database:', cs.database ? 'Sí' : 'No');
-                    console.log('5. commentsRef:', cs.commentsRef ? 'Sí' : 'No');
-                    console.log('6. userId:', cs.userId);
-                }
-                console.log('9. comments-list existe:', document.getElementById('comments-list') ? 'Sí' : 'No');
-                console.log('10. comment-text existe:', document.getElementById('comment-text') ? 'Sí' : 'No');
-                console.log('=== FIN DIAGNÓSTICO ===');
-            }, 1500);
+            if (window.DEBUG_COMMENTS) {
+                console.log('=== DIAGNÓSTICO COMENTARIOS ===');
+                setTimeout(() => {
+                    console.log('1. Firebase disponible:', typeof firebase !== 'undefined');
+                    console.log('2. Firebase apps:', (typeof firebase !== 'undefined' && firebase.apps) ? firebase.apps.length : 0);
+                    const cs = window.commentSystem;
+                    console.log('3. commentSystem:', cs ? 'Sí' : 'No');
+                    if (cs) {
+                        console.log('4. Database:', cs.database ? 'Sí' : 'No');
+                        console.log('5. commentsRef:', cs.commentsRef ? 'Sí' : 'No');
+                        console.log('6. userId:', cs.userId);
+                    }
+                    console.log('9. comments-list existe:', document.getElementById('comments-list') ? 'Sí' : 'No');
+                    console.log('10. comment-text existe:', document.getElementById('comment-text') ? 'Sí' : 'No');
+                    console.log('=== FIN DIAGNÓSTICO ===');
+                }, 1500);
+            }
         </script>
 
     </body>

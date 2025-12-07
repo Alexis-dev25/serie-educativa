@@ -367,3 +367,21 @@ input#buscador:focus{box-shadow:0 6px 18px rgba(11,22,40,0.06); border-color:var
   #lista{grid-template-columns:1fr}
 }
 
+/* Extra styles extracted from JS */
+/* Comment-related styles moved to comments.css */
+.cs-uid-btn:hover{ box-shadow:0 6px 18px rgba(11,22,40,0.06); transform:translateY(-1px) }
+
+/* Utility classes for JS-driven state */
+.hidden{ display:none !important }
+.char-count-normal{ color: #7f8c8d }
+.char-count-warn{ color: #f39c12 }
+.char-count-danger{ color: #e74c3c }
+
+/* Mode indicator classes */
+#comment-mode.mode-local{ color: #e67e22 }
+#comment-mode.mode-firebase{ color: #2ecc71 }
+
+
+
+
+

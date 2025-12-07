@@ -233,7 +233,7 @@ localStorage.getItem('moderationHistory'):
 ]
 
 Ver en consola:
-  console.log(JSON.parse(localStorage.getItem('moderationHistory')));
+  window.LOG && window.LOG(JSON.parse(localStorage.getItem('moderationHistory')));
 
 
 // INDICADOR DE MODO EN LA INTERFAZ

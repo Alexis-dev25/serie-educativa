@@ -1,5 +1,5 @@
 // comments.js - Sistema de Comentarios para Página Educativa
-console.log("comments.js cargado");
+window.LOG && window.LOG("comments.js cargado");
 
 // Verificar si Firebase está disponible
 function checkFirebase() {
@@ -22,7 +22,7 @@ class CommentSystem {
         if (this.useLocal) {
             console.warn("Firebase no disponible o no inicializado. Usando localStorage para comentarios (modo fallback).");
         } else {
-            console.log("Iniciando CommentSystem con Firebase...");
+            this._log("Iniciando CommentSystem con Firebase...");
         }
 
         this.database = this.useLocal ? null : firebase.database();
@@ -62,12 +62,12 @@ class CommentSystem {
                 attempts++;
                 if (checkFirebase()) {
                     clearInterval(checkLater);
-                    console.log('Firebase detectado después de la inicialización. Ahora se puede habilitar.');
+                    this._log('Firebase detectado después de la inicialización. Ahora se puede habilitar.');
                     // No migramos automáticamente pero habilitamos API para el usuario
                     this.database = firebase.database();
                     this.commentsRef = this.database.ref('comments');
                     this.updateModeIndicator();
-                    console.info('Llama a window.commentSystem.migrateLocalToFirebase() para mover comentarios locales a Firebase.');
+                    this._log('Llama a window.commentSystem.migrateLocalToFirebase() para mover comentarios locales a Firebase.');
                 } else if (attempts >= maxAttempts) {
                     clearInterval(checkLater);
                 }
@@ -80,10 +80,12 @@ class CommentSystem {
         if (!el) return;
         if (this.useLocal) {
             el.textContent = 'Modo: local (usando localStorage)';
-            el.style.color = '#e67e22';
+            el.classList.add('mode-local');
+            el.classList.remove('mode-firebase');
         } else {
             el.textContent = 'Modo: Firebase (en línea)';
-            el.style.color = '#2ecc71';
+            el.classList.add('mode-firebase');
+            el.classList.remove('mode-local');
         }
     }
 
@@ -139,8 +141,73 @@ class CommentSystem {
             // Asociar botones si existen
             document.addEventListener('DOMContentLoaded', () => this._wireAuthButtons());
             this._wireAuthButtons();
+
+            // Intentar verificación silenciosa (auth o IP) una vez que los listeners están listos
+            try {
+                this.attemptSilentAdminCheck();
+            } catch (e) {
+                this._log('Error en intento de verificación silenciosa:', e);
+            }
         } catch (err) {
             this._log('Error configurando auth listeners', err);
+        }
+    }
+
+    async attemptSilentAdminCheck() {
+        // 1) Si ya es admin, nada que hacer
+        if (this.isAdmin()) return;
+
+        // 2) Si ya hay usuario autenticado, _checkAdminFromAuth en onAuthStateChanged se encargará,
+        //    pero hacemos un intento inmediato por si el estado ya está presente.
+        try {
+            if (this.auth && this.auth.currentUser) {
+                const user = this.auth.currentUser;
+                if (this._checkAdminFromAuth(user)) {
+                    this.isAdminFlag = true;
+                    localStorage.setItem('commentIsAdmin', 'true');
+                    this.updateUserUI();
+                    this.showMessage('Verificación silenciosa: eres administrador (por cuenta).', 'success');
+                    return;
+                }
+            }
+        } catch (e) {
+            this._log('Error verificando admin por auth:', e);
+        }
+
+        // 3) Si no hay auth que lo identifique, y si hay ipHashes configurados, intentar identificar por IP
+        try {
+            const ipCheckedFlag = 'comment_ip_checked';
+            if (this.adminConfig && Array.isArray(this.adminConfig.ipHashes) && this.adminConfig.ipHashes.length > 0 && !localStorage.getItem(ipCheckedFlag)) {
+                // Hacer una llamada pública para obtener IP (avisar en consola)
+                this._log('Intentando verificación silenciosa por IP...');
+                const res = await fetch('https://api.ipify.org?format=json');
+                const j = await res.json();
+                const ip = j && j.ip ? j.ip : null;
+                if (!ip) {
+                    localStorage.setItem(ipCheckedFlag, '1');
+                    this._log('No se obtuvo IP para verificación silenciosa');
+                    return;
+                }
+                const hash = await this._sha256Hex(ip);
+                const short = hash.slice(0, 12);
+                this._log('IP detectada (hash corto):', short);
+                if (this.adminConfig.ipHashes.includes(short)) {
+                    this.userId = 'ip_' + short;
+                    this.userName = 'Admin (IP)';
+                    this.isAdminFlag = true;
+                    localStorage.setItem('commentIsAdmin', 'true');
+                    localStorage.setItem('commentUserId', this.userId);
+                    localStorage.setItem('commentUserName', this.userName);
+                    this.updateUserUI();
+                    this.showMessage('Verificación silenciosa: administrador identificado por IP', 'success');
+                } else {
+                    this._log('Verificación silenciosa por IP: no autorizado');
+                }
+                // Marcar que ya se comprobó esta sesión para no repetir peticiones
+                localStorage.setItem(ipCheckedFlag, '1');
+            }
+        } catch (e) {
+            this._log('Error en verificación silenciosa por IP:', e);
         }
     }
 
@@ -154,14 +221,12 @@ class CommentSystem {
         // Si no existe el botón de UID, crearlo y añadirlo al contenedor de auth
         if (!showUidBtn) {
             const container = document.getElementById('comment-auth');
-            if (container) {
-                showUidBtn = document.createElement('button');
-                showUidBtn.id = 'show-uid';
-                showUidBtn.textContent = 'Mostrar mi UID';
-                showUidBtn.style.padding = '6px 10px';
-                showUidBtn.style.borderRadius = '8px';
-                showUidBtn.style.display = 'none';
-                container.appendChild(showUidBtn);
+                if (container) {
+                    showUidBtn = document.createElement('button');
+                    showUidBtn.id = 'show-uid';
+                    showUidBtn.textContent = 'Mostrar mi UID';
+                    showUidBtn.className = 'cs-uid-btn';
+                    container.appendChild(showUidBtn);
             }
         }
 
@@ -174,11 +239,11 @@ class CommentSystem {
         if (signoutBtn) signoutBtn.onclick = () => this.signOutAuth();
 
         // Mostrar/ocultar botones admin
-        if (localBtn) localBtn.style.display = this.isAdmin() ? 'inline-block' : 'none';
-        if (ipBtn) ipBtn.style.display = 'inline-block'; // permitimos intentar identificar por IP (puede otorgar admin)
+        if (localBtn) localBtn.classList.toggle('hidden', !this.isAdmin());
+        if (ipBtn) ipBtn.classList.remove('hidden'); // permitimos intentar identificar por IP (puede otorgar admin)
         // Mostrar/ocultar botón de UID solo para el usuario autenticado
         if (showUidBtn) {
-            showUidBtn.style.display = (this.auth && this.auth.currentUser) ? 'inline-block' : 'none';
+            showUidBtn.classList.toggle('hidden', !(this.auth && this.auth.currentUser));
             showUidBtn.onclick = async () => {
                 try {
                     const uid = (this.auth && this.auth.currentUser) ? this.auth.currentUser.uid : null;
@@ -230,11 +295,49 @@ class CommentSystem {
         const googleBtn = document.getElementById('signin-google');
         if (el) el.textContent = `Identidad: ${this.userName || 'visitante'}${this.isAdmin() ? ' (admin)' : ''}`;
         if (this.auth && this.auth.currentUser) {
-            if (signoutBtn) signoutBtn.style.display = 'inline-block';
-            if (googleBtn) googleBtn.style.display = 'none';
+            if (signoutBtn) signoutBtn.classList.remove('hidden');
+            if (googleBtn) googleBtn.classList.add('hidden');
         } else {
-            if (signoutBtn) signoutBtn.style.display = 'none';
-            if (googleBtn) googleBtn.style.display = 'inline-block';
+            if (signoutBtn) signoutBtn.classList.add('hidden');
+            if (googleBtn) googleBtn.classList.remove('hidden');
+        }
+
+        // Asegurar que el botón Mostrar UID exista y su visibilidad esté sincronizada
+        try {
+            const container = document.getElementById('comment-auth');
+            if (container) {
+                let showUidBtn = document.getElementById('show-uid');
+                if (!showUidBtn) {
+                    showUidBtn = document.createElement('button');
+                    showUidBtn.id = 'show-uid';
+                    showUidBtn.textContent = 'Mostrar mi UID';
+                    showUidBtn.style.padding = '6px 10px';
+                    showUidBtn.style.borderRadius = '8px';
+                    showUidBtn.style.display = 'none';
+                    container.appendChild(showUidBtn);
+
+                    showUidBtn.onclick = async () => {
+                        try {
+                            const uid = (this.auth && this.auth.currentUser) ? this.auth.currentUser.uid : null;
+                            if (!uid) return this.showMessage('No estás autenticado', 'error');
+                            if (navigator.clipboard && navigator.clipboard.writeText) {
+                                await navigator.clipboard.writeText(uid);
+                                this.showMessage('UID copiado al portapapeles', 'success');
+                            } else {
+                                window.prompt('Tu UID (cópialo manualmente):', uid);
+                            }
+                        } catch (err) {
+                            this._log('Error copiando UID', err);
+                            this.showMessage('No se pudo copiar el UID', 'error');
+                        }
+                    };
+                }
+
+                // Mostrar solo si está autenticado
+                showUidBtn.style.display = (this.auth && this.auth.currentUser) ? 'inline-block' : 'none';
+            }
+        } catch (e) {
+            this._log('Error actualizando botón de UID:', e);
         }
     }
 
@@ -249,7 +352,31 @@ class CommentSystem {
             this.showMessage('Sesión iniciada con Google', 'success');
         } catch (err) {
             this._log('Error signInWithGoogle', err);
-            this.showMessage('Error iniciando sesión con Google', 'error');
+            // Manejo específico para dominio no autorizado (OAuth)
+            const code = err && err.code ? err.code : '';
+            const msg = err && err.message ? err.message : 'Error desconocido';
+            if (code === 'auth/unauthorized-domain' || (msg && msg.toLowerCase().includes('not authorized for oauth'))) {
+                const projectId = (window.firebaseConfig && window.firebaseConfig.projectId) ? window.firebaseConfig.projectId : null;
+                const consoleUrl = projectId ? `https://console.firebase.google.com/project/${projectId}/authentication/providers?authMode=signInMethod` : 'https://console.firebase.google.com/';
+                // Mensaje visible y claro
+                this.showMessage('Error: dominio no autorizado para OAuth. Revisa la consola de Firebase.', 'error');
+                // Mostrar instrucciones rápidas en consola
+                console.warn('Firebase Auth error:', code, msg);
+                console.info('Añade tu dominio (ej. localhost o 127.0.0.1) en Firebase Console → Authentication → Authorized domains');
+                console.info('Abrir Firebase Console (sign-in method):', consoleUrl);
+                // Ofrecer abrir la consola (puede ser bloqueado por popup blocker)
+                try {
+                    if (confirm('Dominio no autorizado para OAuth. ¿Quieres abrir la página de métodos de inicio de sesión en Firebase Console para añadir tu dominio?')) {
+                        window.open(consoleUrl, '_blank');
+                    }
+                } catch (e) {
+                    // ignore
+                }
+                return;
+            }
+
+            // Mostrar detalle del error al usuario para depuración rápida
+            this.showMessage(`Error iniciando sesión: ${code} ${msg}`, 'error');
         }
     }
 
@@ -351,9 +478,21 @@ class CommentSystem {
             this.setup();
         }
     }
+
+    // Cachear selectores frecuentes para mejor legibilidad y rendimiento
+    cacheDOM() {
+        this.$ = this.$ || {};
+        this.$.commentText = document.getElementById('comment-text');
+        this.$.charCount = document.getElementById('char-count');
+        this.$.submitBtn = document.getElementById('submit-comment');
+        this.$.previewBtn = document.getElementById('preview-comment');
+        this.$.commentsList = document.getElementById('comments-list');
+        this.$.commentAuth = document.getElementById('comment-auth');
+        this.$.userStatus = document.getElementById('user-status');
+    }
     // Agrega esta función y llámala después de init
-forceDisplayComments() {
-    console.log("Forzando visualización de comentarios...");
+    forceDisplayComments() {
+    this._log("Forzando visualización de comentarios...");
     
     if (!this.database) {
         console.error("Database no disponible");
@@ -363,11 +502,11 @@ forceDisplayComments() {
     // Obtener comentarios directamente
     this.commentsRef.once('value')
         .then(snapshot => {
-            if (snapshot.exists()) {
-                console.log(`Encontrados ${snapshot.numChildren()} comentarios`);
+                if (snapshot.exists()) {
+                this._log(`Encontrados ${snapshot.numChildren()} comentarios`);
                 this.handleCommentsSnapshot(snapshot);
             } else {
-                console.log("No hay comentarios");
+                this._log("No hay comentarios");
                 this.displayComments([]);
             }
         })
@@ -379,21 +518,24 @@ forceDisplayComments() {
 // Llamar desde consola: window.commentSystem.forceDisplayComments()
     
     setup() {
-        console.log("Configurando sistema de comentarios...");
+        this._log("Configurando sistema de comentarios...");
         
         // Verificar que existan los elementos HTML
-        if (!document.getElementById('comment-text')) {
+        this.cacheDOM();
+        if (!this.$.commentText) {
             console.error("No se encontró el textarea de comentarios");
             this.createCommentSection();
+            // Volver a cachear después de crear la sección
+            this.cacheDOM();
         }
-        
+
         this.setupEventListeners();
         this.updateModeIndicator();
         this.loadComments();
     }
     
     createCommentSection() {
-        console.log("Creando sección de comentarios...");
+        this._log("Creando sección de comentarios...");
         
         const container = document.createElement('div');
         container.id = 'comments-container';
@@ -432,10 +574,11 @@ forceDisplayComments() {
     
     // Esperar un momento para asegurar que el DOM esté listo
     setTimeout(() => {
-        const textarea = document.getElementById('comment-text');
-        const charCount = document.getElementById('char-count');
-        const submitBtn = document.getElementById('submit-comment');
-        const previewBtn = document.getElementById('preview-comment');
+        // Usar elementos cacheados si están disponibles
+        const textarea = (this.$ && this.$.commentText) || document.getElementById('comment-text');
+        const charCount = (this.$ && this.$.charCount) || document.getElementById('char-count');
+        const submitBtn = (this.$ && this.$.submitBtn) || document.getElementById('submit-comment');
+        const previewBtn = (this.$ && this.$.previewBtn) || document.getElementById('preview-comment');
         
             this._log("Elementos encontrados:", {
                 textarea: !!textarea,
@@ -447,6 +590,7 @@ forceDisplayComments() {
         if (!textarea) {
             console.error("Textarea no encontrado, creando...");
             this.createCommentSection();
+            this.cacheDOM();
             return;
         }
         
@@ -455,15 +599,18 @@ forceDisplayComments() {
             const length = textarea.value.length;
             if (charCount) {
                 charCount.textContent = `${length}/500`;
-                charCount.style.color = length > 450 ? '#e74c3c' : length > 400 ? '#f39c12' : '#7f8c8d';
+                // Actualizar clases según longitud
+                charCount.classList.toggle('char-count-danger', length > 450);
+                charCount.classList.toggle('char-count-warn', length > 400 && length <= 450);
+                charCount.classList.toggle('char-count-normal', length <= 400);
             }
         });
         
         // Enviar comentario
-        if (submitBtn) {
+            if (submitBtn) {
             submitBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log("Botón de enviar clickeado");
+                this._log("Botón de enviar clickeado");
                 this.submitComment();
             });
         }
@@ -472,7 +619,7 @@ forceDisplayComments() {
         if (previewBtn) {
             previewBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log("Botón de vista previa clickeado");
+                this._log("Botón de vista previa clickeado");
                 this.showPreview();
             });
         }
@@ -523,15 +670,6 @@ showPreview() {
         previewDiv = document.createElement('div');
         previewDiv.id = 'comment-preview';
         previewDiv.className = 'comment-preview';
-        previewDiv.style.cssText = `
-            background: var(--bg);
-            color: var(--text);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            border: 2px dashed #db3434ff;
-            font-family: Arial, sans-serif;
-        `;
         
         const textareaParent = textarea.parentElement;
         if (textareaParent) {
@@ -542,41 +680,38 @@ showPreview() {
         }
     }
     
-    // Contenido de la vista previa
+    // Contenido de la vista previa (usar clases definidas en CSS)
     previewDiv.innerHTML = `
-        <h4 style="margin-top: 0; color: var(--text);">👁️ Vista Previa de tu Comentario:</h4>
-        <div class="preview-content" style="background: var(--bg); padding: 15px; border-radius: 5px; margin: 10px 0; min-height: 50px;">
-            <div class="preview-header" style="display: flex; background: var(--bg); justify-content: space-between; margin-bottom: 10px; font-size: 14px;">
-                <span style="font-weight: bold; color: var(--text); background: var(--bg);">${this.userName}</span>
-                <span style="color: #7f8c8d;">Ahora mismo</span>
+        <h4 class="preview-title">👁️ Vista Previa de tu Comentario:</h4>
+        <div class="preview-content">
+            <div class="preview-header">
+                <span class="preview-author">${this.userName}</span>
+                <span class="preview-time">Ahora mismo</span>
             </div>
-            <div class="preview-text" style="line-height: 1.5; color: var(--text); background: var(--bg); white-space: pre-wrap; word-break: break-word;">
-                ${this.escapeHtml(text)}
-            </div>
-            <div class="preview-actions" style="margin-top: 10px; background: var(--bg);">
-                <button class="preview-like-btn" style="background: none; border: none; color: #7f8c8d; cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 14px;">
-                    🤍 <span>0</span>
-                </button>
+            <div class="preview-text">${this.escapeHtml(text)}</div>
+            <div class="preview-actions">
+                <button class="preview-like-btn">🤍 <span>0</span></button>
             </div>
         </div>
-        <div style="display: flex; gap: 10px; margin-top: 15px;">
-            <button onclick="window.commentSystem.submitComment()" 
-                    style="background: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                ✅ Publicar ahora
-            </button>
-            <button onclick="document.getElementById('comment-preview').remove()" 
-                    style="background: #e74c3c; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                ❌ Cancelar
-            </button>
-            <button onclick="document.getElementById('comment-text').focus()" 
-                    style="background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                ✏️ Editar
-            </button>
+        <div class="preview-controls">
+            <button class="preview-confirm">✅ Publicar ahora</button>
+            <button class="preview-cancel">❌ Cancelar</button>
+            <button class="preview-edit">✏️ Editar</button>
         </div>
-        <div style="margin-top: 10px; font-size: 12px; color: #95a5a6;">
+        <div class="preview-note">
             <strong>Recordatorio:</strong> Tu nombre será "${this.userName}" y no podrás editarlo después.
         </div>
     `;
+
+    // Wire buttons created inside preview
+    setTimeout(() => {
+        const confirmBtn = previewDiv.querySelector('.preview-confirm');
+        const cancelBtn = previewDiv.querySelector('.preview-cancel');
+        const editBtn = previewDiv.querySelector('.preview-edit');
+        if (confirmBtn) confirmBtn.addEventListener('click', () => window.commentSystem.submitComment());
+        if (cancelBtn) cancelBtn.addEventListener('click', () => previewDiv.remove());
+        if (editBtn) editBtn.addEventListener('click', () => document.getElementById('comment-text') && document.getElementById('comment-text').focus());
+    }, 10);
     
     // Asegurarse de que esté visible
     previewDiv.style.display = 'block';
@@ -646,13 +781,13 @@ showPreview() {
         return;
     }
     
-    // Verificar moderación
+        // Verificar moderación
     if (this.moderator && this.moderator.moderate) {
-        console.log("Verificando moderación...");
+        this._log("Verificando moderación...");
         const moderationResult = this.moderator.moderate(text);
         
         if (!moderationResult.safe) {
-            console.log("Comentario rechazado:", moderationResult.reason);
+            this._log("Comentario rechazado:", moderationResult.reason);
             const userMessage = this.getUserFriendlyMessage(moderationResult);
             this.showMessage(userMessage, 'error');
             
@@ -660,7 +795,7 @@ showPreview() {
             this.saveModerationLog(text, moderationResult);
             return;
         }
-        console.log("Comentario aprobado por moderación");
+        this._log("Comentario aprobado por moderación");
     } else if (text.length > 500) {
         this.showMessage('El comentario es muy largo (máx. 500 caracteres)', 'error');
         return;
@@ -695,7 +830,8 @@ showPreview() {
             const charCount = document.getElementById('char-count');
             if (charCount) {
                 charCount.textContent = '0/500';
-                charCount.style.color = '#7f8c8d';
+                charCount.classList.remove('char-count-warn','char-count-danger');
+                charCount.classList.add('char-count-normal');
             }
 
             const previewDiv = document.getElementById('comment-preview');
@@ -732,7 +868,8 @@ showPreview() {
             const charCount = document.getElementById('char-count');
             if (charCount) {
                 charCount.textContent = '0/500';
-                charCount.style.color = '#7f8c8d';
+                charCount.classList.remove('char-count-warn','char-count-danger');
+                charCount.classList.add('char-count-normal');
             }
 
             // Eliminar vista previa si existe
@@ -818,21 +955,21 @@ handleCommentsSnapshot(snapshot) {
     
     // Verificar si hay datos
     if (!snapshot.exists()) {
-        console.log("No hay comentarios en Firebase");
+        this._log("No hay comentarios en Firebase");
         this.displayComments([]);
         return;
     }
     
     // Recorrer todos los comentarios
     snapshot.forEach((childSnapshot) => {
-        try {
-            const comment = childSnapshot.val();
-            comment.id = childSnapshot.key;
-            comments.push(comment);
-            console.log(`Comentario ${comment.id}: ${comment.author} - ${comment.text?.substring(0, 30)}...`);
-        } catch (err) {
-            console.error("Error procesando comentario:", err);
-        }
+            try {
+                const comment = childSnapshot.val();
+                comment.id = childSnapshot.key;
+                comments.push(comment);
+                this._log(`Comentario ${comment.id}: ${comment.author} - ${comment.text?.substring(0, 30)}...`);
+            } catch (err) {
+                console.error("Error procesando comentario:", err);
+            }
     });
     
     this._log(`Total de comentarios encontrados: ${comments.length}`);
@@ -866,7 +1003,7 @@ handleCommentsSnapshot(snapshot) {
     
     let html = '';
     
-    comments.forEach(comment => {
+            comments.forEach(comment => {
         try {
             // Validar datos del comentario
             if (!comment.text || !comment.author) {
@@ -877,19 +1014,23 @@ handleCommentsSnapshot(snapshot) {
             const timeAgo = this.getTimeAgo(comment.timestamp);
             const isLiked = comment.likedBy && comment.likedBy[this.userId];
             const likeCount = comment.likes || 0;
-            
+            const avatarLetter = this.escapeHtml((comment.author || 'U').charAt(0).toUpperCase());
+
             html += `
                 <div class="comment-card" data-id="${comment.id || ''}">
-                    <div class="comment-header">
-                        <span class="comment-author">${this.escapeHtml(comment.author)}</span>
-                        <span class="comment-time">${timeAgo}</span>
-                    </div>
-                    <div class="comment-content">${this.escapeHtml(comment.text)}</div>
-                    <div class="comment-actions">
-                        <button class="comment-like-btn ${isLiked ? 'liked' : ''}" data-id="${comment.id}" data-liked="${isLiked ? '1' : '0'}" ${isLiked ? 'title="Ya te gusta"' : 'title="Dar like"'}>
-                            ${isLiked ? '❤️' : '🤍'} 
-                            <span class="like-count">${likeCount}</span>
-                        </button>
+                    <div class="comment-avatar">${avatarLetter}</div>
+                    <div class="comment-body">
+                        <div class="comment-header">
+                            <span class="comment-author">${this.escapeHtml(comment.author)}</span>
+                            <span class="comment-time">${timeAgo}</span>
+                        </div>
+                        <div class="comment-content">${this.escapeHtml(comment.text)}</div>
+                        <div class="comment-actions">
+                            <button class="like-btn ${isLiked ? 'liked' : ''} comment-like-btn" data-id="${comment.id}" data-liked="${isLiked ? '1' : '0'}" ${isLiked ? 'title="Ya te gusta"' : 'title="Dar like"'}>
+                                <span class="heart">${isLiked ? '❤️' : '🤍'}</span>
+                                <span class="like-count">${likeCount}</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -934,7 +1075,7 @@ handleCommentsSnapshot(snapshot) {
     async likeComment(commentId) {
         try {
             if (this.useLocal) {
-                console.log("Registrando like en localStorage (fallback)...");
+                this._log("Registrando like en localStorage (fallback)...");
                 const key = 'comments_local';
                 const stored = JSON.parse(localStorage.getItem(key) || '[]');
                 const idx = stored.findIndex(c => c.id === commentId);
@@ -1027,7 +1168,7 @@ handleCommentsSnapshot(snapshot) {
 }
     // Agrega esta función a la clase CommentSystem
     debugFirebase() {
-        console.log("=== DEBUG FIREBASE ===");
+        this._log("=== DEBUG FIREBASE ===");
         
         if (!this.database) {
             console.error("Database no disponible");
@@ -1037,23 +1178,23 @@ handleCommentsSnapshot(snapshot) {
         // Verificar conexión
         const connectedRef = this.database.ref(".info/connected");
         connectedRef.on("value", (snap) => {
-            console.log("Conectado a Firebase:", snap.val() ? "Sí" : "No");
+            this._log("Conectado a Firebase:", snap.val() ? "Sí" : "No");
         });
         
         // Verificar comentarios directamente
         this.commentsRef.once('value')
             .then((snapshot) => {
-                console.log("Comentarios en Firebase:", snapshot.numChildren());
+                this._log("Comentarios en Firebase:", snapshot.numChildren());
                 
                 snapshot.forEach((child) => {
-                    console.log(`- ${child.key}:`, child.val());
+                    this._log(`- ${child.key}:`, child.val());
                 });
             })
             .catch(error => {
                 console.error("Error obteniendo comentarios:", error);
             });
         
-        console.log("=== FIN DEBUG ===");
+        this._log("=== FIN DEBUG ===");
 }
 
 // Llamar desde consola: window.commentSystem.debugFirebase()
@@ -1100,56 +1241,42 @@ handleCommentsSnapshot(snapshot) {
     }
     
     showMessage(message, type) {
-        // Crear notificación simple
-        const messageEl = document.createElement('div');
-        messageEl.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: ${type === 'success' ? '#2ecc71' : '#e74c3c'};
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            z-index: 10000;
-            opacity: 1;
-            transform: translateX(0);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            max-width: 300px;
-        `;
-        
-        messageEl.textContent = message;
-        document.body.appendChild(messageEl);
+        // Delegar en la utilidad interna de toast
+        this._showToast(message, type);
+    }
 
-        // Desaparecer suavemente después de 3s
-        setTimeout(() => {
-            messageEl.style.opacity = '0';
-            messageEl.style.transform = 'translateX(20px)';
-            setTimeout(() => messageEl.remove(), 350);
-        }, 3000);
+    _showToast(message, type='info') {
+        try {
+            const container = document.createElement('div');
+            container.className = `cs-toast ${type === 'success' ? 'cs-toast-success' : type === 'info' ? 'cs-toast-info' : 'cs-toast-error'}`;
+            container.textContent = message;
+            document.body.appendChild(container);
+            setTimeout(() => {
+                container.classList.add('cs-toast-hide');
+                setTimeout(() => container.remove(), 350);
+            }, 3000);
+        } catch (e) {
+            // fallback a alert
+            try { alert(message); } catch (ee) { /* ignore */ }
+        }
     }
 
     addStyles() {
-        if (document.getElementById('comments-temp-styles')) return;
-        const style = document.createElement('style');
-        style.id = 'comments-temp-styles';
-        style.textContent = `
-            /* Estilos mínimos para sección creada dinámicamente */
-            .comments-section { max-width:800px; margin:24px auto; }
-        `;
-        document.head.appendChild(style);
+        // Las reglas CSS principales se han extraído a `styles.css`; no inyectamos estilos desde JS.
+        return;
     }
 }
 
 // Inicializar cuando todo esté listo
 function initCommentSystem() {
-    console.log("Intentando inicializar CommentSystem...");
+    window.LOG && window.LOG("Intentando inicializar CommentSystem...");
     
     // Esperar a que Firebase esté listo
     const checkFirebaseReady = setInterval(() => {
         // Si Firebase no está cargado (`undefined`) o ya está inicializado, procedemos.
         if (typeof firebase === 'undefined' || (firebase && firebase.apps && firebase.apps.length > 0)) {
             clearInterval(checkFirebaseReady);
-            console.log("Iniciando CommentSystem (Firebase cargado o no disponible)");
+            window.LOG && window.LOG("Iniciando CommentSystem (Firebase cargado o no disponible)");
 
             // Crear instancia global (el constructor decidirá si usa Firebase o localStorage)
             window.commentSystem = new CommentSystem();

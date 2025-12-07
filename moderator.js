@@ -1,5 +1,5 @@
 // moderator.js - Sistema de Moderación para Comentarios
-console.log("moderator.js cargado");
+window.LOG && window.LOG("moderator.js cargado");
 
 class CommentModerator {
     constructor() {
@@ -378,4 +378,4 @@ class CommentModerator {
 
 // Hacer disponible globalmente
 window.CommentModerator = CommentModerator;
-console.log("CommentModerator disponible como window.CommentModerator");
+window.LOG && window.LOG("CommentModerator disponible como window.CommentModerator");

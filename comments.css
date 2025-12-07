@@ -1,0 +1,47 @@
+/* Styles for comment system (extracted from JS) */
+
+:root{ --cs-bg:#fff; --cs-text:#1f2937; --cs-muted:#6b7280; --cs-accent-1:#6c8cff; --cs-accent-2:#9ad0ff; --cs-like:#ff4757; --cs-card:#f8fafc; --card-border:#e6e9ef }
+
+.cs-container{ font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color:var(--cs-text) }
+.cs-card{ background:var(--cs-card); border:1px solid var(--card-border); border-radius:12px; padding:12px }
+.cs-row{ display:flex; gap:12px; align-items:flex-start }
+.comment-avatar{ width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,var(--cs-accent-1),var(--cs-accent-2)); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px }
+.comment-body{ flex:1 }
+.like-btn{ display:inline-flex; align-items:center; gap:8px; background:transparent; border:none; cursor:pointer; padding:6px 8px; border-radius:8px; color:var(--cs-muted); font-weight:600 }
+.like-btn .heart{ font-size:18px }
+.like-btn.liked{ color:var(--cs-like); transform:translateY(-1px) }
+.like-count{ background:rgba(0,0,0,0.06); padding:2px 8px; border-radius:999px; font-size:13px }
+.comments-list{ margin-top:16px; display:flex; flex-direction:column; gap:12px }
+
+/* Toast notifications used by comments and counter */
+.cs-toast{ position: fixed; bottom: 20px; right: 20px; color: white; padding: 12px 18px; border-radius: 10px; z-index: 10000; opacity: 1; transform: translateX(0); transition: opacity 0.3s ease, transform 0.3s ease; max-width: 320px; box-shadow: 0 6px 18px rgba(10,20,30,0.12); }
+.cs-toast-success{ background: #2ecc71; }
+.cs-toast-error{ background: #e74c3c; }
+.cs-toast-info{ background: #3498db; }
+.cs-toast-hide{ opacity: 0; transform: translateX(20px); }
+
+/* Preview controls and small utilities */
+.preview-title{ margin-top:0; color:var(--cs-text); font-size:16px }
+.preview-header{ display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px }
+.preview-author{ font-weight:700; color:var(--cs-text) }
+.preview-time{ color:var(--cs-muted) }
+.preview-text{ line-height:1.5; color:var(--cs-text); white-space:pre-wrap; word-break:break-word; padding:10px 0 }
+.preview-actions{ margin-top:10px }
+.preview-controls{ display:flex; gap:10px; margin-top:12px }
+.preview-controls .preview-confirm{ background:#2ecc71; color:white; border:none; padding:10px 16px; border-radius:8px; cursor:pointer }
+.preview-controls .preview-cancel{ background:#e74c3c; color:white; border:none; padding:10px 16px; border-radius:8px; cursor:pointer }
+.preview-controls .preview-edit{ background:#3498db; color:white; border:none; padding:10px 16px; border-radius:8px; cursor:pointer }
+.preview-note{ margin-top:10px; font-size:12px; color:#95a5a6 }
+
+/* Botón para mostrar UID (pequeño y coherente con UI) */
+.cs-uid-btn{ padding:6px 10px; border-radius:8px; background:transparent; border:1px solid var(--card-border); cursor:pointer; color:var(--cs-text) }
+.cs-uid-btn:hover{ box-shadow:0 6px 18px rgba(11,22,40,0.06); transform:translateY(-1px) }
+
+/* Utilities */
+.hidden{ display:none !important }
+.char-count-ok{ color:green }
+.char-count-warning{ color:orange }
+.char-count-danger{ color:red }
+
+/* Simple responsive */
+@media (max-width:480px){ .comment-avatar{ width:36px; height:36px; font-size:14px } }

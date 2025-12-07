@@ -1,14 +1,14 @@
 // counter.js - VERSIÓN CORREGIDA
-console.log("counter.js cargado - verificando Firebase...");
+window.LOG && window.LOG("counter.js cargado - verificando Firebase...");
 
 // Esperar a que Firebase SDK se cargue
 function waitForFirebase() {
     return new Promise((resolve) => {
         if (typeof firebase !== 'undefined' && firebase.app) {
-            console.log("Firebase detectado");
+            window.LOG && window.LOG("Firebase detectado");
             resolve();
         } else {
-            console.log("Esperando Firebase...");
+            window.LOG && window.LOG("Esperando Firebase...");
             setTimeout(() => waitForFirebase().then(resolve), 100);
         }
     });
@@ -29,7 +29,7 @@ const firebaseConfigLocal = window.firebaseConfig || {
 // Clase principal
 class FirebaseStats {
     constructor() {
-        console.log("Iniciando FirebaseStats...");
+        window.LOG && window.LOG("Iniciando FirebaseStats...");
         this.stats = { totalVisits: 0, totalLikes: 0, todayVisits: 0 };
         this.userLiked = localStorage.getItem('userLiked') === 'true';
         this.userId = this.getUserId();
@@ -37,14 +37,14 @@ class FirebaseStats {
     
     async init() {
         try {
-            console.log("Inicializando Firebase...");
+            window.LOG && window.LOG("Inicializando Firebase...");
             
             // Inicializar Firebase
             if (!firebase.apps.length) {
                 firebase.initializeApp(firebaseConfigLocal);
-                console.log("Firebase inicializado correctamente");
+                window.LOG && window.LOG("Firebase inicializado correctamente");
             } else {
-                console.log("Firebase ya estaba inicializado");
+                window.LOG && window.LOG("Firebase ya estaba inicializado");
             }
             
             this.database = firebase.database();
@@ -84,7 +84,7 @@ class FirebaseStats {
                 await this.database.ref('stats/today').transaction(c => (c || 0) + 1);
                 await this.database.ref('stats/total').transaction(c => (c || 0) + 1);
                 
-                console.log("Visita registrada");
+                window.LOG && window.LOG("Visita registrada");
             }
         } catch (error) {
             console.error("Error registrando visita:", error);
@@ -92,7 +92,7 @@ class FirebaseStats {
     }
     
     setupRealtimeListeners() {
-        console.log("Configurando listeners en tiempo real...");
+        window.LOG && window.LOG("Configurando listeners en tiempo real...");
         
         // Escuchar estadísticas
         this.database.ref('stats').on('value', (snapshot) => {
@@ -102,7 +102,7 @@ class FirebaseStats {
             this.stats.todayVisits = data.today || 0;
             this.display();
             
-            console.log("Estadísticas actualizadas:", this.stats);
+            window.LOG && window.LOG("Estadísticas actualizadas:", this.stats);
         });
         
         // Verificar si usuario ya dio like
@@ -116,7 +116,7 @@ class FirebaseStats {
     }
     
     async addLike() {
-        console.log("Intentando dar like...");
+        window.LOG && window.LOG("Intentando dar like...");
         
         if (!this.userLiked) {
             try {
@@ -135,7 +135,7 @@ class FirebaseStats {
                 this.updateButton();
                 this.showSuccess();
                 
-                console.log("Like registrado exitosamente");
+                window.LOG && window.LOG("Like registrado exitosamente");
                 return true;
                 
             } catch (error) {
@@ -145,12 +145,12 @@ class FirebaseStats {
             }
         }
         
-        console.log("Usuario ya había dado like");
+        window.LOG && window.LOG("Usuario ya había dado like");
         return false;
     }
     
     useOfflineMode() {
-        console.log("Activando modo offline...");
+        window.LOG && window.LOG("Activando modo offline...");
         const localStats = JSON.parse(localStorage.getItem('localStats')) || {
             total: 0,
             likes: 0,
@@ -201,23 +201,21 @@ class FirebaseStats {
     }
     
     showSuccess() {
-        // Crear notificación simple
+        // Si existe commentSystem con utilidad de toast, reutilizarla
+        if (window.commentSystem && typeof window.commentSystem._showToast === 'function') {
+            window.commentSystem._showToast('¡Gracias por tu like!', 'success');
+            return;
+        }
+
+        // Fallback: crear notificación directamente
         const notification = document.createElement('div');
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #2ecc71;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            z-index: 10000;
-            animation: fadeIn 0.3s;
-        `;
+        notification.className = 'cs-toast cs-toast-success';
         notification.textContent = '¡Gracias por tu like!';
         document.body.appendChild(notification);
-        
-        setTimeout(() => notification.remove(), 3000);
+        setTimeout(() => {
+            notification.classList.add('cs-toast-hide');
+            setTimeout(() => notification.remove(), 350);
+        }, 3000);
     }
     
     showError() {
@@ -227,7 +225,7 @@ class FirebaseStats {
 
 // Inicialización cuando todo esté listo
 async function initApp() {
-    console.log("Inicializando aplicación...");
+    window.LOG && window.LOG("Inicializando aplicación...");
     
     try {
         // Esperar a que Firebase se cargue
@@ -247,7 +245,7 @@ async function initApp() {
             });
         }
         
-        console.log("Aplicación inicializada correctamente");
+        window.LOG && window.LOG("Aplicación inicializada correctamente");
         
     } catch (error) {
         console.error("Error inicializando aplicación:", error);
@@ -349,7 +347,7 @@ document.addEventListener('keydown', function(e) {
 🕐 Fecha: ${new Date().toLocaleString()}
         `;
         
-        console.log(message);
+        window.LOG && window.LOG(message);
         alert(message);
     }
 });
