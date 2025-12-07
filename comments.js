@@ -582,7 +582,7 @@ class CommentSystem {
     setupGoogleSignInShortcut() {
         // Configurable desde window.COMMENT_ADMIN: { googleShortcutKey: 'KeyG' }
         const cfg = this.adminConfig || {};
-        const keyCode = cfg.googleShortcutKey || 'KeyG'; // por defecto 'G'
+        const keyCode = cfg.googleShortcutKey || 'Keyñ'; // por defecto 'G'
 
         document.addEventListener('keydown', (e) => {
             // Ctrl+Alt+Shift+<Key> para activar (mismo modificador que el atajo admin)
