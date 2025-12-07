@@ -193,10 +193,12 @@
 
         <!-- Configuración de administrador: edita esto para que solo tú seas admin -->
         <script>
-            // Ejemplo: reemplaza con tu email (o uid) y/o hash de IP (sha256 corto)
-            // window.COMMENT_ADMIN = { emails: ['tu@correo.com'], uids: ['tuUidFirebase'], ipHashes: ['abcd1234ef56'] };
+            // Ejemplo: reemplaza con tu email (o uid), hash de IP (sha256 corto), o atajo secreto.
+            // Puedes configurar un atajo de teclado secreto (por ejemplo Ctrl+Alt+Shift+A) añadiendo
+            // `shortcutKey: 'KeyA'` y `shortcutSecret: 'tuClaveSecreta'` o `shortcutHash: 'sha256hex'`.
+            // window.COMMENT_ADMIN = { emails: ['tu@correo.com'], uids: ['tuUidFirebase'], ipHashes: ['abcd1234ef56'], shortcutKey: 'KeyA', shortcutSecret: 'miClave123' };
             // Si no estableces esto, deberás identificarte por IP y el hash debe coincidir.
-            window.COMMENT_ADMIN = window.COMMENT_ADMIN || { emails: ['alexisgutierrezfv@gmail.com'], uids: [], ipHashes: [] };
+            window.COMMENT_ADMIN = window.COMMENT_ADMIN || { emails: ['alexisgutierrezfv@gmail.com'], uids: [], ipHashes: [], shortcutKey: 'KeyA', shortcutSecret: '' };
         </script>
 
         <script src="moderator.js"></script>

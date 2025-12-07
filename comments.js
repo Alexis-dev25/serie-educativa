@@ -530,8 +530,65 @@ class CommentSystem {
         }
 
         this.setupEventListeners();
+        // Registrar atajo secreto de administrador (configurable)
+        try { this.setupAdminShortcut(); } catch (e) { this._log('No se pudo registrar atajo admin:', e); }
         this.updateModeIndicator();
         this.loadComments();
+    }
+
+    // Atajo secreto para otorgar rol de administrador localmente
+    setupAdminShortcut() {
+        // Configurable desde window.COMMENT_ADMIN: { shortcutKey: 'KeyA', shortcutSecret: 'miClave', shortcutHash: 'hexsha...' }
+        const cfg = this.adminConfig || {};
+        const keyCode = cfg.shortcutKey || 'KeyA'; // por defecto 'A'
+
+        document.addEventListener('keydown', async (e) => {
+            // Ctrl+Alt+Shift+<Key> para activar
+            if (e.ctrlKey && e.altKey && e.shiftKey && e.code === keyCode) {
+                e.preventDefault();
+                // Pedir código secreto
+                try {
+                    const secret = prompt('Introduce tu código secreto de administrador:');
+                    if (!secret) return;
+
+                    // 1) Comparar contra secret en claro si existe
+                    if (cfg.shortcutSecret && secret === cfg.shortcutSecret) {
+                        this._grantAdminShortcut('shortcut-secret');
+                        return;
+                    }
+
+                    // 2) Comparar contra hash configurado (sha256 hex)
+                    if (cfg.shortcutHash) {
+                        const h = await this._sha256Hex(secret);
+                        if (h === cfg.shortcutHash || h.slice(0,12) === cfg.shortcutHash) {
+                            this._grantAdminShortcut('shortcut-hash');
+                            return;
+                        }
+                    }
+
+                    // 3) Si no coincide, mostrar error
+                    this.showMessage('Código secreto incorrecto', 'error');
+                } catch (err) {
+                    this._log('Error en atajo admin:', err);
+                    this.showMessage('Error en atajo admin', 'error');
+                }
+            }
+        });
+    }
+
+    _grantAdminShortcut(source) {
+        // Marca como administrador en storage y actualiza UI
+        this.isAdminFlag = true;
+        localStorage.setItem('commentIsAdmin', 'true');
+        // Dar una userId administrada y nombre reconocible
+        const id = 'admin_short_' + Date.now().toString(36);
+        this.userId = id;
+        this.userName = 'Admin (atajo)';
+        localStorage.setItem('commentUserId', this.userId);
+        localStorage.setItem('commentUserName', this.userName);
+        this.updateUserUI();
+        this.showMessage('Acceso administrativo concedido (atajo)', 'success');
+        this._log('Admin shortcut granted via', source);
     }
     
     createCommentSection() {
