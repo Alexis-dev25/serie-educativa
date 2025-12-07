@@ -539,16 +539,78 @@ class CommentSystem {
     }
 
 
+    // Función auxiliar para comparar la tecla configurada con el evento
+    _matchesKeyEvent(e, keySpec) {
+        if (!keySpec) return false;
+        // Si se pasa un código como 'KeyG' o 'Digit1', compararlo con e.code
+        if (typeof keySpec === 'string' && keySpec.startsWith('Key')) {
+            return e.code === keySpec;
+        }
+        // Si es un solo carácter, comparar con e.key (insensible a mayúsculas)
+        if (typeof keySpec === 'string' && keySpec.length === 1) {
+            return (e.key || '').toUpperCase() === keySpec.toUpperCase();
+        }
+        // Fallback: comparar por igualdad directa
+        return e.code === keySpec || (e.key || '').toUpperCase() === (keySpec || '').toUpperCase();
+    }
+
+    // Atajo secreto para otorgar rol de administrador localmente
+    setupAdminShortcut() {
+        const cfg = this.adminConfig || {};
+        // Evitar registrar más de una vez
+        if (this._adminShortcutRegistered) return;
+        this._adminShortcutRegistered = true;
+
+        const keySpec = cfg.shortcutKey || 'KeyA'; // por defecto 'A'
+
+        // Usar captura para detectar atajos aunque otros handlers detengan la propagación
+        window.addEventListener('keydown', async (e) => {
+            // Nuevo comportamiento: Ctrl+Shift+<Key> (sin Alt)
+            if (e.ctrlKey && e.shiftKey && !e.altKey && this._matchesKeyEvent(e, keySpec)) {
+                try { e.preventDefault(); } catch (ignore) {}
+                // Pedir código secreto
+                try {
+                    const secret = prompt('Introduce tu código secreto de administrador:');
+                    if (!secret) return;
+
+                    // 1) Comparar contra secret en claro si existe
+                    if (cfg.shortcutSecret && secret === cfg.shortcutSecret) {
+                        this._grantAdminShortcut('shortcut-secret');
+                        return;
+                    }
+
+                    // 2) Comparar contra hash configurado (sha256 hex)
+                    if (cfg.shortcutHash) {
+                        const h = await this._sha256Hex(secret);
+                        if (h === cfg.shortcutHash || h.slice(0,12) === cfg.shortcutHash) {
+                            this._grantAdminShortcut('shortcut-hash');
+                            return;
+                        }
+                    }
+
+                    // 3) Si no coincide, mostrar error
+                    this.showMessage('Código secreto incorrecto', 'error');
+                } catch (err) {
+                    this._log('Error en atajo admin:', err);
+                    this.showMessage('Error en atajo admin', 'error');
+                }
+            }
+        }, { capture: true });
+    }
+
     // Atajo configurable para abrir el flujo de Sign-In de Google
     setupGoogleSignInShortcut() {
         // Configurable desde window.COMMENT_ADMIN: { googleShortcutKey: 'KeyG' }
         const cfg = this.adminConfig || {};
-        const keyCode = cfg.googleShortcutKey || 'KeyÑ'; // por defecto 'G'
+        if (this._googleShortcutRegistered) return;
+        this._googleShortcutRegistered = true;
 
-        document.addEventListener('keydown', (e) => {
-            // Ctrl+Alt+Shift+<Key> para activar (mismo modificador que el atajo admin)
-            if (e.ctrlKey && e.altKey && e.shiftKey && e.code === keyCode) {
-                e.preventDefault();
+        const keySpec = cfg.googleShortcutKey || 'KeyG'; // por defecto 'G'
+
+        window.addEventListener('keydown', (e) => {
+            // Ctrl+Shift+<Key> para activar (sin Alt)
+            if (e.ctrlKey && e.shiftKey && !e.altKey && this._matchesKeyEvent(e, keySpec)) {
+                try { e.preventDefault(); } catch (ignore) {}
                 // Si ya existe auth y user logueado, avisar
                 if (this.auth && this.auth.currentUser) {
                     this.showMessage('Ya tienes sesión iniciada con Google', 'info');
@@ -563,7 +625,7 @@ class CommentSystem {
                     this.showMessage('No fue posible iniciar sesión con Google', 'error');
                 }
             }
-        });
+        }, { capture: true });
     }
 
     _grantAdminShortcut(source) {
