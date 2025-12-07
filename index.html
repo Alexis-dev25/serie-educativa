@@ -1,42 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <title>Serie-Educativa</title>
     <meta charset="utf-8">
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Serie-Educativa</title>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="counter.css">
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <meta name="description" content="Serie educativa: pequeños artículos y visores de código para aprender lenguajes.">
-    </head>
-    <body>
-        <header class="site-header">
-            <h1>Serie Educativa 📚</h1>
-            <div class="controls">
-                <button id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">🌓</button>
-            </div>
-        </header>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serie-Educativa</title>
+    <meta name="description" content="Serie educativa: pequeños artículos y visores de código para aprender lenguajes.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="counter.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Serie Educativa 📚</h1>
+        <div class="controls">
+            <button id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">🌓</button>
+        </div>
+    </header>
 
-        <section class="intro">
-            <h2>Introducción</h2>
-            <div class="text-intro">
-                <p>Bienvenido a mi rincón de código</p>
-                <p>Esta página nació de una mezcla entre curiosidad, pasión y muchas horas frente a la pantalla. No fue hecha por una empresa ni por un equipo de expertos, sino por mí —un estudiante de 14 años con ganas de entender el mundo de la programación y compartirlo sin filtros ni complicaciones.</p>
-                <p>Aquí encontrarás los lenguajes más populares, explicados de forma clara, junto con visores de código para que puedas experimentar sin tener que abrir mil pestañas. No hay anuncios, no hay distracciones, solo contenido directo y útil.</p>
-                <p>¿Está perfecta? No. ¿Está hecha con ganas? Absolutamente.</p>
-                <p>Porque a veces, lo que empieza como un proyecto escolar termina siendo algo mucho más personal.</p>
-                <p>Gracias por visitar. Espero que aprendas algo nuevo… o al menos te inspires a crear tu propia versión.</p>
-            </div>
-        </section>
+    <section class="intro">
+        <h2>Introducción</h2>
+        <div class="text-intro">
+            <p>Bienvenido a mi rincón de código</p>
+            <p>Esta página nació de una mezcla entre curiosidad, pasión y muchas horas frente a la pantalla. No fue hecha por una empresa ni por un equipo de expertos, sino por mí —un estudiante de 14 años con ganas de entender el mundo de la programación y compartirlo sin filtros ni complicaciones.</p>
+            <p>Aquí encontrarás los lenguajes más populares, explicados de forma clara, junto con visores de código para que puedas experimentar sin tener que abrir mil pestañas. No hay anuncios, no hay distracciones, solo contenido directo y útil.</p>
+            <p>¿Está perfecta? No. ¿Está hecha con ganas? Absolutamente.</p>
+            <p>Porque a veces, lo que empieza como un proyecto escolar termina siendo algo mucho más personal.</p>
+            <p>Gracias por visitar. Espero que aprendas algo nuevo… o al menos te inspires a crear tu propia versión.</p>
+        </div>
+    </section>
 
-        <section class="temas">
-            <h2>Temas</h2>
-            <input type="text" id="buscador" placeholder="Buscar...🔍" aria-label="Buscar temas">
-            <ul id="lista">
+    <section class="temas">
+        <h2>Temas</h2>
+        <input type="text" id="buscador" placeholder="Buscar...🔍" aria-label="Buscar temas">
+        <ul id="lista">
                 <li class="point">
                     <section id="html-css-section" class="html-css">
                         <h2>HTML/CSS</h2>
@@ -118,7 +114,8 @@
                     </section>
                 </li>
             </ul>
-        </section>
+    </section>
+
     <div class="edu-counter" id="edu-counter">
         <div class="edu-header">
             <span class="edu-icon">📚</span>
@@ -155,106 +152,113 @@
         </div>
     </div>
     
-    <!-- Firebase SDK + tu código -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-    <script>
-        // Configuración proporcionada por el usuario
-        if (!window.firebaseConfig) {
-            window.firebaseConfig = {
-                apiKey: "AIzaSyCbm7LYeDnXJTk9bJJs9FyOvkmqxMs7f8U",
-                authDomain: "serie-educativa.firebaseapp.com",
-                databaseURL: "https://serie-educativa-default-rtdb.firebaseio.com",
-                projectId: "serie-educativa",
-                storageBucket: "serie-educativa.firebasestorage.app",
-                messagingSenderId: "419592658892",
-                appId: "1:419592658892:web:11a70ffa88f853a4920769",
-                measurementId: "G-81N5THENWD"
-            };
-        }
+        <!-- Firebase SDK -->
+        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 
-        // Inicializar Firebase (usa window.firebaseConfig para evitar redeclaraciones)
-        try {
-            if (typeof firebase !== 'undefined') {
-                if (!firebase.apps.length) {
-                    firebase.initializeApp(window.firebaseConfig);
-                    console.log('Firebase inicializado con la configuración proporcionada');
-                } else {
-                    console.log('Firebase ya estaba inicializado');
-                }
-            } else {
-                console.warn('SDK de Firebase no cargado aún. La inicialización fallará si se llama ahora.');
+        <script>
+            // Configuración Firebase por defecto (se puede sobrescribir en window.firebaseConfig)
+            if (!window.firebaseConfig) {
+                window.firebaseConfig = {
+                    apiKey: "AIzaSyCbm7LYeDnXJTk9bJJs9FyOvkmqxMs7f8U",
+                    authDomain: "serie-educativa.firebaseapp.com",
+                    databaseURL: "https://serie-educativa-default-rtdb.firebaseio.com",
+                    projectId: "serie-educativa",
+                    storageBucket: "serie-educativa.firebasestorage.app",
+                    messagingSenderId: "419592658892",
+                    appId: "1:419592658892:web:11a70ffa88f853a4920769",
+                    measurementId: "G-81N5THENWD"
+                };
             }
-        } catch (err) {
-            console.error('Error inicializando Firebase:', err);
-        }
-    </script>
-    <script src="counter.js"></script>
-    <script src="moderator.js"></script>
+
+            // Inicializar Firebase solo si el SDK está disponible
+            try {
+                if (typeof firebase !== 'undefined') {
+                    if (!firebase.apps || !firebase.apps.length) {
+                        firebase.initializeApp(window.firebaseConfig);
+                        console.log('Firebase inicializado');
+                    } else {
+                        console.log('Firebase ya inicializado');
+                    }
+                } else {
+                    console.warn('SDK de Firebase no cargado aún');
+                }
+            } catch (err) {
+                console.error('Error inicializando Firebase:', err);
+            }
+        </script>
+
+        <!-- Configuración de administrador: edita esto para que solo tú seas admin -->
+        <script>
+            // Ejemplo: reemplaza con tu email (o uid) y/o hash de IP (sha256 corto)
+            // window.COMMENT_ADMIN = { emails: ['tu@correo.com'], uids: ['tuUidFirebase'], ipHashes: ['abcd1234ef56'] };
+            // Si no estableces esto, deberás identificarte por IP y el hash debe coincidir.
+            window.COMMENT_ADMIN = window.COMMENT_ADMIN || { emails: [alexisgutierrezfv@gmail.com], uids: [], ipHashes: [] };
+        </script>
+
+        <script src="moderator.js"></script>
+        <script src="counter.js"></script>
+
+        <!-- Sección de comentarios (estructura visible) -->
         <section>
-            <div class="comments-section">
-    <h3>💬 Comentarios </h3>
-            <div style="margin-top:6px; margin-bottom:12px; font-size:13px; color:#7f8c8d;" id="comment-mode">Modo: comprobando...</div>
-    
-    <!-- Advertencia de moderación -->
-    <div class="moderation-warning">
-        <p>⚠️ <strong>Normas de la comunidad:</strong></p>
-        <ul>
-            <li>Sé respetuoso con todos</li>
-            <li>No se permiten insultos ni lenguaje ofensivo</li>
-            <li>Comentarios relacionados únicamente con programación</li>
-            <li>No spam ni contenido comercial</li>
-            <li>Los comentarios son moderados automáticamente</li>
-        </ul>
-    </div>
-    
-    <!-- Formulario -->
-    <div class="comment-form">
-    <textarea id="comment-text" class="comment-text" placeholder="Comparte tus dudas, ejemplos o comentarios sobre programación..."maxlength="500" rows="4"></textarea>
-    
-    <div class="comment-form-footer">
-        <span id="char-count">0/500</span>
-        <div>
-            <!-- BOTÓN DE VISTA PREVIA -->
-            <button type="button" id="preview-comment" class="preview-btn">
-                👁️ Vista Previa
-            </button>
-            
-            <!-- BOTÓN DE PUBLICAR -->
-            <button type="button" id="submit-comment" class="comment-submit-btn">
-                📤 Publicar Comentario
-            </button>
-        </div>
-    </div>
-    
-    <p class="comment-note">
-        <small>💡 Consejo: Presiona Ctrl+Enter para publicar rápido, Shift+Enter para vista previa</small>
-    </p>
-    <div class="comments-list" id="comments-list">
-        <div class="loading-comments">⏳ Cargando comentarios...</div>
-    </div>
-</div>
-    <script>
-    // Cargar comments.js dinámicamente
-    const script = document.createElement('script');
-    script.src = 'comments.js';
-    script.onload = function() {
-        console.log('comments.js cargado exitosamente');
-    };
-    script.onerror = function() {
-        console.error('Error cargando comments.js - creando versión de emergencia');
-        
-        // Versión de emergencia
-        const emergencyScript = document.createElement('script');
-        emergencyScript.textContent = `
-            console.log('Usando sistema de comentarios de emergencia');
-            // Código básico de emergencia aquí
-        `;
-        document.head.appendChild(emergencyScript);
-    };
-    document.head.appendChild(script);
-</script>
+                <div class="comments-section">
+                <h3>💬 Comentarios</h3>
+                <div style="margin-top:6px; margin-bottom:8px; font-size:13px; color:#7f8c8d;" id="comment-mode">Modo: comprobando...</div>
+                <div id="comment-auth" style="margin-bottom:12px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                    <span id="user-status" style="font-size:13px; color:#7f8c8d;">Identidad: visitante</span>
+                    <button id="signin-google" style="padding:6px 10px; border-radius:8px;">Iniciar sesión con Google</button>
+                    <button id="identify-ip" style="padding:6px 10px; border-radius:8px;">Identificar por IP</button>
+                    <button id="local-identity" style="padding:6px 10px; border-radius:8px;">Usar nombre local</button>
+                    <button id="signout-btn" style="padding:6px 10px; border-radius:8px; display:none;">Cerrar sesión</button>
+                </div>
+
+                <div class="moderation-warning">
+                    <p>⚠️ <strong>Normas de la comunidad:</strong></p>
+                    <ul>
+                        <li>Sé respetuoso con todos</li>
+                        <li>No se permiten insultos ni lenguaje ofensivo</li>
+                        <li>Comentarios relacionados únicamente con programación</li>
+                        <li>No spam ni contenido comercial</li>
+                        <li>Los comentarios son moderados automáticamente</li>
+                    </ul>
+                </div>
+
+                  <div class="comment-form">
+                    <textarea id="comment-text" class="comment-text" placeholder="Comparte tus dudas, ejemplos o comentarios sobre programación..." maxlength="500" rows="4"></textarea>
+
+                    <div class="comment-form-footer">
+                        <span id="char-count">0/500</span>
+                        <div>
+                            <button type="button" id="preview-comment" class="preview-btn">👁️ Vista Previa</button>
+                            <button type="button" id="submit-comment" class="comment-submit-btn">📤 Publicar Comentario</button>
+                        </div>
+                    </div>
+
+                    <p class="comment-note"><small>💡 Consejo: Presiona Ctrl+Enter para publicar rápido, Shift+Enter para vista previa</small></p>
+                    <div class="comments-list" id="comments-list">
+                        <div class="loading-comments">⏳ Cargando comentarios...</div>
+                    </div>
+                </div>
+            </div>
         </section>
+
+        <!-- Cargar comments.js dinámicamente y con fallback -->
+        <script>
+            (function(){
+                const s = document.createElement('script');
+                s.src = 'comments.js';
+                s.onload = () => console.log('comments.js cargado');
+                s.onerror = () => {
+                    console.error('Error cargando comments.js - cargando fallback mínimo');
+                    const emergency = document.createElement('script');
+                    emergency.textContent = "console.warn('Comments fallback activo'); window.commentSystem = window.commentSystem || { loadComments: ()=>{}, submitComment: ()=>{alert('Sistema de comentarios no disponible');} };";
+                    document.body.appendChild(emergency);
+                };
+                document.body.appendChild(s);
+            })();
+        </script>
+
         <section>
             <h2>Feedback 📙</h2>
             <div class="fb">
@@ -265,79 +269,29 @@
                 <a href="#top">Subir 👆</a>
             </div>
         </section>
+
         <script src="theme.js"></script>
         <script src="buscador.js"></script>
+
         <script>
-// Script de diagnóstico
-console.log("=== DIAGNÓSTICO COMENTARIOS ===");
+            // Script de diagnóstico (no intrusivo)
+            console.log('=== DIAGNÓSTICO COMENTARIOS ===');
+            setTimeout(() => {
+                console.log('1. Firebase disponible:', typeof firebase !== 'undefined');
+                console.log('2. Firebase apps:', (typeof firebase !== 'undefined' && firebase.apps) ? firebase.apps.length : 0);
+                const cs = window.commentSystem;
+                console.log('3. commentSystem:', cs ? 'Sí' : 'No');
+                if (cs) {
+                    console.log('4. Database:', cs.database ? 'Sí' : 'No');
+                    console.log('5. commentsRef:', cs.commentsRef ? 'Sí' : 'No');
+                    console.log('6. userId:', cs.userId);
+                }
+                console.log('9. comments-list existe:', document.getElementById('comments-list') ? 'Sí' : 'No');
+                console.log('10. comment-text existe:', document.getElementById('comment-text') ? 'Sí' : 'No');
+                console.log('=== FIN DIAGNÓSTICO ===');
+            }, 1500);
+        </script>
 
-// Esperar a que cargue todo
-setTimeout(() => {
-    // 1. Verificar Firebase
-    console.log("1. Firebase disponible:", typeof firebase !== 'undefined');
-    console.log("2. Firebase apps:", firebase ? firebase.apps.length : 0);
-    
-    // 2. Verificar commentSystem
-    const cs = window.commentSystem;
-    console.log("3. commentSystem:", cs ? "Sí" : "No");
-    
-    if (cs) {
-        console.log("4. Database:", cs.database ? "Sí" : "No");
-        console.log("5. commentsRef:", cs.commentsRef ? "Sí" : "No");
-        console.log("6. userId:", cs.userId);
-        
-        // 3. Verificar comentarios manualmente
-        if (cs.database) {
-            console.log("7. Verificando comentarios directamente...");
-            
-            cs.database.ref('comments').once('value')
-                .then(snapshot => {
-                    console.log("8. Total comentarios en Firebase:", snapshot.numChildren());
-                    
-                    if (snapshot.exists()) {
-                        snapshot.forEach(child => {
-                            const comment = child.val();
-                            console.log(`   - ${child.key}: ${comment.author} - "${comment.text?.substring(0, 50)}..."`);
-                        });
-                    } else {
-                        console.log("8. No hay comentarios en Firebase");
-                    }
-                })
-                .catch(error => {
-                    console.error("8. Error obteniendo comentarios:", error);
-                });
-        }
-    }
-    
-    // 4. Verificar elementos HTML
-    console.log("9. comments-list existe:", document.getElementById('comments-list') ? "Sí" : "No");
-    console.log("10. comment-form existe:", document.getElementById('comment-text') ? "Sí" : "No");
-    
-    // 5. Verificar estilos
-    const styles = Array.from(document.styleSheets).filter(ss => 
-        ss.href && ss.href.includes('comments') || 
-        Array.from(ss.cssRules || []).some(rule => 
-            rule.selectorText && rule.selectorText.includes('comment')
-        )
-    );
-    console.log("11. Estilos de comentarios cargados:", styles.length);
-    
-    console.log("=== FIN DIAGNÓSTICO ===");
-    
-    // Habilitar comando para forzar recarga
-    window.reloadComments = function() {
-        if (window.commentSystem && window.commentSystem.loadComments) {
-            console.log("Forzando recarga de comentarios...");
-            window.commentSystem.loadComments();
-        }
-    };
-    
-}, 3000);
-</script>
     </body>
-    </html>
-    </section>
-</body>
-
 </html>
 

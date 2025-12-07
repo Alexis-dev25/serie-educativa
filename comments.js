@@ -41,9 +41,18 @@ class CommentSystem {
         })();
         
         this.moderationHistory = JSON.parse(localStorage.getItem('moderationHistory')) || [];
+        // Control de logs (activar con window.DEBUG_COMMENTS = true)
+        this.debug = !!window.DEBUG_COMMENTS;
+
+        // Configuración de administrador (defínela en index.html antes de cargar scripts)
+        // Ejemplo: window.COMMENT_ADMIN = { emails: ['tu@correo.com'], uids: ['...'], ipHashes: ['ab12...'] }
+        this.adminConfig = window.COMMENT_ADMIN || { emails: [], uids: [], ipHashes: [] };
+        this.isAdminFlag = localStorage.getItem('commentIsAdmin') === 'true' || false;
 
         // Indicador de modo y auto-check para el caso en que Firebase se cargue después
         this.init();
+        // Inicializar auth (si está disponible)
+        this.initAuth();
 
         // Intentar detectar si Firebase aparece más tarde (por ejemplo si el usuario pega la config)
         if (this.useLocal) {
@@ -76,6 +85,241 @@ class CommentSystem {
             el.textContent = 'Modo: Firebase (en línea)';
             el.style.color = '#2ecc71';
         }
+    }
+
+    _log(...args) {
+        if (this.debug) console.log('[CommentSystem]', ...args);
+    }
+
+    async initAuth() {
+        // Si Firebase Auth no está presente, intentar detectarlo más tarde
+        if (typeof firebase === 'undefined' || !firebase.auth) {
+            this._log('Firebase Auth no disponible, reintentando en 1s');
+            let attempts = 0;
+            const ic = setInterval(() => {
+                attempts++;
+                if (typeof firebase !== 'undefined' && firebase.auth) {
+                    clearInterval(ic);
+                    this._setupAuthListeners();
+                } else if (attempts > 10) {
+                    clearInterval(ic);
+                    this._log('Firebase Auth no detectado');
+                }
+            }, 1000);
+            return;
+        }
+
+        this._setupAuthListeners();
+    }
+
+    _setupAuthListeners() {
+        try {
+            this.auth = firebase.auth();
+            this.auth.onAuthStateChanged((user) => {
+                if (user) {
+                    this.userId = 'auth_' + user.uid;
+                    this.userName = user.displayName || user.email || this.userName;
+                    localStorage.setItem('commentUserId', this.userId);
+                    localStorage.setItem('commentUserName', this.userName);
+                } else {
+                    // Si no hay usuario, respetar lo almacenado o mantener local
+                    const storedId = localStorage.getItem('commentUserId');
+                    const storedName = localStorage.getItem('commentUserName');
+                    if (storedId) this.userId = storedId;
+                    if (storedName) this.userName = storedName;
+                }
+                // Detectar admin desde auth
+                if (user && this._checkAdminFromAuth(user)) {
+                    this.isAdminFlag = true;
+                    localStorage.setItem('commentIsAdmin', 'true');
+                }
+                this.updateUserUI();
+            });
+
+            // Asociar botones si existen
+            document.addEventListener('DOMContentLoaded', () => this._wireAuthButtons());
+            this._wireAuthButtons();
+        } catch (err) {
+            this._log('Error configurando auth listeners', err);
+        }
+    }
+
+    _wireAuthButtons() {
+        const googleBtn = document.getElementById('signin-google');
+        const ipBtn = document.getElementById('identify-ip');
+        const localBtn = document.getElementById('local-identity');
+        const signoutBtn = document.getElementById('signout-btn');
+        let showUidBtn = document.getElementById('show-uid');
+
+        // Si no existe el botón de UID, crearlo y añadirlo al contenedor de auth
+        if (!showUidBtn) {
+            const container = document.getElementById('comment-auth');
+            if (container) {
+                showUidBtn = document.createElement('button');
+                showUidBtn.id = 'show-uid';
+                showUidBtn.textContent = 'Mostrar mi UID';
+                showUidBtn.style.padding = '6px 10px';
+                showUidBtn.style.borderRadius = '8px';
+                showUidBtn.style.display = 'none';
+                container.appendChild(showUidBtn);
+            }
+        }
+
+        if (googleBtn) googleBtn.onclick = () => this.signInWithGoogle();
+        if (ipBtn) ipBtn.onclick = () => this.identifyByIP();
+        if (localBtn) localBtn.onclick = () => {
+            if (!this.isAdmin()) return this.showMessage('Solo el administrador puede usar identidad local', 'error');
+            this.setLocalIdentity();
+        };
+        if (signoutBtn) signoutBtn.onclick = () => this.signOutAuth();
+
+        // Mostrar/ocultar botones admin
+        if (localBtn) localBtn.style.display = this.isAdmin() ? 'inline-block' : 'none';
+        if (ipBtn) ipBtn.style.display = 'inline-block'; // permitimos intentar identificar por IP (puede otorgar admin)
+        // Mostrar/ocultar botón de UID solo para el usuario autenticado
+        if (showUidBtn) {
+            showUidBtn.style.display = (this.auth && this.auth.currentUser) ? 'inline-block' : 'none';
+            showUidBtn.onclick = async () => {
+                try {
+                    const uid = (this.auth && this.auth.currentUser) ? this.auth.currentUser.uid : null;
+                    if (!uid) return this.showMessage('No estás autenticado', 'error');
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(uid);
+                        this.showMessage('UID copiado al portapapeles', 'success');
+                    } else {
+                        // Fallback: prompt para que copie manualmente
+                        window.prompt('Tu UID (cópialo manualmente):', uid);
+                    }
+                } catch (err) {
+                    this._log('Error copiando UID', err);
+                    this.showMessage('No se pudo copiar el UID', 'error');
+                }
+            };
+        }
+
+        this.updateUserUI();
+    }
+
+    isAdmin() {
+        if (this.isAdminFlag) return true;
+        // Check auth currentUser
+        if (this.auth && this.auth.currentUser) {
+            const u = this.auth.currentUser;
+            if (this.adminConfig.uids && this.adminConfig.uids.includes(u.uid)) return true;
+            if (this.adminConfig.emails && u.email && this.adminConfig.emails.includes(u.email)) return true;
+        }
+        // Check stored userId (ip_)
+        const storedId = localStorage.getItem('commentUserId');
+        if (storedId && storedId.startsWith('ip_')) {
+            const hash = storedId.slice(3);
+            if (this.adminConfig.ipHashes && this.adminConfig.ipHashes.includes(hash)) return true;
+        }
+        return false;
+    }
+
+    _checkAdminFromAuth(user) {
+        if (!user) return false;
+        if (this.adminConfig.uids && this.adminConfig.uids.includes(user.uid)) return true;
+        if (this.adminConfig.emails && user.email && this.adminConfig.emails.includes(user.email)) return true;
+        return false;
+    }
+
+    updateUserUI() {
+        const el = document.getElementById('user-status');
+        const signoutBtn = document.getElementById('signout-btn');
+        const googleBtn = document.getElementById('signin-google');
+        if (el) el.textContent = `Identidad: ${this.userName || 'visitante'}${this.isAdmin() ? ' (admin)' : ''}`;
+        if (this.auth && this.auth.currentUser) {
+            if (signoutBtn) signoutBtn.style.display = 'inline-block';
+            if (googleBtn) googleBtn.style.display = 'none';
+        } else {
+            if (signoutBtn) signoutBtn.style.display = 'none';
+            if (googleBtn) googleBtn.style.display = 'inline-block';
+        }
+    }
+
+    async signInWithGoogle() {
+        if (!this.auth) {
+            this.showMessage('Autenticación no disponible', 'error');
+            return;
+        }
+        try {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            await this.auth.signInWithPopup(provider);
+            this.showMessage('Sesión iniciada con Google', 'success');
+        } catch (err) {
+            this._log('Error signInWithGoogle', err);
+            this.showMessage('Error iniciando sesión con Google', 'error');
+        }
+    }
+
+    async signOutAuth() {
+        if (!this.auth) return;
+        try {
+            await this.auth.signOut();
+            localStorage.removeItem('commentUserId');
+            localStorage.removeItem('commentUserName');
+            this.userId = this.getUserId();
+            this.userName = this.generateRandomName();
+            this.updateUserUI();
+            this.showMessage('Sesión cerrada', 'success');
+        } catch (err) {
+            this._log('Error signOut', err);
+            this.showMessage('Error cerrando sesión', 'error');
+        }
+    }
+
+    async identifyByIP() {
+        try {
+            const res = await fetch('https://api.ipify.org?format=json');
+            const j = await res.json();
+            const ip = j.ip || 'unknown';
+            const hash = await this._sha256Hex(ip);
+            const short = hash.slice(0, 12);
+            // Si el hash está en la lista de admins, activar admin y permitir identificación
+            if (this.adminConfig.ipHashes && this.adminConfig.ipHashes.includes(short)) {
+                this.userId = 'ip_' + short;
+                this.userName = 'Admin (IP)';
+                this.isAdminFlag = true;
+                localStorage.setItem('commentIsAdmin', 'true');
+                localStorage.setItem('commentUserId', this.userId);
+                localStorage.setItem('commentUserName', this.userName);
+                this.updateUserUI();
+                this.showMessage('Identificado como administrador por IP', 'success');
+            } else {
+                this.showMessage('IP obtenida, pero no autorizada como administrador', 'error');
+            }
+        } catch (err) {
+            this._log('Error obteniendo IP', err);
+            this.showMessage('No se pudo identificar por IP', 'error');
+        }
+    }
+
+    async _sha256Hex(str) {
+        try {
+            const enc = new TextEncoder();
+            const data = enc.encode(str);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        } catch (err) {
+            this._log('Error sha256', err);
+            return String(Math.abs(str.split('').reduce((s, c) => s + c.charCodeAt(0), 0))).slice(0,12);
+        }
+    }
+
+    setLocalIdentity() {
+        const name = prompt('Introduce tu nombre para mostrar (se guardará localmente):', this.userName || '');
+        if (!name) return;
+            if (!this.isAdmin()) return this.showMessage('Solo el administrador puede establecer identidad local', 'error');
+            this.userName = name.trim().slice(0, 50) || this.userName;
+            this.userId = 'local_' + Date.now() + '_' + Math.random().toString(36).substr(2,6);
+            this.isAdminFlag = true;
+            localStorage.setItem('commentUserId', this.userId);
+            localStorage.setItem('commentUserName', this.userName);
+            localStorage.setItem('commentIsAdmin', 'true');
+            this.updateUserUI();
+            this.showMessage('Identidad local (admin) guardada', 'success');
     }
     
     getUserId() {
@@ -184,7 +428,7 @@ forceDisplayComments() {
     }
     
     setupEventListeners() {
-    console.log("Configurando event listeners...");
+    this._log("Configurando event listeners...");
     
     // Esperar un momento para asegurar que el DOM esté listo
     setTimeout(() => {
@@ -193,12 +437,12 @@ forceDisplayComments() {
         const submitBtn = document.getElementById('submit-comment');
         const previewBtn = document.getElementById('preview-comment');
         
-        console.log("Elementos encontrados:", {
-            textarea: !!textarea,
-            charCount: !!charCount,
-            submitBtn: !!submitBtn,
-            previewBtn: !!previewBtn
-        });
+            this._log("Elementos encontrados:", {
+                textarea: !!textarea,
+                charCount: !!charCount,
+                submitBtn: !!submitBtn,
+                previewBtn: !!previewBtn
+            });
         
         if (!textarea) {
             console.error("Textarea no encontrado, creando...");
@@ -237,7 +481,7 @@ forceDisplayComments() {
         textarea.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key === 'Enter') {
                 e.preventDefault();
-                console.log("Ctrl+Enter detectado");
+                this._log("Ctrl+Enter detectado");
                 this.submitComment();
             }
             
@@ -383,19 +627,19 @@ showPreview() {
         }
     }
     async submitComment() {
-    console.log("submitComment llamado");
-    
+    this._log("submitComment llamado");
+
     const textarea = document.getElementById('comment-text');
     const submitBtn = document.getElementById('submit-comment');
-    
+
     if (!textarea || !submitBtn) {
         console.error("Elementos no encontrados");
         this.showMessage('Error: elementos del formulario no encontrados', 'error');
         return;
     }
-    
+
     const text = textarea.value.trim();
-    console.log("Texto a enviar:", text.substring(0, 50) + (text.length > 50 ? '...' : ''));
+    this._log("Texto a enviar:", text.substring(0, 50) + (text.length > 50 ? '...' : ''));
     
     if (!text) {
         this.showMessage('Por favor escribe un comentario', 'error');
@@ -429,8 +673,7 @@ showPreview() {
     
     try {
         if (this.useLocal) {
-            console.log("Guardando comentario en localStorage (fallback)...");
-
+            this._log("Guardando comentario en localStorage (fallback)...");
             const commentsKey = 'comments_local';
             const stored = JSON.parse(localStorage.getItem(commentsKey) || '[]');
 
@@ -463,7 +706,7 @@ showPreview() {
             // Refrescar lista local
             this.loadComments();
         } else {
-            console.log("Preparando datos para Firebase...");
+            this._log("Preparando datos para Firebase...");
             const commentData = {
                 text: text,
                 author: this.userName,
@@ -473,14 +716,14 @@ showPreview() {
                 likedBy: {}
             };
 
-            console.log("Datos a enviar:", commentData);
+            this._log("Datos a enviar:", commentData);
 
             // Guardar en Firebase
             const newCommentRef = this.commentsRef.push();
-            console.log("Referencia creada:", newCommentRef.key);
+            this._log("Referencia creada:", newCommentRef.key);
 
             await newCommentRef.set(commentData);
-            console.log("Comentario guardado en Firebase");
+            this._log("Comentario guardado en Firebase");
 
             // Limpiar textarea
             textarea.value = '';
@@ -507,7 +750,7 @@ showPreview() {
         }
 
     } catch (error) {
-        console.error('Error publicando comentario:', error);
+        this._log('Error publicando comentario:', error);
         this.showMessage(`Error: ${error.message}`, 'error');
     } finally {
         // Restaurar botón
@@ -517,7 +760,7 @@ showPreview() {
 }
     
     loadComments() {
-    console.log("Cargando comentarios desde Firebase...");
+    this._log("Cargando comentarios desde Firebase...");
     
     try {
         // Obtener referencia a la lista de comentarios
@@ -531,7 +774,7 @@ showPreview() {
         commentsList.innerHTML = '<div class="loading-comments">⏳ Cargando comentarios...</div>';
         
         if (this.useLocal) {
-            console.log("Cargando comentarios desde localStorage (fallback)...");
+            this._log("Cargando comentarios desde localStorage (fallback)...");
             const stored = JSON.parse(localStorage.getItem('comments_local') || '[]');
             // Asegurarse de que todos los objetos tengan la estructura esperada
             const comments = stored.map(c => ({
@@ -553,7 +796,7 @@ showPreview() {
         // Configurar listener para comentarios en tiempo real (Firebase)
         this.commentsRef.orderByChild('timestamp').on('value', 
             (snapshot) => {
-                console.log("Nuevos datos recibidos de Firebase");
+                this._log("Nuevos datos recibidos de Firebase");
                 this.handleCommentsSnapshot(snapshot);
             },
             (error) => {
@@ -569,8 +812,8 @@ showPreview() {
 }
 
 handleCommentsSnapshot(snapshot) {
-    console.log("Procesando snapshot...");
-    
+    this._log("Procesando snapshot...");
+
     const comments = [];
     
     // Verificar si hay datos
@@ -592,7 +835,7 @@ handleCommentsSnapshot(snapshot) {
         }
     });
     
-    console.log(`Total de comentarios encontrados: ${comments.length}`);
+    this._log(`Total de comentarios encontrados: ${comments.length}`);
     
     // Ordenar por timestamp (más reciente primero)
     comments.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
@@ -602,7 +845,7 @@ handleCommentsSnapshot(snapshot) {
 }
     
     displayComments(comments) {
-    console.log("Mostrando", comments.length, "comentarios");
+    this._log("Mostrando", comments.length, "comentarios");
     
     const container = document.getElementById('comments-list');
     if (!container) {
@@ -643,9 +886,7 @@ handleCommentsSnapshot(snapshot) {
                     </div>
                     <div class="comment-content">${this.escapeHtml(comment.text)}</div>
                     <div class="comment-actions">
-                        <button class="comment-like-btn ${isLiked ? 'liked' : ''}" 
-                                onclick="window.commentSystem.likeComment('${comment.id}')"
-                                ${isLiked ? 'title="Ya te gusta"' : 'title="Dar like"'}>
+                        <button class="comment-like-btn ${isLiked ? 'liked' : ''}" data-id="${comment.id}" data-liked="${isLiked ? '1' : '0'}" ${isLiked ? 'title="Ya te gusta"' : 'title="Dar like"'}>
                             ${isLiked ? '❤️' : '🤍'} 
                             <span class="like-count">${likeCount}</span>
                         </button>
@@ -663,8 +904,19 @@ handleCommentsSnapshot(snapshot) {
     </div>`;
     
     container.innerHTML = header + html;
-    
-    console.log("Comentarios renderizados exitosamente");
+
+    // Event delegation para likes
+    if (this._boundLikeHandler) container.removeEventListener('click', this._boundLikeHandler);
+    this._boundLikeHandler = (e) => {
+        const btn = e.target.closest && e.target.closest('.comment-like-btn');
+        if (!btn) return;
+        const id = btn.getAttribute('data-id');
+        if (!id) return;
+        this.likeComment(id);
+    };
+    container.addEventListener('click', this._boundLikeHandler);
+
+    this._log("Comentarios renderizados exitosamente");
 }
     
     showCommentsError() {
@@ -730,7 +982,7 @@ handleCommentsSnapshot(snapshot) {
             }
             
         } catch (error) {
-            console.error('Error dando like:', error);
+            this._log('Error dando like:', error);
             this.showMessage('No se pudo registrar el like', 'error');
         }
     }
@@ -859,30 +1111,32 @@ handleCommentsSnapshot(snapshot) {
             padding: 15px 25px;
             border-radius: 10px;
             z-index: 10000;
-            animation: slideIn 0.3s;
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity 0.3s ease, transform 0.3s ease;
             max-width: 300px;
         `;
         
-        // Agregar animación si no existe
-        if (!document.getElementById('message-animation')) {
-            const style = document.createElement('style');
-            style.id = 'message-animation';
-            style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-        
         messageEl.textContent = message;
         document.body.appendChild(messageEl);
-        
+
+        // Desaparecer suavemente después de 3s
         setTimeout(() => {
-            messageEl.style.animation = 'slideIn 0.3s reverse';
-            setTimeout(() => messageEl.remove(), 300);
+            messageEl.style.opacity = '0';
+            messageEl.style.transform = 'translateX(20px)';
+            setTimeout(() => messageEl.remove(), 350);
         }, 3000);
+    }
+
+    addStyles() {
+        if (document.getElementById('comments-temp-styles')) return;
+        const style = document.createElement('style');
+        style.id = 'comments-temp-styles';
+        style.textContent = `
+            /* Estilos mínimos para sección creada dinámicamente */
+            .comments-section { max-width:800px; margin:24px auto; }
+        `;
+        document.head.appendChild(style);
     }
 }
 

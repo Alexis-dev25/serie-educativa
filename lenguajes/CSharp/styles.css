@@ -1,184 +1,57 @@
+/* C# / CSHARP - Colores accent/personalizados */
 :root {
-  --bg-light: #f3e8ff;
-  --surface-light: #ffffff;
-  --text-light: #2c1b4e;
   --accent-cs: #a855f7;
   --accent-secondary: #d946ef;
-  --bg-dark: #2d1b4e;
-  --surface-dark: #3d2b5e;
-  --text-dark: #e8d5f2;
-}
-
-body {
-    background-color: var(--bg-light);
-    color: var(--text-light);
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 15px;
-    min-height: 100vh;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-[data-theme="dark"] body {
-    background-color: var(--bg-dark);
-    color: var(--text-dark);
 }
 
 ::selection {
-    background-color: var(--accent-cs);
-    color: #ffffff;
+  background-color: var(--accent-cs);
+  color: #ffffff;
 }
 
-a{
-    color: var(--accent-secondary);
-    text-decoration: none;
-    transition: color 0.3s ease;
+a {
+  color: var(--accent-secondary);
 }
 
 a:hover {
-    color: var(--accent-cs);
-}
-
-p {
-    text-align: left;
+  color: var(--accent-cs);
 }
 
 h1 {
-    background-color: var(--surface-light);
-    color: var(--accent-secondary);
-    border: 3px solid var(--accent-cs);
-    padding: 10px 20px;
-    margin: 20px auto;
-    max-width: 700px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.15);
-    transition: all 0.3s ease;
+  background-color: var(--surface-light);
+  color: var(--accent-secondary);
+  border: 3px solid var(--accent-cs);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.15);
 }
 
 [data-theme="dark"] h1 {
-    background-color: var(--surface-dark);
-    color: var(--accent-secondary);
+  background-color: var(--surface-dark);
+  color: var(--accent-secondary);
 }
 
 section {
-    background-color: var(--surface-light);
-    color: var(--text-light);
-    border: 3px solid var(--accent-cs);
-    padding: 10px 20px;
-    margin: 20px auto;
-    max-width: 700px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.1);
-    transition: all 0.3s ease;
+  background-color: var(--surface-light);
+  color: var(--text-light);
+  border: 3px solid var(--accent-cs);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.1);
 }
 
 [data-theme="dark"] section {
-    background-color: var(--surface-dark);
-    color: var(--text-dark);
-}
-
-h1, h2, h3 {
-    text-align: center;
+  background-color: var(--surface-dark);
+  color: var(--text-dark);
 }
 
 [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 {
-    color: var(--accent-secondary);
+  color: var(--accent-secondary);
 }
 
-div {
-    background-color: var(--surface-light);
-    color: var(--text-light);
-    padding: 5px 20px;
-    margin-top: 15px;
-    text-align: left;
-    border: 2px solid var(--accent-secondary);
-    border-radius: 10px;
-    transition: all 0.3s ease;
+div, .code {
+  background-color: var(--surface-light);
+  color: var(--text-light);
+  border: 2px solid var(--accent-secondary);
 }
 
-[data-theme="dark"] div {
-    background-color: var(--surface-dark);
-    color: var(--text-dark);
-}
-
-.links{
-    text-align: center;
-}
-
-.csharp {
-    margin-right: 40px;
-    max-width: 100%;
-    height: auto;
-}
-
-.codigo, .recom {
-    text-align: center;
-}
-
-/* Media Queries para diseño responsive */
-@media screen and (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    h1 {
-        font-size: 1.8em;
-        padding: 8px 15px;
-        width: 90%;
-    }
-
-    section {
-        padding: 15px;
-        width: 90%;
-    }
-
-    div, .code {
-        padding: 5px 15px;
-        margin-top: 10px;
-    }
-
-    .csharp {
-        margin-right: 20px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    body {
-        padding: 5px;
-    }
-
-    h1 {
-        font-size: 1.5em;
-        padding: 8px 10px;
-    }
-
-    section {
-        padding: 10px;
-    }
-
-    div, .code {
-        padding: 5px 10px;
-        font-size: 0.9em;
-    }
-
-    .csharp {
-        margin-right: 10px;
-        display: block;
-        margin: 10px auto;
-    }
-}
-
-/* Mejoras para pantallas más grandes */
-@media screen and (min-width: 1200px) {
-    section {
-        padding: 30px;
-    }
-
-    div, .code {
-        transition: transform 0.3s ease;
-    }
-
-    div:hover, .code:hover {
-        transform: scale(1.02);
-    }
+[data-theme="dark"] div, [data-theme="dark"] .code {
+  background-color: var(--surface-dark);
+  color: var(--text-dark);
 }

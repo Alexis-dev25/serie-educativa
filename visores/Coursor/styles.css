@@ -1,184 +1,74 @@
+/* Cursor - Colores accent/personalizados */
 :root {
-  --bg-light: #f0f0f0;
-  --surface-light: #ffffff;
-  --text-light: #2a2a2a;
   --accent-cursor: #ffffff;
   --accent-secondary: #929292;
-  --bg-dark: #1a1a1a;
-  --surface-dark: #2d2d2d;
-  --text-dark: #e0e0e0;
-}
-
-body {
-    background-color: var(--bg-light);
-    color: var(--text-light);
-    font-family: Arial, sans-serif;
-    text-align: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-[data-theme="dark"] body {
-    background-color: var(--bg-dark);
-    color: var(--text-dark);
 }
 
 ::selection {
-    background-color: var(--accent-cursor);
-    color: #111;
+  background-color: var(--accent-cursor);
+  color: #111;
 }
 
-a::selection{
-    background-color: var(--accent-cursor);
-    color: #111;
+a::selection {
+  background-color: var(--accent-cursor);
+  color: #111;
 }
 
-a{
-    color: var(--accent-secondary);
+a {
+  color: var(--accent-secondary);
 }
 
 h1 {
-    background-color: var(--surface-light);
-    text-align: start;
-    color: var(--text-light);
-    border: 3px solid var(--accent-cursor);
-    padding: 10px 20px;
-    margin: 20px auto;
-    max-width: 700px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
+  background-color: var(--surface-light);
+  text-align: start;
+  color: var(--text-light);
+  border: 3px solid var(--accent-cursor);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 [data-theme="dark"] h1 {
-    background-color: var(--surface-dark);
-    color: var(--accent-cursor);
+  background-color: var(--surface-dark);
+  color: var(--accent-cursor);
 }
 
 section {
-    background-color: var(--surface-light);
-    color: var(--text-light);
-    border: 3px solid var(--accent-cursor);
-    padding: 10px 20px;
-    margin: 20px auto;
-    max-width: 700px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
+  background-color: var(--surface-light);
+  color: var(--text-light);
+  border: 3px solid var(--accent-cursor);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
 }
 
 [data-theme="dark"] section {
-    background-color: var(--surface-dark);
-    color: var(--text-dark);
-}
-
-h1, h2, h3 {
-    text-align: center;
+  background-color: var(--surface-dark);
+  color: var(--text-dark);
 }
 
 [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 {
-    color: var(--accent-cursor);
-}
-
-div, .code {
-    background-color: var(--surface-light);
-    color: var(--text-light);
-    padding: 5px 20px;
-    margin-top: 15px;
-    text-align: left;
-    border: 2px solid var(--accent-cursor);
-    border-radius: 10px;
-    transition: all 0.3s ease;
-}
-
-[data-theme="dark"] div, [data-theme="dark"] .code {
-    background-color: var(--surface-dark);
-    color: var(--text-dark);
-}
-
-.tabla {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 100%;
-    border-collapse: collapse;
+  color: var(--accent-cursor);
 }
 
 .tabla th, .tabla td {
-    padding: 8px;
-    text-align: center;
-    border: 1px solid var(--accent-cursor);
+  border: 1px solid var(--accent-cursor);
 }
 
 .tabla th {
-    background-color: var(--accent-cursor);
-    color: #111;
-    transition: all 0.3s ease;
+  background-color: var(--accent-cursor);
+  color: #111;
 }
 
 [data-theme="dark"] .tabla th {
-    background-color: var(--surface-dark);
-    color: var(--accent-cursor);
-    border: 1px solid var(--accent-cursor);
+  background-color: var(--surface-dark);
+  color: var(--accent-cursor);
+  border: 1px solid var(--accent-cursor);
 }
 
-.links{
-    text-align: center;
+div, .code {
+  background-color: var(--surface-light);
+  color: var(--text-light);
+  border: 2px solid var(--accent-cursor);
 }
 
-.cursor {
-    margin-right: 40px;
-    max-width: 100%;
-    height: auto;
-}
-
-/* Media Queries para diseño responsive */
-@media screen and (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    h1 {
-        font-size: 1.8em;
-        padding: 8px 15px;
-        width: 90%;
-    }
-
-    section {
-        padding: 15px;
-        width: 90%;
-    }
-
-    div, .code {
-        padding: 5px 15px;
-        margin-top: 10px;
-    }
-
-    .cursor {
-        margin-right: 20px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    body {
-        padding: 5px;
-    }
-
-    h1 {
-        font-size: 1.5em;
-        padding: 8px 10px;
-    }
-
-    section {
-        padding: 10px;
-    }
-
-    div, .code {
-        padding: 5px 10px;
-        font-size: 0.9em;
-    }
-
-    .cursor {
-        margin-right: 10px;
-        display: block;
-        margin: 10px auto;
-    }
+[data-theme="dark"] div, [data-theme="dark"] .code {
+  background-color: var(--surface-dark);
+  color: var(--text-dark);
 }

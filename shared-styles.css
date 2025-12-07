@@ -1,0 +1,241 @@
+/* SHARED STYLES - Estructura, layout, responsive y colores genéricos */
+/* Solo los colores accent/personalizados se definen en styles.css locales */
+
+:root {
+  --bg-light: #f0f4f8;
+  --surface-light: #ffffff;
+  --text-light: #1a1a2e;
+  --bg-dark: #111;
+  --surface-dark: #151515;
+  --text-dark: #e0e0e0;
+
+  --card-border: 1px solid rgba(0,0,0,0.08);
+  --card-border-dark: 1px solid rgba(255,255,255,0.06);
+  --transition: 0.3s ease;
+  --a-color: #0066cc;
+  --a-color-dark: #66aaff;
+  --sele-bg: rgba(0,102,204,0.08);
+  --sele-bg-dark: rgba(102,170,255,0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 15px;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] {
+  --card-border: var(--card-border-dark);
+  --transition: var(--transition);
+  --a-color: var(--a-color-dark);
+  --sele-bg: var(--sele-bg-dark);
+}
+
+[data-theme="dark"] body {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+a {
+  text-decoration: none;
+  transition: color var(--transition);
+  color: var(--a-color);
+}
+
+/* Tema: botón fijo para alternar tema (arriba-derecha) */
+#theme-toggle, .controls {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 9999;
+  background: var(--surface-light);
+  color: inherit;
+  border: var(--card-border);
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), color var(--transition);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+[data-theme="dark"] #theme-toggle {
+  background: var(--surface-dark);
+  color: var(--text-dark);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  border: var(--card-border);
+}
+
+@media screen and (max-width: 480px) {
+  #theme-toggle {
+    top: 10px;
+    right: 10px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    font-size: 0.95em;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  #theme-toggle {
+    top: 8px;
+    right: 8px;
+    padding: 5px 6px;
+    font-size: 0.9em;
+  }
+}
+
+h1, h2, h3 {
+  text-align: center;
+}
+
+section {
+  padding: 10px 20px;
+  margin: 20px auto;
+  max-width: 700px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+h1 {
+  padding: 10px 20px;
+  margin: 20px auto;
+  max-width: 700px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+div, .code {
+  padding: 5px 20px;
+  margin-top: 15px;
+  text-align: left;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.links {
+  text-align: center;
+}
+
+/* Imágenes responsive */
+.csharp, .java, .js, .python, .sql, .vsc, .trae, .cursor, .linux, .html-icon, .css-icon {
+  margin-right: 40px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Tablas responsivas */
+.tabla {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla th, .tabla td {
+  padding: 8px;
+  text-align: center;
+}
+
+.tabla th {
+  transition: all 0.3s ease;
+}
+
+/* RESPONSIVE DESIGN */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+    padding: 8px 15px;
+    width: 90%;
+  }
+
+  section {
+    padding: 15px;
+    width: 90%;
+  }
+
+  div, .code {
+    padding: 5px 15px;
+    margin-top: 10px;
+  }
+
+  .csharp, .java, .js, .python, .sql, .vsc, .trae, .cursor, .linux, .html-icon, .css-icon {
+    margin-right: 20px;
+  }
+
+  .tabla {
+    font-size: 0.9em;
+  }
+
+  .tabla th, .tabla td {
+    padding: 6px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    padding: 5px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+    padding: 8px 10px;
+  }
+
+  section {
+    padding: 10px;
+  }
+
+  div, .code {
+    padding: 5px 10px;
+    font-size: 0.9em;
+  }
+
+  .csharp, .java, .js, .python, .sql, .vsc, .trae, .cursor, .linux, .html-icon, .css-icon {
+    margin-right: 10px;
+    display: block;
+    margin: 10px auto;
+  }
+
+  .tabla {
+    font-size: 0.8em;
+  }
+
+  .tabla th, .tabla td {
+    padding: 4px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  section {
+    padding: 30px;
+  }
+
+  div, .code {
+    transition: transform 0.3s ease;
+  }
+
+  div:hover, .code:hover {
+    transform: scale(1.02);
+  }
+
+  .tabla {
+    transition: all 0.3s ease;
+  }
+
+  .tabla:hover {
+    transform: scale(1.01);
+  }
+}

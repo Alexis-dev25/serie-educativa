@@ -1,159 +1,59 @@
+/* VS Code - Colores accent/personalizados */
 :root {
-  --bg-light: #e3f2fd;
-  --surface-light: #ffffff;
-  --text-light: #0d1b2a;
   --accent-vsc: #29b6f6;
   --accent-secondary: #0288d1;
-  --bg-dark: #0d1b2a;
-  --surface-dark: #1a2a3a;
-  --text-dark: #b3e5fc;
-}
-
-body {
-    background-color: var(--bg-light);
-    color: var(--text-light);
-    font-family: Arial, sans-serif;
-    text-align: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-[data-theme="dark"] body {
-    background-color: var(--bg-dark);
-    color: var(--text-dark);
 }
 
 ::selection {
-    background-color: var(--accent-vsc);
-    color: #fff;
+  background-color: var(--accent-vsc);
+  color: #fff;
 }
 
-a::selection{
-    background-color: var(--accent-secondary);
-    color: #fff;
+a::selection {
+  background-color: var(--accent-secondary);
+  color: #fff;
 }
 
-a{
-    color: var(--accent-vsc);
+a {
+  color: var(--accent-vsc);
 }
 
 h1 {
-    background-color: var(--surface-light);
-    text-align: start;
-    color: var(--accent-secondary);
-    border: 3px solid var(--accent-vsc);
-    padding: 10px 20px;
-    margin: 20px auto;
-    max-width: 700px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(41, 182, 246, 0.15);
-    transition: all 0.3s ease;
+  background-color: var(--surface-light);
+  text-align: start;
+  color: var(--accent-secondary);
+  border: 3px solid var(--accent-vsc);
+  box-shadow: 0 4px 12px rgba(41, 182, 246, 0.15);
 }
 
 [data-theme="dark"] h1 {
-    background-color: var(--surface-dark);
-    color: var(--accent-vsc);
+  background-color: var(--surface-dark);
+  color: var(--accent-vsc);
 }
 
 section {
-    background-color: var(--surface-light);
-    color: var(--text-light);
-    border: 3px solid var(--accent-vsc);
-    padding: 10px 20px;
-    margin: 20px auto;
-    max-width: 700px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(41, 182, 246, 0.1);
-    transition: all 0.3s ease;
+  background-color: var(--surface-light);
+  color: var(--text-light);
+  border: 3px solid var(--accent-vsc);
+  box-shadow: 0 4px 12px rgba(41, 182, 246, 0.1);
 }
 
 [data-theme="dark"] section {
-    background-color: var(--surface-dark);
-    color: var(--text-dark);
-}
-
-h1, h2, h3 {
-    text-align: center;
+  background-color: var(--surface-dark);
+  color: var(--text-dark);
 }
 
 [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 {
-    color: var(--accent-vsc);
+  color: var(--accent-vsc);
 }
 
 div, .code {
-    background-color: var(--surface-light);
-    color: var(--text-light);
-    padding: 5px 20px;
-    margin-top: 15px;
-    text-align: left;
-    border: 2px solid var(--accent-vsc);
-    border-radius: 10px;
-    transition: all 0.3s ease;
+  background-color: var(--surface-light);
+  color: var(--text-light);
+  border: 2px solid var(--accent-vsc);
 }
 
 [data-theme="dark"] div, [data-theme="dark"] .code {
-    background-color: var(--surface-dark);
-    color: var(--text-dark);
-}
-
-.links{
-    text-align: center;
-}
-
-.vsc {
-    margin-right: 40px;
-    max-width: 100%;
-    height: auto;
-}
-
-/* Media Queries para diseño responsive */
-@media screen and (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    h1 {
-        font-size: 1.8em;
-        padding: 8px 15px;
-        width: 90%;
-    }
-
-    section {
-        padding: 15px;
-        width: 90%;
-    }
-
-    div, .code {
-        padding: 5px 15px;
-        margin-top: 10px;
-    }
-
-    .vsc {
-        margin-right: 20px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    body {
-        padding: 5px;
-    }
-
-    h1 {
-        font-size: 1.5em;
-        padding: 8px 10px;
-    }
-
-    section {
-        padding: 10px;
-    }
-
-    div, .code {
-        padding: 5px 10px;
-        font-size: 0.9em;
-    }
-
-    .vsc {
-        margin-right: 10px;
-        display: block;
-        margin: 10px auto;
-    }
+  background-color: var(--surface-dark);
+  color: var(--text-dark);
 }

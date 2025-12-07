@@ -3,6 +3,11 @@ const buscador = document.getElementById("buscador");
 // Selecciona todos los elementos <li> (tarjetas) dentro de la lista
 const items = Array.from(document.querySelectorAll("#lista .point"));
 
+// Guardar si no existe el buscador (evitar errores en otras páginas)
+if (!buscador) {
+    console.warn('buscador.js: elemento #buscador no encontrado — búsquedas deshabilitadas');
+}
+
 // Debounce para evitar ejecutar la búsqueda en cada pulsación muy rápido
 function debounce(fn, wait = 150) {
     let t;
@@ -10,6 +15,7 @@ function debounce(fn, wait = 150) {
 }
 
 function filtrarPorTitulo() {
+    if (!buscador) return;
     const filtro = (buscador.value || "").trim().toLowerCase();
     if (!filtro) {
         // mostrar todos
@@ -23,9 +29,11 @@ function filtrarPorTitulo() {
     });
 }
 
-const filtrarDebounced = debounce(filtrarPorTitulo, 150);
-buscador.addEventListener('input', filtrarDebounced);
-buscador.addEventListener('keyup', (e) => { if (e.key === 'Enter') filtrarPorTitulo(); });
+if (buscador) {
+    const filtrarDebounced = debounce(filtrarPorTitulo, 150);
+    buscador.addEventListener('input', filtrarDebounced);
+    buscador.addEventListener('keyup', (e) => { if (e.key === 'Enter') filtrarPorTitulo(); });
 
-// Inicializar (por si hay texto prellenado)
-filtrarPorTitulo();
+    // Inicializar (por si hay texto prellenado)
+    filtrarPorTitulo();
+}
