@@ -532,6 +532,8 @@ class CommentSystem {
         this.setupEventListeners();
         // Registrar atajo secreto de administrador (configurable)
         try { this.setupAdminShortcut(); } catch (e) { this._log('No se pudo registrar atajo admin:', e); }
+        // Registrar atajo para iniciar sesión con Google (configurable)
+        try { this.setupGoogleSignInShortcut(); } catch (e) { this._log('No se pudo registrar atajo de Google:', e); }
         this.updateModeIndicator();
         this.loadComments();
     }
@@ -571,6 +573,33 @@ class CommentSystem {
                 } catch (err) {
                     this._log('Error en atajo admin:', err);
                     this.showMessage('Error en atajo admin', 'error');
+                }
+            }
+        });
+    }
+
+    // Atajo configurable para abrir el flujo de Sign-In de Google
+    setupGoogleSignInShortcut() {
+        // Configurable desde window.COMMENT_ADMIN: { googleShortcutKey: 'KeyG' }
+        const cfg = this.adminConfig || {};
+        const keyCode = cfg.googleShortcutKey || 'KeyG'; // por defecto 'G'
+
+        document.addEventListener('keydown', (e) => {
+            // Ctrl+Alt+Shift+<Key> para activar (mismo modificador que el atajo admin)
+            if (e.ctrlKey && e.altKey && e.shiftKey && e.code === keyCode) {
+                e.preventDefault();
+                // Si ya existe auth y user logueado, avisar
+                if (this.auth && this.auth.currentUser) {
+                    this.showMessage('Ya tienes sesión iniciada con Google', 'info');
+                    return;
+                }
+                // Intentar iniciar flujo de Google Sign-In
+                try {
+                    this._log('Atajo Google detectado, lanzando signInWithGoogle()');
+                    this.signInWithGoogle();
+                } catch (err) {
+                    this._log('Error al disparar signInWithGoogle desde atajo:', err);
+                    this.showMessage('No fue posible iniciar sesión con Google', 'error');
                 }
             }
         });
