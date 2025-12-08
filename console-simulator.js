@@ -45,37 +45,57 @@ class ConsoleSimulator {
 
     /**
      * Simula ejecución de código Python
-     * (Esta es una simulación básica, no ejecuta Python real)
+     * (Esta es una simulación mejorada que interpreta variables y f-strings)
      */
     executePython(code) {
         this.output = [];
         try {
-            const lines = code.split('\n').filter(line => line.trim());
+            const lines = code.split('\n');
             
-            for (const line of lines) {
+            for (let line of lines) {
                 const trimmed = line.trim();
+                
+                // Ignorar líneas vacías y comentarios
+                if (!trimmed || trimmed.startsWith('#')) {
+                    continue;
+                }
 
-                // print()
-                if (trimmed.startsWith('print(')) {
-                    const match = trimmed.match(/print\((.*)\)/);
-                    if (match) {
-                        let content = match[1];
-                        content = content.replace(/['"]/g, '');
-                        this.output.push(content);
-                    }
-                }
-                // Asignaciones de variables
-                else if (trimmed.includes('=') && !trimmed.includes('==')) {
-                    const [varName, value] = trimmed.split('=').map(s => s.trim());
+                // Asignaciones de variables: nombre = valor
+                if (trimmed.includes('=') && !trimmed.includes('==') && !trimmed.startsWith('print')) {
+                    const [varName, ...valueParts] = trimmed.split('=');
+                    const varNameClean = varName.trim();
+                    let value = valueParts.join('=').trim();
+                    
                     try {
-                        this.variables[varName] = eval(value);
+                        // Reemplazar nombres de variables en la expresión
+                        let evaluableValue = value;
+                        for (const [vName, vValue] of Object.entries(this.variables)) {
+                            const regex = new RegExp(`\\b${vName}\\b`, 'g');
+                            evaluableValue = evaluableValue.replace(regex, 
+                                typeof vValue === 'string' ? `"${vValue}"` : vValue);
+                        }
+                        this.variables[varNameClean] = eval(evaluableValue);
                     } catch {
-                        this.variables[varName] = value;
+                        // Si falla la evaluación, guardar como string
+                        this.variables[varNameClean] = value.replace(/['"]/g, '');
                     }
+                    continue;
                 }
-                // Mostrar variable
-                else if (trimmed in this.variables) {
-                    this.output.push(String(this.variables[trimmed]));
+
+                // print() - Imprime strings, variables, f-strings
+                if (trimmed.startsWith('print(')) {
+                    const printContent = trimmed.slice(6, -1); // Obtener contenido entre print( y )
+                    let output = this.evaluatePrintContent(printContent);
+                    this.output.push(output);
+                    continue;
+                }
+
+                // Operaciones simples (comentarios ignorados)
+                if (trimmed && !trimmed.startsWith('#')) {
+                    // Si es solo un nombre de variable, mostrar su valor
+                    if (trimmed in this.variables) {
+                        this.output.push(String(this.variables[trimmed]));
+                    }
                 }
             }
 
@@ -83,6 +103,54 @@ class ConsoleSimulator {
         } catch (error) {
             this.output = [`ERROR: ${error.message}`];
             return { success: false, output: [`ERROR: ${error.message}`] };
+        }
+    }
+
+    /**
+     * Evalúa el contenido de un print()
+     */
+    evaluatePrintContent(content) {
+        content = content.trim();
+
+        // f-string: f"texto {variable} más texto"
+        if (content.startsWith('f"') || content.startsWith("f'")) {
+            const quote = content[1];
+            const stringContent = content.slice(2, -1);
+            
+            let result = stringContent;
+            // Reemplazar {variable} con su valor
+            result = result.replace(/\{([^}]+)\}/g, (match, varName) => {
+                varName = varName.trim();
+                if (varName in this.variables) {
+                    return this.variables[varName];
+                }
+                return match;
+            });
+            return result;
+        }
+
+        // String normal: "texto" o 'texto'
+        if ((content.startsWith('"') && content.endsWith('"')) ||
+            (content.startsWith("'") && content.endsWith("'"))) {
+            return content.slice(1, -1);
+        }
+
+        // Variable: print(nombre)
+        if (content in this.variables) {
+            return String(this.variables[content]);
+        }
+
+        // Expresión: print(a + b), print(10 * 5)
+        try {
+            let evaluableContent = content;
+            for (const [vName, vValue] of Object.entries(this.variables)) {
+                const regex = new RegExp(`\\b${vName}\\b`, 'g');
+                evaluableContent = evaluableContent.replace(regex,
+                    typeof vValue === 'string' ? `"${vValue}"` : vValue);
+            }
+            return String(eval(evaluableContent));
+        } catch {
+            return content;
         }
     }
 

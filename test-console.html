@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Consola Simulada</title>
+    <link rel="stylesheet" href="console-simulator.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test - Consola Simulada</h1>
+
+    <div class="test-section">
+        <h2>Test Python - Variables y F-strings</h2>
+        <div id="python-test"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test JavaScript - Variables y Operaciones</h2>
+        <div id="javascript-test"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test HTML/CSS - Código HTML</h2>
+        <div id="html-test"></div>
+    </div>
+
+    <script src="console-simulator.js"></script>
+    <script>
+        // Test Python
+        const pythonExamples = [
+            {
+                name: "Variables con print",
+                code: `nombre = "Juan"
+edad = 25
+print(nombre)
+print(edad)`
+            },
+            {
+                name: "F-string",
+                code: `nombre = "Ana"
+edad = 30
+print(f"Mi nombre es {nombre} y tengo {edad} años")`
+            },
+            {
+                name: "Operaciones matemáticas",
+                code: `a = 10
+b = 5
+suma = a + b
+print(suma)`
+            }
+        ];
+        createConsoleUI('python-test', 'python', pythonExamples);
+
+        // Test JavaScript
+        const jsExamples = [
+            {
+                name: "Variables básicas",
+                code: `const nombre = "Carlos";
+const edad = 28;
+console.log(nombre);
+console.log(edad);`
+            },
+            {
+                name: "Template literal",
+                code: `const nombre = "María";
+const edad = 25;
+console.log(\`Mi nombre es \${nombre} y tengo \${edad} años\`);`
+            },
+            {
+                name: "Operaciones",
+                code: `const a = 15;
+const b = 3;
+console.log(a + b);
+console.log(a * b);`
+            }
+        ];
+        createConsoleUI('javascript-test', 'javascript', jsExamples);
+
+        // Test HTML
+        const htmlExamples = [
+            {
+                name: "HTML básico",
+                code: `<h1>Hola Mundo</h1>
+<p>Este es un párrafo.</p>`
+            }
+        ];
+        createConsoleUI('html-test', 'html', htmlExamples);
+    </script>
+</body>
+</html>

@@ -1,201 +1,804 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>HTML/CSS</title>
+    <title>HTML & CSS - Tutorial Interactivo y Consola Simulada | Serie Educativa</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tutorial interactivo de HTML y CSS con ejemplos complejos, consola simulada, chatbot educativo y ejercicios prácticos. Aprende desde lo básico hasta conceptos avanzados.">
+    <meta name="keywords" content="HTML, CSS, tutorial, desarrollo web, consola interactiva, ejemplos, aprender HTML, aprender CSS, responsive design">
+    <meta name="author" content="Alexis Gutiérrez">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="HTML & CSS - Tutorial Interactivo | Serie Educativa">
+    <meta property="og:description" content="Aprende HTML y CSS con ejemplos prácticos, consola simulada y chatbot educativo.">
+    <meta property="og:url" content="https://alexis-dev25.github.io/serie-educativa/lenguajes/html-css/">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "HTML & CSS - Tutorial Interactivo",
+        "description": "Tutorial completo de HTML y CSS con ejemplos, consola simulada y ejercicios",
+        "inLanguage": "es"
+    }
+    </script>
+    
     <link rel="stylesheet" href="../../shared-styles.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tutorial-styles.css">
+    <link rel="stylesheet" href="../../chatbot.css">
+    <link rel="stylesheet" href="../../console-simulator.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://alexis-dev25.github.io/serie-educativa/lenguajes/html-css/">
 </head>
 <body>
     <header class="site-header">
-        <h1>HTML / CSS</h1>
+        <h1>HTML & CSS</h1>
         <div class="controls"><button id="theme-toggle" aria-label="Cambiar tema">🌓</button></div>
     </header>
-    <section class="html">
-        <h1 class="title1">¿Qué es HTML?</h1>
-        <section class="intro">
-            <div class="text">
-                <h2 class="title1">Introducción</h2>
-                <p>HTML (HyperText Markup Language) es el lenguaje de marcado estándar que se 
-                    utiliza para crear y estructurar páginas web. No es un lenguaje de programación, 
-                    sino un lenguaje que define la estructura del contenido en la web.</p>
+
+    <h1>¿Qué es HTML y CSS?</h1>
+    <section class="intro">
+        <div class="text">
+            <h2>Introducción</h2>
+            <p><strong>HTML</strong> (HyperText Markup Language) es el lenguaje de marcado estándar utilizado para crear páginas web. Define la estructura y el contenido de una página mediante etiquetas semánticas.</p>
+            <p><strong>CSS</strong> (Cascading Style Sheets) es un lenguaje de estilos utilizado para describir la presentación visual de un documento HTML. Controla el diseño, colores, tipografía y efectos visuales.</p>
+            <p>Juntos, HTML y CSS son los fundamentos del desarrollo web moderno. HTML proporciona la estructura, mientras que CSS proporciona la apariencia y el diseño responsivo.</p>
         </div>
-        </section>
-        <section class="info">
-            <h2 class="title1">Más Informarción</h2>
-            <div class="carac">
-                <h3>Características principales</h3>
-                <ul>
-                    <li>
-                        <p>Utiliza etiquetas o tags (como h1, p, div, img, etc.).</p>
-                    </li>
-                    <li>
-                        <p>Define la estructura básica de un sitio: 
-                            encabezados, párrafos, listas, enlaces, imágenes, formularios y más.</p>
-                    </li>
-                    <li>
-                            <p>Trabaja junto con CSS (para el diseño) y JavaScript (para la interactividad).</p>
-                        </li>
-                        <li>
-                            <p>Es interpretado por navegadores web.</p>
-                        </li>
-                    </ul>
-            </div>
-            <div class="usos">
-                <h3>Usos comunes</h3>
-                <ul>
-                    <li>
-                        <p>Crear el contenido estático de una página web.</p>
-                    </li>
-                    <li>
-                        <p>Organizar elementos como texto, imágenes, enlaces, 
-                            videos, tablas, formularios, etc.</p>
-                    </li>
-                    <li>
-                        <p>Integrar archivos multimedia y recursos externos.</p>
-                    </li>
-                    <li>
-                        <p>Estructurar la base de aplicaciones web modernas.</p>
-                    </li>
-                </ul>
-            </div>
-            <div class="vent-desvent">
-                <h3>Ventajas y Desventajas</h3>
-                <h4>Ventajas</h4>
-                <ul>
-                    <li>
-                        <p>Fácil de aprender y usar.</p>
-                    </li>
-                    <li>
-                        <p>Fácil de aprender y usar.</p>
-                    </li>
-                    <li>
-                        <p>Compatible con todos los navegadores.</p>
-                    </li>
-                    <li>
-                        <p>Totalmente gratuito y abierto.</p>
-                    </li>
-                </ul>
-                <h4>Desventajas</h4>
-                <ul>
-                    <li>
-                        <p>Por sí solo no da estilo ni interactividad 
-                            (se necesita CSS y JavaScript).</p>
-                    </li>
-                    <li>
-                        <p>Puede volverse complicado de manejar en sitios 
-                            grandes sin una estructura adecuada</p>
-                    </li>
-                </ul>
-            </div>
-        </section>
     </section>
-    <section class="css">
-        <h1 class="title2">¿Qué es CSS?</h1>
-        <section class="css-intro">
-            <div class="css-text">
-                <h2 class="title2">Introducción</h2>
-                <p>CSS (Cascading Style Sheets / Hojas de Estilo en Cascada) 
-                    es el lenguaje usado para dar estilo y diseño a las páginas web. 
-                    Trabaja junto con HTML para definir cómo se verá el contenido en la pantalla 
-                    (colores, fuentes, tamaños, márgenes, animaciones, etc.).</p>
+
+    <section class="info">
+        <h2>Más Información</h2>
+        <div class="carac">
+            <h3>Características principales de HTML</h3>
+            <ul>
+                <li><p>Lenguaje de marcado basado en etiquetas (tags).</p></li>
+                <li><p>Estructura jerárquica con elementos anidados.</p></li>
+                <li><p>Semántica clara para mejorar accesibilidad y SEO.</p></li>
+                <li><p>Soporta multimedia: imágenes, video, audio.</p></li>
+                <li><p>Formularios interactivos para recopilar datos.</p></li>
+            </ul>
         </div>
-        </section>
-        <section class="css-info">
-            <h2 class="title2">Más Informarción</h2>
-            <div class="css-carac">
-                <h3>Características principales</h3>
-                <ul>
-                    <li>
-                        <p>Separa el contenido (HTML) del diseño (CSS).</p>
-                    </li>
-                    <li>
-                        <p>Permite aplicar estilos a uno o muchos elementos a la vez.</p>
-                    </li>
-                    <li>
-                        <p>Usa reglas compuestas por selectores y declaraciones de estilo.</p>
-                    </li>
-                    <li>
-                        <p>Admite responsividad con media queries (diseño adaptable a pantallas).</p>
-                    </li>
-                    <li>
-                        <p>Compatible con animaciones, transiciones y efectos visuales.</p>
-                    </li>
-                </ul>
-            </div>
-            <div class="css-usos">
-                <h3>Usos comunes</h3>
-                <ul>
-                    <li>
-                        <p>Cambiar colores, fuentes, tamaños y posiciones.</p>
-                    </li>
-                    <li>
-                        <p>Crear layouts responsivos (diseños que se adaptan a móviles y pantallas grandes).</p>
-                    </li>
-                    <li>
-                        <p>Aplicar efectos como sombras, bordes, gradientes y animaciones.</p>
-                    </li>
-                    <li>
-                        <p>Diseñar interfaces atractivas y usables.</p>
-                    </li>
-                </ul>
-            </div>
-            <div class="css-vent-desvent">
-                <h3>Ventajas y Desventajas</h3>
-                <h4>Ventajas</h4>
-                <ul>
-                    <li>
-                        <p>Mejora la apariencia visual sin alterar el HTML.</p>
-                    </li>
-                    <li>
-                        <p>Permite reutilizar estilos en múltiples páginas.</p>
-                    </li>
-                    <li>
-                        <p>Control total del diseño con pocas líneas de código.</p>
-                    </li>
-                    <li>
-                        <p>Es compatible con todas las tecnologías web modernas.</p>
-                    </li>
-                </ul>
-                <h4>Desventajas</h4>
-                <ul>
-                    <li>
-                        <p>El diseño puede romperse si no se organiza bien.</p>
-                    </li>
-                    <li>
-                        <p>A veces es necesario aprender técnicas complejas (como Flexbox o Grid).</p>
-                    </li>
-                    <li>
-                        <p>La compatibilidad entre navegadores puede requerir ajustes.</p>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        </section>
-        <section class="mas">
+        <div class="usos">
+            <h3>Características principales de CSS</h3>
+            <ul>
+                <li><p>Selectores para dirigirse a elementos HTML específicos.</p></li>
+                <li><p>Propiedades para cambiar color, tamaño, fuente, posición, etc.</p></li>
+                <li><p>Media queries para diseño responsivo (mobile-first).</p></li>
+                <li><p>Flexbox y Grid para layouts modernos.</p></li>
+                <li><p>Animaciones y transiciones para efectos dinámicos.</p></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Tutorial Interactivo -->
+    <section class="tutorial-section">
+        <h2>📚 Tutorial Completo</h2>
+        
+        <div class="tutorial-tabs">
+            <button class="tab-btn active" data-tab="html-basico">HTML Básico</button>
+            <button class="tab-btn" data-tab="html-avanzado">HTML Avanzado</button>
+            <button class="tab-btn" data-tab="css-basico">CSS Básico</button>
+            <button class="tab-btn" data-tab="css-avanzado">CSS Avanzado</button>
+        </div>
+
+        <!-- HTML Básico -->
+        <div id="html-basico" class="tab-content active">
+            <h3>1. Estructura básica de HTML</h3>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Mi Primera Página&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;¡Hola, Mundo!&lt;/h1&gt;
+    &lt;p&gt;Esta es mi primera página web.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+            <h3>2. Etiquetas de Encabezado y Párrafos</h3>
+            <pre><code>&lt;h1&gt;Encabezado 1 (más grande)&lt;/h1&gt;
+&lt;h2&gt;Encabezado 2&lt;/h2&gt;
+&lt;h3&gt;Encabezado 3&lt;/h3&gt;
+&lt;h6&gt;Encabezado 6 (más pequeño)&lt;/h6&gt;
+
+&lt;p&gt;Este es un párrafo de texto.&lt;/p&gt;
+&lt;p&gt;Puedes tener &lt;strong&gt;texto en negrita&lt;/strong&gt; 
+    y &lt;em&gt;texto en cursiva&lt;/em&gt;.&lt;/p&gt;</code></pre>
+
+            <h3>3. Listas</h3>
+            <pre><code>&lt;!-- Lista sin ordenar --&gt;
+&lt;ul&gt;
+    &lt;li&gt;Manzana&lt;/li&gt;
+    &lt;li&gt;Plátano&lt;/li&gt;
+    &lt;li&gt;Naranja&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Lista ordenada --&gt;
+&lt;ol&gt;
+    &lt;li&gt;Primero&lt;/li&gt;
+    &lt;li&gt;Segundo&lt;/li&gt;
+    &lt;li&gt;Tercero&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+
+            <h3>4. Enlaces</h3>
+            <pre><code>&lt;!-- Link absoluto --&gt;
+&lt;a href="https://www.google.com"&gt;Ir a Google&lt;/a&gt;
+
+&lt;!-- Link relativo --&gt;
+&lt;a href="otra-pagina.html"&gt;Otra Página&lt;/a&gt;
+
+&lt;!-- Link a sección --&gt;
+&lt;a href="#seccion"&gt;Ir a Sección&lt;/a&gt;
+&lt;h2 id="seccion"&gt;Esta es la Sección&lt;/h2&gt;</code></pre>
+
+            <h3>5. Imágenes</h3>
+            <pre><code>&lt;img src="imagen.jpg" alt="Descripción"&gt;
+
+&lt;!-- Con atributos de dimensión --&gt;
+&lt;img src="imagen.jpg" alt="Mi Imagen" width="300" height="200"&gt;
+
+&lt;!-- En un enlace --&gt;
+&lt;a href="pagina.html"&gt;
+    &lt;img src="icono.png" alt="Icono"&gt;
+&lt;/a&gt;</code></pre>
+
+            <h3>6. Formularios Básicos</h3>
+            <pre><code>&lt;form&gt;
+    &lt;label for="nombre"&gt;Nombre:&lt;/label&gt;
+    &lt;input type="text" id="nombre" name="nombre" required&gt;
+
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input type="email" id="email" name="email"&gt;
+
+    &lt;label for="mensaje"&gt;Mensaje:&lt;/label&gt;
+    &lt;textarea id="mensaje" name="mensaje" rows="4"&gt;&lt;/textarea&gt;
+
+    &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+            <h3>7. Tablas Básicas</h3>
+            <pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Nombre&lt;/th&gt;
+        &lt;th&gt;Edad&lt;/th&gt;
+        &lt;th&gt;Ciudad&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Juan&lt;/td&gt;
+        &lt;td&gt;25&lt;/td&gt;
+        &lt;td&gt;Madrid&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;María&lt;/td&gt;
+        &lt;td&gt;28&lt;/td&gt;
+        &lt;td&gt;Barcelona&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+        </div>
+
+        <!-- HTML Avanzado -->
+        <div id="html-avanzado" class="tab-content">
+            <h3>1. Etiquetas Semánticas</h3>
+            <pre><code>&lt;header&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="/"&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="/servicios"&gt;Servicios&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+    &lt;article&gt;
+        &lt;h2&gt;Título del Artículo&lt;/h2&gt;
+        &lt;p&gt;Contenido del artículo...&lt;/p&gt;
+    &lt;/article&gt;
+    &lt;aside&gt;
+        &lt;h3&gt;Barra Lateral&lt;/h3&gt;
+        &lt;p&gt;Contenido adicional...&lt;/p&gt;
+    &lt;/aside&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+    &lt;p&gt;© 2024 Mi Sitio Web&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+
+            <h3>2. Atributos Data</h3>
+            <pre><code>&lt;div class="producto" data-id="123" data-precio="29.99"&gt;
+    &lt;h3&gt;Producto&lt;/h3&gt;
+    &lt;p&gt;Descripción&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    const producto = document.querySelector('.producto');
+    console.log(producto.dataset.id);      // "123"
+    console.log(producto.dataset.precio);  // "29.99"
+&lt;/script&gt;</code></pre>
+
+            <h3>3. Multimedia Avanzada</h3>
+            <pre><code>&lt;!-- Video --&gt;
+&lt;video width="400" height="300" controls&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+    Tu navegador no soporta video HTML5
+&lt;/video&gt;
+
+&lt;!-- Audio --&gt;
+&lt;audio controls&gt;
+    &lt;source src="cancion.mp3" type="audio/mpeg"&gt;
+    Tu navegador no soporta audio HTML5
+&lt;/audio&gt;</code></pre>
+
+            <h3>4. Formularios Avanzados</h3>
+            <pre><code>&lt;form&gt;
+    &lt;input type="number" min="1" max="100" placeholder="Número"&gt;
+    &lt;input type="date" /&gt;
+    &lt;input type="color" /&gt;
+    &lt;input type="range" min="0" max="100" /&gt;
+    
+    &lt;select&gt;
+        &lt;option&gt;Seleccionar...&lt;/option&gt;
+        &lt;option value="opcion1"&gt;Opción 1&lt;/option&gt;
+        &lt;option value="opcion2"&gt;Opción 2&lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;input type="checkbox" id="terminos" /&gt;
+    &lt;label for="terminos"&gt;Aceptar términos&lt;/label&gt;
+&lt;/form&gt;</code></pre>
+
+            <h3>5. SVG Inline</h3>
+            <pre><code>&lt;svg width="100" height="100"&gt;
+    &lt;circle cx="50" cy="50" r="40" fill="blue" /&gt;
+    &lt;rect x="10" y="10" width="30" height="30" fill="red" /&gt;
+    &lt;line x1="0" y1="0" x2="100" y2="100" stroke="black" /&gt;
+&lt;/svg&gt;</code></pre>
+
+            <h3>6. Web Components</h3>
+            <pre><code>&lt;!-- Elemento personalizado --&gt;
+&lt;my-component data-titulo="Mi Componente"&gt;
+    &lt;p&gt;Contenido del componente&lt;/p&gt;
+&lt;/my-component&gt;
+
+&lt;script&gt;
+    class MyComponent extends HTMLElement {
+        connectedCallback() {
+            this.innerHTML = `&lt;div&gt;${this.dataset.titulo}&lt;/div&gt;`;
+        }
+    }
+    customElements.define('my-component', MyComponent);
+&lt;/script&gt;</code></pre>
+        </div>
+
+        <!-- CSS Básico -->
+        <div id="css-basico" class="tab-content">
+            <h3>1. Selectores CSS</h3>
+            <pre><code>/* Selector de elemento */
+h1 { color: blue; }
+
+/* Selector de clase */
+.mi-clase { background-color: yellow; }
+
+/* Selector de ID */
+#mi-id { font-size: 20px; }
+
+/* Selector de atributo */
+input[type="text"] { border: 1px solid gray; }
+
+/* Combinadores */
+div > p { margin: 10px; }        /* hijo directo */
+div p { color: green; }          /* descendiente */</code></pre>
+
+            <h3>2. Modelo de Caja (Box Model)</h3>
+            <pre><code>div {
+    /* Contenido */
+    width: 200px;
+    height: 100px;
+    
+    /* Relleno interno (padding) */
+    padding: 20px;
+    
+    /* Borde */
+    border: 2px solid black;
+    
+    /* Margen externo */
+    margin: 30px;
+}
+
+/* Shorthand */
+padding: 10px 20px;        /* vertical horizontal */
+margin: 10px 20px 30px 40px;  /* top right bottom left */</code></pre>
+
+            <h3>3. Colores y Tipografía</h3>
+            <pre><code>body {
+    /* Colores */
+    color: #333333;           /* Hexadecimal */
+    background-color: rgb(255, 255, 255);
+    
+    /* Tipografía */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;        /* bold, 400, 700, etc */
+    font-style: italic;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: underline;
+}
+
+/* Fuentes Web */
+@font-face {
+    font-family: 'MiFuente';
+    src: url('fuente.woff2') format('woff2');
+}</code></pre>
+
+            <h3>4. Display y Posicionamiento</h3>
+            <pre><code>/* Display */
+.bloque { display: block; }        /* línea completa */
+.inline { display: inline; }       /* en línea */
+.inline-block { display: inline-block; }
+.flex { display: flex; }           /* Flexbox */
+.grid { display: grid; }           /* CSS Grid */
+
+/* Posicionamiento */
+.relativo { position: relative; top: 10px; left: 20px; }
+.absoluto { position: absolute; top: 0; left: 0; }
+.fijo { position: fixed; bottom: 20px; right: 20px; }
+.estatico { position: static; }    /* por defecto */</code></pre>
+
+            <h3>5. Fondos e Imágenes</h3>
+            <pre><code>div {
+    background-color: lightblue;
+    background-image: url('imagen.jpg');
+    background-size: cover;        /* cover, contain, 100% */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Shorthand */
+background: lightblue url('imagen.jpg') no-repeat center cover;</code></pre>
+
+            <h3>6. Bordes y Sombras</h3>
+            <pre><code>div {
+    /* Bordes */
+    border: 2px solid #333;
+    border-radius: 10px;           /* esquinas redondeadas */
+    border-top: 1px dashed red;
+    
+    /* Sombras */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 4px gray;
+}
+
+/* Borde redondeado circulante */
+border-radius: 50%;  /* círculo completo */</code></pre>
+
+            <h3>7. Efectos Básicos</h3>
+            <pre><code>/* Opacidad */
+.transparente {
+    opacity: 0.5;  /* 0 = invisible, 1 = opaco */
+}
+
+/* Cursor */
+button {
+    cursor: pointer;
+}
+
+/* Transiciones */
+button {
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #007bff;
+}</code></pre>
+        </div>
+
+        <!-- CSS Avanzado -->
+        <div id="css-avanzado" class="tab-content">
+            <h3>1. Flexbox</h3>
+            <pre><code>.contenedor {
+    display: flex;
+    flex-direction: row;          /* row, column */
+    justify-content: center;      /* distribución horizontal */
+    align-items: center;          /* distribución vertical */
+    gap: 20px;                    /* espacio entre elementos */
+}
+
+.item {
+    flex: 1;                      /* igual tamaño */
+    /* o */
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 100px;
+}</code></pre>
+
+            <h3>2. CSS Grid</h3>
+            <pre><code>.grid-contenedor {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 100px auto 50px;
+    gap: 20px;
+}
+
+.item {
+    grid-column: 1 / 3;           /* del 1 al 3 */
+    grid-row: 1 / 2;
+}
+
+/* Grid responsivo */
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));</code></pre>
+
+            <h3>3. Media Queries (Responsivo)</h3>
+            <pre><code>/* Mobile first */
+.contenedor {
+    width: 100%;
+    font-size: 14px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .contenedor {
+        width: 90%;
+        font-size: 16px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .contenedor {
+        width: 1000px;
+        font-size: 18px;
+    }
+}
+
+/* Orientación */
+@media (orientation: landscape) {
+    body { flex-direction: row; }
+}</code></pre>
+
+            <h3>4. Variables CSS</h3>
+            <pre><code>:root {
+    --color-primario: #007bff;
+    --color-secundario: #6c757d;
+    --espaciado: 20px;
+    --font-principal: Arial, sans-serif;
+}
+
+body {
+    color: var(--color-primario);
+    padding: var(--espaciado);
+    font-family: var(--font-principal);
+}
+
+/* Variables con fallback */
+color: var(--color-no-existe, blue);</code></pre>
+
+            <h3>5. Transformaciones</h3>
+            <pre><code>div {
+    /* Escala */
+    transform: scale(1.5);
+    
+    /* Rotación */
+    transform: rotate(45deg);
+    
+    /* Traslación */
+    transform: translate(50px, 30px);
+    
+    /* Sesgo */
+    transform: skew(10deg, 20deg);
+    
+    /* Combinadas */
+    transform: translate(30px) rotate(45deg) scale(1.2);
+    
+    /* Perspectiva 3D */
+    transform: perspective(500px) rotateX(10deg) rotateY(20deg);
+}</code></pre>
+
+            <h3>6. Filtros</h3>
+            <pre><code>img {
+    filter: blur(5px);
+    filter: brightness(150%);
+    filter: contrast(200%);
+    filter: grayscale(100%);
+    filter: hue-rotate(90deg);
+    filter: invert(100%);
+    filter: opacity(50%);
+    filter: saturate(200%);
+    filter: sepia(100%);
+    
+    /* Múltiples */
+    filter: brightness(120%) contrast(110%);
+}</code></pre>
+
+            <h3>7. Animaciones Avanzadas</h3>
+            <pre><code>/* Definir animación */
+@keyframes deslizar {
+    0% { left: 0; opacity: 0; }
+    50% { opacity: 1; }
+    100% { left: 500px; opacity: 0; }
+}
+
+div {
+    animation: deslizar 3s ease-in-out infinite;
+    animation-delay: 1s;
+    animation-iteration-count: 2;
+}
+
+/* Transición */
+button {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: linear-gradient(45deg, red, blue);
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- Ejemplos Complejos -->
+    <section class="ejemplos-section">
+        <h2>🎯 Ejemplos Complejos</h2>
+
+        <div class="example-card">
+            <h3>Ejemplo 1: Navegación Responsiva con HTML/CSS</h3>
+            <pre><code>&lt;header class="navbar"&gt;
+    &lt;nav class="nav-menu"&gt;
+        &lt;a href="#" class="logo"&gt;Logo&lt;/a&gt;
+        &lt;input type="checkbox" id="nav-toggle" class="nav-toggle"&gt;
+        &lt;label for="nav-toggle" class="nav-toggle-label"&gt;☰&lt;/label&gt;
+        &lt;ul class="nav-list"&gt;
+            &lt;li&gt;&lt;a href="#home"&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#about"&gt;Acerca&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#services"&gt;Servicios&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#contact"&gt;Contacto&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;style&gt;
+    .navbar { background-color: #333; padding: 20px; }
+    .nav-menu { display: flex; align-items: center; }
+    .nav-toggle { display: none; }
+    .nav-toggle-label { display: none; cursor: pointer; font-size: 24px; }
+    
+    @media (max-width: 768px) {
+        .nav-toggle-label { display: block; }
+        .nav-toggle:checked ~ .nav-list { display: flex; }
+        .nav-list { display: none; flex-direction: column; width: 100%; }
+    }
+&lt;/style&gt;</code></pre>
+        </div>
+
+        <div class="example-card">
+            <h3>Ejemplo 2: Tarjetas con Efecto Hover</h3>
+            <pre><code>&lt;div class="card-container"&gt;
+    &lt;div class="card"&gt;
+        &lt;img src="imagen.jpg" alt="Tarjeta"&gt;
+        &lt;div class="card-content"&gt;
+            &lt;h3&gt;Título&lt;/h3&gt;
+            &lt;p&gt;Descripción breve de la tarjeta&lt;/p&gt;
+            &lt;button&gt;Ver más&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+    .card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    .card img { width: 100%; height: 200px; object-fit: cover; }
+    .card-content { padding: 20px; }
+    
+    button {
+        background: linear-gradient(45deg, #e34c26, #ff6b3d);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+&lt;/style&gt;</code></pre>
+        </div>
+
+        <div class="example-card">
+            <h3>Ejemplo 3: Layoute con CSS Grid Responsivo</h3>
+            <pre><code>&lt;div class="grid-layout"&gt;
+    &lt;header&gt;Encabezado&lt;/header&gt;
+    &lt;nav&gt;Navegación&lt;/nav&gt;
+    &lt;main&gt;Contenido Principal&lt;/main&gt;
+    &lt;aside&gt;Barra Lateral&lt;/aside&gt;
+    &lt;footer&gt;Pie de página&lt;/footer&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+    .grid-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "nav"
+            "main"
+            "aside"
+            "footer";
+        gap: 20px;
+    }
+    
+    @media (min-width: 768px) {
+        .grid-layout {
+            grid-template-columns: 250px 1fr;
+            grid-template-areas:
+                "header header"
+                "nav nav"
+                "aside main"
+                "footer footer";
+        }
+    }
+    
+    header { grid-area: header; background: #333; color: white; padding: 20px; }
+    nav { grid-area: nav; }
+    main { grid-area: main; }
+    aside { grid-area: aside; }
+    footer { grid-area: footer; background: #333; color: white; padding: 20px; }
+&lt;/style&gt;</code></pre>
+        </div>
+    </section>
+
+    <!-- Consola Simulada -->
+    <section class="console-section">
+        <h2>🖥️ Prueba el Código</h2>
+        <div id="htmlcss-console"></div>
+    </section>
+
+    <!-- Chatbot -->
+    <section class="chatbot-section">
+        <h2>🤖 Chatbot Educativo</h2>
+        <p>Haz preguntas sobre HTML y CSS y obtén respuestas inmediatas</p>
+        <div id="htmlcss-chatbot"></div>
+    </section>
+
+    <!-- Secciones Adicionales -->
+    <section class="example">
+        <h2>Para aprender 🧠</h2>
+        <div>
+            <h3>Ejemplo!</h3>
+            <a href="#" class="download-btn">Descargar Ejemplo</a>
+        </div>
+    </section>
+
+    <section class="mas">
         <h2>Un poco más!</h2>
         <div class="mi-opinion">
             <h3>¿Cómo lo uso yo?</h3>
-            <p>Me estoy enbarcando en el diseño Web, 
-                la verdad estos son muy fáciles, lo más camplicado es aprenderse la estructura de 
-                "head" de html es un poco irregular, pero en general son fáciles, 
-                conforme experimentas agarras experiencia</p>
+            <p>HTML y CSS son la base fundamental del desarrollo web. Los utilizo en cada proyecto web que realizo, 
+                desde sitios sencillos hasta aplicaciones complejas. Son herramientas indispensables que todo 
+                desarrollador web debe dominar.</p>
         </div>
         <div class="links">
             <h3>Links</h3>
-            <a href="https://www-w3schools-com.translate.goog/html/?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=tc" target="_blank" rel="noopener noreferrer" class="html-icon">
-                <img src="html.png" alt="acheteemeele" width="100" height="100">
+            <a href="https://developer.mozilla.org/es/docs/Web/HTML" target="_blank" rel="noopener noreferrer" class="html">
+                <img src="html.png" alt="html" width="100" height="100">
             </a>
-            <a href="https://www-w3schools-com.translate.goog/css/default.asp?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=tc" target="_blank" rel="noopener noreferrer" class="css-icon">
-                <img src="css.png" alt="ceeseese" width="100" height="100">
+            <a href="https://developer.mozilla.org/es/docs/Web/CSS" target="_blank" rel="noopener noreferrer" class="css">
+                <img src="css.png" alt="css" width="100" height="100">
             </a>
             <a href="https://github.com/Alexis-dev25" target="_blank" rel="noopener noreferrer" class="social-icon">
                 <img src="github.png" alt="github" width="100" height="100">
             </a>
         </div>    
-        </section>
+    </section>
+
     <script src="../../theme.js"></script>
+    <script src="../../chatbot.js"></script>
+    <script src="../../console-simulator.js"></script>
+    <script>
+        // Ejemplos para la consola simulada
+        const htmlcssExamples = [
+            {
+                name: "HTML básico",
+                code: `<!DOCTYPE html>
+<html>
+<head><title>Hola</title></head>
+<body>
+<h1>¡Hola, Mundo!</h1>
+<p>Esta es una página web simple.</p>
+</body>
+</html>`
+            },
+            {
+                name: "Formulario HTML",
+                code: `<form>
+<label>Nombre:</label>
+<input type="text" placeholder="Tu nombre">
+<br><br>
+<label>Email:</label>
+<input type="email" placeholder="tu@email.com">
+<br><br>
+<button type="submit">Enviar</button>
+</form>`
+            },
+            {
+                name: "Lista HTML",
+                code: `<h2>Lenguajes de Programación</h2>
+<ul>
+<li>Python</li>
+<li>JavaScript</li>
+<li>HTML/CSS</li>
+<li>Java</li>
+</ul>`
+            },
+            {
+                name: "CSS básico",
+                code: `<style>
+body {
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+h1 {
+  color: #333;
+  text-align: center;
+}
+p {
+  color: #666;
+  line-height: 1.6;
+}
+</style>
+<h1>Ejemplo CSS</h1>
+<p>Este es un párrafo con estilos CSS aplicados.</p>`
+            },
+            {
+                name: "Flexbox",
+                code: `<style>
+.flex-container {
+  display: flex;
+  justify-content: space-around;
+  background: #333;
+  padding: 20px;
+}
+.flex-item {
+  background: #007bff;
+  color: white;
+  padding: 20px;
+  flex: 1;
+  margin: 10px;
+}
+</style>
+<div class="flex-container">
+<div class="flex-item">Item 1</div>
+<div class="flex-item">Item 2</div>
+<div class="flex-item">Item 3</div>
+</div>`
+            }
+        ];
+
+        // Inicializar consola simulada
+        createConsoleUI('htmlcss-console', 'html', htmlcssExamples);
+
+        // Inicializar chatbot
+        createChatbotUI('htmlcss-chatbot', 'html');
+
+        // Tabs del tutorial
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remover activo
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                // Agregar activo
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
