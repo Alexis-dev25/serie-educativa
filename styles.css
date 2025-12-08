@@ -381,6 +381,25 @@ input#buscador:focus{box-shadow:0 6px 18px rgba(11,22,40,0.06); border-color:var
 #comment-mode.mode-local{ color: #e67e22 }
 #comment-mode.mode-firebase{ color: #2ecc71 }
 
+/* Estilos para editores de código */
+.sublime { --color: #8B4513; }
+.vim { --color: #228B22; }
+.vscode { --color: #0078d4; }
+.cursor { --color: #333333; }
+
+/* Estilos para sistemas operativos */
+.windows { --color: #0078d4; }
+.linux { --color: #fcc624; }
+.macos { --color: #555555; }
+
+/* Temas de lenguajes (existentes) */
+.python { --color: #667eea; }
+.js { --color: #f39c12; }
+.java { --color: #e74c3c; }
+.cs { --color: #239120; }
+.sql { --color: #d35400; }
+.html-css { --color: #e34c26; }
+
 
 
 

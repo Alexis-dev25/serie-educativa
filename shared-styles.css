@@ -100,10 +100,13 @@ section {
   border-radius: 10px;
   transition: all 0.3s ease;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1, h2, h3 {
-  text-align: left;
+  text-align: center;
 }
 
 /* Excepción para la página principal (index.html) */
@@ -125,10 +128,13 @@ h1 {
 
 div, .code {
   padding: 5px 20px;
-  margin-top: 15px;
+  margin: 15px auto;
   text-align: left;
   border-radius: 10px;
   transition: all 0.3s ease;
+  max-width: 900px;
+  width: 100%;
+  display: block;
 }
 
 .links {
@@ -174,11 +180,13 @@ div, .code {
   section {
     padding: 15px;
     width: 90%;
+    align-items: center;
   }
 
   div, .code {
     padding: 5px 15px;
     margin-top: 10px;
+    width: 90%;
   }
 
   .csharp, .java, .js, .python, .sql, .vsc, .trae, .cursor, .linux, .html-icon, .css-icon {
@@ -206,11 +214,13 @@ div, .code {
 
   section {
     padding: 10px;
+    align-items: center;
   }
 
   div, .code {
     padding: 5px 10px;
     font-size: 0.9em;
+    width: 95%;
   }
 
   .csharp, .java, .js, .python, .sql, .vsc, .trae, .cursor, .linux, .html-icon, .css-icon {
