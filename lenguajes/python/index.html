@@ -1,12 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Python</title>
+    <title>Python - Tutorial Interactivo y Consola Simulada | Serie Educativa</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tutorial interactivo de Python con ejemplos complejos, consola simulada, chatbot educativo y ejercicios prácticos. Aprende desde lo básico hasta conceptos avanzados.">
+    <meta name="keywords" content="Python, tutorial, programación, consola interactiva, ejemplos, aprender Python, chatbot educativo">
+    <meta name="author" content="Alexis Gutiérrez">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Python - Tutorial Interactivo | Serie Educativa">
+    <meta property="og:description" content="Aprende Python con ejemplos prácticos, consola simulada y chatbot educativo.">
+    <meta property="og:url" content="https://alexis-dev25.github.io/serie-educativa/lenguajes/python/">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Python - Tutorial Interactivo",
+        "description": "Tutorial completo de Python con ejemplos, consola simulada y ejercicios",
+        "inLanguage": "es"
+    }
+    </script>
+    
     <link rel="stylesheet" href="../../shared-styles.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tutorial-styles.css">
+    <link rel="stylesheet" href="../../chatbot.css">
+    <link rel="stylesheet" href="../../console-simulator.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://alexis-dev25.github.io/serie-educativa/lenguajes/python/">
     </head>
     <body>
         <header class="site-header">
@@ -96,6 +122,426 @@
             </ul>
         </div>
     </section>
+    <!-- Tutorial Interactivo -->
+    <section class="tutorial-section">
+        <h2>📚 Tutorial Completo</h2>
+        
+        <div class="tutorial-tabs">
+            <button class="tab-btn active" data-tab="basico">Nivel Básico</button>
+            <button class="tab-btn" data-tab="intermedio">Nivel Intermedio</button>
+            <button class="tab-btn" data-tab="avanzado">Nivel Avanzado</button>
+        </div>
+
+        <!-- Nivel Básico -->
+        <div id="basico" class="tab-content active">
+            <h3>1. Variables y Tipos de Datos</h3>
+            <p>Las variables almacenan información. Python detecta automáticamente el tipo:</p>
+            <pre><code>nombre = "Juan"          # String
+edad = 25                # Integer
+altura = 1.75            # Float
+es_estudiante = True     # Boolean
+
+print(nombre, edad)</code></pre>
+
+            <h3>2. Operadores Básicos</h3>
+            <pre><code>a = 10
+b = 3
+
+suma = a + b        # 13
+resta = a - b       # 7
+multiplicacion = a * b   # 30
+division = a / b    # 3.333...
+modulo = a % b      # 1
+potencia = a ** b   # 1000</code></pre>
+
+            <h3>3. Condicionales (if, else)</h3>
+            <pre><code>edad = 18
+
+if edad >= 18:
+    print("Eres mayor de edad")
+elif edad >= 13:
+    print("Eres adolescente")
+else:
+    print("Eres niño")</code></pre>
+
+            <h3>4. Bucles</h3>
+            <pre><code># Bucle for
+for i in range(5):
+    print(i)  # 0, 1, 2, 3, 4
+
+# Bucle while
+contador = 0
+while contador < 3:
+    print(contador)
+    contador += 1</code></pre>
+
+            <h3>5. Listas</h3>
+            <pre><code>frutas = ["manzana", "plátano", "naranja"]
+numeros = [1, 2, 3, 4, 5]
+
+print(frutas[0])           # manzana
+print(frutas[-1])          # naranja
+print(len(frutas))         # 3
+
+frutas.append("uva")       # Agregar
+frutas.remove("plátano")   # Eliminar</code></pre>
+
+            <h3>6. Diccionarios</h3>
+            <pre><code>persona = {
+    "nombre": "Juan",
+    "edad": 25,
+    "ciudad": "Madrid"
+}
+
+print(persona["nombre"])    # Juan
+persona["edad"] = 26        # Modificar
+persona["email"] = "juan@email.com"  # Agregar</code></pre>
+
+            <h3>7. Funciones Básicas</h3>
+            <pre><code>def saludar(nombre):
+    return f"¡Hola, {nombre}!"
+
+resultado = saludar("Ana")
+print(resultado)</code></pre>
+        </div>
+
+        <!-- Nivel Intermedio -->
+        <div id="intermedio" class="tab-content">
+            <h3>1. Funciones Avanzadas</h3>
+            <pre><code>def calcular(a, b, operacion="suma"):
+    if operacion == "suma":
+        return a + b
+    elif operacion == "resta":
+        return a - b
+    elif operacion == "multiplicacion":
+        return a * b
+
+resultado = calcular(10, 5, "multiplicacion")
+print(resultado)  # 50
+
+# Funciones con *args
+def sumar_todo(*numeros):
+    total = 0
+    for n in numeros:
+        total += n
+    return total
+
+print(sumar_todo(1, 2, 3, 4, 5))  # 15
+
+# Funciones con **kwargs
+def crear_perfil(**datos):
+    for clave, valor in datos.items():
+        print(f"{clave}: {valor}")
+
+crear_perfil(nombre="Juan", edad=25, ciudad="Madrid")</code></pre>
+
+            <h3>2. List Comprehensions</h3>
+            <pre><code>numeros = [1, 2, 3, 4, 5]
+cuadrados = [x**2 for x in numeros]
+print(cuadrados)  # [1, 4, 9, 16, 25]
+
+# Con condición
+pares = [x for x in numeros if x % 2 == 0]
+print(pares)  # [2, 4]</code></pre>
+
+            <h3>3. Manejo de Excepciones</h3>
+            <pre><code>try:
+    numero = int("abc")
+except ValueError:
+    print("Debes ingresar un número válido")
+except Exception as e:
+    print(f"Error: {e}")
+finally:
+    print("Fin del intento")</code></pre>
+
+            <h3>4. Clases Básicas (POO)</h3>
+            <pre><code>class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+    
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre}"
+
+juan = Persona("Juan", 25)
+print(juan.saludar())
+print(juan.edad)</code></pre>
+
+            <h3>5. Módulos y Librerías</h3>
+            <pre><code>import math
+
+# Usar funciones del módulo
+raiz = math.sqrt(16)
+print(raiz)  # 4.0
+
+# from ... import ...
+from math import pi
+print(pi)  # 3.14159...</code></pre>
+
+            <h3>6. Strings Avanzado</h3>
+            <pre><code>texto = "Python es AMAZING"
+
+# Métodos útiles
+print(texto.lower())         # python es amazing
+print(texto.upper())         # PYTHON ES AMAZING
+print(texto.replace("Python", "Java"))
+print(texto.split())         # ['Python', 'es', 'AMAZING']
+print("es" in texto)         # True
+
+# f-strings
+nombre = "Juan"
+edad = 25
+print(f"{nombre} tiene {edad} años")</code></pre>
+
+            <h3>7. Trabajar con Archivos</h3>
+            <pre><code># Leer archivo
+with open("archivo.txt", "r") as f:
+    contenido = f.read()
+    print(contenido)
+
+# Escribir archivo
+with open("archivo.txt", "w") as f:
+    f.write("Hola, mundo!")
+
+# Agregar líneas
+with open("archivo.txt", "a") as f:
+    f.write("\nNueva línea")</code></pre>
+        </div>
+
+        <!-- Nivel Avanzado -->
+        <div id="avanzado" class="tab-content">
+            <h3>1. Programación Orientada a Objetos Avanzada</h3>
+            <pre><code>class Animal:
+    def hacer_sonido(self):
+        return "Sonido genérico"
+
+class Perro(Animal):
+    def hacer_sonido(self):
+        return "¡Guau!"
+    
+    def traer_objeto(self, objeto):
+        return f"El perro trae {objeto}"
+
+class Gato(Animal):
+    def hacer_sonido(self):
+        return "¡Miau!"
+
+# Polimorfismo
+animales = [Perro(), Gato(), Animal()]
+for animal in animales:
+    print(animal.hacer_sonido())</code></pre>
+
+            <h3>2. Decoradores</h3>
+            <pre><code>def decorador_tiempo(func):
+    import time
+    def wrapper(*args, **kwargs):
+        inicio = time.time()
+        resultado = func(*args, **kwargs)
+        fin = time.time()
+        print(f"Tiempo: {fin - inicio:.4f} segundos")
+        return resultado
+    return wrapper
+
+@decorador_tiempo
+def calcular_numeros_primos(n):
+    primos = []
+    for num in range(2, n):
+        es_primo = True
+        for divisor in range(2, int(num**0.5) + 1):
+            if num % divisor == 0:
+                es_primo = False
+                break
+        if es_primo:
+            primos.append(num)
+    return primos
+
+resultado = calcular_numeros_primos(100)</code></pre>
+
+            <h3>3. Generadores</h3>
+            <pre><code>def fibonacci(n):
+    a, b = 0, 1
+    for _ in range(n):
+        yield a
+        a, b = b, a + b
+
+# Usar el generador
+for num in fibonacci(10):
+    print(num)
+
+# O convertir a lista
+numeros = list(fibonacci(10))</code></pre>
+
+            <h3>4. Comprensión de Diccionarios</h3>
+            <pre><code>numeros = [1, 2, 3, 4, 5]
+
+# Crear diccionario con comprehension
+cuadrados = {x: x**2 for x in numeros}
+print(cuadrados)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# Con condición
+pares_cuadrados = {x: x**2 for x in numeros if x % 2 == 0}
+print(pares_cuadrados)  # {2: 4, 4: 16}</code></pre>
+
+            <h3>5. Expresiones Lambda</h3>
+            <pre><code>numeros = [1, 2, 3, 4, 5]
+
+# Lambda con map
+cuadrados = list(map(lambda x: x**2, numeros))
+print(cuadrados)
+
+# Lambda con filter
+pares = list(filter(lambda x: x % 2 == 0, numeros))
+print(pares)
+
+# Lambda con sorted
+personas = [("Ana", 25), ("Juan", 20), ("Carlos", 30)]
+ordenado = sorted(personas, key=lambda x: x[1])
+print(ordenado)</code></pre>
+
+            <h3>6. Context Managers</h3>
+            <pre><code>from contextlib import contextmanager
+
+@contextmanager
+def recurso_controlado():
+    print("Adquiriendo recurso")
+    try:
+        yield "Recurso disponible"
+    finally:
+        print("Liberando recurso")
+
+with recurso_controlado() as recurso:
+    print(f"Usando: {recurso}")</code></pre>
+
+            <h3>7. Ejemplo Complejo: API REST</h3>
+            <pre><code>import requests
+import json
+
+def obtener_informacion_usuario(user_id):
+    """Obtiene información de un usuario de JSONPlaceholder"""
+    try:
+        url = f"https://jsonplaceholder.typicode.com/users/{user_id}"
+        response = requests.get(url)
+        response.raise_for_status()
+        
+        datos = response.json()
+        return {
+            "id": datos["id"],
+            "nombre": datos["name"],
+            "email": datos["email"],
+            "ciudad": datos["address"]["city"]
+        }
+    except requests.exceptions.RequestException as e:
+        print(f"Error en la solicitud: {e}")
+        return None
+
+# Usar la función
+usuario = obtener_informacion_usuario(1)
+if usuario:
+    print(json.dumps(usuario, indent=2, ensure_ascii=False))</code></pre>
+        </div>
+    </section>
+
+    <!-- Ejemplos Complejos -->
+    <section class="examples-section">
+        <h2>💡 Ejemplos Complejos Útiles</h2>
+        
+        <div class="example-card">
+            <h3>Ejemplo 1: Validador de Contraseñas</h3>
+            <pre><code>import re
+
+def validar_contraseña(contraseña):
+    """Valida que la contraseña cumpla criterios de seguridad"""
+    requisitos = {
+        "longitud": len(contraseña) >= 8,
+        "mayuscula": bool(re.search(r'[A-Z]', contraseña)),
+        "minuscula": bool(re.search(r'[a-z]', contraseña)),
+        "numero": bool(re.search(r'\d', contraseña)),
+        "especial": bool(re.search(r'[!@#$%^&*]', contraseña))
+    }
+    
+    return all(requisitos.values()), requisitos
+
+# Usar
+valida, criterios = validar_contraseña("Mi2Contraseña!")
+print(f"¿Válida?: {valida}")
+print(f"Criterios: {criterios}")</code></pre>
+        </div>
+
+        <div class="example-card">
+            <h3>Ejemplo 2: Gestor de Tareas</h3>
+            <pre><code>class GestorTareas:
+    def __init__(self):
+        self.tareas = []
+    
+    def agregar(self, titulo, prioridad=1):
+        self.tareas.append({
+            "titulo": titulo,
+            "prioridad": prioridad,
+            "completada": False
+        })
+    
+    def completar(self, indice):
+        if 0 <= indice < len(self.tareas):
+            self.tareas[indice]["completada"] = True
+    
+    def ordenar_por_prioridad(self):
+        return sorted(self.tareas, 
+                     key=lambda x: x["prioridad"], 
+                     reverse=True)
+    
+    def mostrar_pendientes(self):
+        pendientes = [t for t in self.tareas if not t["completada"]]
+        for i, tarea in enumerate(pendientes):
+            print(f"{i+1}. {tarea['titulo']} [Prioridad: {tarea['prioridad']}]")
+
+# Usar
+gestor = GestorTareas()
+gestor.agregar("Estudiar Python", 3)
+gestor.agregar("Hacer proyecto", 2)
+gestor.agregar("Descansar", 1)
+gestor.mostrar_pendientes()</code></pre>
+        </div>
+
+        <div class="example-card">
+            <h3>Ejemplo 3: Analizador de Texto</h3>
+            <pre><code>from collections import Counter
+
+def analizar_texto(texto):
+    """Analiza y muestra estadísticas de un texto"""
+    # Limpiar y separar
+    palabras = texto.lower().split()
+    
+    # Estadísticas
+    stats = {
+        "total_palabras": len(palabras),
+        "palabras_unicas": len(set(palabras)),
+        "longitud_promedio": sum(len(p) for p in palabras) / len(palabras),
+        "palabra_mas_frecuente": Counter(palabras).most_common(1)[0]
+    }
+    
+    return stats
+
+# Usar
+texto = "Python es un lenguaje Python que Python muchos"
+resultado = analizar_texto(texto)
+for clave, valor in resultado.items():
+    print(f"{clave}: {valor}")</code></pre>
+        </div>
+    </section>
+
+    <!-- Consola Simulada -->
+    <section class="console-section">
+        <h2>🖥️ Prueba el Código</h2>
+        <div id="python-console"></div>
+    </section>
+
+    <!-- Chatbot -->
+    <section class="chatbot-section">
+        <h2>🤖 Chatbot Educativo</h2>
+        <p>Haz preguntas sobre Python y obten respuestas inmediatas</p>
+        <div id="python-chatbot"></div>
+    </section>
+
     <section class="example">
         <h2>Para aprender 🧠</h2>
         <div>
@@ -123,5 +569,68 @@
         </div>    
         </section>
     <script src="../../theme.js"></script>
+    <script src="../../chatbot.js"></script>
+    <script src="../../console-simulator.js"></script>
+    <script>
+        // Ejemplos para la consola simulada
+        const pythonExamples = [
+            {
+                name: "Variables básicas",
+                code: `nombre = "Juan"
+edad = 25
+altura = 1.75
+print(f"{nombre} tiene {edad} años")`
+            },
+            {
+                name: "Suma de números",
+                code: `a = 10
+b = 20
+suma = a + b
+print(f"La suma de {a} + {b} es {suma}")`
+            },
+            {
+                name: "Lista y bucle",
+                code: `numeros = [1, 2, 3, 4, 5]
+for n in numeros:
+    print(n * 2)`
+            },
+            {
+                name: "Función simple",
+                code: `def saludar(nombre):
+    return f"¡Hola, {nombre}!"
+
+print(saludar("Ana"))`
+            },
+            {
+                name: "Diccionario",
+                code: `persona = {
+    "nombre": "Carlos",
+    "edad": 28,
+    "ciudad": "Madrid"
+}
+print(persona["nombre"])
+print(persona["edad"])`
+            }
+        ];
+
+        // Inicializar consola simulada
+        createConsoleUI('python-console', 'python', pythonExamples);
+
+        // Inicializar chatbot
+        createChatbotUI('python-chatbot', 'python');
+
+        // Tabs del tutorial
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remover activo
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                // Agregar activo
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>

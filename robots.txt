@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+Sitemap: https://alexis-dev25.github.io/serie-educativa/sitemap.xml
+
+# Bloquear herramientas de scraping
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /

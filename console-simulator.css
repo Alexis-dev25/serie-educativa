@@ -1,0 +1,197 @@
+/* =====================
+   Estilos de Consola Simulada
+   ===================== */
+
+.console-simulator {
+    background: var(--bg-secondary, #f5f5f5);
+    border: 1px solid var(--border-color, #ddd);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    font-family: 'Monaco', 'Courier New', monospace;
+}
+
+.console-header {
+    border-bottom: 2px solid var(--border-color, #ddd);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.console-header h3 {
+    margin: 0;
+    color: var(--text-primary, #333);
+}
+
+.console-examples {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.console-examples label {
+    font-weight: 600;
+    color: var(--text-primary, #333);
+}
+
+.console-examples select {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color, #ddd);
+    border-radius: 4px;
+    background: var(--bg-primary, #fff);
+    color: var(--text-primary, #333);
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.console-examples select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.console-editor {
+    margin-bottom: 15px;
+}
+
+.console-editor label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary, #333);
+}
+
+.code-input {
+    width: 100%;
+    height: 200px;
+    padding: 12px;
+    border: 1px solid var(--border-color, #ddd);
+    border-radius: 4px;
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+    background: var(--bg-primary, #fff);
+    color: var(--text-primary, #333);
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.code-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.console-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #764ba2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-secondary {
+    background: var(--bg-tertiary, #e9ecef);
+    color: var(--text-primary, #333);
+}
+
+.btn-secondary:hover {
+    background: var(--border-color, #ddd);
+}
+
+.console-output {
+    background: #1a1a1a;
+    color: #00ff00;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.console-output h4 {
+    margin: 0 0 10px 0;
+    color: #00ff00;
+    font-size: 0.9rem;
+}
+
+#console-output-text {
+    margin: 0;
+    padding: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.console-output.error #console-output-text {
+    color: #ff6b6b;
+}
+
+.console-output.error h4 {
+    color: #ff6b6b;
+}
+
+/* Dark theme */
+[data-theme="dark"] .console-simulator {
+    background: #2d2d2d;
+    border-color: #444;
+}
+
+[data-theme="dark"] .console-examples select,
+[data-theme="dark"] .code-input {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+[data-theme="dark"] .btn-secondary {
+    background: #3d3d3d;
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .console-header h3,
+[data-theme="dark"] .console-examples label,
+[data-theme="dark"] .console-editor label {
+    color: #e0e0e0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .console-simulator {
+        padding: 15px;
+    }
+
+    .code-input {
+        height: 150px;
+    }
+
+    .console-buttons {
+        flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+    }
+}
