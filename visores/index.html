@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Code Viewers: Editores de código. Aprende VS Code, Sublime, Vim, Cursor y más.">
+    <title>Code Viewers | Editores de Código | Serie Educativa</title>
+    <link rel="stylesheet" href="../shared-styles.css">
+    <style>
+        .viewer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 30px 0; }
+        .viewer-card { background: linear-gradient(135deg, rgba(100, 150, 0, 0.1) 0%, rgba(150, 200, 0, 0.1) 100%);
+                       border: 2px solid rgba(100, 150, 0, 0.3); border-radius: 10px; padding: 20px; text-align: center;
+                       transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
+        .viewer-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(100, 150, 0, 0.2); }
+        .viewer-card img { width: 80px; height: 80px; margin: 15px 0; }
+        .viewer-card h3 { margin: 15px 0; color: #333; }
+        .viewer-card p { color: #666; font-size: 14px; }
+        .viewer-card a { display: inline-block; margin-top: 15px; padding: 10px 20px; background: #76b900; color: white;
+                         text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .viewer-card a:hover { background: #5a9000; }
+        .badge { display: inline-block; background: #ff9500; color: white; padding: 5px 10px; border-radius: 20px;
+                 font-size: 12px; margin-top: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <h1>📝 Code Viewers - Editores de Código</h1>
+    </header>
+
+    <nav class="breadcrumb">
+        <a href="../index.html">Inicio</a> > Code Viewers
+    </nav>
+
+    <main class="container">
+        <section>
+            <h2>Herramientas Profesionales para Programar</h2>
+            <p>Explora los mejores editores y IDEs para desarrollo. Cada uno tiene características únicas y es especializado para diferentes necesidades.</p>
+        </section>
+
+        <div class="viewer-grid">
+            <div class="viewer-card">
+                <h3>📝 Visual Studio Code</h3>
+                <p>El editor más popular. Ligero, poderoso y con miles de extensiones. Ideal para principiantes y profesionales.</p>
+                <span class="badge">⭐ Recomendado para empezar</span>
+                <a href="VSCode/">Ver Guía</a>
+            </div>
+
+            <div class="viewer-card">
+                <h3>✨ Sublime Text</h3>
+                <p>Editor ultrarrápido y minimalista. Perfecto para quien busca velocidad y simplicidad sin sacrificar poder.</p>
+                <a href="Sublime/">Ver Guía</a>
+            </div>
+
+            <div class="viewer-card">
+                <h3>⌨️ Vim</h3>
+                <p>El editor más poderoso del mundo. Funciona en terminal, ideal para servidores y desarrollo avanzado.</p>
+                <span class="badge">🔥 Curva de aprendizaje</span>
+                <a href="Vim/">Ver Guía</a>
+            </div>
+
+            <div class="viewer-card">
+                <h3>🤖 Cursor</h3>
+                <p>VS Code potenciado con IA. Genera código automáticamente, refactoriza y asiste tu programación.</p>
+                <span class="badge">✨ Basado en IA</span>
+                <a href="Cursor/">Ver Guía</a>
+            </div>
+        </div>
+
+        <section style="margin-top: 40px;">
+            <h2>Comparación de Características</h2>
+            <table style="width: 100%;">
+                <tr style="background: rgba(100, 150, 0, 0.1);">
+                    <th>Característica</th>
+                    <th>VS Code</th>
+                    <th>Sublime</th>
+                    <th>Vim</th>
+                    <th>Cursor</th>
+                </tr>
+                <tr>
+                    <td><strong>Curva de aprendizaje</strong></td>
+                    <td>Fácil</td>
+                    <td>Fácil</td>
+                    <td>Difícil</td>
+                    <td>Fácil</td>
+                </tr>
+                <tr>
+                    <td><strong>Velocidad</strong></td>
+                    <td>Muy rápido</td>
+                    <td>Ultra rápido</td>
+                    <td>Ultra rápido</td>
+                    <td>Rápido</td>
+                </tr>
+                <tr>
+                    <td><strong>IA integrada</strong></td>
+                    <td>❌</td>
+                    <td>❌</td>
+                    <td>❌</td>
+                    <td>✅ Nativa</td>
+                </tr>
+                <tr>
+                    <td><strong>Extensiones</strong></td>
+                    <td>Miles</td>
+                    <td>Cientos</td>
+                    <td>Plugins</td>
+                    <td>Compatible VS Code</td>
+                </tr>
+                <tr>
+                    <td><strong>Debugging</strong></td>
+                    <td>✅ Excelente</td>
+                    <td>⚠️ Limitado</td>
+                    <td>❌ Manual</td>
+                    <td>✅ Excelente</td>
+                </tr>
+                <tr>
+                    <td><strong>Precio</strong></td>
+                    <td>Gratis</td>
+                    <td>Gratis (evaluación)</td>
+                    <td>Gratis</td>
+                    <td>$20/mes Pro</td>
+                </tr>
+                <tr>
+                    <td><strong>Mejor para</strong></td>
+                    <td>General, todos</td>
+                    <td>Minimalistas</td>
+                    <td>Expertos, servidores</td>
+                    <td>Desarrollo IA-asistido</td>
+                </tr>
+            </table>
+        </section>
+
+        <section style="margin-top: 40px;">
+            <h2>Recomendaciones por uso:</h2>
+            <ul>
+                <li><strong>Principiante:</strong> 👉 VS Code (más amigable y comunidad grande)</li>
+                <li><strong>Desarrollo web:</strong> 👉 VS Code o Cursor (muchas extensiones)</li>
+                <li><strong>Minimalista:</strong> 👉 Sublime Text (ligero y rápido)</li>
+                <li><strong>Edición en servidores:</strong> 👉 Vim (funciona por SSH)</li>
+                <li><strong>Con IA:</strong> 👉 Cursor (mejor integración)</li>
+                <li><strong>Máxima productividad:</strong> 👉 VS Code + Vim bindings (mejor de ambos)</li>
+            </ul>
+        </section>
+
+        <section style="margin-top: 40px; background: linear-gradient(90deg, rgba(100, 150, 0, 0.1) 0%, rgba(150, 200, 0, 0.1) 100%);
+                       padding: 20px; border-radius: 8px;">
+            <h2>💡 Consejo: Combina herramientas</h2>
+            <p>No tienes que elegir solo una. Muchos desarrolladores profesionales usan:</p>
+            <ul>
+                <li>🎯 <strong>VS Code</strong> como editor principal (debugging, extensiones)</li>
+                <li>⚡ <strong>Vim bindings</strong> en VS Code para edición ultra-rápida</li>
+                <li>🖥️ <strong>Terminal</strong> integrada para comandos</li>
+                <li>🤖 <strong>Cursor</strong> para tareas específicas con IA</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Serie Educativa - Code Viewers | <a href="../index.html">Volver al inicio</a></p>
+    </footer>
+
+    <script src="../theme.js"></script>
+</body>
+</html>

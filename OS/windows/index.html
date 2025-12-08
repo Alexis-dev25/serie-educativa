@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guía completa de Windows: instalación, línea de comandos, PowerShell, desarrollo.">
+    <title>Windows - Guía Completa | Serie Educativa</title>
+    <link rel="stylesheet" href="../../shared-styles.css">
+    <style>
+        .os-tabs { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+        .os-btn { background: #0078d4; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .os-btn.active { background: #005a9e; }
+        .os-content { display: none; }
+        .os-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <h1>🪟 Windows - Sistema Operativo</h1>
+    </header>
+
+    <nav class="breadcrumb">
+        <a href="../../index.html">Inicio</a> > <a href="../index.html">Sistemas Operativos</a> > Windows
+    </nav>
+
+    <main class="container">
+        <section>
+            <h2>¿Qué es Windows?</h2>
+            <p>Windows es el sistema operativo más popular del mundo, desarrollado por Microsoft. Domina en computadoras de escritorio y portátiles.</p>
+
+            <h3>Versiones actuales:</h3>
+            <ul>
+                <li><strong>Windows 11:</strong> Última versión con interfaz moderna</li>
+                <li><strong>Windows 10:</strong> Aún muy usado, soporte extendido</li>
+                <li><strong>Windows Server:</strong> Para servidores empresariales</li>
+            </ul>
+        </section>
+
+        <div class="os-tabs">
+            <button class="os-btn active" onclick="switchOS('cmd')">🖥️ CMD (Símbolo del sistema)</button>
+            <button class="os-btn" onclick="switchOS('powershell')">⚡ PowerShell</button>
+            <button class="os-btn" onclick="switchOS('dev')">💻 Desarrollo en Windows</button>
+            <button class="os-btn" onclick="switchOS('admin')">🔧 Administración</button>
+        </div>
+
+        <!-- CMD -->
+        <section id="cmd" class="os-content active">
+            <h2>🖥️ CMD (Símbolo del Sistema)</h2>
+            <p>La interfaz clásica de línea de comandos de Windows.</p>
+
+            <h3>Comandos básicos:</h3>
+            <pre><code>dir                    # Listar archivos y carpetas
+cd carpeta            # Cambiar de directorio
+cd ..                 # Ir al directorio superior
+mkdir nombre          # Crear carpeta
+del archivo.txt       # Eliminar archivo
+copy archivo.txt copia.txt   # Copiar archivo
+move archivo.txt destino/    # Mover archivo
+echo "texto" > archivo.txt   # Crear archivo con texto
+type archivo.txt      # Ver contenido de archivo
+cls                   # Limpiar pantalla</code></pre>
+
+            <h3>Comandos útiles:</h3>
+            <pre><code>ipconfig              # Ver configuración de red
+ping google.com       # Verificar conectividad
+tasklist              # Listar procesos activos
+taskkill /IM proceso.exe   # Terminar proceso
+systeminfo            # Información del sistema
+date                  # Mostrar fecha
+time                  # Mostrar hora</code></pre>
+        </section>
+
+        <!-- POWERSHELL -->
+        <section id="powershell" class="os-content">
+            <h2>⚡ PowerShell</h2>
+            <p>Shell más potente y moderno que CMD. Basado en .NET, ideal para automatización.</p>
+
+            <h3>Comandos básicos (Cmdlets):</h3>
+            <pre><code>Get-ChildItem         # Listar archivos (equivalente a dir)
+Get-Location          # Ubicación actual (pwd)
+Set-Location ruta     # Cambiar directorio (cd)
+New-Item -Type Directory -Name carpeta   # Crear carpeta
+Remove-Item archivo.txt   # Eliminar archivo
+Copy-Item archivo.txt copia.txt  # Copiar archivo
+Move-Item archivo.txt destino/   # Mover archivo
+Get-Content archivo.txt   # Ver contenido de archivo
+Clear-Host            # Limpiar pantalla</code></pre>
+
+            <h3>Scripting básico:</h3>
+            <pre><code># Variables
+$nombre = "Juan"
+$edad = 25
+Write-Host "Hola $nombre, tienes $edad años"
+
+# Array
+$frutas = "manzana", "plátano", "naranja"
+$frutas | ForEach-Object { Write-Host $_ }
+
+# Condicional
+if ($edad -gt 18) {
+    Write-Host "Es mayor de edad"
+} else {
+    Write-Host "Es menor de edad"
+}
+
+# Bucle
+for ($i = 1; $i -le 5; $i++) {
+    Write-Host "Número: $i"
+}</code></pre>
+
+            <h3>Funciones en PowerShell:</h3>
+            <pre><code>function Saludar ($nombre) {
+    Write-Host "Hola, $nombre!"
+}
+
+Saludar "María"
+
+# Función con retorno
+function Suma ($a, $b) {
+    return $a + $b
+}
+
+$resultado = Suma 5 3
+Write-Host "5 + 3 = $resultado"</code></pre>
+        </section>
+
+        <!-- DESARROLLO -->
+        <section id="dev" class="os-content">
+            <h2>💻 Desarrollo en Windows</h2>
+
+            <h3>Instalación de herramientas:</h3>
+            <pre><code># Node.js
+# Descargar desde nodejs.org o usar chocolatey:
+choco install nodejs
+
+# Python
+choco install python
+
+# Git
+choco install git
+
+# Visual Studio Code
+choco install vscode
+
+# .NET SDK (para C#)
+choco install dotnet-sdk</code></pre>
+
+            <h3>Gestores de paquetes en Windows:</h3>
+            <ul>
+                <li><strong>Chocolatey:</strong> Gestor de paquetes para Windows</li>
+                <li><strong>Windows Package Manager (winget):</strong> Oficial de Microsoft</li>
+                <li><strong>NPM:</strong> Para paquetes JavaScript/Node.js</li>
+                <li><strong>pip:</strong> Para paquetes Python</li>
+                <li><strong>NuGet:</strong> Para paquetes .NET</li>
+            </ul>
+
+            <h3>Configurar PATH:</h3>
+            <pre><code># En PowerShell para añadir a PATH:
+$env:PATH += ";C:\Program Files\tu_programa"
+
+# Permanentemente editar variables de entorno:
+# 1. Win + X → Sistema
+# 2. Variables de entorno
+# 3. Editar las variables del sistema</code></pre>
+
+            <h3>WSL (Windows Subsystem for Linux):</h3>
+            <p>Ejecuta Linux directamente en Windows para mejor experiencia de desarrollo.</p>
+            <pre><code># Instalar WSL2:
+wsl --install
+
+# Instalar distribución específica:
+wsl --install -d Ubuntu
+
+# Listar distribuciones:
+wsl -l -v
+
+# Entrar en WSL:
+wsl</code></pre>
+        </section>
+
+        <!-- ADMINISTRACIÓN -->
+        <section id="admin" class="os-content">
+            <h2>🔧 Administración</h2>
+
+            <h3>Gestión de usuarios:</h3>
+            <pre><code># PowerShell como administrador
+Get-LocalUser          # Listar usuarios
+New-LocalUser -Name usuario -Password (ConvertTo-SecureString "contraseña" -AsPlainText -Force)
+Remove-LocalUser -Name usuario
+Add-LocalGroupMember -Group "Administradores" -Member usuario</code></pre>
+
+            <h3>Gestión de servicios:</h3>
+            <pre><code>Get-Service                # Listar servicios
+Start-Service -Name Spooler    # Iniciar servicio
+Stop-Service -Name Spooler     # Detener servicio
+Restart-Service -Name Spooler  # Reiniciar servicio</code></pre>
+
+            <h3>Monitoreo del sistema:</h3>
+            <pre><code>Get-Process            # Ver procesos activos
+Get-Process | Sort-Object WorkingSet | Select-Object -Last 5   # Top 5 procesos por memoria
+Get-WmiObject Win32_OperatingSystem | Select-Object Caption, Version, OSArchitecture
+Get-Volume             # Ver unidades de disco</code></pre>
+
+            <h3>Mantenimiento:</h3>
+            <pre><code># Limpiar disco
+Disk Cleanup           # Utilidad gráfica
+del C:\Windows\Temp\*  # Limpiar carpeta temporal
+
+# Desfragmentar disco
+Defrag-Volume -DriveLetter C -Defrag
+
+# Actualizar Windows
+Get-WindowsUpdate
+Install-WindowsUpdate</code></pre>
+        </section>
+
+        <section style="margin-top: 40px;">
+            <h2>📚 Recursos útiles</h2>
+            <ul>
+                <li><a href="https://docs.microsoft.com/en-us/powershell/" target="_blank">Documentación oficial PowerShell</a></li>
+                <li><a href="https://docs.microsoft.com/windows/" target="_blank">Documentación de Windows</a></li>
+                <li><a href="https://docs.microsoft.com/windows/wsl/" target="_blank">Guía de WSL</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        function switchOS(tab) {
+            document.querySelectorAll('.os-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.os-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

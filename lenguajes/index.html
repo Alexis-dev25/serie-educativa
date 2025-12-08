@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lenguajes de Programación: Python, JavaScript, Java, C#, SQL, HTML/CSS. Tutoriales completos con ejemplos.">
+    <title>Lenguajes de Programación | Serie Educativa</title>
+    <link rel="stylesheet" href="../shared-styles.css">
+    <style>
+        .lang-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 30px 0; }
+        .lang-card { background: linear-gradient(135deg, rgba(200, 100, 0, 0.1) 0%, rgba(255, 150, 0, 0.1) 100%);
+                     border: 2px solid rgba(200, 100, 0, 0.3); border-radius: 10px; padding: 20px; text-align: center;
+                     transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
+        .lang-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(200, 100, 0, 0.2); }
+        .lang-card img { width: 80px; height: 80px; margin: 15px 0; }
+        .lang-card h3 { margin: 15px 0; color: #333; }
+        .lang-card p { color: #666; font-size: 14px; }
+        .lang-card a { display: inline-block; margin-top: 15px; padding: 10px 20px; background: #ff9500; color: white;
+                       text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .lang-card a:hover { background: #cc7700; }
+        .level-badge { display: inline-block; background: #667eea; color: white; padding: 5px 10px; border-radius: 20px;
+                       font-size: 12px; margin: 5px 2px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <h1>🚀 Lenguajes de Programación</h1>
+    </header>
+
+    <nav class="breadcrumb">
+        <a href="../index.html">Inicio</a> > Lenguajes
+    </nav>
+
+    <main class="container">
+        <section>
+            <h2>Aprende a Programar desde Cero</h2>
+            <p>Selecciona un lenguaje y comienza tu viaje en la programación. Cada tutorial incluye conceptos teóricos, ejemplos prácticos y un chatbot educativo.</p>
+        </section>
+
+        <div class="lang-grid">
+            <div class="lang-card">
+                <h3>🐍 Python</h3>
+                <p>El lenguaje más fácil de aprender. Perfecto para principiantes y usado en ciencia de datos, IA y web.</p>
+                <div style="margin: 10px 0;">
+                    <span class="level-badge">Básico</span>
+                    <span class="level-badge">Intermedio</span>
+                    <span class="level-badge">Avanzado</span>
+                </div>
+                <a href="python/">Ver Tutorial</a>
+            </div>
+
+            <div class="lang-card">
+                <h3>📱 JavaScript</h3>
+                <p>El lenguaje de la web. Esencial para desarrollo frontend y cada vez más para backend con Node.js.</p>
+                <div style="margin: 10px 0;">
+                    <span class="level-badge">Básico</span>
+                    <span class="level-badge">Intermedio</span>
+                    <span class="level-badge">Avanzado</span>
+                </div>
+                <a href="javascript/">Ver Tutorial</a>
+            </div>
+
+            <div class="lang-card">
+                <h3>🌐 HTML/CSS</h3>
+                <p>La base de la web. HTML estructura las páginas y CSS las hace hermosas. Aprende web desde cero.</p>
+                <div style="margin: 10px 0;">
+                    <span class="level-badge">Básico</span>
+                    <span class="level-badge">Intermedio</span>
+                    <span class="level-badge">Avanzado</span>
+                </div>
+                <a href="html-css/">Ver Tutorial</a>
+            </div>
+
+            <div class="lang-card">
+                <h3>☕ Java</h3>
+                <p>Lenguaje robusto y escalable. Usado en empresas grandes, Android y sistemas críticos.</p>
+                <div style="margin: 10px 0;">
+                    <span class="level-badge">Básico</span>
+                    <span class="level-badge">Intermedio</span>
+                    <span class="level-badge">Avanzado</span>
+                </div>
+                <a href="java/">Ver Tutorial</a>
+            </div>
+
+            <div class="lang-card">
+                <h3>💚 C#</h3>
+                <p>Lenguaje moderno del ecosistema .NET. Ideal para desarrollo de apps, web con ASP.NET y Unity.</p>
+                <div style="margin: 10px 0;">
+                    <span class="level-badge">Básico</span>
+                    <span class="level-badge">Intermedio</span>
+                    <span class="level-badge">Avanzado</span>
+                </div>
+                <a href="CSharp/">Ver Tutorial</a>
+            </div>
+
+            <div class="lang-card">
+                <h3>🗄️ SQL</h3>
+                <p>Lenguaje para gestionar bases de datos. Esencial para cualquier desarrollador backend.</p>
+                <div style="margin: 10px 0;">
+                    <span class="level-badge">Básico</span>
+                    <span class="level-badge">Intermedio</span>
+                    <span class="level-badge">Avanzado</span>
+                </div>
+                <a href="SQL/">Ver Tutorial</a>
+            </div>
+        </div>
+
+        <section style="margin-top: 40px;">
+            <h2>¿Cuál lenguaje elegir?</h2>
+            <table style="width: 100%;">
+                <tr style="background: rgba(200, 100, 0, 0.1);">
+                    <th>Objetivo</th>
+                    <th>Lenguaje recomendado</th>
+                </tr>
+                <tr>
+                    <td><strong>Aprender a programar</strong></td>
+                    <td>👉 Python (más fácil)</td>
+                </tr>
+                <tr>
+                    <td><strong>Desarrollo web frontend</strong></td>
+                    <td>👉 HTML/CSS + JavaScript</td>
+                </tr>
+                <tr>
+                    <td><strong>Desarrollo web backend</strong></td>
+                    <td>👉 Python o JavaScript (Node.js)</td>
+                </tr>
+                <tr>
+                    <td><strong>Apps móviles Android</strong></td>
+                    <td>👉 Java o Kotlin</td>
+                </tr>
+                <tr>
+                    <td><strong>Apps desktop Windows</strong></td>
+                    <td>👉 C#</td>
+                </tr>
+                <tr>
+                    <td><strong>Ciencia de datos/IA</strong></td>
+                    <td>👉 Python</td>
+                </tr>
+                <tr>
+                    <td><strong>Sistemas críticos</strong></td>
+                    <td>👉 Java</td>
+                </tr>
+                <tr>
+                    <td><strong>Bases de datos</strong></td>
+                    <td>👉 SQL</td>
+                </tr>
+            </table>
+        </section>
+
+        <section style="margin-top: 40px; background: linear-gradient(90deg, rgba(200, 100, 0, 0.1) 0%, rgba(255, 150, 0, 0.1) 100%);
+                       padding: 20px; border-radius: 8px;">
+            <h2>💡 Ruta recomendada para principiantes:</h2>
+            <ol>
+                <li>📚 <strong>Comienza con Python</strong> (2-4 semanas) - Aprende conceptos fundamentales</li>
+                <li>🌐 <strong>Aprende HTML/CSS</strong> (1-2 semanas) - Comprende la estructura de la web</li>
+                <li>📱 <strong>Aprende JavaScript</strong> (3-4 semanas) - Haz páginas web interactivas</li>
+                <li>🗄️ <strong>Aprende SQL</strong> (1-2 semanas) - Maneja datos</li>
+                <li>🎯 <strong>Elige especialización:</strong></li>
+                <ul>
+                    <li>🌐 Web: Aprende frameworks como React, Django, Flask</li>
+                    <li>☕ Backend: Aprende Java o C#</li>
+                    <li>🤖 IA: Continúa con Python avanzado</li>
+                </ul>
+            </ol>
+        </section>
+
+        <section style="margin-top: 40px;">
+            <h2>Características de cada tutorial:</h2>
+            <ul>
+                <li>✅ <strong>Introducción:</strong> Conceptos básicos y aplicaciones</li>
+                <li>✅ <strong>Tutorial de 3 niveles:</strong> Básico, Intermedio, Avanzado (21 temas)</li>
+                <li>✅ <strong>Ejemplos prácticos:</strong> Proyectos reales para aprender haciendo</li>
+                <li>✅ <strong>Consola simulada:</strong> Ejecuta código directamente en el navegador</li>
+                <li>✅ <strong>Chatbot educativo:</strong> Pregunta tus dudas al bot</li>
+                <li>✅ <strong>Recursos adicionales:</strong> Links y tips para profundizar</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Serie Educativa - Lenguajes | <a href="../index.html">Volver al inicio</a></p>
+    </footer>
+
+    <script src="../theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guía completa de Cursor: el editor con IA para desarrollo más rápido.">
+    <title>Cursor - Editor Impulsado por IA | Serie Educativa</title>
+    <link rel="stylesheet" href="../../shared-styles.css">
+    <style>
+        .cursor-card { background: linear-gradient(135deg, rgba(0, 0, 0, 0.1) 0%, rgba(100, 100, 100, 0.1) 100%); 
+                       border-left: 4px solid #333333; padding: 15px; margin: 15px 0; border-radius: 5px; }
+        .ai-feature { background: linear-gradient(90deg, rgba(0, 150, 255, 0.1) 0%, rgba(100, 150, 255, 0.1) 100%);
+                      padding: 12px; border-radius: 5px; margin: 10px 0; border-left: 3px solid #0096ff; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <h1>🤖 Cursor - Editor Potenciado por IA</h1>
+    </header>
+
+    <nav class="breadcrumb">
+        <a href="../../index.html">Inicio</a> > <a href="../index.html">Code Viewers</a> > Cursor
+    </nav>
+
+    <main class="container">
+        <section>
+            <h2>¿Qué es Cursor?</h2>
+            <p>Cursor es un editor de código moderno basado en VS Code pero potenciado con IA integrada. Diseñado para acelerar el desarrollo usando autocompletado inteligente y asistencia de programación.</p>
+
+            <h3>Características revolucionarias:</h3>
+            <ul>
+                <li>🤖 IA integrada (GPT-4, Claude, Copilot+)</li>
+                <li>⚡ Autocompletado inteligente en tiempo real</li>
+                <li>💬 Chat integrado para preguntas sobre código</li>
+                <li>🔄 Refactorización automática propuesta por IA</li>
+                <li>🐛 Debugging asistido por IA</li>
+                <li>📝 Generación de código desde comentarios</li>
+                <li>👨‍💻 Compatible con extensiones de VS Code</li>
+                <li>⌨️ Mismos atajos que VS Code</li>
+            </ul>
+
+            <h3>¿Cuándo usar Cursor?</h3>
+            <ul>
+                <li>✅ Desarrollo rápido de prototipos</li>
+                <li>✅ Aprender nuevos lenguajes/frameworks</li>
+                <li>✅ Generar código boilerplate</li>
+                <li>✅ Refactorización de código</li>
+                <li>✅ Debugging asistido</li>
+                <li>✅ Documentación automática</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Instalación</h2>
+            <pre><code># Descargar desde https://cursor.sh
+
+# macOS
+# Descarga el .dmg y arrastra a Applications
+
+# Windows
+# Descarga el instalador .exe y ejecuta
+
+# Linux
+# Descarga el .AppImage y hazlo ejecutable
+chmod +x cursor-*.AppImage
+./cursor-*.AppImage
+
+# O usar package managers:
+# macOS (Homebrew)
+brew install --cask cursor</code></pre>
+        </section>
+
+        <section>
+            <h2>Configuración inicial</h2>
+
+            <div class="cursor-card">
+                <h3>1. Autenticación con IA</h3>
+                <p>Al abrir Cursor por primera vez:</p>
+                <ol>
+                    <li>Te pedirá que selecciones un modelo de IA</li>
+                    <li>Opciones: GPT-4, Claude, Copilot+ (según suscripción)</li>
+                    <li>Inicia sesión o conecta tu cuenta</li>
+                    <li>Acepta los términos y condiciones</li>
+                </ol>
+            </div>
+
+            <div class="cursor-card">
+                <h3>2. Sincronizar extensiones de VS Code</h3>
+                <ol>
+                    <li>File → Preferences → Settings</li>
+                    <li>Busca "Cursor: Import VS Code Extensions"</li>
+                    <li>Importará automáticamente tus extensiones favoritas</li>
+                </ol>
+            </div>
+
+            <div class="cursor-card">
+                <h3>3. Elegir modelo de IA predeterminado</h3>
+                <ol>
+                    <li>Cursor Settings (abajo a la izquierda)</li>
+                    <li>Selecciona "Models"</li>
+                    <li>Elige tu modelo preferido para cada tarea</li>
+                </ol>
+            </div>
+        </section>
+
+        <section>
+            <h2>Características principales de IA</h2>
+
+            <div class="ai-feature">
+                <h3>💬 Chat (Cmd/Ctrl + K)</h3>
+                <p>Chat integrado con contexto de tu proyecto. Formula preguntas sobre código, pide refactorización o explicaciones.</p>
+                <pre><code>// En el editor, presiona Ctrl+K
+// Escribe tu pregunta:
+"¿Cómo optimizar esta función?"
+"Refactoriza este código con mejor practices"
+"Explica qué hace esta función"</code></pre>
+            </div>
+
+            <div class="ai-feature">
+                <h3>✨ Autocompletado Inteligente (Tab)</h3>
+                <p>Sugiere líneas o bloques de código completos basado en contexto.</p>
+                <ul>
+                    <li>Empieza a escribir código</li>
+                    <li>Cursor sugiere líneas/bloques automáticamente</li>
+                    <li>Presiona Tab para aceptar</li>
+                    <li>Presiona Escape para rechazar</li>
+                </ul>
+            </div>
+
+            <div class="ai-feature">
+                <h3>📝 Generar código desde comentarios</h3>
+                <p>Escribe un comentario descriptivo y Cursor genera el código.</p>
+                <pre><code>// Función que calcula fibonacci recursivo con cache
+// Cursor generará:
+def fibonacci(n, cache=None):
+    if cache is None:
+        cache = {}
+    if n in cache:
+        return cache[n]
+    if n <= 1:
+        return n
+    cache[n] = fibonacci(n-1, cache) + fibonacci(n-2, cache)
+    return cache[n]</code></pre>
+            </div>
+
+            <div class="ai-feature">
+                <h3>🔄 Refactorizar (Cmd/Ctrl + Shift + R)</h3>
+                <p>Selecciona código y Cursor propone mejoras automáticas.</p>
+                <ol>
+                    <li>Selecciona código que quieres refactorizar</li>
+                    <li>Presiona Cmd/Ctrl + Shift + R</li>
+                    <li>Cursor propone versión mejorada</li>
+                    <li>Acepta o rechaza cambios</li>
+                </ol>
+            </div>
+
+            <div class="ai-feature">
+                <h3>🐛 Debugging Asistido</h3>
+                <p>Cursor entiende errores y propone soluciones.</p>
+                <ol>
+                    <li>Cuando hay error, Cursor lo destaca</li>
+                    <li>Hover sobre error para ver explicación</li>
+                    <li>Cursor sugiere fixes automáticos</li>
+                    <li>Acepta sugerencia o ignora</li>
+                </ol>
+            </div>
+
+            <div class="ai-feature">
+                <h3>📚 Documentación Automática</h3>
+                <p>Genera docstrings y comentarios automáticamente.</p>
+                <pre><code>// Coloca cursor en función sin documentar
+// Presiona Cmd/Ctrl + K
+// Escribe: "Documenta esta función"
+// Cursor genera documentación completa</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Atajos de teclado (heredados de VS Code)</h2>
+
+            <table style="width: 100%;">
+                <tr style="background: rgba(0, 0, 0, 0.1);">
+                    <th>Windows/Linux</th>
+                    <th>macOS</th>
+                    <th>Función</th>
+                </tr>
+                <tr>
+                    <td>Ctrl + K</td>
+                    <td>Cmd + K</td>
+                    <td>Abrir Chat de IA</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + L</td>
+                    <td>Cmd + L</td>
+                    <td>Generar respuesta IA (cuando selección)</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + Shift + R</td>
+                    <td>Cmd + Shift + R</td>
+                    <td>Refactorizar con IA</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + P</td>
+                    <td>Cmd + P</td>
+                    <td>Buscar archivo (Quick Open)</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + /</td>
+                    <td>Cmd + /</td>
+                    <td>Comentar/Descomentar</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + Shift + P</td>
+                    <td>Cmd + Shift + P</td>
+                    <td>Paleta de comandos</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + B</td>
+                    <td>Cmd + B</td>
+                    <td>Toggle sidebar</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + `</td>
+                    <td>Ctrl + `</td>
+                    <td>Terminal integrada</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Modelos de IA disponibles</h2>
+
+            <div class="cursor-card">
+                <h3>🚀 GPT-4</h3>
+                <ul>
+                    <li><strong>Velocidad:</strong> Moderada</li>
+                    <li><strong>Precisión:</strong> Muy alta</li>
+                    <li><strong>Mejor para:</strong> Tareas complejas, refactorización</li>
+                    <li><strong>Costo:</strong> $20/mes ilimitado (Pro)</li>
+                </ul>
+            </div>
+
+            <div class="cursor-card">
+                <h3>🧠 Claude 3</h3>
+                <ul>
+                    <li><strong>Velocidad:</strong> Muy rápida</li>
+                    <li><strong>Precisión:</strong> Muy alta</li>
+                    <li><strong>Mejor para:</strong> Generación de código, análisis</li>
+                    <li><strong>Costo:</strong> $20/mes ilimitado (Pro)</li>
+                </ul>
+            </div>
+
+            <div class="cursor-card">
+                <h3>⚡ GPT-3.5</h3>
+                <ul>
+                    <li><strong>Velocidad:</strong> Muy rápida</li>
+                    <li><strong>Precisión:</strong> Buena</li>
+                    <li><strong>Mejor para:</strong> Autocompletado rápido</li>
+                    <li><strong>Costo:</strong> Gratis (limitado)</li>
+                </ul>
+            </div>
+
+            <div class="cursor-card">
+                <h3>🔷 Copilot+</h3>
+                <ul>
+                    <li><strong>Velocidad:</strong> Muy rápida</li>
+                    <li><strong>Precisión:</strong> Muy buena</li>
+                    <li><strong>Mejor para:</strong> Autocompletado en tiempo real</li>
+                    <li><strong>Costo:</strong> $20/mes (licencia Microsoft)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Casos de uso prácticos</h2>
+
+            <div class="cursor-card">
+                <h3>📱 Crear una API REST rápidamente</h3>
+                <ol>
+                    <li>Crea archivo main.py</li>
+                    <li>Escribe comentario:</li>
+                </ol>
+                <pre><code># API REST con FastAPI que gestiona usuarios
+# GET /users - obtener todos los usuarios
+# POST /users - crear nuevo usuario
+# GET /users/{id} - obtener usuario por ID
+# DELETE /users/{id} - eliminar usuario
+
+# Presiona Cmd/Ctrl + K → "Genera el código"
+# Cursor generará la API completa</code></pre>
+            </div>
+
+            <div class="cursor-card">
+                <h3>🐍 Convertir código a otro lenguaje</h3>
+                <ol>
+                    <li>Selecciona código en Python</li>
+                    <li>Chat (Cmd/Ctrl + K): "Convierte esto a JavaScript"</li>
+                    <li>Cursor traduce el código automáticamente</li>
+                </ol>
+            </div>
+
+            <div class="cursor-card">
+                <h3>🔍 Entender código legacy</h3>
+                <ol>
+                    <li>Selecciona código viejo que no entiendes</li>
+                    <li>Chat: "¿Qué hace esta función? Explica en párrafos"</li>
+                    <li>Cursor explica en lenguaje natural</li>
+                </ol>
+            </div>
+
+            <div class="cursor-card">
+                <h3>✅ Tests automáticos</h3>
+                <ol>
+                    <li>Selecciona función</li>
+                    <li>Chat: "Genera tests unitarios completos"</li>
+                    <li>Cursor crea tests automáticamente</li>
+                </ol>
+            </div>
+
+            <div class="cursor-card">
+                <h3>🎨 Generar HTML/CSS desde descripción</h3>
+                <pre><code>// Crea un archivo index.html vacío
+// Escribe en comentario:
+// Un formulario de login moderno con fondo gradiente,
+// input de email y password, botón submit azul
+
+// Presiona Cmd/Ctrl + K → "Genera el HTML y CSS"
+// Cursor crea un formulario hermoso</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Configuración avanzada</h2>
+
+            <div class="cursor-card">
+                <h3>Personalizar modelo por lenguaje:</h3>
+                <pre><code>// En settings.json:
+{
+    "cursor.chat.model": "gpt-4",
+    "cursor.autocomplete.model": "gpt-3.5-turbo",
+    "[python]": {
+        "cursor.chat.model": "claude-3"
+    },
+    "[javascript]": {
+        "cursor.chat.model": "gpt-4"
+    }
+}</code></pre>
+            </div>
+
+            <div class="cursor-card">
+                <h3>Contexto del proyecto (.cursorrules)</h3>
+                <p>Crea archivo `.cursorrules` en raíz del proyecto para dar contexto a IA:</p>
+                <pre><code"># .cursorrules
+You are helping with a Python Django project.
+Use Django ORM for database queries.
+Follow PEP 8 style guide.
+Add type hints to all functions.
+Write docstrings for all functions.
+Prioritize performance and security.
+Use Django REST Framework for APIs.
+Create tests for all new code.</code></pre>
+            </div>
+
+            <div class="cursor-card">
+                <h3>Usar @selecciones en Chat</h3>
+                <p>En Chat, puedes referencias archivos y contexto:</p>
+                <pre><code>// En chat, escribe:
+@models.py - "¿Qué campos tiene el modelo User?"
+@utils.js - "Refactoriza esta función siguiendo best practices"
+#select - Usa selección actual como contexto</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Planes y precios</h2>
+
+            <table style="width: 100%; margin: 15px 0;">
+                <tr style="background: rgba(0, 0, 0, 0.1);">
+                    <th>Plan</th>
+                    <th>Precio</th>
+                    <th>Características</th>
+                </tr>
+                <tr>
+                    <td><strong>Free</strong></td>
+                    <td>$0</td>
+                    <td>GPT-3.5, 50 usos/día, chat limitado</td>
+                </tr>
+                <tr>
+                    <td><strong>Pro</strong></td>
+                    <td>$20/mes</td>
+                    <td>GPT-4, Claude, ilimitado, refactorización</td>
+                </tr>
+                <tr>
+                    <td><strong>Business</strong></td>
+                    <td>Contactar</td>
+                    <td>Para equipos, admin panel, SSO</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Diferencias: Cursor vs VS Code</h2>
+
+            <table style="width: 100%; margin: 15px 0;">
+                <tr style="background: rgba(0, 0, 0, 0.1);">
+                    <th>Característica</th>
+                    <th>Cursor</th>
+                    <th>VS Code</th>
+                </tr>
+                <tr>
+                    <td>IA integrada</td>
+                    <td>✅ Sí</td>
+                    <td>❌ No (requiere extensión)</td>
+                </tr>
+                <tr>
+                    <td>Chat integrado</td>
+                    <td>✅ Sí, nativo</td>
+                    <td>⚠️ Extensiones terceros</td>
+                </tr>
+                <tr>
+                    <td>Autocompletado IA</td>
+                    <td>✅ Muy bueno</td>
+                    <td>⚠️ Con Copilot</td>
+                </tr>
+                <tr>
+                    <td>Extensiones VS Code</td>
+                    <td>✅ Compatible</td>
+                    <td>✅ Nativas</td>
+                </tr>
+                <tr>
+                    <td>Precio</td>
+                    <td>$20/mes Pro</td>
+                    <td>Gratis</td>
+                </tr>
+                <tr>
+                    <td>Comunidad</td>
+                    <td>Creciente</td>
+                    <td>Gigante</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Tips para máximo provecho</h2>
+
+            <div class="cursor-card">
+                <h3>💡 Mejores prácticas:</h3>
+                <ul>
+                    <li>✅ Escribe comentarios descriptivos para mejor contexto</li>
+                    <li>✅ Usa `.cursorrules` para guiar el comportamiento de IA</li>
+                    <li>✅ Selecciona código específico para evitar cambios innecesarios</li>
+                    <li>✅ Usa modelo GPT-4 para tareas complejas, GPT-3.5 para rápidas</li>
+                    <li>✅ Revisa SIEMPRE el código generado antes de usar</li>
+                    <li>✅ Participa en comunidad Cursor para aprender de otros</li>
+                </ul>
+            </div>
+
+            <div class="cursor-card">
+                <h3>⚠️ Cuidados:</h3>
+                <ul>
+                    <li>⚠️ Cursor no reemplaza aprendizaje, es herramienta</li>
+                    <li>⚠️ Código generado puede tener bugs, necesita testing</li>
+                    <li>⚠️ Ten cuidado con datos sensibles en chat</li>
+                    <li>⚠️ Siempre revisa security implications del código</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>📚 Recursos útiles</h2>
+            <ul>
+                <li><a href="https://cursor.sh/" target="_blank">Sitio oficial de Cursor</a></li>
+                <li><a href="https://cursor.sh/docs" target="_blank">Documentación oficial</a></li>
+                <li><a href="https://twitter.com/cursor_ai" target="_blank">Twitter de Cursor</a></li>
+                <li><a href="https://discord.gg/PJEcgF7NQJ" target="_blank">Comunidad Discord</a></li>
+            </ul>
+        </section>
+
+        <section style="margin: 40px 0;">
+            <h2>🎯 Próximos pasos</h2>
+            <p><strong>Cursor es especialmente útil cuando combinado con otros editores:</strong></p>
+            <ul>
+                <li>Usa <strong>Cursor</strong> para desarrollo rápido y prototipado</li>
+                <li>Usa <strong>VS Code</strong> para control fino y extensiones</li>
+                <li>Usa <strong>Vim</strong> para edición ultra-rápida en terminal</li>
+            </ul>
+        </section>
+    </main>
+
+    <script src="../../theme.js"></script>
+</body>
+</html>

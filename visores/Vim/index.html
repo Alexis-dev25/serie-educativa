@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guía completa de Vim: modos, comandos, keybindings y configuración.">
+    <title>Vim - Editor de Terminal | Serie Educativa</title>
+    <link rel="stylesheet" href="../../shared-styles.css">
+    <style>
+        .vim-card { background: linear-gradient(135deg, rgba(0, 128, 0, 0.1) 0%, rgba(34, 139, 34, 0.1) 100%); 
+                    border-left: 4px solid #228B22; padding: 15px; margin: 15px 0; border-radius: 5px; }
+        .vim-mode { background: linear-gradient(90deg, rgba(0, 100, 0, 0.15) 0%, rgba(0, 150, 0, 0.15) 100%);
+                    padding: 10px; border-radius: 5px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <h1>⌨️ Vim - El Editor de Texto Más Poderoso</h1>
+    </header>
+
+    <nav class="breadcrumb">
+        <a href="../../index.html">Inicio</a> > <a href="../index.html">Code Viewers</a> > Vim
+    </nav>
+
+    <main class="container">
+        <section>
+            <h2>¿Qué es Vim?</h2>
+            <p>Vim (Vi IMproved) es un editor de texto extremadamente potente que funciona en la terminal. Es el favorito de programadores y sysadmins por su eficiencia.</p>
+
+            <h3>Características:</h3>
+            <ul>
+                <li>⚡ Ultrarrápido y ligero</li>
+                <li>🎯 Basado en modos (mejora productividad)</li>
+                <li>🔌 Completamente personalizable</li>
+                <li>🖥️ Funciona en cualquier terminal/servidor</li>
+                <li>🧠 Curva de aprendizaje pero muy rewarding</li>
+                <li>🎨 Amplio soporte de temas y plugins</li>
+            </ul>
+
+            <h3>¿Por qué aprender Vim?</h3>
+            <ul>
+                <li>✅ Editar archivos en servidores remotos (SSH)</li>
+                <li>✅ Desarrollo sin abandonar la terminal</li>
+                <li>✅ Atajos que duplican tu velocidad de edición</li>
+                <li>✅ Funciona en 40 años de sistemas UNIX</li>
+                <li>✅ Lenguaje de edición (composable)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Instalación</h2>
+            <pre><code># Linux (Ubuntu/Debian)
+sudo apt install vim vim-gui-common
+
+# macOS (Homebrew)
+brew install vim
+
+# O usar Vi que está preinstalado
+vi nombre-archivo.txt
+
+# Verificar versión
+vim --version</code></pre>
+        </section>
+
+        <section>
+            <h2>Los 4 Modos Principales</h2>
+
+            <div class="vim-mode">
+                <h3>1. NORMAL (Navegación y edición)</h3>
+                <p>El modo por defecto. Aquí escribes comandos para navegar y editar.</p>
+                <p><strong>Cómo entrar:</strong> Presiona <code>ESC</code> desde cualquier modo</p>
+            </div>
+
+            <div class="vim-mode">
+                <h3>2. INSERT (Insertar texto)</h3>
+                <p>Aquí escribes el código normalmente, como en un editor convencional.</p>
+                <p><strong>Cómo entrar:</strong> Presiona <code>i</code>, <code>a</code>, <code>o</code>, <code>I</code>, <code>A</code> o <code>O</code> desde NORMAL</p>
+            </div>
+
+            <div class="vim-mode">
+                <h3>3. COMMAND LINE (Comandos Ex)</h3>
+                <p>Ejecutas comandos más complejos (guardar, buscar y reemplazar, etc.)</p>
+                <p><strong>Cómo entrar:</strong> Presiona <code>:</code> desde NORMAL</p>
+            </div>
+
+            <div class="vim-mode">
+                <h3>4. VISUAL (Selección)</h3>
+                <p>Selecciona texto para aplicar operaciones.</p>
+                <p><strong>Cómo entrar:</strong> Presiona <code>v</code>, <code>V</code> o <code>Ctrl+V</code> desde NORMAL</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Comandos básicos (Modo NORMAL)</h2>
+
+            <div class="vim-card">
+                <h3>Movimiento (hjkl)</h3>
+                <pre><code>h              # Izquierda
+j              # Abajo
+k              # Arriba
+l              # Derecha
+
+w              # Siguiente palabra
+b              # Palabra anterior
+e              # Fin de palabra
+0              # Inicio de línea
+$              # Fin de línea
+G              # Fin del archivo
+gg             # Inicio del archivo
+:20            # Ir a línea 20</code></pre>
+            </div>
+
+            <div class="vim-card">
+                <h3>Edición básica</h3>
+                <pre><code>i              # Insertar antes del cursor
+a              # Insertar después del cursor
+o              # Nueva línea abajo e insertar
+O              # Nueva línea arriba e insertar
+x              # Eliminar carácter
+dd             # Eliminar línea
+d5d            # Eliminar 5 líneas
+dw             # Eliminar palabra
+d$             # Eliminar hasta fin de línea
+u              # Deshacer
+Ctrl+r         # Rehacer
+.              # Repetir último comando</code></pre>
+            </div>
+
+            <div class="vim-card">
+                <h3>Copia y pega</h3>
+                <pre><code>yy             # Copiar línea completa
+5yy            # Copiar 5 líneas
+yw             # Copiar palabra
+p              # Pegar después del cursor
+P              # Pegar antes del cursor
+v              # Seleccionar (VISUAL mode)
+y              # Copiar selección
+d              # Cortar selección</code></pre>
+            </div>
+
+            <div class="vim-card">
+                <h3>Búsqueda y reemplazo</h3>
+                <pre><code>/texto         # Buscar texto
+n              # Siguiente coincidencia
+N              # Coincidencia anterior
+:s/viejo/nuevo/    # Reemplazar en línea actual
+:%s/viejo/nuevo/   # Reemplazar en todo el archivo
+:%s/viejo/nuevo/gc # Reemplazar con confirmación</code></pre>
+            </div>
+
+            <div class="vim-card">
+                <h3>Modo de comando (:)</h3>
+                <pre><code>:w             # Guardar
+:q             # Salir
+:wq            # Guardar y salir
+:q!            # Salir sin guardar
+:e archivo.txt # Abrir archivo
+:split         # Dividir ventana horizontalmente
+:vsplit        # Dividir ventana verticalmente
+:set number    # Mostrar números de línea
+:set ignorecase # Búsqueda sin mayúsculas</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Comandos avanzados</h2>
+
+            <div class="vim-card">
+                <h3>Operadores (composables)</h3>
+                <p>La potencia de Vim: puedes combinar operadores con movimientos.</p>
+                <pre><code>d + w = dw     # Eliminar palabra
+c + i + " = ci"  # Cambiar dentro de comillas
+y + t + , = yt,  # Copiar hasta coma
+> + > + j = >>j  # Indentar dos líneas</code></pre>
+            </div>
+
+            <div class="vim-card">
+                <h3>Macros</h3>
+                <pre><code>q + a          # Empezar a grabar en registro 'a'
+(tus comandos...)
+q              # Parar grabación
+@a             # Ejecutar macro en 'a'
+5@a            # Ejecutar macro 5 veces</code></pre>
+            </div>
+
+            <div class="vim-card">
+                <h3>Selección visual avanzada</h3>
+                <pre><code>v              # Visual (por carácter)
+V              # Visual (línea completa)
+Ctrl+v         # Visual bloque (rectangular)
+gv             # Reseleccionar última selección
+:&lt;,&gt; comando  # Aplicar comando a selección</code></pre>
+            </div>
+
+            <div class="vim-card">
+                <h3>Búsqueda y navegación avanzada</h3>
+                <pre><code>*              # Buscar palabra bajo cursor
+#              # Buscar palabra anterior
+%              # Ir a bracket pareado
+[[ ]]          # Navegar por funciones
+{ }            # Navegar por párrafos
+:!comando      # Ejecutar comando shell</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Configuración (~/.vimrc)</h2>
+            <div class="vim-card">
+                <h3>Crear archivo de configuración:</h3>
+                <pre><code>" Configuración básica recomendada
+set number              " Mostrar números de línea
+set relativenumber      " Números relativos (mejor para movimientos)
+set tabstop=4           " Ancho de tabulación
+set shiftwidth=4        " Ancho de indentación
+set expandtab           " Convertir tabs a espacios
+set autoindent          " Autoindentación
+set ignorecase          " Búsqueda sin mayúsculas
+set smartcase           " Pero si escribes mayúsculas, sí considera
+set incsearch           " Búsqueda incremental
+set hlsearch            " Resaltar búsquedas
+set mouse=a             " Habilitar mouse
+syntax on               " Resaltado de sintaxis
+colorscheme desert      " Tema (prueba: slate, monokai, dracula)
+
+" Mapeos personalizados
+map &lt;leader&gt;n :NERDTreeToggle&lt;CR&gt;    " Toggle NERDTree
+let mapleader = ","     " Definir líder como ','</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Plugins con vim-plug</h2>
+
+            <div class="vim-card">
+                <h3>Instalar vim-plug:</h3>
+                <pre><code>curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim</code></pre>
+            </div>
+
+            <div class="vim-card">
+                <h3>Configurar plugins en ~/.vimrc:</h3>
+                <pre><code>call plug#begin('~/.vim/plugged')
+
+Plug 'tpope/vim-sensible'           " Configuración sensible
+Plug 'tpope/vim-surround'           " Manipular delimitadores
+Plug 'scrooloose/nerdtree'          " Explorador de archivos
+Plug 'junegunn/fzf'                 " Búsqueda fuzzy
+Plug 'vim-airline/vim-airline'      " Barra de estado hermosa
+Plug 'dracula/vim'                  " Tema Dracula
+Plug 'sheerun/vim-polyglot'         " Soporte de lenguajes
+
+call plug#end()
+
+" Ahora en Vim: :PlugInstall</code></pre>
+            </div>
+
+            <div class="vim-card">
+                <h3>Plugins recomendados:</h3>
+                <ul>
+                    <li><strong>vim-surround</strong> - Cambiar delimitadores rápido</li>
+                    <li><strong>vim-commentary</strong> - Comentar código</li>
+                    <li><strong>NERDTree</strong> - Explorador de archivos</li>
+                    <li><strong>fzf.vim</strong> - Búsqueda fuzzy (buscar archivos rápido)</li>
+                    <li><strong>CoC</strong> - Autocompletado inteligente</li>
+                    <li><strong>vim-airline</strong> - Barra de estado hermosa</li>
+                    <li><strong>dracula/vim</strong> - Tema oscuro popular</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Flujo de trabajo típico</h2>
+            <pre><code># 1. Abrir archivo
+vim archivo.py
+
+# 2. Entrar a insert mode y escribir
+i (presionar i)
+(escribir código...)
+
+# 3. Volver a normal mode y guardar
+ESC (presionar ESC)
+:wq (presionar :wq y Enter)</code></pre>
+        </section>
+
+        <section>
+            <h2>Diferencia: Vim vs Vi vs Neovim</h2>
+            <table style="width: 100%; margin: 15px 0;">
+                <tr style="background: rgba(34, 139, 34, 0.1);">
+                    <th>Editor</th>
+                    <th>Descripción</th>
+                    <th>Ventaja</th>
+                </tr>
+                <tr>
+                    <td><strong>Vi</strong></td>
+                    <td>Original (1976), preinstalado en todos los Unix</td>
+                    <td>Siempre disponible en servidores antiguos</td>
+                </tr>
+                <tr>
+                    <td><strong>Vim</strong></td>
+                    <td>Vi Improved (1991), mucho más potente</td>
+                    <td>Mejor compatibilidad, más plugins, más activo</td>
+                </tr>
+                <tr>
+                    <td><strong>Neovim</strong></td>
+                    <td>Refactor moderno de Vim (2014)</td>
+                    <td>Mejor arquitectura, plugins asíncronos, Lua scripting</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Tutoriales interactivos</h2>
+            <ul>
+                <li>Ejecuta <code>vimtutor</code> en terminal para tutorial interactivo (30 min)</li>
+                <li>Juego interactivo: <a href="https://vim.adventure.js.org/" target="_blank">Vim Adventures</a></li>
+                <li>Práctica: <a href="https://www.freecodecamp.org/news/vim-isnt-hard-heres-how-to-master-it/" target="_blank">Guía completa FreeCodeCamp</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>⭐ Consejos finales</h2>
+            <ul>
+                <li>🎯 <strong>Aprende gradualmente</strong> - No intentes aprender todo al inicio</li>
+                <li>⚡ <strong>Memoriza hjkl</strong> - Son la base de la navegación</li>
+                <li>📖 <strong>:help es tu amigo</strong> - Escribe :help para ayuda</li>
+                <li>🔄 <strong>Práctica diaria</strong> - Vim es como aprender un instrumento</li>
+                <li>💪 <strong>Es difícil al inicio pero ultra rewarding</strong></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>📚 Recursos útiles</h2>
+            <ul>
+                <li><a href="https://www.vim.org/" target="_blank">Sitio oficial de Vim</a></li>
+                <li><a href="https://neovim.io/" target="_blank">Neovim (versión moderna)</a></li>
+                <li><a href="https://github.com/vim/vim" target="_blank">Repositorio de Vim</a></li>
+                <li><a href="https://www.linux.com/training-tutorials/vim-101-beginners-guide-vim/" target="_blank">Guía para principiantes</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <script src="../../theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guía completa de macOS: instalación, Terminal, Homebrew, desarrollo en Mac.">
+    <title>macOS - Guía Completa | Serie Educativa</title>
+    <link rel="stylesheet" href="../../shared-styles.css">
+    <style>
+        .os-tabs { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+        .os-btn { background: #555555; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .os-btn.active { background: #000000; }
+        .os-content { display: none; }
+        .os-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <h1>🍎 macOS - Sistema para Creativos</h1>
+    </header>
+
+    <nav class="breadcrumb">
+        <a href="../../index.html">Inicio</a> > <a href="../index.html">Sistemas Operativos</a> > macOS
+    </nav>
+
+    <main class="container">
+        <section>
+            <h2>¿Qué es macOS?</h2>
+            <p>macOS es el sistema operativo de Apple para computadoras Mac. Basado en Unix, combina estabilidad con un diseño elegante y es favorito entre creativos y desarrolladores.</p>
+
+            <h3>Versiones recientes:</h3>
+            <ul>
+                <li><strong>macOS Sonoma (14):</strong> Última versión con IA mejorada</li>
+                <li><strong>macOS Ventura (13):</strong> Enfocada en privacidad y rendimiento</li>
+                <li><strong>macOS Monterey (12):</strong> Aún soportada, versión estable</li>
+            </ul>
+
+            <h3>¿Por qué es popular para desarrollo?</h3>
+            <ul>
+                <li>✅ Basado en Unix (poderosa terminal)</li>
+                <li>✅ Hardware optimizado (mejor rendimiento)</li>
+                <li>✅ Excelente para desarrollo iOS/macOS</li>
+                <li>✅ Herramientas de desarrollo incluidas (Xcode)</li>
+                <li>✅ Gran comunidad de desarrolladores</li>
+            </ul>
+        </section>
+
+        <div class="os-tabs">
+            <button class="os-btn active" onclick="switchOS('terminal')">📱 Terminal & Zsh</button>
+            <button class="os-btn" onclick="switchOS('homebrew')">🍺 Homebrew</button>
+            <button class="os-btn" onclick="switchOS('dev')">💻 Desarrollo en Mac</button>
+            <button class="os-btn" onclick="switchOS('system')">⚙️ Sistema</button>
+        </div>
+
+        <!-- TERMINAL & ZSH -->
+        <section id="terminal" class="os-content active">
+            <h2>📱 Terminal & Zsh</h2>
+            <p>macOS usa Zsh (Z Shell) como shell por defecto desde Catalina.</p>
+
+            <h3>Comandos básicos (Unix):</h3>
+            <pre><code>ls                     # Listar archivos
+ls -la                 # Lista detallada con ocultos
+pwd                    # Directorio actual
+cd directorio          # Cambiar directorio
+mkdir nombre           # Crear directorio
+rm archivo.txt         # Eliminar archivo
+rm -r carpeta/         # Eliminar carpeta y contenido
+cp archivo.txt copia.txt    # Copiar
+mv archivo.txt nuevo_nombre # Mover/renombrar
+cat archivo.txt        # Ver contenido
+open archivo.txt       # Abrir con app predeterminada
+open -a "Visual Studio Code" archivo.txt  # Abrir con app específica</code></pre>
+
+            <h3>Comandos específicos de Mac:</h3>
+            <pre><code>open .                 # Abrir carpeta actual en Finder
+open -a Finder         # Abrir Finder
+pbcopy < archivo.txt   # Copiar contenido al portapapeles
+ls | pbcopy            # Copiar output al portapapeles
+pbpaste                # Pegar del portapapeles
+screencapture -x screenshot.png  # Captura de pantalla
+say "Hola"             # Síntesis de voz
+curl -O url            # Descargar archivo</code></pre>
+
+            <h3>Configurar Zsh:</h3>
+            <pre><code># Editar configuración
+nano ~/.zshrc
+# o
+vim ~/.zshrc
+
+# Aliases útiles
+alias ll='ls -la'
+alias python='python3'
+alias clearning='clear && printf "\033c"'
+
+# Función de utilidad
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Cambiar shell
+chsh -s /bin/zsh       # Cambiar a Zsh
+chsh -s /bin/bash      # Cambiar a Bash</code></pre>
+
+            <h3>Oh My Zsh (personalización):</h3>
+            <pre><code># Instalar Oh My Zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Usar temas
+# Editar ~/.zshrc y cambiar: ZSH_THEME="robbyrussel"
+# Temas populares: agnoster, powerlevel10k, spaceship
+
+# Plugins recomendados
+# En ~/.zshrc, añadir a plugins array:
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</code></pre>
+        </section>
+
+        <!-- HOMEBREW -->
+        <section id="homebrew" class="os-content">
+            <h2>🍺 Homebrew - Gestor de Paquetes</h2>
+            <p>Homebrew es el gestor de paquetes estándar para macOS.</p>
+
+            <h3>Instalación:</h3>
+            <pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Verificar instalación
+brew --version
+brew doctor             # Verificar salud de Homebrew</code></pre>
+
+            <h3>Comandos básicos:</h3>
+            <pre><code>brew install nombre-paquete   # Instalar paquete
+brew uninstall nombre-paquete  # Desinstalar
+brew upgrade           # Actualizar todos los paquetes
+brew update            # Actualizar lista de paquetes
+brew search búsqueda   # Buscar paquete
+brew list              # Listar paquetes instalados
+brew info nombre-paquete   # Información del paquete</code></pre>
+
+            <h3>Paquetes útiles:</h3>
+            <pre><code>brew install node      # Node.js y NPM
+brew install python3   # Python 3
+brew install git       # Git
+brew install wget      # Descargador
+brew install nvm       # Node Version Manager
+brew install rbenv     # Ruby Version Manager
+brew install java      # Java
+brew install docker    # Docker
+brew install postgresql # PostgreSQL
+brew install redis     # Redis</code></pre>
+
+            <h3>Casks (aplicaciones GUI):</h3>
+            <pre><code>brew install --cask visual-studio-code  # VS Code
+brew install --cask google-chrome       # Chrome
+brew install --cask firefox             # Firefox
+brew install --cask slack               # Slack
+brew install --cask discord             # Discord
+brew install --cask spotify             # Spotify
+brew install --cask notion              # Notion
+brew install --cask figma               # Figma</code></pre>
+
+            <h3>Gestión de servicios:</h3>
+            <pre><code>brew services start postgresql   # Iniciar servicio
+brew services stop postgresql    # Detener servicio
+brew services restart postgresql # Reiniciar
+brew services list               # Listar servicios</code></pre>
+        </section>
+
+        <!-- DESARROLLO EN MAC -->
+        <section id="dev" class="os-content">
+            <h2>💻 Desarrollo en Mac</h2>
+
+            <h3>Xcode Command Line Tools:</h3>
+            <pre><code>xcode-select --install      # Instalar herramientas de línea de comandos
+xcode-select --version      # Verificar versión
+xcode-select --reset        # Reiniciar configuración</code></pre>
+
+            <h3>Gestores de versiones:</h3>
+            <pre><code># Node Version Manager (nvm)
+brew install nvm
+nvm install node            # Instalar Node.js
+nvm use 18                  # Usar versión específica
+nvm list                    # Ver versiones instaladas
+
+# Ruby Version Manager (rbenv)
+brew install rbenv
+rbenv install 3.2.0
+rbenv global 3.2.0
+
+# Python con pyenv
+brew install pyenv
+pyenv install 3.11.0
+pyenv global 3.11.0</code></pre>
+
+            <h3>Desarrollo iOS/macOS:</h3>
+            <pre><code># Instalar Xcode (desde App Store)
+# o línea de comandos
+xcode-select --install
+
+# Compilar project Swift
+swift build
+
+# Crear proyecto iOS
+xcode-select -p         # Verificar path de Xcode
+open -a Xcode           # Abrir Xcode
+
+# CocoaPods (gestor de dependencias iOS)
+sudo gem install cocoapods
+pod init
+pod install</code></pre>
+
+            <h3>Variables de entorno:</h3>
+            <pre><code># En ~/.zshrc o ~/.bash_profile
+export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.nvm/versions/node/v18.0.0/bin:$PATH"
+
+# Crear variable personalizada
+export MI_VARIABLE="valor"
+
+# Aplicar cambios
+source ~/.zshrc</code></pre>
+
+            <h3>Git en Mac:</h3>
+            <pre><code>brew install git        # Instalar Git (o con Xcode Tools)
+git --version
+git config --global user.name "Tu Nombre"
+git config --global user.email "tu@email.com"
+
+# SSH para GitHub
+ssh-keygen -t ed25519 -C "tu@email.com"
+cat ~/.ssh/id_ed25519.pub   # Copiar al GitHub</code></pre>
+        </section>
+
+        <!-- SISTEMA -->
+        <section id="system" class="os-content">
+            <h2>⚙️ Configuración del Sistema</h2>
+
+            <h3>Información del sistema:</h3>
+            <pre><code>system_profiler SPSoftwareDataType   # Info de macOS
+sysctl -a               # Parámetros del kernel
+uname -a                # Información del sistema
+sw_vers                 # Versión de macOS
+diskutil list           # Listar discos
+df -h                   # Espacio disponible</code></pre>
+
+            <h3>Procesos y memoria:</h3>
+            <pre><code>ps aux                  # Listar procesos
+ps aux | grep nombre    # Buscar proceso específico
+top -l 1                # Snapshot de top
+Activity Monitor         # Abrir app nativa (GUI)
+kill -9 PID             # Matar proceso
+killall nombre-app      # Matar aplicación por nombre</code></pre>
+
+            <h3>Preferencias de sistema:</h3>
+            <pre><code># Mostrar archivos ocultos en Finder
+defaults write com.apple.finder AppleShowAllFiles YES
+killall Finder          # Reiniciar Finder
+
+# Acelerar animaciones
+defaults write com.apple.dock autohide-time-modifier -int 0
+killall Dock
+
+# Tomar screenshots en PNG (cambiar de formato)
+defaults write com.apple.screencapture type png
+
+# Listar todos los settings
+defaults read</code></pre>
+
+            <h3>Seguridad:</h3>
+            <pre><code># Habilitar firewall
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+
+# Exigir password después de dormir
+defaults write com.apple.screensaver askForPassword -int 1
+
+# Verificar integridad del sistema
+sudo softwareupdate -i -a   # Instalar actualizaciones
+spctl --status              # Ver estado de Gatekeeper</code></pre>
+
+            <h3>Red y conectividad:</h3>
+            <pre><code>ifconfig                # Configuración de red
+networksetup -getinfo "Wi-Fi"  # Info de red específica
+ping google.com          # Probar conectividad
+traceroute google.com    # Ruta de conexión
+nslookup google.com      # Resolver DNS
+netstat -an             # Conexiones de red
+lsof -i :puerto         # Procesos usando puerto específico</code></pre>
+
+            <h3>Mantenimiento:</h3>
+            <pre><code># Limpiar caché
+rm -rf ~/Library/Caches/*
+rm -rf ~/Library/Saved\ Application\ State/*
+
+# Actualizar paquetes Homebrew
+brew update && brew upgrade
+
+# Limpiar descargas de Xcode
+rm -rf ~/Library/Developer/Xcode/DerivedData/*
+
+# Verificar disco
+diskutil verifyVolume /
+diskutil repairVolume /</code></pre>
+        </section>
+
+        <section style="margin-top: 40px;">
+            <h2>🎯 Atajos de teclado útiles</h2>
+            <table style="width: 100%; margin: 15px 0;">
+                <tr style="background: rgba(85, 85, 85, 0.1);">
+                    <th>Atajo</th>
+                    <th>Función</th>
+                </tr>
+                <tr>
+                    <td>Cmd + Espacio</td>
+                    <td>Abrir Spotlight (búsqueda)</td>
+                </tr>
+                <tr>
+                    <td>Cmd + Q</td>
+                    <td>Cerrar aplicación</td>
+                </tr>
+                <tr>
+                    <td>Cmd + W</td>
+                    <td>Cerrar ventana</td>
+                </tr>
+                <tr>
+                    <td>Cmd + Tab</td>
+                    <td>Alternar entre aplicaciones</td>
+                </tr>
+                <tr>
+                    <td>Cmd + C/X/V</td>
+                    <td>Copiar/Cortar/Pegar</td>
+                </tr>
+                <tr>
+                    <td>Cmd + Z</td>
+                    <td>Deshacer</td>
+                </tr>
+                <tr>
+                    <td>Cmd + , (coma)</td>
+                    <td>Abrir Preferencias de app</td>
+                </tr>
+                <tr>
+                    <td>Fn + F11</td>
+                    <td>Ver Escritorio</td>
+                </tr>
+            </table>
+
+            <h2>📚 Recursos útiles</h2>
+            <ul>
+                <li><a href="https://support.apple.com/" target="_blank">Soporte de Apple</a></li>
+                <li><a href="https://brew.sh/" target="_blank">Sitio oficial de Homebrew</a></li>
+                <li><a href="https://www.zsh.org/" target="_blank">Zsh Shell</a></li>
+                <li><a href="https://developer.apple.com/" target="_blank">Apple Developer</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        function switchOS(tab) {
+            document.querySelectorAll('.os-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.os-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

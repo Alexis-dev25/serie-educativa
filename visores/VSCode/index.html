@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guía completa de Visual Studio Code: instalación, extensiones, shortcuts y configuración.">
+    <title>Visual Studio Code - Editor Moderno | Serie Educativa</title>
+    <link rel="stylesheet" href="../../shared-styles.css">
+    <style>
+        .vscode-card { background: linear-gradient(135deg, rgba(0, 120, 212, 0.1) 0%, rgba(0, 90, 158, 0.1) 100%); 
+                       border-left: 4px solid #0078d4; padding: 15px; margin: 15px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <h1>📝 Visual Studio Code - Editor de Desarrollo Moderno</h1>
+    </header>
+
+    <nav class="breadcrumb">
+        <a href="../../index.html">Inicio</a> > <a href="../index.html">Code Viewers</a> > Visual Studio Code
+    </nav>
+
+    <main class="container">
+        <section>
+            <h2>¿Qué es Visual Studio Code?</h2>
+            <p>VS Code es un editor de código ligero, potente y gratuito creado por Microsoft. Es el editor más popular entre desarrolladores actualmente.</p>
+
+            <h3>Características principales:</h3>
+            <ul>
+                <li>⚡ Muy rápido y responsivo</li>
+                <li>🧪 Debugging integrado</li>
+                <li>🔧 Terminal integrada</li>
+                <li>🎨 Miles de temas y extensiones</li>
+                <li>🔍 IntelliSense (autocompletado inteligente)</li>
+                <li>📦 Git integrado</li>
+                <li>👥 Live Share (colaborar en tiempo real)</li>
+                <li>☁️ Cloud Sync (sincronizar configuración en nube)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Instalación</h2>
+            <pre><code># macOS (Homebrew)
+brew install --cask visual-studio-code
+
+# Windows (Chocolatey)
+choco install vscode
+
+# Linux (Ubuntu/Debian)
+sudo apt install code
+
+# O descargar desde: https://code.visualstudio.com</code></pre>
+        </section>
+
+        <section>
+            <h2>Atajos de teclado esenciales</h2>
+
+            <table style="width: 100%;">
+                <tr style="background: rgba(0, 120, 212, 0.1);">
+                    <th>Windows/Linux</th>
+                    <th>macOS</th>
+                    <th>Función</th>
+                </tr>
+                <tr>
+                    <td>Ctrl + P</td>
+                    <td>Cmd + P</td>
+                    <td>Abrir archivo (Quick Open)</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + B</td>
+                    <td>Cmd + B</td>
+                    <td>Toggle sidebar</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + `</td>
+                    <td>Ctrl + `</td>
+                    <td>Toggle terminal integrada</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + Shift + P</td>
+                    <td>Cmd + Shift + P</td>
+                    <td>Paleta de comandos</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + F</td>
+                    <td>Cmd + F</td>
+                    <td>Buscar</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + H</td>
+                    <td>Cmd + H</td>
+                    <td>Buscar y reemplazar</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + D</td>
+                    <td>Cmd + D</td>
+                    <td>Seleccionar palabra siguiente (multi-cursor)</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + Alt + ↑/↓</td>
+                    <td>Opt + Cmd + ↑/↓</td>
+                    <td>Duplicar línea</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + /</td>
+                    <td>Cmd + /</td>
+                    <td>Comentar/Descomentar</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + Shift + K</td>
+                    <td>Cmd + Shift + K</td>
+                    <td>Eliminar línea</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + G</td>
+                    <td>Cmd + G</td>
+                    <td>Ir a línea específica</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + .</td>
+                    <td>Cmd + .</td>
+                    <td>Quick Fix (acciones rápidas)</td>
+                </tr>
+                <tr>
+                    <td>F2</td>
+                    <td>F2</td>
+                    <td>Renombrar símbolo</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + Shift + F</td>
+                    <td>Cmd + Shift + F</td>
+                    <td>Buscar en archivos</td>
+                </tr>
+                <tr>
+                    <td>Alt + Z</td>
+                    <td>Opt + Z</td>
+                    <td>Toggle Word Wrap</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Extensiones imprescindibles</h2>
+
+            <div class="vscode-card">
+                <h3>Pasos para instalar extensiones:</h3>
+                <ol>
+                    <li>Presiona Ctrl+Shift+X (Cmd+Shift+X en Mac)</li>
+                    <li>Busca la extensión deseada</li>
+                    <li>Presiona "Install"</li>
+                </ol>
+            </div>
+
+            <div class="vscode-card">
+                <h3>🌟 Extensiones esenciales:</h3>
+                <ul>
+                    <li><strong>Prettier</strong> - Formateador de código automático</li>
+                    <li><strong>Pylance</strong> - IntelliSense mejorado para Python</li>
+                    <li><strong>ESLint</strong> - Linting para JavaScript</li>
+                    <li><strong>Thunder Client</strong> - Cliente REST (como Postman)</li>
+                    <li><strong>Live Server</strong> - Servidor web local con reload automático</li>
+                    <li><strong>GitLens</strong> - Información de Git integrada</li>
+                    <li><strong>Bracket Pair Colorizer 2</strong> - Destaca brackets pareados</li>
+                    <li><strong>Better Comments</strong> - Comentarios con colores</li>
+                    <li><strong>Path Intellisense</strong> - Autocompletado de rutas</li>
+                    <li><strong>Code Runner</strong> - Ejecutar código rápidamente</li>
+                    <li><strong>REST Client</strong> - Realizar requests HTTP desde VS Code</li>
+                    <li><strong>Remote - SSH</strong> - Editar archivos en servidores remotos</li>
+                </ul>
+            </div>
+
+            <div class="vscode-card">
+                <h3>🎨 Temas populares:</h3>
+                <ul>
+                    <li><strong>Dracula Official</strong> - Tema oscuro muy popular</li>
+                    <li><strong>One Dark Pro</strong> - Inspirado en Atom</li>
+                    <li><strong>Nord</strong> - Colores árticos relajantes</li>
+                    <li><strong>Ayu</strong> - Minimalista y limpio</li>
+                    <li><strong>Gruvbox Dark</strong> - Colores retro cálidos</li>
+                    <li><strong>Synthwave 84</strong> - Estilo cyberpunk</li>
+                </ul>
+            </div>
+
+            <div class="vscode-card">
+                <h3>📦 Extensiones por lenguaje:</h3>
+                <ul>
+                    <li><strong>Python:</strong> Pylance, Python, Jupyter</li>
+                    <li><strong>JavaScript/Node:</strong> ESLint, Prettier, Thunder Client</li>
+                    <li><strong>HTML/CSS:</strong> Live Server, Prettier, Emmet</li>
+                    <li><strong>Java:</strong> Extension Pack for Java</li>
+                    <li><strong>C#:</strong> C#, C# Extensions</li>
+                    <li><strong>Docker:</strong> Docker, Docker Compose</li>
+                    <li><strong>Database:</strong> SQLTools, MySQL, PostgreSQL</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Configuración (settings.json)</h2>
+
+            <div class="vscode-card">
+                <h3>Acceder a configuración:</h3>
+                <p>File → Preferences → Settings (Ctrl+,)</p>
+                <p>O editar directamente: <code>Ctrl+Shift+P → Preferences: Open Settings (JSON)</code></p>
+            </div>
+
+            <div class="vscode-card">
+                <h3>Configuración recomendada:</h3>
+                <pre><code>{
+    "editor.fontSize": 14,
+    "editor.fontFamily": "Fira Code, Consolas",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.wordWrap": "on",
+    "editor.rulers": [80, 120],
+    "editor.minimap.enabled": false,
+    "files.autoSave": "afterDelay",
+    "workbench.colorTheme": "Dracula Official",
+    "workbench.iconTheme": "material-icon-theme",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python",
+        "editor.formatOnSave": true
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "git.autofetch": true,
+    "terminal.integrated.shell.windows": "C:\\\\Program Files\\\\PowerShell\\\\7\\\\pwsh.exe"
+}</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Debugging (Depuración)</h2>
+
+            <div class="vscode-card">
+                <h3>Debugging de Python:</h3>
+                <ol>
+                    <li>Instala extensión "Python" o "Pylance"</li>
+                    <li>Crea archivo .vscode/launch.json:</li>
+                </ol>
+                <pre><code>{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
+}</code></pre>
+                <ol start="3">
+                    <li>Presiona F5 para iniciar depuración</li>
+                    <li>Usa breakpoints (Ctrl+Click en línea) para parar ejecución</li>
+                </ol>
+            </div>
+
+            <div class="vscode-card">
+                <h3>Debugging de Node.js:</h3>
+                <pre><code>{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${workspaceFolder}/app.js",
+            "skipFiles": ["&lt;node_internals&gt;/**"]
+        }
+    ]
+}</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Características avanzadas</h2>
+
+            <div class="vscode-card">
+                <h3>Multi-cursor y edición:</h3>
+                <ul>
+                    <li>Ctrl+D - Selecciona palabra siguiente (usa múltiples veces)</li>
+                    <li>Ctrl+Shift+L - Selecciona todas las instancias</li>
+                    <li>Ctrl+Alt+↑/↓ - Duplica línea arriba/abajo</li>
+                    <li>Shift+Alt+↑/↓ - Mueve línea arriba/abajo</li>
+                </ul>
+            </div>
+
+            <div class="vscode-card">
+                <h3>Snippets personalizados:</h3>
+                <ol>
+                    <li>File → Preferences → User Snippets</li>
+                    <li>Selecciona lenguaje (ej: "python")</li>
+                    <li>Ejemplo:</li>
+                </ol>
+                <pre><code>{
+    "Print Function": {
+        "prefix": "pf",
+        "body": [
+            "print(f\"${1:variable} = {${1:variable}}\")"
+        ],
+        "description": "Print f-string debug"
+    }
+}</code></pre>
+            </div>
+
+            <div class="vscode-card">
+                <h3>Workspaces (Espacios de trabajo):</h3>
+                <p>Guarda múltiples proyectos juntos:</p>
+                <ol>
+                    <li>File → Save Workspace As...</li>
+                    <li>VS Code guardará archivo .code-workspace</li>
+                    <li>Abre con: File → Open Workspace from File</li>
+                </ol>
+            </div>
+
+            <div class="vscode-card">
+                <h3>Live Share (Colaboración):</h3>
+                <ol>
+                    <li>Instala extensión "Live Share"</li>
+                    <li>Presiona Ctrl+Shift+P → "Live Share: Start Collaboration Session"</li>
+                    <li>Comparte link con compañeros para colaborar en tiempo real</li>
+                </ol>
+            </div>
+        </section>
+
+        <section>
+            <h2>Terminal integrada</h2>
+
+            <div class="vscode-card">
+                <h3>Usar terminal:</h3>
+                <ul>
+                    <li>Abre: Ctrl+` (acento grave)</li>
+                    <li>Nueva terminal: Ctrl+Shift+`</li>
+                    <li>Cambiar shell: Ctrl+Shift+P → "Terminal: Select Default Profile"</li>
+                </ul>
+            </div>
+
+            <div class="vscode-card">
+                <h3>Ventajas:</h3>
+                <ul>
+                    <li>No necesitas dejar VS Code</li>
+                    <li>La terminal hereda variables del workspace</li>
+                    <li>Puedes tener múltiples terminales abiertas</li>
+                    <li>Output resaltado por sintaxis en Python, JavaScript, etc.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Control de versiones (Git)</h2>
+
+            <div class="vscode-card">
+                <h3>Git integrado:</h3>
+                <ul>
+                    <li>Ctrl+Shift+G - Abre panel de Git</li>
+                    <li>Ver cambios sin salir de VS Code</li>
+                    <li>Commit, push, pull desde la interfaz</li>
+                    <li>Resolve merge conflicts visualmente</li>
+                </ul>
+            </div>
+
+            <div class="vscode-card">
+                <h3>Recomendación: Instala GitLens</h3>
+                <p>Extensión que muestra quién cambió cada línea, historial de commits, y más.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Performance tips</h2>
+            <div class="vscode-card">
+                <h3>Optimizar VS Code:</h3>
+                <ul>
+                    <li>⚡ Desactiva extensiones innecesarias</li>
+                    <li>🖥️ Aumenta memoria: launch.json</li>
+                    <li>📁 Excluye carpetas de búsqueda: settings.json</li>
+                    <li>🔍 Usa .gitignore para ignorar archivos</li>
+                </ul>
+
+                <pre><code>// Excluir carpetas
+"files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/.venv": true
+}
+
+// Excluir de búsqueda
+"search.exclude": {
+    "**/node_modules": true,
+    "**/.git": true
+}</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>🎯 Comparación: VS Code vs Alternativas</h2>
+            <table style="width: 100%; margin: 15px 0;">
+                <tr style="background: rgba(0, 120, 212, 0.1);">
+                    <th>Editor</th>
+                    <th>Ventaja</th>
+                    <th>Desventaja</th>
+                </tr>
+                <tr>
+                    <td><strong>VS Code</strong></td>
+                    <td>Mejor balance, comunidad grande, gratis</td>
+                    <td>Basado en Electron (usa más RAM)</td>
+                </tr>
+                <tr>
+                    <td><strong>Sublime Text</strong></td>
+                    <td>Ultra rápido, ligero</td>
+                    <td>Menos plugins, comunidad menor</td>
+                </tr>
+                <tr>
+                    <td><strong>Vim</strong></td>
+                    <td>Extremadamente poderoso, funciona en terminal</td>
+                    <td>Curva de aprendizaje muy pronunciada</td>
+                </tr>
+                <tr>
+                    <td><strong>IntelliJ IDEA</strong></td>
+                    <td>Mejor para Java, IDE completo</td>
+                    <td>Pesado, requiere licencia</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>📚 Recursos útiles</h2>
+            <ul>
+                <li><a href="https://code.visualstudio.com/" target="_blank">Sitio oficial</a></li>
+                <li><a href="https://marketplace.visualstudio.com/" target="_blank">VS Code Marketplace</a></li>
+                <li><a href="https://code.visualstudio.com/docs" target="_blank">Documentación oficial</a></li>
+                <li><a href="https://www.youtube.com/c/VisualStudioCode" target="_blank">Canal oficial YouTube</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <script src="../../theme.js"></script>
+</body>
+</html>

@@ -1,124 +1,442 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Java</title>
+    <title>Java - Tutorial Interactivo y Consola Simulada | Serie Educativa</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tutorial interactivo de Java con ejemplos complejos, consola simulada, chatbot educativo y ejercicios prácticos.">
+    <meta name="keywords" content="Java, tutorial, programación, consola interactiva, ejemplos, POO, chatbot">
+    <meta name="author" content="Alexis Gutiérrez">
+    <meta name="robots" content="index, follow">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Java - Tutorial Interactivo | Serie Educativa">
+    <meta property="og:description" content="Aprende Java con ejemplos prácticos, consola simulada y chatbot educativo.">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Java - Tutorial Interactivo",
+        "description": "Tutorial completo de Java con ejemplos, consola simulada y ejercicios",
+        "inLanguage": "es"
+    }
+    </script>
+    
     <link rel="stylesheet" href="../../shared-styles.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tutorial-styles.css">
+    <link rel="stylesheet" href="../../chatbot.css">
+    <link rel="stylesheet" href="../../console-simulator.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    </head>
-    <body>
-        <header class="site-header">
-            <h1>Java</h1>
-            <div class="controls"><button id="theme-toggle" aria-label="Cambiar tema">🌓</button></div>
-        </header>
-        <h1>¿Qué es Java?</h1>
+</head>
+<body>
+    <header class="site-header">
+        <h1>Java</h1>
+        <div class="controls"><button id="theme-toggle" aria-label="Cambiar tema">🌓</button></div>
+    </header>
+
+    <h1>¿Qué es Java?</h1>
     <section class="intro">
         <div class="text">
             <h2>Introducción</h2>
-            <p>Java es un lenguaje de programación orientado a objetos, 
-                de propósito general y compilado, desarrollado por Sun 
-                Microsystems (ahora propiedad de Oracle) y lanzado en 1995. 
-                Es famoso por su lema: “Escribe una vez, ejecútalo en cualquier 
-                lugar” gracias a su máquina virtual (JVM).</p>
-    </div>
+            <p>Java es un lenguaje de programación orientado a objetos, de propósito general y compilado, desarrollado por Sun Microsystems (ahora Oracle) en 1995. Es famoso por "Write Once, Run Anywhere" (WORA) gracias a la JVM.</p>
+            <p>Java es uno de los lenguajes más utilizados en el mundo empresarial, especialmente en aplicaciones de gran escala, sistemas backend y desarrollo Android.</p>
+        </div>
     </section>
+
     <section class="info">
-        <h2>Más Informarción</h2>
+        <h2>Más Información</h2>
         <div class="carac">
             <h3>Características principales</h3>
             <ul>
-                <li>
-                    <p>Lenguaje compilado e interpretado (compila a bytecode que se ejecuta en la JVM).</p>
-                </li>
-                <li>
-                    <p>Fuertemente tipado y orientado a objetos.</p>
-                </li>
-                <li>
-                    <p>Soporta programación modular, multihilo y segura.</p>
-                </li>
-                <li>
-                    <p>Multiplataforma: se ejecuta en cualquier sistema con una JVM..</p>
-                </li>
-                <li>
-                    <p>Ampliamente usado en aplicaciones 
-                        empresariales, apps Android, sistemas embebidos, y más.</p>
-                </li>
+                <li><p>Lenguaje compilado e interpretado (bytecode en JVM).</p></li>
+                <li><p>Fuertemente tipado y orientado a objetos.</p></li>
+                <li><p>Soporta modularidad, multihilos, concurrencia y seguridad.</p></li>
+                <li><p>Multiplataforma: funciona en cualquier sistema con JVM.</p></li>
+                <li><p>Gestión automática de memoria con Garbage Collector.</p></li>
+                <li><p>Amplio ecosistema de librerías y frameworks.</p></li>
             </ul>
         </div>
         <div class="usos">
             <h3>Usos comunes</h3>
             <ul>
-                <li>
-                    <p>Aplicaciones Android (es el lenguaje base junto con Kotlin).</p>
-                </li>
-                <li>
-                    <p>Sistemas empresariales (banca, seguros, grandes organizaciones).</p>
-                </li>
-                <li>
-                    <p>Aplicaciones web (con frameworks como Spring).</p>
-                </li>
-                <li>
-                    <p>Juegos y herramientas de escritorio (como Minecraft).</p>
-                </li>
-                <li>
-                    <p>Internet of Things (IoT) y tarjetas inteligentes.</p>
-                </li>
+                <li><p>Aplicaciones Android y desarrollo móvil.</p></li>
+                <li><p>Sistemas empresariales y aplicaciones web.</p></li>
+                <li><p>Frameworks como Spring Boot, Jakarta EE.</p></li>
+                <li><p>Big Data (Hadoop, Spark), IoT, sistemas embebidos.</p></li>
+                <li><p>Juegos y herramientas de escritorio.</p></li>
             </ul>
         </div>
         <div class="vent-desvent">
             <h3>Ventajas y Desventajas</h3>
             <h4>Ventajas</h4>
             <ul>
-                <li>
-                    <p>Portabilidad total gracias a la JVM.</p>
-                </li>
-                <li>
-                    <p>Excelente manejo de la memoria y errores.</p>
-                </li>
-                <li>
-                    <p>Gran comunidad y abundante documentación.</p>
-                </li>
-                <li>
-                    <p>Muy usado en el mundo corporativo y académico.</p>
-                </li>
+                <li><p>Portabilidad con WORA y JVM.</p></li>
+                <li><p>Excelente gestión de memoria y errores.</p></li>
+                <li><p>Comunidad enorme con 25+ años de madurez.</p></li>
+                <li><p>Altísima demanda laboral en el sector empresarial.</p></li>
             </ul>
             <h4>Desventajas</h4>
             <ul>
-                <li>
-                    <p>Sintaxis más verborreica que otros lenguajes como Python.</p>
-                </li>
-                <li>
-                    <p>Puede ser más pesado en rendimiento comparado con C++.</p>
-                </li>
-                <li>
-                    <p>Requiere más configuración para tareas simples.</p>
-                </li>
+                <li><p>Sintaxis verborreica comparada con Python.</p></li>
+                <li><p>Mayor consumo de memoria que C++ o Go.</p></li>
+                <li><p>Configuración más compleja para tareas simples.</p></li>
             </ul>
         </div>
     </section>
-    <section class="concepts">
-        <h2>Para aprender!</h2>
-        <div>
-            <h3>Conceptos 🧠</h3>
-        <ul>
-            <li><p>Clases y objetos</p></li>
-            <li><p>Encapsulamiento, herencia, polimorfismo</p></li>
-            <li><p>Interfaces y clases abstractas</p></li>
-            <li><p>Colecciones (List, Map, Set)</p></li>
-            <li><p>Excepciones y manejo de errores</p></li>
-            <li><p>Multihilos y concurrencia</p></li>
-            <li><p>JDBC (para conectar con bases de datos)</p></li>
-        </ul>
+
+    <!-- Tutorial Interactivo -->
+    <section class="tutorial-section">
+        <h2>📚 Tutorial Completo</h2>
+        
+        <div class="tutorial-tabs">
+            <button class="tab-btn active" data-tab="basico">Nivel Básico</button>
+            <button class="tab-btn" data-tab="intermedio">Nivel Intermedio</button>
+            <button class="tab-btn" data-tab="avanzado">Nivel Avanzado</button>
         </div>
-    <div class="codigo">
-        <h3>Ejemplo!</h3>
-            <a href="ejemplo.java" download>Descargar Ejemplo</a>
-    </div>
+
+        <div id="basico" class="tab-content active">
+            <h3>1. Estructura Básica</h3>
+            <pre><code>public class MiPrimeraClase {
+    public static void main(String[] args) {
+        System.out.println("¡Hola, Mundo!");
+    }
+}</code></pre>
+
+            <h3>2. Variables y Tipos</h3>
+            <pre><code>int edad = 25;
+double altura = 1.75;
+String nombre = "Juan";
+boolean esEstudiante = true;
+char genero = 'M';
+
+System.out.println(nombre);</code></pre>
+
+            <h3>3. Operadores</h3>
+            <pre><code>int a = 10, b = 5;
+System.out.println(a + b);      // 15
+System.out.println(a - b);      // 5
+System.out.println(a * b);      // 50
+System.out.println(a / b);      // 2
+System.out.println(a % b);      // 0</code></pre>
+
+            <h3>4. Condicionales</h3>
+            <pre><code>int edad = 18;
+
+if (edad >= 18) {
+    System.out.println("Eres mayor");
+} else if (edad >= 13) {
+    System.out.println("Eres adolescente");
+} else {
+    System.out.println("Eres niño");
+}</code></pre>
+
+            <h3>5. Bucles</h3>
+            <pre><code>for (int i = 0; i < 5; i++) {
+    System.out.println(i);
+}
+
+int contador = 0;
+while (contador < 3) {
+    System.out.println(contador);
+    contador++;
+}</code></pre>
+
+            <h3>6. Arrays</h3>
+            <pre><code>int[] numeros = {1, 2, 3, 4, 5};
+String[] nombres = {"Juan", "María", "Carlos"};
+
+System.out.println(numeros[0]);       // 1
+System.out.println(nombres.length);   // 3
+
+for (int num : numeros) {
+    System.out.println(num);
+}</code></pre>
+
+            <h3>7. Métodos</h3>
+            <pre><code>public static void saludar(String nombre) {
+    System.out.println("¡Hola, " + nombre + "!");
+}
+
+public static int sumar(int a, int b) {
+    return a + b;
+}
+
+saludar("Juan");
+System.out.println(sumar(5, 3));</code></pre>
+        </div>
+
+        <div id="intermedio" class="tab-content">
+            <h3>1. Clases y Objetos</h3>
+            <pre><code>public class Persona {
+    private String nombre;
+    private int edad;
+    
+    public Persona(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+    
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+}</code></pre>
+
+            <h3>2. Herencia</h3>
+            <pre><code>public class Animal {
+    public void hacerSonido() {
+        System.out.println("Sonido genérico");
+    }
+}
+
+public class Perro extends Animal {
+    @Override
+    public void hacerSonido() {
+        System.out.println("¡Guau guau!");
+    }
+}</code></pre>
+
+            <h3>3. Polimorfismo</h3>
+            <pre><code>Animal perro = new Perro();
+Animal gato = new Gato();
+
+perro.hacerSonido();  // ¡Guau guau!
+gato.hacerSonido();   // ¡Miau!</code></pre>
+
+            <h3>4. ArrayList</h3>
+            <pre><code>import java.util.ArrayList;
+
+ArrayList<String> frutas = new ArrayList<>();
+frutas.add("Manzana");
+frutas.add("Plátano");
+
+System.out.println(frutas.get(0));   // Manzana
+System.out.println(frutas.size());   // 2
+frutas.remove(0);</code></pre>
+
+            <h3>5. HashMap</h3>
+            <pre><code>import java.util.HashMap;
+
+HashMap<String, Integer> edades = new HashMap<>();
+edades.put("Juan", 25);
+edades.put("María", 28);
+
+System.out.println(edades.get("Juan"));  // 25
+
+for (String nombre : edades.keySet()) {
+    System.out.println(nombre + ": " + edades.get(nombre));
+}</code></pre>
+
+            <h3>6. Excepciones</h3>
+            <pre><code>try {
+    int resultado = 10 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Error: División entre cero");
+} finally {
+    System.out.println("Fin");
+}</code></pre>
+
+            <h3>7. Strings</h3>
+            <pre><code>String texto = "Java INCREÍBLE";
+
+System.out.println(texto.toLowerCase());        
+System.out.println(texto.toUpperCase());        
+System.out.println(texto.length());             
+System.out.println(texto.contains("Java"));     
+System.out.println(texto.replace("Java", "Python"));</code></pre>
+        </div>
+
+        <div id="avanzado" class="tab-content">
+            <h3>1. Interfaces</h3>
+            <pre><code>public interface Animal {
+    void hacerSonido();
+    void moverse();
+}
+
+public class Perro implements Animal {
+    @Override
+    public void hacerSonido() { System.out.println("¡Guau!"); }
+    
+    @Override
+    public void moverse() { System.out.println("Corre"); }
+}</code></pre>
+
+            <h3>2. Clases Abstractas</h3>
+            <pre><code>public abstract class Vehiculo {
+    abstract void acelerar();
+    
+    public void info() {
+        System.out.println("Soy un vehículo");
+    }
+}
+
+public class Auto extends Vehiculo {
+    @Override
+    void acelerar() {
+        System.out.println("Auto acelera");
+    }
+}</code></pre>
+
+            <h3>3. Genéricos</h3>
+            <pre><code>public class Caja<T> {
+    private T contenido;
+    
+    public void guardar(T item) { this.contenido = item; }
+    public T obtener() { return contenido; }
+}
+
+Caja<String> cajaString = new Caja<>();
+cajaString.guardar("Hola");
+System.out.println(cajaString.obtener());</code></pre>
+
+            <h3>4. Lambdas</h3>
+            <pre><code>ArrayList<Integer> numeros = new ArrayList<>();
+numeros.add(1); numeros.add(2); numeros.add(3);
+
+// Lambda para imprimir
+numeros.forEach(n -> System.out.println(n * 2));
+
+// Con stream
+numeros.stream()
+       .filter(n -> n > 1)
+       .map(n -> n * 10)
+       .forEach(System.out::println);</code></pre>
+
+            <h3>5. Streams API</h3>
+            <pre><code>import java.util.Arrays;
+
+int[] numeros = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+int suma = Arrays.stream(numeros)
+                 .filter(n -> n % 2 == 0)
+                 .sum();
+
+long count = Arrays.stream(numeros)
+                  .filter(n -> n > 5)
+                  .count();</code></pre>
+
+            <h3>6. Anotaciones</h3>
+            <pre><code>@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface MiAnotacion {
+    String valor() default "default";
+}
+
+public class Clase {
+    @MiAnotacion(valor = "Hola")
+    public void metodo() {
+        System.out.println("Anotado");
+    }
+}</code></pre>
+
+            <h3>7. Reflection</h3>
+            <pre><code>Class<?> clase = Class.forName("java.lang.String");
+
+System.out.println("Nombre: " + clase.getName());
+System.out.println("Métodos: " + clase.getMethods().length);
+
+for (var metodo : clase.getDeclaredMethods()) {
+    System.out.println("- " + metodo.getName());
+}</code></pre>
+        </div>
     </section>
+
+    <!-- Ejemplos Complejos -->
+    <section class="ejemplos-section">
+        <h2>🎯 Ejemplos Complejos</h2>
+
+        <div class="example-card">
+            <h3>Ejemplo 1: Gestor de Estudiantes</h3>
+            <pre><code>public class Estudiante {
+    private String nombre;
+    private double promedio;
+    
+    public Estudiante(String nombre, double promedio) {
+        this.nombre = nombre;
+        this.promedio = promedio;
+    }
+    
+    public boolean estáAprobado() { return promedio >= 6.0; }
+}
+
+ArrayList<Estudiante> estudiantes = new ArrayList<>();
+estudiantes.add(new Estudiante("Juan", 7.5));
+
+double promedio = estudiantes.stream()
+    .mapToDouble(e -> e.promedio)
+    .average()
+    .orElse(0.0);</code></pre>
+        </div>
+
+        <div class="example-card">
+            <h3>Ejemplo 2: Validador de Datos</h3>
+            <pre><code>public class Validador {
+    public static boolean esEmail(String email) {
+        return email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
+    }
+    
+    public static boolean esContraValid(String pass) {
+        return pass.length() >= 8 &&
+               pass.matches(".*[A-Z].*") &&
+               pass.matches(".*\\d.*");
+    }
+}
+
+System.out.println(Validador.esEmail("user@mail.com"));
+System.out.println(Validador.esContraValid("Segura123"));</code></pre>
+        </div>
+
+        <div class="example-card">
+            <h3>Ejemplo 3: Calculadora</h3>
+            <pre><code>public class Calculadora {
+    private ArrayList<String> historial = new ArrayList<>();
+    
+    public double sumar(double a, double b) {
+        double res = a + b;
+        historial.add(a + " + " + b + " = " + res);
+        return res;
+    }
+    
+    public void mostrarHistorial() {
+        for (String op : historial) {
+            System.out.println(op);
+        }
+    }
+}
+
+Calculadora calc = new Calculadora();
+calc.sumar(5, 3);
+calc.mostrarHistorial();</code></pre>
+        </div>
+    </section>
+
+    <!-- Consola Simulada -->
+    <section class="console-section">
+        <h2>🖥️ Prueba el Código</h2>
+        <div id="java-console"></div>
+    </section>
+
+    <!-- Chatbot -->
+    <section class="chatbot-section">
+        <h2>🤖 Chatbot Educativo</h2>
+        <p>Haz preguntas sobre Java y obtén respuestas inmediatas</p>
+        <div id="java-chatbot"></div>
+    </section>
+
+    <section class="example">
+        <h2>Para aprender 🧠</h2>
+        <div>
+            <h3>Ejemplo!</h3>
+            <a href="ejemplo.java" download>Descargar Ejemplo</a>
+        </div>
+    </section>
+
     <section class="mas">
         <h2>Un poco más!</h2>
+        <div class="mi-opinion">
+            <h3>¿Cómo lo uso yo?</h3>
+            <p>Java es mi lenguaje principal para aplicaciones empresariales. Su solidez, escalabilidad y comunidad lo hacen indispensable. Aunque verborreico, sus beneficios justifican la sintaxis.</p>
+        </div>
         <div class="links">
             <h3>Links</h3>
             <a href="https://www.java.com/es/" target="_blank" rel="noopener noreferrer" class="java">
@@ -127,8 +445,56 @@
             <a href="https://github.com/Alexis-dev25" target="_blank" rel="noopener noreferrer" class="social-icon">
                 <img src="github.png" alt="github" width="100" height="100">
             </a>
-        </div>
-        </section>
+        </div>    
+    </section>
+
     <script src="../../theme.js"></script>
+    <script src="../../chatbot.js"></script>
+    <script src="../../console-simulator.js"></script>
+    <script>
+        const javaExamples = [
+            {
+                name: "Hola Mundo",
+                code: `System.out.println("¡Hola, Mundo!");`
+            },
+            {
+                name: "Variables",
+                code: `int edad = 25;
+String nombre = "Juan";
+System.out.println(nombre + " tiene " + edad + " años");`
+            },
+            {
+                name: "Bucle for",
+                code: `for (int i = 1; i <= 5; i++) {
+    System.out.println("Número: " + i);
+}`
+            },
+            {
+                name: "Array",
+                code: `int[] nums = {10, 20, 30, 40};
+for (int n : nums) {
+    System.out.println(n);
+}`
+            },
+            {
+                name: "Operaciones",
+                code: `int a = 15, b = 3;
+System.out.println("Suma: " + (a + b));
+System.out.println("Producto: " + (a * b));`
+            }
+        ];
+
+        createConsoleUI('java-console', 'java', javaExamples);
+        createChatbotUI('java-chatbot', 'java');
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>

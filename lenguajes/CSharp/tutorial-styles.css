@@ -1,0 +1,59 @@
+.tab-btn {
+    background: linear-gradient(135deg, #239120 0%, #1a6e0f 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, #1a6e0f 0%, #0f5408 100%);
+    box-shadow: 0 4px 10px rgba(35, 145, 32, 0.4);
+    transform: scale(1.05);
+}
+
+.tab-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(35, 145, 32, 0.3);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.example-card {
+    background: linear-gradient(135deg, rgba(35, 145, 32, 0.1) 0%, rgba(26, 110, 15, 0.1) 100%);
+    border-left: 4px solid #239120;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+.tutorial-tabs {
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+[data-theme="dark"] .tab-btn {
+    background: linear-gradient(135deg, #1a6e0f 0%, #0f5408 100%);
+}
+
+[data-theme="dark"] .example-card {
+    background: linear-gradient(135deg, rgba(35, 145, 32, 0.15) 0%, rgba(26, 110, 15, 0.15) 100%);
+    border-left-color: #239120;
+}

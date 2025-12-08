@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistemas Operativos: Windows, Linux, macOS. Aprende comandos, configuración y desarrollo.">
+    <title>Sistemas Operativos | Serie Educativa</title>
+    <link rel="stylesheet" href="../shared-styles.css">
+    <style>
+        .os-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 30px 0; }
+        .os-card { background: linear-gradient(135deg, rgba(0, 100, 200, 0.1) 0%, rgba(100, 150, 255, 0.1) 100%);
+                   border: 2px solid rgba(0, 100, 200, 0.3); border-radius: 10px; padding: 20px; text-align: center;
+                   transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
+        .os-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0, 100, 200, 0.2); }
+        .os-card img { width: 80px; height: 80px; margin: 15px 0; }
+        .os-card h3 { margin: 15px 0; color: #333; }
+        .os-card p { color: #666; font-size: 14px; }
+        .os-card a { display: inline-block; margin-top: 15px; padding: 10px 20px; background: #0078d4; color: white;
+                     text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .os-card a:hover { background: #005a9e; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <h1>🖥️ Sistemas Operativos</h1>
+    </header>
+
+    <nav class="breadcrumb">
+        <a href="../index.html">Inicio</a> > Sistemas Operativos
+    </nav>
+
+    <main class="container">
+        <section>
+            <h2>Aprende sobre Sistemas Operativos</h2>
+            <p>Domina los principales sistemas operativos y sus herramientas de desarrollo.</p>
+        </section>
+
+        <div class="os-grid">
+            <div class="os-card">
+                <h3>🪟 Windows</h3>
+                <p>El sistema operativo más popular del mundo. Aprende CMD, PowerShell, desarrollo en Windows y administración del sistema.</p>
+                <a href="windows/">Ver Guía</a>
+            </div>
+
+            <div class="os-card">
+                <h3>🐧 Linux</h3>
+                <p>El sistema de código abierto. Domina Bash, línea de comandos, administración y desarrollo en servidores.</p>
+                <a href="linux/">Ver Guía</a>
+            </div>
+
+            <div class="os-card">
+                <h3>🍎 macOS</h3>
+                <p>El sistema de Apple. Aprende Terminal, Zsh, Homebrew y desarrollo específico para Mac.</p>
+                <a href="macos/">Ver Guía</a>
+            </div>
+        </div>
+
+        <section style="margin-top: 40px;">
+            <h2>¿Cuál elegir?</h2>
+            <table style="width: 100%;">
+                <tr style="background: rgba(0, 120, 212, 0.1);">
+                    <th>Windows</th>
+                    <th>Linux</th>
+                    <th>macOS</th>
+                </tr>
+                <tr>
+                    <td>✅ Más popular en desktop</td>
+                    <td>✅ Servidores y open source</td>
+                    <td>✅ Mejor para desarrollo</td>
+                </tr>
+                <tr>
+                    <td>✅ Mejor gaming</td>
+                    <td>✅ Libre y gratuito</td>
+                    <td>✅ Integración Apple</td>
+                </tr>
+                <tr>
+                    <td>✅ Software empresarial</td>
+                    <td>✅ Personalizable</td>
+                    <td>✅ Hardware optimizado</td>
+                </tr>
+                <tr>
+                    <td>❌ Menos control</td>
+                    <td>❌ Curva de aprendizaje</td>
+                    <td>❌ Más costoso</td>
+                </tr>
+            </table>
+        </section>
+
+        <section style="margin-top: 40px;">
+            <h2>Recomendaciones por uso:</h2>
+            <ul>
+                <li><strong>Desarrollo Web:</strong> Linux o macOS (mejor terminal)</li>
+                <li><strong>Desarrollo .NET/Windows:</strong> Windows (nativo)</li>
+                <li><strong>Desarrollo iOS:</strong> macOS (obligatorio)</li>
+                <li><strong>Servidores:</strong> Linux (dominante)</li>
+                <li><strong>Uso general/Gaming:</strong> Windows</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Serie Educativa - OS | <a href="../index.html">Volver al inicio</a></p>
+    </footer>
+
+    <script src="../theme.js"></script>
+</body>
+</html>

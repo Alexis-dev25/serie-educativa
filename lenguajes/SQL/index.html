@@ -1,127 +1,633 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>SQL</title>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aprende SQL desde cero. Tutorial completo con ejemplos, consultas y chatbot educativo.">
+    <meta name="keywords" content="SQL, Base de datos, SELECT, INSERT, UPDATE, DELETE, JOINs, tutorial">
+    <meta name="author" content="Serie Educativa">
+    <meta property="og:title" content="SQL - Tutorial Completo">
+    <meta property="og:description" content="Guía interactiva de SQL con ejemplos prácticos y chatbot">
+    <meta property="og:type" content="website">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": "SQL - Tutorial Completo",
+        "description": "Aprende SQL desde cero hasta nivel avanzado",
+        "educationalLevel": "Beginner to Advanced",
+        "inLanguage": "es"
+    }
+    </script>
+    <title>SQL - Tutorial Completo | Serie Educativa</title>
     <link rel="stylesheet" href="../../shared-styles.css">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    </head>
-    <body>
-        <header class="site-header">
-            <h1>SQL</h1>
-            <div class="controls"><button id="theme-toggle" aria-label="Cambiar tema">🌓</button></div>
-        </header>
-        <h1>¿Qué es SQL?</h1>
-    <section class="intro">
-        <div class="text">
-            <h2>Introducción</h2>
-            <p>SQL (Structured Query Language) es un lenguaje específico diseñado para gestionar y manipular bases de datos relacionales. Fue desarrollado por IBM en los años 70 y se ha convertido en el estándar para trabajar con sistemas de bases de datos como MySQL, PostgreSQL, SQL Server, SQLite, Oracle, entre otros.</p>
-    </div>
-    </section>
-    <section class="info">
-        <h2>Más Informarción</h2>
-        <div class="carac">
-            <h3>Características principales</h3>
+    <link rel="stylesheet" href="tutorial-styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <h1>🗄️ SQL - Lenguaje de Consulta Estructurado</h1>
+    </header>
+
+    <nav class="breadcrumb">
+        <a href="../../index.html">Inicio</a> > <a href="../index.html">Lenguajes</a> > SQL
+    </nav>
+
+    <main class="container">
+        <!-- SECCIÓN INTRODUCTORIA -->
+        <section class="intro-section">
+            <h2>¿Qué es SQL?</h2>
+            <p>SQL (Structured Query Language) es el lenguaje estándar para gestionar bases de datos relacionales. Te permite crear, leer, actualizar y eliminar datos de forma eficiente.</p>
+            
+            <h3>Características principales:</h3>
             <ul>
-                <li>
-                    <p>Permite consultar, insertar, actualizar y eliminar datos en bases de datos.</p>
-                </li>
-                <li>
-                    <p>Usa una sintaxis estructurada basada en comandos.</p>
-                </li>
-                <li>
-                    <p>Trabaja con tablas relacionadas entre sí.</p>
-                </li>
-                <li>
-                    <p>Es declarativo: le dices qué hacer, no cómo hacerlo.</p>
-                </li>
+                <li><strong>Relacional:</strong> Datos organizados en tablas con relaciones</li>
+                <li><strong>ACID:</strong> Garantiza integridad y consistencia de datos</li>
+                <li><strong>Escalable:</strong> Maneja millones de registros eficientemente</li>
+                <li><strong>Estándar:</strong> Usado en MySQL, PostgreSQL, SQL Server, Oracle</li>
+                <li><strong>Potente:</strong> Consultas complejas con JOINs y agregaciones</li>
             </ul>
-        </div>
-        <div class="commands">
-            <h3>Comandos</h3>
-            <table class="tabla">
-                <thead>
-                    <th>Comando</th>
-                    <th>Función</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>SELECT</td>
-                        <td>Recupera datos de una tabla</td>
-                    </tr>
-                    <tr>
-                        <td>INSERT</td>
-                        <td>Agrega nuevos registros</td>
-                    </tr>
-                    <tr>
-                        <td>UPDATE</td>
-                        <td>Modifica datos existentes</td>
-                    </tr>
-                    <tr>
-                        <td>DELETE</td>
-                        <td>Elimina registros</td>
-                    </tr>
-                    <tr>
-                        <td>CREATE</td>
-                        <td>Crea bases de datos, tablas u otros objeto</td>
-                    </tr>
-                    <tr>
-                        <td>DROP</td>
-                        <td>Elimina bases de datos o tablas</td>
-                    </tr>
-                    <tr>
-                        <td>WHERE</td>
-                        <td>Filtra registros según condiciones</td>
-                    </tr>
-                    <tr>
-                        <td>JOIN</td>
-                        <td>Combina datos de varias tablas</td>
-                    </tr>
-                </tbody>
+
+            <h3>¿Para qué sirve?</h3>
+            <p>SQL es esencial para:</p>
+            <ul>
+                <li>Gestionar datos de aplicaciones web y móviles</li>
+                <li>Análisis de datos y reportes</li>
+                <li>Data warehousing y business intelligence</li>
+                <li>Transacciones bancarias y comercio electrónico</li>
+                <li>Cualquier sistema que almacene información</li>
+            </ul>
+
+            <h3>Ventajas y desventajas</h3>
+            <table style="width: 100%; margin: 15px 0;">
+                <tr style="background: rgba(211, 84, 0, 0.1);">
+                    <th>✅ Ventajas</th>
+                    <th>❌ Limitaciones</th>
+                </tr>
+                <tr>
+                    <td>Consultas potentes y flexibles</td>
+                    <td>Requiere diseño previo (esquema)</td>
+                </tr>
+                <tr>
+                    <td>Seguridad y control de acceso</td>
+                    <td>Menos flexible que NoSQL para datos no estructurados</td>
+                </tr>
+                <tr>
+                    <td>Integridad referencial garantizada</td>
+                    <td>Curva de aprendizaje para consultas complejas</td>
+                </tr>
+                <tr>
+                    <td>Transacciones ACID</td>
+                    <td>Escalabilidad horizontal más compleja</td>
+                </tr>
             </table>
-        </div>
-        <div class="vent-desvent">
-            <h3>Ventajas y Desventajas</h3>
-            <h4>Ventajas</h4>
-            <ul>
-                <li>
-                    <p>Ideal para almacenar grandes volúmenes de datos.</p>
-                </li>
-                <li>
-                    <p>Muy eficiente para realizar búsquedas, filtros y reportes.</p>
-                </li>
-                <li>
-                    <p>Lenguaje estándar en el mundo empresarial y de software.</p>
-                </li>
-            </ul>
-            <h4>Desventajas</h4>
-            <ul>
-                <li>
-                    <p>No está diseñado para tareas fuera del ámbito de bases de datos.</p>
-                </li>
-                <li>
-                    <p>Requiere entender bien la estructura de las tablas y relaciones.</p>
-                </li>
-                <li>
-                    <p>Algunas variaciones según el sistema (MySQL ≠ Oracle en algunos detalles).</p>
-                </li>
-            </ul>
-        </div>
-    </section>
-    <section class="mas">
-        <h2>Un poco más!</h2>
-        <div class="links">
-            <h3>Links</h3>
-            <a href="https://www.w3schools.com/sql/" target="_blank" rel="noopener noreferrer" class="sql">
-                <img src="sql.png" alt="sql" width="100" height="100">
-            </a>
-            <a href="https://github.com/Alexis-dev25" target="_blank" rel="noopener noreferrer" class="social-icon">
-                <img src="github.png" alt="github" width="100" height="100">
-            </a>
-        </div>    
         </section>
+
+        <!-- SECCIÓN TUTORIAL -->
+        <section class="tutorial-section">
+            <h2>Tutorial Interactivo</h2>
+            
+            <div class="tutorial-tabs">
+                <button class="tab-btn active" onclick="switchTab('basico')">📚 Nivel Básico</button>
+                <button class="tab-btn" onclick="switchTab('intermedio')">🚀 Nivel Intermedio</button>
+                <button class="tab-btn" onclick="switchTab('avanzado')">⚡ Nivel Avanzado</button>
+            </div>
+
+            <!-- BÁSICO -->
+            <div id="basico" class="tab-content active">
+                <h3>Fundamentos de SQL</h3>
+                
+                <div class="example-card">
+                    <h4>1️⃣ SELECT - Seleccionar datos</h4>
+                    <p>La consulta más fundamental. Recupera datos de una tabla.</p>
+                    <pre><code>SELECT * FROM usuarios;
+SELECT nombre, email FROM usuarios;
+SELECT nombre FROM usuarios WHERE edad > 18;</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>2️⃣ INSERT - Insertar datos</h4>
+                    <p>Añade nuevos registros a una tabla.</p>
+                    <pre><code>INSERT INTO usuarios (nombre, email, edad) 
+VALUES ('Juan', 'juan@email.com', 25);
+
+INSERT INTO usuarios VALUES (1, 'María', 'maria@email.com', 30);</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>3️⃣ UPDATE - Actualizar datos</h4>
+                    <p>Modifica registros existentes.</p>
+                    <pre><code>UPDATE usuarios SET edad = 26 WHERE nombre = 'Juan';
+UPDATE usuarios SET email = 'nuevo@email.com' WHERE id = 1;</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>4️⃣ DELETE - Eliminar datos</h4>
+                    <p>Borra registros de una tabla.</p>
+                    <pre><code>DELETE FROM usuarios WHERE id = 1;
+DELETE FROM usuarios WHERE edad < 18;</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>5️⃣ WHERE - Filtros</h4>
+                    <p>Especifica condiciones para las consultas.</p>
+                    <pre><code>WHERE edad > 18
+WHERE nombre = 'Juan' AND edad > 25
+WHERE ciudad IN ('Madrid', 'Barcelona')
+WHERE email LIKE '%@gmail.com'</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>6️⃣ ORDER BY - Ordenamiento</h4>
+                    <p>Ordena los resultados ascendente o descendentemente.</p>
+                    <pre><code>SELECT * FROM usuarios ORDER BY edad ASC;
+SELECT * FROM usuarios ORDER BY nombre DESC;
+SELECT * FROM usuarios ORDER BY edad DESC, nombre ASC;</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>7️⃣ LIMIT - Limitar resultados</h4>
+                    <p>Restringe la cantidad de registros retornados.</p>
+                    <pre><code>SELECT * FROM usuarios LIMIT 10;
+SELECT * FROM usuarios LIMIT 5 OFFSET 10;
+SELECT * FROM usuarios ORDER BY edad DESC LIMIT 3;</code></pre>
+                </div>
+            </div>
+
+            <!-- INTERMEDIO -->
+            <div id="intermedio" class="tab-content">
+                <h3>Conceptos Intermedios</h3>
+                
+                <div class="example-card">
+                    <h4>1️⃣ JOIN - Relacionar tablas</h4>
+                    <p>Combina datos de múltiples tablas basado en relaciones.</p>
+                    <pre><code>SELECT u.nombre, p.titulo 
+FROM usuarios u 
+INNER JOIN posts p ON u.id = p.usuario_id;
+
+SELECT u.nombre, p.titulo 
+FROM usuarios u 
+LEFT JOIN posts p ON u.id = p.usuario_id;</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>2️⃣ COUNT - Contar registros</h4>
+                    <p>Cuenta filas que cumplen una condición.</p>
+                    <pre><code>SELECT COUNT(*) FROM usuarios;
+SELECT COUNT(*) as total FROM usuarios WHERE edad > 18;
+SELECT nombre, COUNT(*) FROM posts GROUP BY usuario_id;</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>3️⃣ SUM, AVG, MIN, MAX - Agregaciones</h4>
+                    <p>Calcula valores agregados de columnas numéricas.</p>
+                    <pre><code>SELECT SUM(salario) FROM empleados;
+SELECT AVG(edad) FROM usuarios;
+SELECT MIN(fecha), MAX(fecha) FROM pedidos;</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>4️⃣ GROUP BY - Agrupar datos</h4>
+                    <p>Agrupa filas con valores idénticos en una columna.</p>
+                    <pre><code>SELECT departamento, COUNT(*) as total 
+FROM empleados 
+GROUP BY departamento;
+
+SELECT usuario_id, COUNT(*) as posts 
+FROM articulos 
+GROUP BY usuario_id 
+HAVING COUNT(*) > 5;</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>5️⃣ DISTINCT - Valores únicos</h4>
+                    <p>Muestra valores únicos sin repeticiones.</p>
+                    <pre><code>SELECT DISTINCT ciudad FROM usuarios;
+SELECT DISTINCT departamento FROM empleados;
+SELECT COUNT(DISTINCT usuario_id) FROM pedidos;</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>6️⃣ LIKE - Búsqueda de patrones</h4>
+                    <p>Busca valores que coincidan con un patrón.</p>
+                    <pre><code>SELECT * FROM usuarios WHERE nombre LIKE 'J%';
+SELECT * FROM usuarios WHERE email LIKE '%gmail.com';
+SELECT * FROM usuarios WHERE nombre LIKE '%ar%';</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>7️⃣ IN y BETWEEN - Rangos y listas</h4>
+                    <p>Filtra valores dentro de listas o rangos.</p>
+                    <pre><code>SELECT * FROM usuarios WHERE edad IN (18, 25, 30);
+SELECT * FROM usuarios WHERE edad BETWEEN 20 AND 30;
+SELECT * FROM pedidos WHERE fecha BETWEEN '2024-01-01' AND '2024-12-31';</code></pre>
+                </div>
+            </div>
+
+            <!-- AVANZADO -->
+            <div id="avanzado" class="tab-content">
+                <h3>Conceptos Avanzados</h3>
+                
+                <div class="example-card">
+                    <h4>1️⃣ Subqueries - Consultas anidadas</h4>
+                    <p>Consultas dentro de otras consultas para lógica compleja.</p>
+                    <pre><code>SELECT nombre FROM usuarios 
+WHERE id IN (SELECT usuario_id FROM posts WHERE likes > 100);
+
+SELECT AVG(salario) FROM empleados 
+WHERE salario > (SELECT AVG(salario) FROM empleados);</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>2️⃣ UNION - Combinar resultados</h4>
+                    <p>Combina resultados de múltiples consultas SELECT.</p>
+                    <pre><code>SELECT nombre, 'usuario' as tipo FROM usuarios
+UNION
+SELECT nombre, 'admin' as tipo FROM administradores;
+
+SELECT email FROM usuarios
+UNION ALL
+SELECT email FROM clientes;</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>3️⃣ CASE - Lógica condicional</h4>
+                    <p>Implementa condiciones if-else en consultas.</p>
+                    <pre><code>SELECT nombre, 
+  CASE 
+    WHEN edad < 18 THEN 'Menor'
+    WHEN edad < 65 THEN 'Adulto'
+    ELSE 'Jubilado'
+  END as categoria
+FROM usuarios;
+
+SELECT nombre,
+  CASE edad WHEN 25 THEN 'Especial' ELSE 'Normal' END
+FROM usuarios;</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>4️⃣ Window Functions - Funciones de ventana</h4>
+                    <p>Análisis avanzado con funciones sobre particiones.</p>
+                    <pre><code>SELECT nombre, salario,
+  ROW_NUMBER() OVER (ORDER BY salario DESC) as rango
+FROM empleados;
+
+SELECT nombre, salario, departamento,
+  AVG(salario) OVER (PARTITION BY departamento) as promedio_dept
+FROM empleados;</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>5️⃣ CTE - Expresiones de tabla común</h4>
+                    <p>Define consultas reutilizables dentro de una consulta principal.</p>
+                    <pre><code>WITH salarios_altos AS (
+  SELECT * FROM empleados WHERE salario > 50000
+)
+SELECT departamento, COUNT(*) 
+FROM salarios_altos 
+GROUP BY departamento;
+
+WITH RECURSIVE numeros AS (
+  SELECT 1 as n
+  UNION ALL
+  SELECT n+1 FROM numeros WHERE n < 10
+)
+SELECT * FROM numeros;</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>6️⃣ Transacciones - BEGIN, COMMIT, ROLLBACK</h4>
+                    <p>Garantiza atomicidad en múltiples operaciones.</p>
+                    <pre><code>BEGIN TRANSACTION;
+  UPDATE cuentas SET saldo = saldo - 100 WHERE id = 1;
+  UPDATE cuentas SET saldo = saldo + 100 WHERE id = 2;
+COMMIT;
+
+BEGIN TRANSACTION;
+  DELETE FROM usuarios WHERE id = 5;
+ROLLBACK;</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h4>7️⃣ Índices y Optimización</h4>
+                    <p>Mejora el rendimiento de las consultas.</p>
+                    <pre><code>CREATE INDEX idx_email ON usuarios(email);
+CREATE INDEX idx_user_date ON posts(usuario_id, fecha);
+DROP INDEX idx_email;
+
+EXPLAIN SELECT * FROM usuarios WHERE email = 'test@email.com';</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN EJEMPLOS COMPLEJOS -->
+        <section class="examples-section">
+            <h2>Ejemplos Complejos Prácticos</h2>
+
+            <div class="example-card">
+                <h3>1. Sistema de Tienda Online</h3>
+                <p><strong>Objetivo:</strong> Gestionar clientes, productos, pedidos y detalles de pedidos.</p>
+                <pre><code>-- Crear tablas
+CREATE TABLE clientes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    ciudad VARCHAR(50),
+    fecha_registro DATE
+);
+
+CREATE TABLE productos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100),
+    precio DECIMAL(10,2),
+    stock INT,
+    categoria VARCHAR(50)
+);
+
+CREATE TABLE pedidos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    cliente_id INT NOT NULL,
+    fecha DATE,
+    total DECIMAL(10,2),
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);
+
+CREATE TABLE detalles_pedido (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    pedido_id INT NOT NULL,
+    producto_id INT NOT NULL,
+    cantidad INT,
+    precio_unitario DECIMAL(10,2),
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
+    FOREIGN KEY (producto_id) REFERENCES productos(id)
+);
+
+-- Consulta: Top 5 clientes por gasto total
+SELECT c.nombre, SUM(p.total) as gasto_total, COUNT(p.id) as num_pedidos
+FROM clientes c
+LEFT JOIN pedidos p ON c.id = p.cliente_id
+GROUP BY c.id, c.nombre
+ORDER BY gasto_total DESC
+LIMIT 5;</code></pre>
+            </div>
+
+            <div class="example-card">
+                <h3>2. Panel de Análisis de Redes Sociales</h3>
+                <p><strong>Objetivo:</strong> Analizar rendimiento de posts, usuarios activos y tendencias.</p>
+                <pre><code>-- Tabla de usuarios y posts
+CREATE TABLE usuarios (
+    id INT PRIMARY KEY,
+    nombre VARCHAR(100),
+    fecha_creacion DATE
+);
+
+CREATE TABLE posts (
+    id INT PRIMARY KEY,
+    usuario_id INT,
+    contenido TEXT,
+    likes INT DEFAULT 0,
+    comentarios INT DEFAULT 0,
+    fecha DATE,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+-- Consulta: Usuarios más activos del mes actual
+SELECT u.nombre, COUNT(p.id) as num_posts, SUM(p.likes) as total_likes
+FROM usuarios u
+INNER JOIN posts p ON u.id = p.usuario_id
+WHERE MONTH(p.fecha) = MONTH(CURDATE()) 
+  AND YEAR(p.fecha) = YEAR(CURDATE())
+GROUP BY u.id
+ORDER BY total_likes DESC;
+
+-- Posts virales (más de 1000 likes)
+SELECT u.nombre, p.contenido, p.likes, p.fecha
+FROM posts p
+INNER JOIN usuarios u ON p.usuario_id = u.id
+WHERE p.likes > 1000
+ORDER BY p.likes DESC;
+
+-- Engagement rate por usuario
+SELECT u.nombre,
+  COUNT(p.id) as posts,
+  ROUND(AVG(p.likes), 2) as prom_likes,
+  ROUND(AVG(p.comentarios), 2) as prom_comentarios
+FROM usuarios u
+LEFT JOIN posts p ON u.id = p.usuario_id
+GROUP BY u.id
+HAVING COUNT(p.id) > 0;</code></pre>
+            </div>
+
+            <div class="example-card">
+                <h3>3. Gestión de Nóminas y Departamentos</h3>
+                <p><strong>Objetivo:</strong> Calcular salarios, comisiones y análisis departamental.</p>
+                <pre><code>-- Tablas de empleados y departamentos
+CREATE TABLE departamentos (
+    id INT PRIMARY KEY,
+    nombre VARCHAR(100),
+    presupuesto DECIMAL(12,2)
+);
+
+CREATE TABLE empleados (
+    id INT PRIMARY KEY,
+    nombre VARCHAR(100),
+    departamento_id INT,
+    salario_base DECIMAL(10,2),
+    comisión DECIMAL(5,2) DEFAULT 0,
+    fecha_contratacion DATE,
+    FOREIGN KEY (departamento_id) REFERENCES departamentos(id)
+);
+
+-- Salario total con comisión (Window function)
+SELECT nombre, departamento_id,
+  salario_base,
+  ROUND(salario_base * comisión / 100, 2) as comisión_monto,
+  ROUND(salario_base * (1 + comisión/100), 2) as salario_total,
+  ROW_NUMBER() OVER (PARTITION BY departamento_id ORDER BY salario_base DESC) as rango_dept
+FROM empleados;
+
+-- Comparación con promedio departamental
+SELECT e.nombre, d.nombre as departamento, e.salario_base,
+  ROUND(AVG(e2.salario_base) OVER (PARTITION BY e.departamento_id), 2) as prom_depto,
+  CASE 
+    WHEN e.salario_base > AVG(e2.salario_base) OVER (PARTITION BY e.departamento_id) 
+      THEN 'Arriba del promedio'
+    ELSE 'Bajo el promedio'
+  END as categoria
+FROM empleados e
+INNER JOIN departamentos d ON e.departamento_id = d.id
+CROSS JOIN empleados e2;</code></pre>
+            </div>
+        </section>
+
+        <!-- SECCIÓN CHATBOT -->
+        <section class="chatbot-section">
+            <h2>💬 Asistente de SQL</h2>
+            <div class="chatbot-container">
+                <div class="messages" id="chatMessages"></div>
+                <div class="input-area">
+                    <input type="text" id="userInput" placeholder="Pregunta sobre SQL..." />
+                    <button onclick="sendSQLQuestion()">Enviar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN INFORMACIÓN ADICIONAL -->
+        <section class="additional-section">
+            <h2>ℹ️ Información Adicional</h2>
+
+            <h3>Bases de datos populares que usan SQL:</h3>
+            <ul>
+                <li><strong>MySQL:</strong> Open-source, usado en aplicaciones web</li>
+                <li><strong>PostgreSQL:</strong> Potente, con características avanzadas</li>
+                <li><strong>Microsoft SQL Server:</strong> Empresa, usado en Windows</li>
+                <li><strong>Oracle Database:</strong> Escalable para sistemas críticos</li>
+                <li><strong>SQLite:</strong> Ligero, perfecto para aplicaciones móviles</li>
+            </ul>
+
+            <h3>Recursos recomendados:</h3>
+            <ul>
+                <li>Documentación oficial de tu gestor de bases de datos</li>
+                <li>Plataformas como LeetCode para problemas SQL</li>
+                <li>Herramientas: DBeaver, pgAdmin, MySQL Workbench</li>
+                <li>Cursos online en Coursera, Udemy o Khan Academy</li>
+            </ul>
+
+            <h3>Buenas prácticas:</h3>
+            <ul>
+                <li>✅ Usa índices para optimizar consultas frecuentes</li>
+                <li>✅ Normaliza tus tablas para evitar redundancia</li>
+                <li>✅ Escribe código legible con indentación</li>
+                <li>✅ Usa transacciones para operaciones críticas</li>
+                <li>✅ Valida datos antes de insertar</li>
+                <li>✅ Usa parametrized queries para prevenir SQL injection</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN DE PRÁCTICA -->
+        <section class="practice-section">
+            <h2>🎯 Desafíos Prácticos</h2>
+            
+            <div class="challenge-card">
+                <h3>Desafío 1: Tienda de Libros</h3>
+                <p>Crea un sistema completo con autores, libros, géneros y reseñas. Escribe consultas para:</p>
+                <ul>
+                    <li>Encontrar el autor con más libros</li>
+                    <li>Promediar rating de libros por género</li>
+                    <li>Listar libros sin reseñas</li>
+                    <li>Top 3 autores por número de reseñas</li>
+                </ul>
+            </div>
+
+            <div class="challenge-card">
+                <h3>Desafío 2: Hospital</h3>
+                <p>Sistema de pacientes, doctores, citas y medicamentos. Escribe:</p>
+                <ul>
+                    <li>Listar doctor con más citas este mes</li>
+                    <li>Pacientes con más de 5 citas</li>
+                    <li>Medicamentos prescritos por especialidad</li>
+                    <li>Tasa de citas completadas vs canceladas</li>
+                </ul>
+            </div>
+
+            <div class="challenge-card">
+                <h3>Desafío 3: E-learning</h3>
+                <p>Plataforma con cursos, estudiantes, lecciones y calificaciones. Crea:</p>
+                <ul>
+                    <li>Ranking de estudiantes por calificación promedio</li>
+                    <li>Cursos con mayor inscripción</li>
+                    <li>Progreso de estudiantes (% completado)</li>
+                    <li>Lecciones más difíciles (menor promedio de notas)</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Serie Educativa - SQL Tutorial | <a href="../../index.html">Volver al inicio</a></p>
+    </footer>
+
+    <script src="../../chatbot.js"></script>
     <script src="../../theme.js"></script>
+    <script>
+        function switchTab(tabName) {
+            const contents = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-btn');
+            
+            contents.forEach(content => content.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function sendSQLQuestion() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const messagesDiv = document.getElementById('chatMessages');
+            
+            // Mostrar pregunta del usuario
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = message;
+            messagesDiv.appendChild(userMsg);
+            
+            // Respuesta del chatbot
+            const response = getSQLResponse(message);
+            const botMsg = document.createElement('div');
+            botMsg.className = 'message bot';
+            botMsg.textContent = response;
+            messagesDiv.appendChild(botMsg);
+            
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            input.value = '';
+        }
+
+        function getSQLResponse(question) {
+            const q = question.toLowerCase();
+            
+            const responses = {
+                'select': 'SELECT se usa para recuperar datos. Ejemplo: SELECT nombre, email FROM usuarios WHERE edad > 18;',
+                'insert': 'INSERT se usa para añadir nuevos registros. Ejemplo: INSERT INTO usuarios (nombre, email) VALUES (\'Juan\', \'juan@email.com\');',
+                'update': 'UPDATE modifica registros existentes. Ejemplo: UPDATE usuarios SET edad = 26 WHERE id = 1;',
+                'delete': 'DELETE elimina registros. ¡Cuidado! Siempre usa WHERE para evitar eliminar todo.',
+                'join': 'JOIN combina datos de múltiples tablas. INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN.',
+                'group by': 'GROUP BY agrupa filas con valores idénticos y permite usar funciones de agregación.',
+                'where': 'WHERE filtra registros según condiciones. Ejemplo: WHERE edad > 18 AND ciudad = \'Madrid\'',
+                'aggregate': 'Funciones de agregación: COUNT(), SUM(), AVG(), MIN(), MAX(). Se usan con GROUP BY.',
+                'index': 'Los índices aceleran consultas pero ralentizan inserciones. Usa en columnas que buscas frecuentemente.',
+                'transaction': 'BEGIN, COMMIT, ROLLBACK garantizan que múltiples operaciones se completen juntas.',
+                'subquery': 'Consultas dentro de otras consultas. Útiles para lógica compleja.',
+                'like': 'LIKE busca patrones: % (cualquier caracteres), _ (un carácter). Ejemplo: LIKE \'%@gmail.com\'',
+                'distinct': 'DISTINCT muestra valores únicos sin repeticiones.',
+                'order by': 'ORDER BY ordena ASC (ascendente) o DESC (descendente).',
+                'limit': 'LIMIT restringe cantidad de resultados. OFFSET salta registros.',
+                'default': 'Pregunta sobre SQL. ¿Qué tema te interesa? (SELECT, INSERT, UPDATE, DELETE, JOIN, GROUP BY, etc.)'
+            };
+            
+            for (const [key, value] of Object.entries(responses)) {
+                if (q.includes(key)) return value;
+            }
+            
+            return responses.default;
+        }
+
+        // Permitir Enter para enviar mensaje
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendSQLQuestion();
+        });
+
+        // Mensaje inicial del chatbot
+        window.addEventListener('load', function() {
+            const messagesDiv = document.getElementById('chatMessages');
+            const welcomeMsg = document.createElement('div');
+            welcomeMsg.className = 'message bot';
+            welcomeMsg.textContent = '¡Hola! Soy tu asistente de SQL. Pregunta sobre SELECT, INSERT, UPDATE, DELETE, JOIN, GROUP BY o cualquier otro concepto de SQL.';
+            messagesDiv.appendChild(welcomeMsg);
+        });
+    </script>
 </body>
 </html>

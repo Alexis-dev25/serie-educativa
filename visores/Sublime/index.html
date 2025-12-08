@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guía completa de Sublime Text: instalación, shortcuts, plugins y configuración.">
+    <title>Sublime Text - Editor de Código | Serie Educativa</title>
+    <link rel="stylesheet" href="../../shared-styles.css">
+    <style>
+        .editor-card { background: linear-gradient(135deg, rgba(62, 39, 35, 0.1) 0%, rgba(78, 35, 35, 0.1) 100%); 
+                       border-left: 4px solid #8B4513; padding: 15px; margin: 15px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <h1>✨ Sublime Text 4 - Editor Elegante y Rápido</h1>
+    </header>
+
+    <nav class="breadcrumb">
+        <a href="../../index.html">Inicio</a> > <a href="../index.html">Code Viewers</a> > Sublime Text
+    </nav>
+
+    <main class="container">
+        <section>
+            <h2>¿Qué es Sublime Text?</h2>
+            <p>Sublime Text es un editor de código ligero, muy rápido y altamente personalizable. Favorito de muchos desarrolladores por su velocidad y flexibilidad.</p>
+
+            <h3>Características principales:</h3>
+            <ul>
+                <li>⚡ Extremadamente rápido y ligero</li>
+                <li>🎨 Altamente personalizable</li>
+                <li>📦 Amplio ecosistema de plugins (Package Control)</li>
+                <li>🔍 Búsqueda y reemplazo potente</li>
+                <li>🖥️ Multi-plataforma (Windows, Mac, Linux)</li>
+                <li>💰 Licencia de prueba indefinida</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Instalación</h2>
+            <pre><code># macOS (Homebrew)
+brew install --cask sublime-text
+
+# Windows (Chocolatey)
+choco install sublimetext4
+
+# Linux (Ubuntu/Debian)
+sudo apt install sublime-text
+
+# O descargar desde: https://www.sublimetext.com/download</code></pre>
+        </section>
+
+        <section>
+            <h2>Primeros pasos</h2>
+            <div class="editor-card">
+                <h3>Instalar Package Control (IMPORTANTE):</h3>
+                <p>Package Control es el gestor de plugins de Sublime Text.</p>
+                <ol>
+                    <li>Abre Sublime Text</li>
+                    <li>View → Show Console</li>
+                    <li>Copia y pega: <code>import urllib.request,os,hashlib; h = 'df21e130d211cee9530fff8346c13c16' + 'e1fb0c1c0426ca88d8205e1c36423c7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else __import__('shutil').copyfile( os.path.join( ipp, pf) if os.path.exists( os.path.join( ipp, pf)) else urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(), os.path.join( ipp, pf)) ; print('Please restart Sublime Text 3')</code></li>
+                    <li>Presiona Enter y reinicia Sublime Text</li>
+                    <li>Verifica: Preferences → Package Control</li>
+                </ol>
+            </div>
+        </section>
+
+        <section>
+            <h2>Atajos de teclado esenciales</h2>
+            <table style="width: 100%;">
+                <tr style="background: rgba(139, 69, 19, 0.1);">
+                    <th>Windows/Linux</th>
+                    <th>macOS</th>
+                    <th>Función</th>
+                </tr>
+                <tr>
+                    <td>Ctrl + P</td>
+                    <td>Cmd + P</td>
+                    <td>Abrir archivo (Quick Open)</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + K, Ctrl + B</td>
+                    <td>Cmd + K, Cmd + B</td>
+                    <td>Toggle sidebar</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + Shift + P</td>
+                    <td>Cmd + Shift + P</td>
+                    <td>Command Palette (Busca comandos)</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + F</td>
+                    <td>Cmd + F</td>
+                    <td>Buscar</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + H</td>
+                    <td>Cmd + H</td>
+                    <td>Buscar y reemplazar</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + D</td>
+                    <td>Cmd + D</td>
+                    <td>Seleccionar palabra (repetir para múltiple)</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + L</td>
+                    <td>Cmd + L</td>
+                    <td>Seleccionar línea</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + /</td>
+                    <td>Cmd + /</td>
+                    <td>Comentar/Descomentar</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + Shift + K</td>
+                    <td>Cmd + Shift + K</td>
+                    <td>Eliminar línea</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + ↑/↓</td>
+                    <td>Cmd + ↑/↓</td>
+                    <td>Mover línea arriba/abajo</td>
+                </tr>
+                <tr>
+                    <td>Ctrl + G</td>
+                    <td>Cmd + G</td>
+                    <td>Ir a línea específica</td>
+                </tr>
+                <tr>
+                    <td>Alt + F3</td>
+                    <td>Opt + Enter</td>
+                    <td>Seleccionar todas las instancias</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Plugins esenciales (con Package Control)</h2>
+            <div class="editor-card">
+                <h3>Pasos para instalar:</h3>
+                <ol>
+                    <li>Ctrl+Shift+P (Cmd+Shift+P en Mac)</li>
+                    <li>Escribe "Package Control: Install Package"</li>
+                    <li>Busca el plugin deseado y presiona Enter</li>
+                </ol>
+            </div>
+
+            <div class="editor-card">
+                <h3>💡 Plugins recomendados:</h3>
+                <ul>
+                    <li><strong>Emmet</strong> - Autocomplete HTML/CSS avanzado</li>
+                    <li><strong>Prettier</strong> - Formateador de código</li>
+                    <li><strong>Pylint</strong> - Linting para Python</li>
+                    <li><strong>ESLint</strong> - Linting para JavaScript</li>
+                    <li><strong>GitGutter</strong> - Ver cambios de Git</li>
+                    <li><strong>Color Highlighter</strong> - Resalta colores</li>
+                    <li><strong>Bracket Highlighter</strong> - Destaca brackets pareados</li>
+                    <li><strong>SideBarEnhancements</strong> - Mejoras al sidebar</li>
+                    <li><strong>A File Icon</strong> - Iconos para archivos en el sidebar</li>
+                    <li><strong>Dracula Color Scheme</strong> - Tema popular</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Configuración</h2>
+            <div class="editor-card">
+                <h3>Acceder a preferencias:</h3>
+                <p><code>Preferences → Settings</code></p>
+                <p>Se abrirá un archivo JSON con configuraciones.</p>
+            </div>
+
+            <div class="editor-card">
+                <h3>Ejemplo de configuración útil:</h3>
+                <pre><code>{
+    "font_size": 12,
+    "font_face": "Consolas",
+    "tab_size": 2,
+    "translate_tabs_to_spaces": true,
+    "word_wrap": true,
+    "ruler": [80, 120],
+    "trim_trailing_white_space_on_save": true,
+    "save_on_focus_lost": true,
+    "highlight_line": true,
+    "bold_folder_labels": true,
+    "color_scheme": "Packages/Dracula Color Scheme/Dracula.sublime-color-scheme",
+    "theme": "Adaptive.sublime-theme"
+}</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Build Systems (Ejecutar código)</h2>
+            <div class="editor-card">
+                <h3>Crear build system para Python:</h3>
+                <ol>
+                    <li>Tools → Build System → New Build System</li>
+                    <li>Copia esto:</li>
+                </ol>
+                <pre><code>{
+    "cmd": ["python", "-u", "$file"],
+    "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+    "selector": "source.python"
+}</code></pre>
+                <ol start="3">
+                    <li>Guarda como "Python.sublime-build"</li>
+                    <li>Ahora puedes presionar Ctrl+B para ejecutar Python</li>
+                </ol>
+            </div>
+        </section>
+
+        <section>
+            <h2>Snippets personalizados</h2>
+            <div class="editor-card">
+                <h3>Crear snippet:</h3>
+                <ol>
+                    <li>Tools → Developer → New Snippet</li>
+                    <li>Ejemplo para HTML boilerplate:</li>
+                </ol>
+                <pre><code>&lt;snippet&gt;
+    &lt;content&gt;&lt;![CDATA[
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;${1:Título}&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    ${2:Contenido}
+&lt;/body&gt;
+&lt;/html&gt;
+]]&gt;&lt;/content&gt;
+    &lt;tabTrigger&gt;html5&lt;/tabTrigger&gt;
+    &lt;scope&gt;text.html&lt;/scope&gt;
+    &lt;description&gt;HTML5 Boilerplate&lt;/description&gt;
+&lt;/snippet&gt;</code></pre>
+                <ol start="3">
+                    <li>Guarda como "HTML5.sublime-snippet"</li>
+                    <li>Ahora escribe "html5" + Tab para expandir</li>
+                </ol>
+            </div>
+        </section>
+
+        <section>
+            <h2>Temas populares</h2>
+            <ul>
+                <li><strong>Dracula</strong> - Tema oscuro popular</li>
+                <li><strong>One Dark</strong> - Inspirado en Atom</li>
+                <li><strong>Monokai</strong> - Tema por defecto mejorado</li>
+                <li><strong>Ayu</strong> - Tema minimalista</li>
+                <li><strong>Gruvbox</strong> - Colores cálidos retro</li>
+            </ul>
+            <p>Instálalos con Package Control como otros plugins.</p>
+        </section>
+
+        <section>
+            <h2>Tips avanzados</h2>
+            <div class="editor-card">
+                <h3>Multi-cursor:</h3>
+                <ul>
+                    <li>Ctrl+Click (Cmd+Click en Mac) para múltiples cursores</li>
+                    <li>Ctrl+Alt+↑/↓ para duplicar cursor arriba/abajo</li>
+                    <li>Ctrl+D selecciona palabra, repite para multiples</li>
+                </ul>
+            </div>
+
+            <div class="editor-card">
+                <h3>Proyectos:</h3>
+                <p>Crea un archivo .sublime-project para organizar carpetas</p>
+                <pre><code>{
+    "folders": [
+        { "path": "src" },
+        { "path": "tests" }
+    ],
+    "settings": {
+        "tab_size": 2
+    }
+}</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>📚 Recursos</h2>
+            <ul>
+                <li><a href="https://www.sublimetext.com/" target="_blank">Sitio oficial</a></li>
+                <li><a href="https://packagecontrol.io/" target="_blank">Package Control</a></li>
+                <li><a href="https://docs.sublimetext.io/" target="_blank">Documentación</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <script src="../../theme.js"></script>
+</body>
+</html>

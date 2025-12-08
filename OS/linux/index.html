@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guía completa de Linux: instalación, shell bash, comandos, desarrollo y administración.">
+    <title>Linux - Guía Completa | Serie Educativa</title>
+    <link rel="stylesheet" href="../../shared-styles.css">
+    <style>
+        .os-tabs { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+        .os-btn { background: #fcc624; color: #333; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .os-btn.active { background: #ff9500; color: white; }
+        .os-content { display: none; }
+        .os-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <h1>🐧 Linux - Sistema Operativo Libre</h1>
+    </header>
+
+    <nav class="breadcrumb">
+        <a href="../../index.html">Inicio</a> > <a href="../index.html">Sistemas Operativos</a> > Linux
+    </nav>
+
+    <main class="container">
+        <section>
+            <h2>¿Qué es Linux?</h2>
+            <p>Linux es un sistema operativo de código abierto, gratuito y potente. Domina en servidores, supercomputadoras y dispositivos embebidos.</p>
+
+            <h3>Distribuciones populares:</h3>
+            <ul>
+                <li><strong>Ubuntu:</strong> La más popular y amigable para principiantes</li>
+                <li><strong>Debian:</strong> Estable y confiable, base de muchas otras</li>
+                <li><strong>Red Hat/Fedora:</strong> Profesional, usada en empresas</li>
+                <li><strong>Arch Linux:</strong> Minimalista, para usuarios avanzados</li>
+                <li><strong>CentOS:</strong> Basada en Red Hat, ideal para servidores</li>
+            </ul>
+
+            <h3>¿Por qué Linux es popular?</h3>
+            <ul>
+                <li>✅ Código abierto y gratuito</li>
+                <li>✅ Muy seguro y estable</li>
+                <li>✅ Poderosa línea de comandos</li>
+                <li>✅ Soporte de comunidad activa</li>
+                <li>✅ Ideal para servidores y desarrollo</li>
+            </ul>
+        </section>
+
+        <div class="os-tabs">
+            <button class="os-btn active" onclick="switchOS('bash')">🖤 Bash Shell</button>
+            <button class="os-btn" onclick="switchOS('files')">📁 Sistema de archivos</button>
+            <button class="os-btn" onclick="switchOS('pkg')">📦 Gestión de paquetes</button>
+            <button class="os-btn" onclick="switchOS('admin')">🔧 Administración</button>
+        </div>
+
+        <!-- BASH -->
+        <section id="bash" class="os-content active">
+            <h2>🖤 Bash Shell</h2>
+            <p>El intérprete de comandos más común en Linux.</p>
+
+            <h3>Comandos básicos:</h3>
+            <pre><code>ls                     # Listar archivos
+ls -la                 # Lista detallada con archivos ocultos
+pwd                    # Mostrar directorio actual
+cd directorio          # Cambiar directorio
+cd ..                  # Ir al directorio superior
+cd ~                   # Ir al home
+mkdir nombre           # Crear directorio
+rmdir nombre           # Eliminar directorio vacío
+rm archivo.txt         # Eliminar archivo
+rm -r carpeta/         # Eliminar carpeta y contenido
+cp archivo.txt copia.txt    # Copiar archivo
+mv archivo.txt nuevo_nombre # Mover/renombrar archivo</code></pre>
+
+            <h3>Visualizar contenido:</h3>
+            <pre><code>cat archivo.txt        # Ver contenido completo
+less archivo.txt       # Ver con scroll (q para salir)
+head -n 20 archivo.txt # Ver primeras 20 líneas
+tail -n 10 archivo.txt # Ver últimas 10 líneas
+grep "texto" archivo.txt   # Buscar texto en archivo
+wc -l archivo.txt      # Contar líneas</code></pre>
+
+            <h3>Permisos:</h3>
+            <pre><code>chmod 755 script.sh    # Cambiar permisos (rwxr-xr-x)
+chmod +x script.sh     # Hacer ejecutable
+chown usuario archivo.txt  # Cambiar propietario
+ls -l                  # Ver permisos detallados
+
+# Permisos: r(4) w(2) x(1)
+# 755 = rwxr-xr-x
+# 644 = rw-r--r--
+# 777 = rwxrwxrwx</code></pre>
+
+            <h3>Scripting Bash:</h3>
+            <pre><code>#!/bin/bash
+# Variables
+nombre="Juan"
+edad=25
+echo "Hola $nombre"
+
+# Array
+frutas=("manzana" "plátano" "naranja")
+echo ${frutas[0]}
+
+# Condicional
+if [ $edad -gt 18 ]; then
+    echo "Es mayor de edad"
+else
+    echo "Es menor de edad"
+fi
+
+# Bucle for
+for fruta in "${frutas[@]}"; do
+    echo "Fruta: $fruta"
+done
+
+# Bucle while
+contador=1
+while [ $contador -le 5 ]; do
+    echo "Número: $contador"
+    contador=$((contador + 1))
+done
+
+# Función
+saludar() {
+    echo "Hola, $1!"
+}
+
+saludar "María"</code></pre>
+        </section>
+
+        <!-- SISTEMA DE ARCHIVOS -->
+        <section id="files" class="os-content">
+            <h2>📁 Sistema de Archivos</h2>
+
+            <h3>Estructura de directorios:</h3>
+            <pre><code>/              # Raíz del sistema de archivos
+/home          # Directorios de usuarios
+/etc           # Archivos de configuración
+/var           # Datos variables (logs, caches)
+/usr           # Programas y librerías de usuario
+/bin           # Comandos esenciales
+/lib           # Librerías del sistema
+/tmp           # Archivos temporales
+/root          # Home del usuario root
+/opt           # Programas opcionales</code></pre>
+
+            <h3>Navegación y búsqueda:</h3>
+            <pre><code>find /ruta -name "archivo.txt"    # Buscar archivo
+find /ruta -type f -name "*.js"   # Buscar archivos .js
+locate archivo.txt                # Búsqueda rápida (requiere indexación)
+which comando                      # Ubicación del comando
+whereis comando                    # Ubicación de comando y documentación
+
+# Aliases (accesos cortos)
+alias ll='ls -la'
+alias backup='cp -r /home/datos /backup/'</code></pre>
+
+            <h3>Operaciones con archivos:</h3>
+            <pre><code>touch archivo.txt      # Crear archivo vacío
+echo "texto" > archivo.txt   # Crear archivo con contenido
+echo "más texto" >> archivo.txt   # Añadir al archivo
+
+# Comprimido
+tar -czf archivo.tar.gz directorio/   # Comprimir
+tar -xzf archivo.tar.gz              # Descomprimir
+
+# Disco
+du -sh directorio/     # Tamaño de directorio
+df -h                  # Espacio disponible en discos</code></pre>
+        </section>
+
+        <!-- GESTIÓN DE PAQUETES -->
+        <section id="pkg" class="os-content">
+            <h2>📦 Gestión de Paquetes</h2>
+
+            <h3>APT (Ubuntu/Debian):</h3>
+            <pre><code>sudo apt update        # Actualizar lista de paquetes
+sudo apt upgrade       # Actualizar paquetes instalados
+sudo apt install nombre-paquete    # Instalar paquete
+sudo apt remove nombre-paquete     # Desinstalar paquete
+sudo apt search node   # Buscar paquete
+apt list --installed   # Listar paquetes instalados
+sudo apt autoremove    # Limpiar paquetes no usados</code></pre>
+
+            <h3>YUM/DNF (Red Hat/Fedora):</h3>
+            <pre><code>sudo dnf install nombre-paquete   # Instalar
+sudo dnf remove nombre-paquete    # Desinstalar
+sudo dnf update                   # Actualizar
+sudo dnf search paquete           # Buscar
+dnf list installed                # Listar instalados</code></pre>
+
+            <h3>Instalación desde fuente:</h3>
+            <pre><code>tar -xzf programa.tar.gz
+cd programa/
+./configure
+make
+sudo make install
+
+# Desinstalar
+sudo make uninstall</code></pre>
+
+            <h3>Herramientas de desarrollo:</h3>
+            <pre><code>sudo apt install build-essential   # Compiladores C/C++
+sudo apt install python3-dev       # Python desarrollo
+sudo apt install nodejs npm        # Node.js y NPM
+sudo apt install git               # Git control de versiones
+sudo apt install curl wget         # Descargar archivos
+sudo apt install vim emacs         # Editores de texto</code></pre>
+        </section>
+
+        <!-- ADMINISTRACIÓN -->
+        <section id="admin" class="os-content">
+            <h2>🔧 Administración del Sistema</h2>
+
+            <h3>Usuarios y permisos:</h3>
+            <pre><code>sudo su                # Convertirse en root
+sudo -l                # Ver comandos permitidos con sudo
+useradd nuevo-usuario  # Crear usuario (como root)
+passwd usuario         # Cambiar contraseña
+userdel usuario        # Eliminar usuario
+
+# Grupos
+groupadd grupo-nuevo
+usermod -a -G grupo-nuevo usuario
+id usuario             # Ver grupos del usuario</code></pre>
+
+            <h3>Procesos:</h3>
+            <pre><code>ps aux                 # Listar todos los procesos
+ps aux | grep nombre   # Buscar proceso específico
+top                    # Monitoreo en tiempo real
+htop                   # Top mejorado (más amigable)
+kill PID               # Terminar proceso por PID
+kill -9 PID            # Forzar terminar proceso
+bg                     # Ejecutar en background
+fg                     # Traer al foreground
+jobs                   # Ver trabajos en background</code></pre>
+
+            <h3>Servicios (systemd):</h3>
+            <pre><code>sudo systemctl start nombre-servicio   # Iniciar
+sudo systemctl stop nombre-servicio    # Detener
+sudo systemctl restart nombre-servicio # Reiniciar
+sudo systemctl status nombre-servicio  # Ver estado
+sudo systemctl enable nombre-servicio  # Habilitar al inicio
+sudo systemctl disable nombre-servicio # Deshabilitar
+
+# Ver logs
+journalctl -u nombre-servicio
+journalctl -f          # Seguir logs en tiempo real</code></pre>
+
+            <h3>Monitoreo y mantenimiento:</h3>
+            <pre><code>uname -a               # Información del sistema
+free -h                # Memoria disponible
+df -h                  # Espacio en disco
+uptime                 # Tiempo activo del sistema
+last                   # Últimos inicios de sesión
+
+# Logs
+cat /var/log/syslog    # Log del sistema
+tail -f /var/log/apache2/error.log  # Ver logs en tiempo real</code></pre>
+
+            <h3>Cron (tareas programadas):</h3>
+            <pre><code>crontab -e             # Editar tareas programadas
+crontab -l             # Listar tareas
+crontab -r             # Eliminar todas las tareas
+
+# Formato: minuto hora día mes día-semana comando
+0 2 * * * /ruta/script.sh          # Cada día a las 2:00 AM
+*/30 * * * * comando               # Cada 30 minutos
+0 0 * * 0 comando                  # Cada domingo a medianoche
+0 9 1 * * comando                  # Primer día del mes a las 9:00</code></pre>
+        </section>
+
+        <section style="margin-top: 40px;">
+            <h2>💡 Comandos útiles combinados</h2>
+            <pre><code># Búsqueda y procesamiento con pipes
+ps aux | grep java | awk '{print $2}' | xargs kill    # Matar todos los procesos java
+
+# Buscar archivos grandes
+find / -type f -size +100M 2>/dev/null
+
+# Backup automático
+tar -czf backup-$(date +%Y%m%d).tar.gz /home/usuario/documentos/
+
+# Contar líneas de código
+find . -name "*.py" -o -name "*.js" | xargs wc -l
+
+# Cambiar permisos recursivamente
+chmod -R 755 directorio/
+
+# Monitoreo de tráfico de red
+netstat -tulpn | grep LISTEN</code></pre>
+
+            <h2>📚 Recursos útiles</h2>
+            <ul>
+                <li><a href="https://www.gnu.org/software/bash/" target="_blank">Documentación oficial Bash</a></li>
+                <li><a href="https://www.kernel.org/" target="_blank">Kernel Linux</a></li>
+                <li><a href="https://ubuntu.com/" target="_blank">Ubuntu</a></li>
+                <li><a href="https://www.debian.org/" target="_blank">Debian</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        function switchOS(tab) {
+            document.querySelectorAll('.os-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.os-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,117 +1,407 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>C#</title>
+    <title>C# - Tutorial Interactivo | Serie Educativa</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tutorial de C# con ejemplos complejos, guías prácticas, chatbot educativo y ejercicios interactivos.">
+    <meta name="keywords" content="C#, C Sharp, tutorial, .NET, programación, ejemplos, chatbot">
+    <meta name="author" content="Alexis Gutiérrez">
+    <meta name="robots" content="index, follow">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="C# - Tutorial Interactivo | Serie Educativa">
+    <meta property="og:description" content="Aprende C# con ejemplos prácticos y chatbot educativo.">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "C# - Tutorial Interactivo",
+        "description": "Tutorial completo de C# con ejemplos y ejercicios",
+        "inLanguage": "es"
+    }
+    </script>
+    
     <link rel="stylesheet" href="../../shared-styles.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tutorial-styles.css">
+    <link rel="stylesheet" href="../../chatbot.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    </head>
-    <body>
-        <header class="site-header">
-            <h1>C# / CSharp</h1>
-            <div class="controls"><button id="theme-toggle" aria-label="Cambiar tema">🌓</button></div>
-        </header>
-        <h1>¿Qué es C#?</h1>
+</head>
+<body>
+    <header class="site-header">
+        <h1>C#</h1>
+        <div class="controls"><button id="theme-toggle" aria-label="Cambiar tema">🌓</button></div>
+    </header>
+
+    <h1>¿Qué es C#?</h1>
     <section class="intro">
         <div class="text">
             <h2>Introducción</h2>
-            <p>C# (se pronuncia “C sharp”) es un lenguaje de programación moderno, orientado a objetos, 
-                creado por Microsoft en el año 2000 como parte del framework .NET.</p>
-                <ul>
-                    <li>Fácil de aprender</li>
-                    <li>Muy seguro</li>
-                    <li>Rápido</li>
-                    <li>Flexible</li>
-                    <li>Compatible con Windows, Linux, macOS y web</li>
-                </ul>
+            <p>C# es un lenguaje de programación orientado a objetos moderno, desarrollado por Microsoft en 2000 como parte del framework .NET. Combina la potencia de C++ con la simplicidad de Java.</p>
+            <p>C# es ampliamente utilizado para desarrollo de aplicaciones Windows, juegos con Unity, aplicaciones web con ASP.NET y aplicaciones móviles multiplataforma.</p>
+        </div>
     </section>
+
     <section class="info">
-        <h2>Más Informarción</h2>
+        <h2>Más Información</h2>
         <div class="carac">
             <h3>Características principales</h3>
-            <p>C# se basa en:</p>
             <ul>
-                <li>Clases</li>
-                <li>Objetos</li>
-                <li>Herencia</li>
-                <li>Polimorfismo</li>
-                <li>Encapsulamiento</li>
-                <li>Abstracción</li>
+                <li><p>Lenguaje compilado, fuertemente tipado y orientado a objetos.</p></li>
+                <li><p>Soporta programación asincrónica, LINQ y programación funcional.</p></li>
+                <li><p>Integrado con .NET Framework y .NET Core (multiplataforma).</p></li>
+                <li><p>Soporte para nullable types, pattern matching y records.</p></li>
+                <li><p>Excelente para desarrollo de juegos con Unity.</p></li>
+                <li><p>Gestión automática de memoria con Garbage Collector.</p></li>
             </ul>
         </div>
         <div class="usos">
             <h3>Usos comunes</h3>
-            <p>1. Desarollo de Videojuegos 🎮</p>
             <ul>
-                <li>Es el lenguaje principal del motor Unity (el más usado del mundo junto con Unreal)./li>
-                <li>Ideal para juegos 2D y 3D.</li>
-            </ul>
-            <p>2. Aplicaciones de escritorio 🖥💻</p>
-            <ul>
-                <li>Con Windows Forms</li>
-                <li>WPF</li>
-                <li>MAUI (para crear apps nativas modernas)</li>
-            </ul>
-            <p>3. Aplicaciones web 🌐</p>
-            <ul>
-                <li>Con ASP.NET Core, uno de los frameworks web más rápidos que existen.</li>
-            </ul>
-            <p>4. Aplicaciones móviles 📱</p>
-            <ul>
-                <li>Con Xamarin/Microsoft MAUI puedes crear apps para Android y iOS con un solo código.</li>
-            </ul>
-            <p>5. Inteligencia Artificial y Machine Learning 🤖</p>
-            <ul>
-                <li>Con la librería ML.NET</li>
-            </ul>
-            <p>6. Microservicios y servidores de alto rendimiento ⚙</p>
-            <ul>
-                <li>Gracias a .NET Core, que es súper eficiente.</li>
+                <li><p>Desarrollo de juegos con Unity (mayoría de juegos indie).</p></li>
+                <li><p>Aplicaciones Windows de escritorio (WPF, WinForms).</p></li>
+                <li><p>Aplicaciones web con ASP.NET Core.</p></li>
+                <li><p>Aplicaciones móviles multiplataforma con Xamarin.</p></li>
+                <li><p>Servicios backend y APIs REST.</p></li>
             </ul>
         </div>
         <div class="vent-desvent">
             <h3>Ventajas y Desventajas</h3>
             <h4>Ventajas</h4>
             <ul>
-                <li>Es muy rápido ---> .NET Core compite con C++ y Rust en benchmarks de servidores web.</li>
-                <li>Es muy estable ---> Ideal para sistemas grandes.</li>
-                <li>Tiene un ecosistema enorme ---> Miles de librerías, frameworks y herramientas.</li>
-                <li>Gran comunidad ---> Millones de desarrolladores y documentación oficial de calidad.</li>
-                <li>Soporte empresarial ---> Microsoft lleva más de 20 años mejorándolo.</li>
+                <li><p>Sintaxis limpia y moderna, fácil de aprender.</p></li>
+                <li><p>Muy versátil: juegos, web, desktop, mobile.</p></li>
+                <li><p>Comunidad grande y ecosistema .NET robusto.</p></li>
+                <li><p>Excelente documentación y soporte de Microsoft.</p></li>
             </ul>
             <h4>Desventajas</h4>
             <ul>
-                <li>Puede ser más complejo al inicio que Python ---> Requiere entender conceptos como clases, métodos, tipos, etc.</li>
-                <li>Para apps móviles necesitas MAUI (aún en desarrollo) ---> Aunque mejora cada año.</li>
-                <li>A veces consume más memoria que C++ o Rust ---> Por el Garbage Collector.</li>
+                <li><p>Históricamente ligado a Windows (aunque ahora multiplataforma).</p></li>
+                <li><p>Mayor consumo de memoria comparado con C++.</p></li>
+                <li><p>Requiere .NET instalado para ejecutar.</p></li>
             </ul>
         </div>
     </section>
-    <section class="concepts">
-        <h2>Para aprender!</h2>
-    <div class="codigo">
-        <h3>Ejemplos!</h3>
-        <a href="ejemplo.cs" download>Descargar Ejemplo</a>
-    </div>
-    <div class="recom">
-        <p>Mi recomendación es que uses el Tutorial propiod de Microsoft </p>
-        <a href="https://dotnet.microsoft.com/en-us/learn/dotnet" target="_blank" rel="noopener noreferrer">Tutorial</a>
-    </div>
+
+    <!-- Tutorial Interactivo -->
+    <section class="tutorial-section">
+        <h2>📚 Tutorial Completo</h2>
+        
+        <div class="tutorial-tabs">
+            <button class="tab-btn active" data-tab="basico">Nivel Básico</button>
+            <button class="tab-btn" data-tab="intermedio">Nivel Intermedio</button>
+            <button class="tab-btn" data-tab="avanzado">Nivel Avanzado</button>
+        </div>
+
+        <div id="basico" class="tab-content active">
+            <h3>1. Estructura Básica</h3>
+            <pre><code>using System;
+
+class Program {
+    static void Main() {
+        Console.WriteLine("¡Hola, Mundo!");
+    }
+}</code></pre>
+
+            <h3>2. Variables y Tipos</h3>
+            <pre><code>int edad = 25;
+double altura = 1.75;
+string nombre = "Juan";
+bool esEstudiante = true;
+
+Console.WriteLine(nombre);</code></pre>
+
+            <h3>3. Operadores</h3>
+            <pre><code>int a = 10, b = 5;
+Console.WriteLine(a + b);      
+Console.WriteLine(a - b);      
+Console.WriteLine(a * b);      
+Console.WriteLine(a / b);      </code></pre>
+
+            <h3>4. Condicionales</h3>
+            <pre><code>int edad = 18;
+
+if (edad >= 18) {
+    Console.WriteLine("Eres mayor");
+} else if (edad >= 13) {
+    Console.WriteLine("Eres adolescente");
+} else {
+    Console.WriteLine("Eres niño");
+}</code></pre>
+
+            <h3>5. Bucles</h3>
+            <pre><code>for (int i = 0; i < 5; i++) {
+    Console.WriteLine(i);
+}
+
+int contador = 0;
+while (contador < 3) {
+    Console.WriteLine(contador);
+    contador++;
+}</code></pre>
+
+            <h3>6. Arrays</h3>
+            <pre><code>int[] numeros = { 1, 2, 3, 4, 5 };
+string[] nombres = { "Juan", "María" };
+
+Console.WriteLine(numeros[0]);       
+foreach (int num in numeros) {
+    Console.WriteLine(num);
+}</code></pre>
+
+            <h3>7. Métodos</h3>
+            <pre><code>static void Saludar(string nombre) {
+    Console.WriteLine("¡Hola, " + nombre + "!");
+}
+
+static int Sumar(int a, int b) {
+    return a + b;
+}
+
+Saludar("Juan");
+Console.WriteLine(Sumar(5, 3));</code></pre>
+        </div>
+
+        <div id="intermedio" class="tab-content">
+            <h3>1. Clases</h3>
+            <pre><code>public class Persona {
+    public string Nombre { get; set; }
+    public int Edad { get; set; }
+    
+    public Persona(string nombre, int edad) {
+        Nombre = nombre;
+        Edad = edad;
+    }
+}</code></pre>
+
+            <h3>2. Herencia</h3>
+            <pre><code>public class Animal {
+    public virtual void HacerSonido() {
+        Console.WriteLine("Sonido genérico");
+    }
+}
+
+public class Perro : Animal {
+    public override void HacerSonido() {
+        Console.WriteLine("¡Guau guau!");
+    }
+}</code></pre>
+
+            <h3>3. Polimorfismo</h3>
+            <pre><code>List<Animal> animales = new List<Animal>();
+animales.Add(new Perro());
+animales.Add(new Gato());
+
+foreach (Animal animal in animales) {
+    animal.HacerSonido();
+}</code></pre>
+
+            <h3>4. List y Dictionary</h3>
+            <pre><code>List<string> frutas = new List<string>();
+frutas.Add("Manzana");
+frutas.Add("Plátano");
+
+Dictionary<string, int> edades = new Dictionary<string, int>();
+edades.Add("Juan", 25);
+Console.WriteLine(edades["Juan"]);</code></pre>
+
+            <h3>5. LINQ</h3>
+            <pre><code>int[] numeros = { 1, 2, 3, 4, 5, 6 };
+
+var pares = from n in numeros
+            where n % 2 == 0
+            select n;
+
+var result = numeros
+    .Where(n => n > 2)
+    .Select(n => n * 2)
+    .ToList();</code></pre>
+
+            <h3>6. Excepciones</h3>
+            <pre><code>try {
+    int resultado = 10 / 0;
+} catch (DivideByZeroException e) {
+    Console.WriteLine("Error: " + e.Message);
+} finally {
+    Console.WriteLine("Fin");
+}</code></pre>
+
+            <h3>7. String Interpolation</h3>
+            <pre><code>string nombre = "Juan";
+int edad = 25;
+
+Console.WriteLine($"Mi nombre es {nombre}");
+Console.WriteLine($"Tengo {edad} años");
+Console.WriteLine($"El doble es {edad * 2}");</code></pre>
+        </div>
+
+        <div id="avanzado" class="tab-content">
+            <h3>1. Interfaces</h3>
+            <pre><code>public interface IAnimal {
+    void HacerSonido();
+    void Moverse();
+}
+
+public class Perro : IAnimal {
+    public void HacerSonido() => Console.WriteLine("Guau");
+    public void Moverse() => Console.WriteLine("Corre");
+}</code></pre>
+
+            <h3>2. Propiedades y Validación</h3>
+            <pre><code>public class Persona {
+    private int edad;
+    
+    public int Edad {
+        get { return edad; }
+        set { 
+            if (value >= 0) edad = value;
+        }
+    }
+}</code></pre>
+
+            <h3>3. Genéricos</h3>
+            <pre><code>public class Contenedor<T> {
+    public T Valor { get; set; }
+}
+
+var contenedor = new Contenedor<string>("Hola");
+Console.WriteLine(contenedor.Valor);</code></pre>
+
+            <h3>4. Async/Await</h3>
+            <pre><code>async Task ObtenerDatos() {
+    var cliente = new HttpClient();
+    var response = await cliente.GetAsync("https://api.ejemplo.com");
+    var contenido = await response.Content.ReadAsStringAsync();
+    Console.WriteLine(contenido);
+}</code></pre>
+
+            <h3>5. Events</h3>
+            <pre><code>public delegate void Notificacion(string mensaje);
+
+public class Botón {
+    public event Notificacion OnClick;
+    
+    public void Click() {
+        OnClick?.Invoke("Clickeado");
+    }
+}</code></pre>
+
+            <h3>6. Atributos</h3>
+            <pre><code>[System.AttributeUsage(System.AttributeTargets.Method)]
+public class MiAtributo : System.Attribute {
+    public string Descripcion { get; set; }
+}</code></pre>
+
+            <h3>7. Reflexión</h3>
+            <pre><code>Type tipo = typeof(string);
+
+Console.WriteLine("Nombre: " + tipo.Name);
+foreach (var metodo in tipo.GetMethods()) {
+    Console.WriteLine("- " + metodo.Name);
+}</code></pre>
+        </div>
     </section>
+
+    <!-- Ejemplos Complejos -->
+    <section class="ejemplos-section">
+        <h2>🎯 Ejemplos Complejos</h2>
+
+        <div class="example-card">
+            <h3>Ejemplo 1: Gestor de Tareas</h3>
+            <pre><code>public class Tarea {
+    public string Titulo { get; set; }
+    public bool Completada { get; set; }
+}
+
+public class GestorTareas {
+    private List<Tarea> tareas = new List<Tarea>();
+    
+    public void Agregar(string titulo) {
+        tareas.Add(new Tarea { Titulo = titulo });
+    }
+    
+    public void Completar(int indice) {
+        if (indice >= 0 && indice < tareas.Count) {
+            tareas[indice].Completada = true;
+        }
+    }
+}</code></pre>
+        </div>
+
+        <div class="example-card">
+            <h3>Ejemplo 2: API REST Cliente</h3>
+            <pre><code>public class ApiCliente {
+    private HttpClient cliente = new HttpClient();
+    
+    public async Task<string> ObtenerDatos(string url) {
+        try {
+            var response = await cliente.GetAsync(url);
+            return await response.Content.ReadAsStringAsync();
+        } catch (Exception ex) {
+            Console.WriteLine("Error: " + ex.Message);
+            return null;
+        }
+    }
+}</code></pre>
+        </div>
+
+        <div class="example-card">
+            <h3>Ejemplo 3: Sistema de Autenticación</h3>
+            <pre><code>public class Usuario {
+    public string Correo { get; set; }
+}
+
+public class Autenticador {
+    private List<Usuario> usuarios = new List<Usuario>();
+    
+    public bool Registrar(string correo) {
+        if (usuarios.Any(u => u.Correo == correo)) return false;
+        usuarios.Add(new Usuario { Correo = correo });
+        return true;
+    }
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- Chatbot -->
+    <section class="chatbot-section">
+        <h2>🤖 Chatbot Educativo</h2>
+        <p>Haz preguntas sobre C# y obtén respuestas inmediatas</p>
+        <div id="csharp-chatbot"></div>
+    </section>
+
     <section class="mas">
         <h2>Un poco más!</h2>
+        <div class="mi-opinion">
+            <h3>¿Por qué C#?</h3>
+            <p>C# es mi lenguaje preferido para desarrollo de juegos con Unity. Su sintaxis moderna, características avanzadas y versatilidad lo hacen excelente para múltiples plataformas.</p>
+        </div>
         <div class="links">
-            <h3>Links</h3>
-            <a href="https://dotnet.microsoft.com/es-es/languages/csharp" target="_blank" rel="noopener noreferrer" class="csharp">
-                <img src="csharp.png" alt="csharp" width="100" height="100">
+            <h3>Links Útiles</h3>
+            <a href="https://learn.microsoft.com/es-es/dotnet/csharp/" target="_blank" rel="noopener noreferrer">
+                <img src="csharp.png" alt="C#" width="100" height="100">
             </a>
             <a href="https://github.com/Alexis-dev25" target="_blank" rel="noopener noreferrer" class="social-icon">
                 <img src="github.png" alt="github" width="100" height="100">
             </a>
-        </div>
-        </section>
+        </div>    
+    </section>
+
     <script src="../../theme.js"></script>
+    <script src="../../chatbot.js"></script>
+    <script>
+        createChatbotUI('csharp-chatbot', 'csharp');
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
