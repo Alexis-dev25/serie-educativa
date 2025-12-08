@@ -1,0 +1,84 @@
+/* Java - Estilos personalizados */
+:root {
+    --java-primary: #e74c3c;
+    --java-secondary: #c0392b;
+    --java-light: #ffe8e6;
+    --java-dark: #1a1a1a;
+}
+
+/* Tema */
+body {
+    --primary-color: var(--java-primary);
+    --secondary-color: var(--java-secondary);
+    --light-bg: var(--java-light);
+}
+
+/* Headers */
+.site-header {
+    background: linear-gradient(135deg, var(--java-primary), var(--java-secondary));
+    color: white;
+}
+
+/* Botones */
+button {
+    background-color: var(--java-primary);
+    border-color: var(--java-primary);
+}
+
+button:hover {
+    background-color: var(--java-secondary);
+    border-color: var(--java-secondary);
+}
+
+/* Enlaces */
+a {
+    color: var(--java-primary);
+}
+
+a:hover {
+    color: var(--java-secondary);
+}
+
+/* Código */
+code, pre {
+    background: var(--java-light);
+    border-left: 4px solid var(--java-primary);
+}
+
+/* Sections */
+section {
+    border-top: 3px solid var(--java-primary);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgba(231, 76, 60, 0.05), transparent);
+}
+
+/* Tutorial tabs */
+.tutorial-section {
+    border-left: 4px solid var(--java-primary);
+}
+
+/* Consola simulada */
+#console-output {
+    border: 2px solid var(--java-primary);
+    background: var(--java-dark);
+}
+
+/* Chatbot */
+.chatbot-container {
+    border: 2px solid var(--java-primary);
+}
+
+.chatbot-header {
+    background: var(--java-primary);
+}
+
+/* Ejemplos */
+.example {
+    background: var(--java-light);
+    border-left: 4px solid var(--java-primary);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}

@@ -1,0 +1,84 @@
+/* JavaScript - Estilos personalizados */
+:root {
+    --js-primary: #f39c12;
+    --js-secondary: #e67e22;
+    --js-light: #fff8f0;
+    --js-dark: #2c2c2c;
+}
+
+/* Tema */
+body {
+    --primary-color: var(--js-primary);
+    --secondary-color: var(--js-secondary);
+    --light-bg: var(--js-light);
+}
+
+/* Headers */
+.site-header {
+    background: linear-gradient(135deg, var(--js-primary), var(--js-secondary));
+    color: white;
+}
+
+/* Botones */
+button {
+    background-color: var(--js-primary);
+    border-color: var(--js-primary);
+}
+
+button:hover {
+    background-color: var(--js-secondary);
+    border-color: var(--js-secondary);
+}
+
+/* Enlaces */
+a {
+    color: var(--js-primary);
+}
+
+a:hover {
+    color: var(--js-secondary);
+}
+
+/* Código */
+code, pre {
+    background: var(--js-light);
+    border-left: 4px solid var(--js-primary);
+}
+
+/* Sections */
+section {
+    border-top: 3px solid var(--js-primary);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgba(243, 156, 18, 0.05), transparent);
+}
+
+/* Tutorial tabs */
+.tutorial-section {
+    border-left: 4px solid var(--js-primary);
+}
+
+/* Consola simulada */
+#console-output {
+    border: 2px solid var(--js-primary);
+    background: var(--js-dark);
+}
+
+/* Chatbot */
+.chatbot-container {
+    border: 2px solid var(--js-primary);
+}
+
+.chatbot-header {
+    background: var(--js-primary);
+}
+
+/* Ejemplos */
+.example {
+    background: var(--js-light);
+    border-left: 4px solid var(--js-primary);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}

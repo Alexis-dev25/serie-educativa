@@ -1,0 +1,84 @@
+/* C# - Estilos personalizados */
+:root {
+    --csharp-primary: #239120;
+    --csharp-secondary: #1a6b1a;
+    --csharp-light: #e8f5e9;
+    --csharp-dark: #0d2c0d;
+}
+
+/* Tema */
+body {
+    --primary-color: var(--csharp-primary);
+    --secondary-color: var(--csharp-secondary);
+    --light-bg: var(--csharp-light);
+}
+
+/* Headers */
+.site-header {
+    background: linear-gradient(135deg, var(--csharp-primary), var(--csharp-secondary));
+    color: white;
+}
+
+/* Botones */
+button {
+    background-color: var(--csharp-primary);
+    border-color: var(--csharp-primary);
+}
+
+button:hover {
+    background-color: var(--csharp-secondary);
+    border-color: var(--csharp-secondary);
+}
+
+/* Enlaces */
+a {
+    color: var(--csharp-primary);
+}
+
+a:hover {
+    color: var(--csharp-secondary);
+}
+
+/* Código */
+code, pre {
+    background: var(--csharp-light);
+    border-left: 4px solid var(--csharp-primary);
+}
+
+/* Sections */
+section {
+    border-top: 3px solid var(--csharp-primary);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgba(35, 145, 32, 0.05), transparent);
+}
+
+/* Tutorial tabs */
+.tutorial-section {
+    border-left: 4px solid var(--csharp-primary);
+}
+
+/* Consola simulada */
+#console-output {
+    border: 2px solid var(--csharp-primary);
+    background: var(--csharp-dark);
+}
+
+/* Chatbot */
+.chatbot-container {
+    border: 2px solid var(--csharp-primary);
+}
+
+.chatbot-header {
+    background: var(--csharp-primary);
+}
+
+/* Ejemplos */
+.example {
+    background: var(--csharp-light);
+    border-left: 4px solid var(--csharp-primary);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}

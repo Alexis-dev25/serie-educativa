@@ -1,0 +1,84 @@
+/* macOS - Estilos personalizados */
+:root {
+    --macos-primary: #555555;
+    --macos-secondary: #333333;
+    --macos-light: #f8f8f8;
+    --macos-dark: #1a1a1a;
+}
+
+/* Tema */
+body {
+    --primary-color: var(--macos-primary);
+    --secondary-color: var(--macos-secondary);
+    --light-bg: var(--macos-light);
+}
+
+/* Headers */
+.site-header {
+    background: linear-gradient(135deg, var(--macos-primary), var(--macos-secondary));
+    color: white;
+}
+
+/* Botones */
+button {
+    background-color: var(--macos-primary);
+    border-color: var(--macos-primary);
+}
+
+button:hover {
+    background-color: var(--macos-secondary);
+    border-color: var(--macos-secondary);
+}
+
+/* Enlaces */
+a {
+    color: var(--macos-primary);
+}
+
+a:hover {
+    color: var(--macos-secondary);
+}
+
+/* Código */
+code, pre {
+    background: var(--macos-light);
+    border-left: 4px solid var(--macos-primary);
+}
+
+/* Sections */
+section {
+    border-top: 3px solid var(--macos-primary);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgba(85, 85, 85, 0.05), transparent);
+}
+
+/* Tabs */
+.os-tabs button {
+    background-color: var(--macos-primary);
+    border-color: var(--macos-primary);
+}
+
+.os-tabs button.active {
+    background-color: var(--macos-secondary);
+}
+
+/* Tablas */
+table {
+    border-color: var(--macos-primary);
+}
+
+table th {
+    background-color: var(--macos-primary);
+    color: white;
+}
+
+/* Ejemplos */
+.example {
+    background: var(--macos-light);
+    border-left: 4px solid var(--macos-primary);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}

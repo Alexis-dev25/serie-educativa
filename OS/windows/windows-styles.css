@@ -1,0 +1,84 @@
+/* Windows - Estilos personalizados */
+:root {
+    --windows-primary: #0078d4;
+    --windows-secondary: #005a9e;
+    --windows-light: #f0f6fc;
+    --windows-dark: #1e1e1e;
+}
+
+/* Tema */
+body {
+    --primary-color: var(--windows-primary);
+    --secondary-color: var(--windows-secondary);
+    --light-bg: var(--windows-light);
+}
+
+/* Headers */
+.site-header {
+    background: linear-gradient(135deg, var(--windows-primary), var(--windows-secondary));
+    color: white;
+}
+
+/* Botones */
+button {
+    background-color: var(--windows-primary);
+    border-color: var(--windows-primary);
+}
+
+button:hover {
+    background-color: var(--windows-secondary);
+    border-color: var(--windows-secondary);
+}
+
+/* Enlaces */
+a {
+    color: var(--windows-primary);
+}
+
+a:hover {
+    color: var(--windows-secondary);
+}
+
+/* Código */
+code, pre {
+    background: var(--windows-light);
+    border-left: 4px solid var(--windows-primary);
+}
+
+/* Sections */
+section {
+    border-top: 3px solid var(--windows-primary);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgba(0, 120, 212, 0.05), transparent);
+}
+
+/* Tabs */
+.os-tabs button {
+    background-color: var(--windows-primary);
+    border-color: var(--windows-primary);
+}
+
+.os-tabs button.active {
+    background-color: var(--windows-secondary);
+}
+
+/* Tablas */
+table {
+    border-color: var(--windows-primary);
+}
+
+table th {
+    background-color: var(--windows-primary);
+    color: white;
+}
+
+/* Ejemplos */
+.example {
+    background: var(--windows-light);
+    border-left: 4px solid var(--windows-primary);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}

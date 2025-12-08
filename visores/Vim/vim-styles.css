@@ -1,0 +1,84 @@
+/* Vim - Estilos personalizados */
+:root {
+    --vim-primary: #228B22;
+    --vim-secondary: #1a6b1a;
+    --vim-light: #f0f8f0;
+    --vim-dark: #1a1a1a;
+}
+
+/* Tema */
+body {
+    --primary-color: var(--vim-primary);
+    --secondary-color: var(--vim-secondary);
+    --light-bg: var(--vim-light);
+}
+
+/* Headers */
+.site-header {
+    background: linear-gradient(135deg, var(--vim-primary), var(--vim-secondary));
+    color: white;
+}
+
+/* Botones */
+button {
+    background-color: var(--vim-primary);
+    border-color: var(--vim-primary);
+}
+
+button:hover {
+    background-color: var(--vim-secondary);
+    border-color: var(--vim-secondary);
+}
+
+/* Enlaces */
+a {
+    color: var(--vim-primary);
+}
+
+a:hover {
+    color: var(--vim-secondary);
+}
+
+/* Código */
+code, pre {
+    background: var(--vim-light);
+    border-left: 4px solid var(--vim-primary);
+}
+
+/* Sections */
+section {
+    border-top: 3px solid var(--vim-primary);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgba(34, 139, 34, 0.05), transparent);
+}
+
+/* Tabs */
+.editor-tabs button {
+    background-color: var(--vim-primary);
+    border-color: var(--vim-primary);
+}
+
+.editor-tabs button.active {
+    background-color: var(--vim-secondary);
+}
+
+/* Tablas */
+table {
+    border-color: var(--vim-primary);
+}
+
+table th {
+    background-color: var(--vim-primary);
+    color: white;
+}
+
+/* Ejemplos */
+.example {
+    background: var(--vim-light);
+    border-left: 4px solid var(--vim-primary);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}

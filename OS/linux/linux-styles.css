@@ -1,0 +1,88 @@
+/* Linux - Estilos personalizados */
+:root {
+    --linux-primary: #fcc624;
+    --linux-secondary: #d4a624;
+    --linux-light: #fffbf0;
+    --linux-dark: #2a2a2a;
+}
+
+/* Tema */
+body {
+    --primary-color: var(--linux-primary);
+    --secondary-color: var(--linux-secondary);
+    --light-bg: var(--linux-light);
+}
+
+/* Headers */
+.site-header {
+    background: linear-gradient(135deg, var(--linux-primary), var(--linux-secondary));
+    color: #333;
+}
+
+/* Botones */
+button {
+    background-color: var(--linux-primary);
+    border-color: var(--linux-primary);
+    color: #333;
+}
+
+button:hover {
+    background-color: var(--linux-secondary);
+    border-color: var(--linux-secondary);
+    color: white;
+}
+
+/* Enlaces */
+a {
+    color: var(--linux-primary);
+}
+
+a:hover {
+    color: var(--linux-secondary);
+}
+
+/* Código */
+code, pre {
+    background: var(--linux-light);
+    border-left: 4px solid var(--linux-primary);
+}
+
+/* Sections */
+section {
+    border-top: 3px solid var(--linux-primary);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgba(252, 198, 36, 0.05), transparent);
+}
+
+/* Tabs */
+.os-tabs button {
+    background-color: var(--linux-primary);
+    border-color: var(--linux-primary);
+    color: #333;
+}
+
+.os-tabs button.active {
+    background-color: var(--linux-secondary);
+    color: white;
+}
+
+/* Tablas */
+table {
+    border-color: var(--linux-primary);
+}
+
+table th {
+    background-color: var(--linux-primary);
+    color: #333;
+}
+
+/* Ejemplos */
+.example {
+    background: var(--linux-light);
+    border-left: 4px solid var(--linux-primary);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}

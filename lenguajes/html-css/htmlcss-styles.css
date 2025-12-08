@@ -1,0 +1,84 @@
+/* HTML/CSS - Estilos personalizados */
+:root {
+    --html-primary: #e34c26;
+    --html-secondary: #c41310;
+    --html-light: #fff5f3;
+    --html-dark: #1a1a1a;
+}
+
+/* Tema */
+body {
+    --primary-color: var(--html-primary);
+    --secondary-color: var(--html-secondary);
+    --light-bg: var(--html-light);
+}
+
+/* Headers */
+.site-header {
+    background: linear-gradient(135deg, var(--html-primary), var(--html-secondary));
+    color: white;
+}
+
+/* Botones */
+button {
+    background-color: var(--html-primary);
+    border-color: var(--html-primary);
+}
+
+button:hover {
+    background-color: var(--html-secondary);
+    border-color: var(--html-secondary);
+}
+
+/* Enlaces */
+a {
+    color: var(--html-primary);
+}
+
+a:hover {
+    color: var(--html-secondary);
+}
+
+/* Código */
+code, pre {
+    background: var(--html-light);
+    border-left: 4px solid var(--html-primary);
+}
+
+/* Sections */
+section {
+    border-top: 3px solid var(--html-primary);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgba(227, 76, 38, 0.05), transparent);
+}
+
+/* Tutorial tabs */
+.tutorial-section {
+    border-left: 4px solid var(--html-primary);
+}
+
+/* Consola simulada */
+#console-output {
+    border: 2px solid var(--html-primary);
+    background: var(--html-dark);
+}
+
+/* Chatbot */
+.chatbot-container {
+    border: 2px solid var(--html-primary);
+}
+
+.chatbot-header {
+    background: var(--html-primary);
+}
+
+/* Ejemplos */
+.example {
+    background: var(--html-light);
+    border-left: 4px solid var(--html-primary);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}

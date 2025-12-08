@@ -1,0 +1,84 @@
+/* Sublime Text - Estilos personalizados */
+:root {
+    --sublime-primary: #8B4513;
+    --sublime-secondary: #6b3410;
+    --sublime-light: #f5f1ed;
+    --sublime-dark: #27221a;
+}
+
+/* Tema */
+body {
+    --primary-color: var(--sublime-primary);
+    --secondary-color: var(--sublime-secondary);
+    --light-bg: var(--sublime-light);
+}
+
+/* Headers */
+.site-header {
+    background: linear-gradient(135deg, var(--sublime-primary), var(--sublime-secondary));
+    color: white;
+}
+
+/* Botones */
+button {
+    background-color: var(--sublime-primary);
+    border-color: var(--sublime-primary);
+}
+
+button:hover {
+    background-color: var(--sublime-secondary);
+    border-color: var(--sublime-secondary);
+}
+
+/* Enlaces */
+a {
+    color: var(--sublime-primary);
+}
+
+a:hover {
+    color: var(--sublime-secondary);
+}
+
+/* Código */
+code, pre {
+    background: var(--sublime-light);
+    border-left: 4px solid var(--sublime-primary);
+}
+
+/* Sections */
+section {
+    border-top: 3px solid var(--sublime-primary);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgba(139, 69, 19, 0.05), transparent);
+}
+
+/* Tabs */
+.editor-tabs button {
+    background-color: var(--sublime-primary);
+    border-color: var(--sublime-primary);
+}
+
+.editor-tabs button.active {
+    background-color: var(--sublime-secondary);
+}
+
+/* Tablas */
+table {
+    border-color: var(--sublime-primary);
+}
+
+table th {
+    background-color: var(--sublime-primary);
+    color: white;
+}
+
+/* Ejemplos */
+.example {
+    background: var(--sublime-light);
+    border-left: 4px solid var(--sublime-primary);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}

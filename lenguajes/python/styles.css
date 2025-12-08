@@ -36,6 +36,7 @@ h1 {
 }
 
 section {
+  text-align: center;
   background-color: var(--surface-light);
   color: var(--text-light);
   border: 3px solid var(--accent-py-cyan);

@@ -1,0 +1,84 @@
+/* Visual Studio Code - Estilos personalizados */
+:root {
+    --vscode-primary: #0078d4;
+    --vscode-secondary: #005a9e;
+    --vscode-light: #f0f6fc;
+    --vscode-dark: #1e1e1e;
+}
+
+/* Tema */
+body {
+    --primary-color: var(--vscode-primary);
+    --secondary-color: var(--vscode-secondary);
+    --light-bg: var(--vscode-light);
+}
+
+/* Headers */
+.site-header {
+    background: linear-gradient(135deg, var(--vscode-primary), var(--vscode-secondary));
+    color: white;
+}
+
+/* Botones */
+button {
+    background-color: var(--vscode-primary);
+    border-color: var(--vscode-primary);
+}
+
+button:hover {
+    background-color: var(--vscode-secondary);
+    border-color: var(--vscode-secondary);
+}
+
+/* Enlaces */
+a {
+    color: var(--vscode-primary);
+}
+
+a:hover {
+    color: var(--vscode-secondary);
+}
+
+/* Código */
+code, pre {
+    background: var(--vscode-light);
+    border-left: 4px solid var(--vscode-primary);
+}
+
+/* Sections */
+section {
+    border-top: 3px solid var(--vscode-primary);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgba(0, 120, 212, 0.05), transparent);
+}
+
+/* Tabs */
+.os-tabs button, .editor-tabs button {
+    background-color: var(--vscode-primary);
+    border-color: var(--vscode-primary);
+}
+
+.os-tabs button.active, .editor-tabs button.active {
+    background-color: var(--vscode-secondary);
+}
+
+/* Tablas */
+table {
+    border-color: var(--vscode-primary);
+}
+
+table th {
+    background-color: var(--vscode-primary);
+    color: white;
+}
+
+/* Ejemplos */
+.example {
+    background: var(--vscode-light);
+    border-left: 4px solid var(--vscode-primary);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}

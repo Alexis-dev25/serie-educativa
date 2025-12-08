@@ -1,0 +1,84 @@
+/* SQL - Estilos personalizados */
+:root {
+    --sql-primary: #d35400;
+    --sql-secondary: #ba4a00;
+    --sql-light: #fff4e6;
+    --sql-dark: #2a1f14;
+}
+
+/* Tema */
+body {
+    --primary-color: var(--sql-primary);
+    --secondary-color: var(--sql-secondary);
+    --light-bg: var(--sql-light);
+}
+
+/* Headers */
+.site-header {
+    background: linear-gradient(135deg, var(--sql-primary), var(--sql-secondary));
+    color: white;
+}
+
+/* Botones */
+button {
+    background-color: var(--sql-primary);
+    border-color: var(--sql-primary);
+}
+
+button:hover {
+    background-color: var(--sql-secondary);
+    border-color: var(--sql-secondary);
+}
+
+/* Enlaces */
+a {
+    color: var(--sql-primary);
+}
+
+a:hover {
+    color: var(--sql-secondary);
+}
+
+/* Código */
+code, pre {
+    background: var(--sql-light);
+    border-left: 4px solid var(--sql-primary);
+}
+
+/* Sections */
+section {
+    border-top: 3px solid var(--sql-primary);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgba(211, 84, 0, 0.05), transparent);
+}
+
+/* Tutorial tabs */
+.tutorial-section {
+    border-left: 4px solid var(--sql-primary);
+}
+
+/* Consola simulada */
+#console-output {
+    border: 2px solid var(--sql-primary);
+    background: var(--sql-dark);
+}
+
+/* Chatbot */
+.chatbot-container {
+    border: 2px solid var(--sql-primary);
+}
+
+.chatbot-header {
+    background: var(--sql-primary);
+}
+
+/* Ejemplos */
+.example {
+    background: var(--sql-light);
+    border-left: 4px solid var(--sql-primary);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}

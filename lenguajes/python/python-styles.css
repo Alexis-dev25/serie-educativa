@@ -1,0 +1,81 @@
+/* Python - Estilos personalizados */
+:root {
+    --python-primary: #46abd3;
+    --python-secondary: #ffdc13;
+    --python-light: #f0f4ff;
+    --python-dark: #1a1a2e;
+}
+
+/* Tema */
+body {
+    --primary-color: var(--python-primary);
+    --secondary-color: var(--python-secondary);
+    --light-bg: var(--python-light);
+}
+
+/* Headers */
+.site-header {
+    background: linear-gradient(135deg, var(--python-primary), var(--python-secondary));
+    color: white;
+}
+
+/* Botones */
+button {
+    background-color: var(--python-primary);
+    border-color: var(--python-primary);
+}
+
+button:hover {
+    background-color: var(--python-secondary);
+    border-color: var(--python-secondary);
+}
+
+/* Enlaces */
+a {
+    color: var(--python-primary);
+}
+
+a:hover {
+    color: var(--python-secondary);
+}
+
+
+
+/* Sections */
+section {
+    border-top: 3px solid var(--python-primary);
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgba(102, 126, 234, 0.05), transparent);
+}
+
+/* Tutorial tabs */
+.tutorial-section {
+    border-left: 4px solid var(--python-primary);
+}
+
+/* Consola simulada */
+#console-output {
+    border: 2px solid var(--python-primary);
+    background: var(--python-dark);
+}
+
+/* Chatbot */
+.chatbot-container {
+    border: 2px solid var(--python-primary);
+}
+
+.chatbot-header {
+    background: var(--python-primary);
+}
+
+/* Ejemplos */
+.example {
+    background: var(--python-light);
+    border-left: 4px solid var(--python-primary);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
