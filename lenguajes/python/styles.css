@@ -36,7 +36,7 @@ h1 {
 }
 
 section {
-  text-align: center;
+  text-align: left;
   background-color: var(--surface-light);
   color: var(--text-light);
   border: 3px solid var(--accent-py-cyan);
@@ -59,6 +59,6 @@ div, .code {
 }
 
 [data-theme="dark"] div, [data-theme="dark"] .code {
-  background-color: var(--surface-dark);
-  color: var(--text-dark);
+  background-color: var(--surface);
+  color: var(--text);
 }
