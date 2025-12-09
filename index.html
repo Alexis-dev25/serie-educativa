@@ -41,11 +41,7 @@
     }
     </script>
     
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="counter.css">
-    <link rel="stylesheet" href="comments.css">
-    <link rel="stylesheet" href="chatbot.css">
-    <link rel="stylesheet" href="console-simulator.css">
+    <link rel="stylesheet" href="main.css">
     <script src="debug.js"></script>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="canonical" href="https://alexis-dev25.github.io/serie-educativa/">
@@ -54,9 +50,6 @@
 <body>
     <header class="site-header">
         <h1>Serie Educativa 📚</h1>
-        <div class="controls">
-            <button id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">🌓</button>
-        </div>
     </header>
 
     <section class="intro">
@@ -76,8 +69,8 @@
         <input type="text" id="buscador" placeholder="Buscar...🔍" aria-label="Buscar temas">
         
         <!-- SECCIÓN LENGUAJES DE PROGRAMACIÓN -->
-        <h3 style="margin-top: 30px; margin-bottom: 15px; color: var(--text);">🚀 Lenguajes de Programación</h3>
-        <p style="color: #666; margin-bottom: 20px;"><a href="lenguajes/" style="color: #ff9500; font-weight: bold;">Ver todos los lenguajes →</a></p>
+        <h3 class="section-title">🚀 Lenguajes de Programación</h3>
+        <p class="section-link"><a href="lenguajes/" class="lang-link">Ver todos los lenguajes →</a></p>
         <ul id="lista">
                 <li class="point">
                     <section id="python-section" class="python">
@@ -132,8 +125,8 @@
             </ul>
 
         <!-- SECCIÓN EDITORES Y HERRAMIENTAS -->
-        <h3 style="margin-top: 40px; margin-bottom: 15px; color: var(--text);">📝 Editores de Código</h3>
-        <p style="color: #666; margin-bottom: 20px;"><a href="visores/" style="color: #76b900; font-weight: bold;">Ver todos los editores →</a></p>
+        <h3 class="section-title">📝 Editores de Código</h3>
+        <p class="section-link"><a href="visores/" class="viewer-link">Ver todos los editores →</a></p>
         <ul>
                 <li class="point">
                     <section id="vscode-section" class="vscode">
@@ -166,8 +159,8 @@
             </ul>
 
         <!-- SECCIÓN SISTEMAS OPERATIVOS -->
-        <h3 style="margin-top: 40px; margin-bottom: 15px; color: var(--text);">🖥️ Sistemas Operativos</h3>
-        <p style="color: #666; margin-bottom: 20px;"><a href="OS/" style="color: #0078d4; font-weight: bold;">Ver todos los sistemas →</a></p>
+        <h3 class="section-title">🖥️ Sistemas Operativos</h3>
+        <p class="section-link"><a href="OS/" class="os-link">Ver todos los sistemas →</a></p>
         <ul>
                 <li class="point">
                     <section id="windows-section" class="windows">
@@ -285,9 +278,9 @@
         <section>
                 <div class="comments-section">
                 <h3>💬 Comentarios</h3>
-                <div style="margin-top:6px; margin-bottom:8px; font-size:13px; color:#7f8c8d;" id="comment-mode">Modo: comprobando...</div>
-                <div id="comment-auth" style="margin-bottom:12px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-                    <span id="user-status" style="font-size:13px; color:#7f8c8d;">Identidad: visitante</span>
+                <div class="comment-mode" id="comment-mode">Modo: comprobando...</div>
+                <div id="comment-auth" class="comment-auth">
+                    <span id="user-status" class="user-status">Identidad: visitante</span>
                     <!-- Los botones de autenticación se han retirado para permitir comentar sin iniciar sesión -->
                 </div>
 
@@ -348,7 +341,6 @@
             </div>
         </section>
 
-        <script src="theme.js"></script>
         <script src="buscador.js"></script>
 
         <script>

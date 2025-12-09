@@ -46,7 +46,7 @@
 }
 
 .stat-box {
-    text-align: center;
+    text-align: left;
     padding: 10px;
     background: #151515;
     border-radius: 8px;
@@ -75,7 +75,7 @@
 }
 
 .like-section {
-    text-align: center;
+    text-align: left;
     padding-top: 10px;
     border-top: 1px solid #c0392b;
 }
