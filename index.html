@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academia Dev · Programación, lenguajes y sistemas</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="index.html" class="logo">
+          <div class="logo-mark"><span>DEV</span></div>
+          <span>Academia Dev</span>
+        </a>
+        <nav class="nav-links">
+          <a href="#lenguajes" class="nav-link">Lenguajes</a>
+          <a href="#editores" class="nav-link">Editores</a>
+          <a href="#sistemas" class="nav-link">Sistemas operativos</a>
+          <a href="#terminal" class="nav-link">Terminal</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <h1 id="hero-title" class="hero-title">
+            Aprende <span>programación moderna</span> desde cero hasta avanzado.
+          </h1>
+          <p class="hero-subtitle">
+            Explora lenguajes, visores/editores de código y sistemas operativos
+            reales. Practica en una terminal simulada, sigue tutoriales de
+            instalación paso a paso y sube de nivel con rutas guiadas.
+          </p>
+
+          <div class="hero-badges">
+            <span class="badge">Rutas: Básico · Intermedio · Avanzado</span>
+            <span class="badge">Windows · Linux · macOS · Android · iOS</span>
+            <span class="badge">VSCode · Vim · Sublime · Android Studio</span>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="location.href='#terminal'">
+              Probar terminal interactiva
+            </button>
+            <button class="btn btn-ghost" onclick="location.href='#lenguajes'">
+              Ver mapa de lenguajes
+            </button>
+          </div>
+
+          <div class="hero-meta">
+            <span><strong>Consejo:</strong> empieza con Python + VSCode.</span>
+            <span><strong>Tip:</strong> usa el buscador para filtrar por nivel.</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="glow-orbit"></div>
+          <article class="hero-card">
+            <header class="hero-card-header">
+              <div class="status-dot"></div>
+              <span class="hero-title-label">primeros-pasos.py</span>
+              <span class="hero-pill">Live preview</span>
+            </header>
+            <div class="hero-card-body">
+              <div class="hero-code-line">
+                <span># Python · Nivel básico</span>
+              </div>
+              <div class="hero-code-line">
+                print(<strong>"Hola, desarrollador/a"</strong>)
+              </div>
+              <div class="hero-code-line">
+                lenguaje = <strong>"Python"</strong>
+              </div>
+              <div class="hero-code-line">
+                editor = <strong>"VSCode"</strong>
+              </div>
+              <div class="hero-code-line">
+                sistema = <strong>"Windows / Linux / macOS"</strong>
+              </div>
+              <br />
+              <div class="hero-code-line">
+                <span># Siguiente paso:</span>
+              </div>
+              <div class="hero-code-line">
+                <span>
+                  # 1. Instala tu editor favorito<br />
+                  # 2. Configura un intérprete / compilador<br />
+                  # 3. Ejecuta tu primer script desde la terminal
+                </span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="search-section" aria-label="Buscador de contenidos">
+        <div class="search-box">
+          <label for="search-input">Busca por tema o nivel</label>
+          <div class="search-input-wrapper">
+            <span>🔍</span>
+            <input
+              id="search-input"
+              type="search"
+              placeholder="Ej: python básico, windows, vscode..."
+              autocomplete="off"
+            />
+            <span class="search-shortcut"><kbd>Ctrl</kbd>+<kbd>K</kbd></span>
+          </div>
+          <div class="search-filters">
+            <button
+              type="button"
+              class="filter-chip"
+              data-filter="all"
+              data-active="true"
+            >
+              Todo
+            </button>
+            <button
+              type="button"
+              class="filter-chip"
+              data-filter="lenguaje"
+            >
+              Lenguajes
+            </button>
+            <button
+              type="button"
+              class="filter-chip"
+              data-filter="editor"
+            >
+              Editores
+            </button>
+            <button
+              type="button"
+              class="filter-chip"
+              data-filter="sistema"
+            >
+              Sistemas
+            </button>
+            <button
+              type="button"
+              class="filter-chip"
+              data-filter="basico"
+            >
+              Básico
+            </button>
+            <button
+              type="button"
+              class="filter-chip"
+              data-filter="intermedio"
+            >
+              Intermedio
+            </button>
+            <button
+              type="button"
+              class="filter-chip"
+              data-filter="avanzado"
+            >
+              Avanzado
+            </button>
+          </div>
+          <p class="search-hint">
+            Filtra el contenido por tipo (lenguaje, editor, sistema) o por nivel
+            de dificultad.
+          </p>
+        </div>
+
+        <aside class="stats-card" aria-label="Resumen de progreso">
+          <h3>¿Cómo empezar?</h3>
+          <div class="stats-row">
+            <span>Ruta recomendada</span>
+            <strong>Python → VSCode → Windows / Linux</strong>
+          </div>
+          <div class="stats-row">
+            <span>Tiempo por módulo</span>
+            <strong>20–40 min</strong>
+          </div>
+          <div class="stats-row">
+            <span>Niveles</span>
+            <strong>Básico · Intermedio · Avanzado</strong>
+          </div>
+          <p class="stats-highlight">
+            Sugerencia: combina teoría corta con práctica en la terminal
+            simulada para fijar conceptos.
+          </p>
+        </aside>
+      </section>
+
+      <section id="lenguajes" class="section" aria-labelledby="lenguajes-title">
+        <div class="section-header">
+          <h2 id="lenguajes-title" class="section-title">Lenguajes</h2>
+          <p class="section-subtitle">
+            Aprende la sintaxis, instalación y flujo de trabajo de los lenguajes
+            más usados.
+          </p>
+        </div>
+        <div class="card-grid">
+          <article
+            class="card"
+            data-searchable="true"
+            data-title="Python basico"
+            data-category="lenguaje"
+            data-level="basico"
+            onclick="location.href='lenguajes/python/index.html'"
+          >
+            <div class="card-tag">Lenguaje · Básico</div>
+            <h3 class="card-title">Python: tu primer lenguaje</h3>
+            <p class="card-body">
+              Instalación en Windows, Linux y macOS, uso de la terminal e
+              introducción a variables, funciones y módulos.
+            </p>
+            <div class="card-footer">
+              <span class="pill">Ideal primer lenguaje</span>
+              <span>~35 min</span>
+            </div>
+          </article>
+
+          <article
+            class="card"
+            data-searchable="true"
+            data-title="JavaScript intermedio"
+            data-category="lenguaje"
+            data-level="intermedio"
+            onclick="location.href='lenguajes/javascript/index.html'"
+          >
+            <div class="card-tag">Lenguaje · Intermedio</div>
+            <h3 class="card-title">JavaScript para la web</h3>
+            <p class="card-body">
+              Manejo del DOM, eventos, módulos ES y cómo integrar librerías de
+              terceros con npm.
+            </p>
+            <div class="card-footer">
+              <span class="pill">Front-end y back-end</span>
+              <span>~45 min</span>
+            </div>
+          </article>
+
+          <article
+            class="card"
+            data-searchable="true"
+            data-title="C# avanzado"
+            data-category="lenguaje"
+            data-level="avanzado"
+            onclick="location.href='lenguajes/csharp/index.html'"
+          >
+            <div class="card-tag">Lenguaje · Avanzado</div>
+            <h3 class="card-title">C# y aplicaciones robustas</h3>
+            <p class="card-body">
+              Instalación de .NET, proyectos de consola, buenas prácticas y
+              organización de soluciones grandes.
+            </p>
+            <div class="card-footer">
+              <span class="pill">Back-end y escritorio</span>
+              <span>~60 min</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="editores" class="section" aria-labelledby="editores-title">
+        <div class="section-header">
+          <h2 id="editores-title" class="section-title">
+            Editores y visores de código
+          </h2>
+          <p class="section-subtitle">
+            Elige tu entorno: desde editores ligeros hasta IDEs completos con
+            depurador.
+          </p>
+        </div>
+        <div class="card-grid">
+          <article
+            class="card"
+            data-searchable="true"
+            data-title="VSCode basico"
+            data-category="editor"
+            data-level="basico"
+            onclick="location.href='editores/vscode/index.html'"
+          >
+            <div class="card-tag">Editor · Básico</div>
+            <h3 class="card-title">Visual Studio Code</h3>
+            <p class="card-body">
+              Instalación, extensiones esenciales, terminal integrada y atajos
+              para ir rápido.
+            </p>
+            <div class="card-footer">
+              <span class="pill">Muy recomendado</span>
+              <span>~25 min</span>
+            </div>
+          </article>
+
+          <article
+            class="card"
+            data-searchable="true"
+            data-title="Vim intermedio"
+            data-category="editor"
+            data-level="intermedio"
+            onclick="location.href='editores/vim/index.html'"
+          >
+            <div class="card-tag">Editor · Intermedio</div>
+            <h3 class="card-title">Vim y edición eficiente</h3>
+            <p class="card-body">
+              Comandos básicos, modos, configuración y cómo integrarlo con Git y
+              terminal.
+            </p>
+            <div class="card-footer">
+              <span class="pill">Para usuarios de teclado</span>
+              <span>~40 min</span>
+            </div>
+          </article>
+
+          <article
+            class="card"
+            data-searchable="true"
+            data-title="Android Studio avanzado"
+            data-category="editor"
+            data-level="avanzado"
+            onclick="location.href='editores/android-studio/index.html'"
+          >
+            <div class="card-tag">IDE · Avanzado</div>
+            <h3 class="card-title">Android Studio</h3>
+            <p class="card-body">
+              Instalación del SDK, emuladores, depuración y mejores prácticas
+              para proyectos móviles.
+            </p>
+            <div class="card-footer">
+              <span class="pill">Apps Android nativas</span>
+              <span>~70 min</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="sistemas" class="section" aria-labelledby="sistemas-title">
+        <div class="section-header">
+          <h2 id="sistemas-title" class="section-title">Sistemas operativos</h2>
+          <p class="section-subtitle">
+            Entiende las diferencias entre Windows, Linux, macOS, Android e iOS
+            y cómo preparar cada entorno.
+          </p>
+        </div>
+        <div class="card-grid">
+          <article
+            class="card"
+            data-searchable="true"
+            data-title="Windows basico"
+            data-category="sistema"
+            data-level="basico"
+            onclick="location.href='sistemas/windows/index.html'"
+          >
+            <div class="card-tag">Sistema · Básico</div>
+            <h3 class="card-title">Windows para programar</h3>
+            <p class="card-body">
+              Instalación de herramientas, PowerShell, WSL y buenas prácticas de
+              organización.
+            </p>
+            <div class="card-footer">
+              <span class="pill">Entorno muy común</span>
+              <span>~30 min</span>
+            </div>
+          </article>
+
+          <article
+            class="card"
+            data-searchable="true"
+            data-title="Linux intermedio"
+            data-category="sistema"
+            data-level="intermedio"
+            onclick="location.href='sistemas/linux/index.html'"
+          >
+            <div class="card-tag">Sistema · Intermedio</div>
+            <h3 class="card-title">Linux para desarrolladores</h3>
+            <p class="card-body">
+              Distribuciones recomendadas, gestor de paquetes, permisos y
+              trabajo intensivo con terminal.
+            </p>
+            <div class="card-footer">
+              <span class="pill">Back-end y servidores</span>
+              <span>~50 min</span>
+            </div>
+          </article>
+
+          <article
+            class="card"
+            data-searchable="true"
+            data-title="Android iOS moviles"
+            data-category="sistema"
+            data-level="intermedio"
+            onclick="location.href='sistemas/android/index.html'"
+          >
+            <div class="card-tag">Sistemas móviles</div>
+            <h3 class="card-title">Android y iOS para devs</h3>
+            <p class="card-body">
+              Diferencias clave, requisitos de desarrollo, emuladores y pruebas
+              en dispositivos físicos.
+            </p>
+            <div class="card-footer">
+              <span class="pill">Mundo mobile</span>
+              <span>~45 min</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section
+        id="terminal"
+        class="terminal-section"
+        aria-labelledby="terminal-title"
+      >
+        <div>
+          <div class="section-header">
+            <h2 id="terminal-title" class="section-title">
+              Terminal simulada
+            </h2>
+            <p class="section-subtitle">
+              Practica comandos reales en un entorno seguro inspirado en Bash y
+              PowerShell.
+            </p>
+          </div>
+
+          <article class="terminal" aria-label="Terminal educativa simulada">
+            <header class="terminal-header">
+              <div class="terminal-dots">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+              </div>
+              <span class="terminal-title">dev@academia:~</span>
+            </header>
+            <div class="terminal-body" id="terminal-output"></div>
+            <div class="terminal-input-row">
+              <span class="terminal-prompt">$</span>
+              <input
+                id="terminal-input"
+                type="text"
+                placeholder="Escribe help, ls, start basico, install python..."
+                autocomplete="off"
+              />
+            </div>
+            <p class="terminal-help">
+              Soporta comandos como
+              <code>help</code>, <code>ls</code>,
+              <code>start basico</code>,
+              <code>install vscode</code>,
+              <code>use requests</code>,
+              <code>info os</code> y más.
+            </p>
+          </article>
+        </div>
+
+        <aside class="terminal-sidebar">
+          <article class="terminal-sidebar-card">
+            <h3>Guía rápida de instalación</h3>
+            <ul>
+              <li><strong>1.</strong> Elige un lenguaje inicial (ej: Python).</li>
+              <li><strong>2.</strong> Instala un editor (VSCode recomendado).</li>
+              <li><strong>3.</strong> Prepara tu sistema (Windows, Linux o macOS).</li>
+              <li><strong>4.</strong> Ejecuta tu primer script en la terminal.</li>
+            </ul>
+            <p class="note">
+              En cada subpágina encontrarás tutoriales detallados según lenguaje,
+              editor u OS.
+            </p>
+          </article>
+
+          <article class="terminal-sidebar-card">
+            <h3>Niveles de complejidad</h3>
+            <ul>
+              <li><strong>Básico:</strong> sintaxis, instalación, primeros scripts.</li>
+              <li><strong>Intermedio:</strong> proyectos pequeños, librerías, testing.</li>
+              <li><strong>Avanzado:</strong> arquitectura, buenas prácticas, despliegue.</li>
+            </ul>
+          </article>
+        </aside>
+      </section>
+
+      <section
+        id="feedback"
+        class="feedback-section"
+        aria-labelledby="feedback-title"
+      >
+        <article class="feedback-card">
+          <h3 id="feedback-title">Comentarios y feedback</h3>
+          <p class="section-subtitle">
+            Deja tus impresiones sobre la web o sugiere nuevos temas. Este
+            módulo está preparado para conectarse a una base de datos.
+          </p>
+          <form id="comment-form" class="feedback-form">
+            <div>
+              <label for="comment-name">Nombre (opcional)</label>
+              <input
+                id="comment-name"
+                type="text"
+                placeholder="Tu nombre o alias"
+              />
+            </div>
+            <div>
+              <label for="comment-text">Comentario</label>
+              <textarea
+                id="comment-text"
+                rows="3"
+                placeholder="¿Qué te gustaría aprender? ¿Qué mejorarías de la web?"
+              ></textarea>
+            </div>
+            <div class="feedback-actions">
+              <button type="submit" class="btn btn-primary">
+                Publicar comentario
+              </button>
+              <div class="likes-badge">
+                <button
+                  type="button"
+                  id="like-button"
+                  class="btn btn-ghost"
+                  style="padding-inline: 0.7rem"
+                >
+                  Dar like a la web
+                </button>
+                <span>
+                  Likes totales:
+                  <strong id="likes-counter">0</strong>
+                </span>
+              </div>
+            </div>
+          </form>
+
+          <div class="comments-list" id="comments-list" aria-live="polite"></div>
+        </article>
+
+        <article class="likes-stats-card">
+          <h3>Estadísticas de likes por día</h3>
+          <p class="section-subtitle">
+            Estos datos se calculan en el navegador. En producción, deberías
+            guardarlos en tu base de datos para tener estadísticas reales.
+          </p>
+          <ul id="likes-stats-list" class="likes-stats-list"></ul>
+          <p id="likes-empty" class="likes-empty">
+            Aún no hay likes registrados. Cuando esta web reciba likes, verás
+            aquí los días con más actividad.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span>Academia Dev · Laboratorio educativo de programación</span>
+        <div class="footer-links">
+          <a href="#lenguajes">Lenguajes</a>
+          <a href="#editores">Editores</a>
+          <a href="#sistemas">Sistemas operativos</a>
+          <a href="#terminal">Terminal</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
+
