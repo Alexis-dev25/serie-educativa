@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Academia Dev · Programación, lenguajes y sistemas</title>
+    <title>Academia de Alexis</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="site-header">
       <div class="header-inner">
         <a href="index.html" class="logo">
-          <div class="logo-mark"><span>DEV</span></div>
-          <span>Academia Dev</span>
+          <div class="logo-mark"><span>ADA</span></div>
+          <span>Academia de Alexis</span>
         </a>
         <nav class="nav-links">
           <a href="#lenguajes" class="nav-link">Lenguajes</a>
@@ -543,7 +543,7 @@
 
     <footer class="site-footer">
       <div class="footer-inner">
-        <span>Academia Dev · Laboratorio educativo de programación</span>
+        <span>Academia de Alexis · Laboratorio educativo de programación</span>
         <div class="footer-links">
           <a href="#lenguajes">Lenguajes</a>
           <a href="#editores">Editores</a>
@@ -553,6 +553,41 @@
       </div>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+        <script>
+            // Configuración Firebase por defecto (se puede sobrescribir en window.firebaseConfig)
+            if (!window.firebaseConfig) {
+                window.firebaseConfig = {
+                    apiKey: "AIzaSyCbm7LYeDnXJTk9bJJs9FyOvkmqxMs7f8U",
+                    authDomain: "serie-educativa.firebaseapp.com",
+                    databaseURL: "https://serie-educativa-default-rtdb.firebaseio.com",
+                    projectId: "serie-educativa",
+                    storageBucket: "serie-educativa.firebasestorage.app",
+                    messagingSenderId: "419592658892",
+                    appId: "1:419592658892:web:11a70ffa88f853a4920769",
+                    measurementId: "G-81N5THENWD"
+                };
+            }
+
+            // Inicializar Firebase solo si el SDK está disponible
+            try {
+                if (typeof firebase !== 'undefined') {
+                    if (!firebase.apps || !firebase.apps.length) {
+                        firebase.initializeApp(window.firebaseConfig);
+                        window.LOG && window.LOG('Firebase inicializado');
+                    } else {
+                        window.LOG && window.LOG('Firebase ya inicializado');
+                    }
+                } else {
+                    console.warn('SDK de Firebase no cargado aún');
+                }
+            } catch (err) {
+                console.error('Error inicializando Firebase:', err);
+            }
+        </script>
     <script src="app.js"></script>
   </body>
 </html>
