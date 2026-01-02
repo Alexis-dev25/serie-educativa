@@ -981,4 +981,157 @@ main {
   color: #9ca3af;
 }
 
+/* =========================
+   Widget Firebase
+   ========================= */
+.firebase-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  background: radial-gradient(
+    circle at top left,
+    rgba(56, 189, 248, 0.15),
+    transparent 60%
+  ),
+  rgba(15, 23, 42, 0.97);
+  border: 1px solid rgba(31, 41, 55, 0.95);
+  border-radius: 1rem;
+  padding: 0.95rem 1rem;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.8);
+}
+
+.firebase-widget-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.firebase-widget-label {
+  font-size: 0.78rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.firebase-widget-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #38bdf8, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.firebase-widget-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+@media (max-width: 600px) {
+  .firebase-widget-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.firebase-stat {
+  text-align: center;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.75rem;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(31, 41, 55, 0.95);
+}
+
+.firebase-stat-number {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+.firebase-stat-label {
+  font-size: 0.7rem;
+  color: #9ca3af;
+  margin-top: 0.15rem;
+}
+
+.firebase-button {
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(to right, #38bdf8, #a855f7);
+  color: #0b1120;
+  border: none;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 170ms ease-out;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.7);
+}
+
+.firebase-button:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.8);
+}
+
+.firebase-button:active {
+  transform: translateY(0px);
+}
+
+.firebase-comments {
+  margin-top: 0.6rem;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.firebase-comment {
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.75rem;
+  background: rgba(15, 23, 42, 0.95);
+  border-left: 2px solid rgba(56, 189, 248, 0.5);
+  margin-bottom: 0.4rem;
+  font-size: 0.8rem;
+}
+
+.firebase-comment-author {
+  font-weight: 600;
+  color: #38bdf8;
+  font-size: 0.78rem;
+}
+
+.firebase-comment-text {
+  color: #e5e7eb;
+  margin-top: 0.2rem;
+  line-height: 1.4;
+}
+
+.firebase-comment-time {
+  font-size: 0.7rem;
+  color: #6b7280;
+  margin-top: 0.2rem;
+}
+
+.firebase-loading {
+  text-align: center;
+  padding: 1rem;
+  color: #9ca3af;
+  font-size: 0.82rem;
+}
+
+.firebase-error {
+  padding: 0.8rem;
+  border-radius: 0.75rem;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #fecaca;
+  font-size: 0.8rem;
+}
+
+.firebase-empty {
+  text-align: center;
+  padding: 1rem;
+  color: #6b7280;
+  font-size: 0.8rem;
+}
+
 

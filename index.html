@@ -485,43 +485,11 @@
             Deja tus impresiones sobre la web o sugiere nuevos temas. Este
             módulo está preparado para conectarse a una base de datos.
           </p>
-          <form id="comment-form" class="feedback-form">
-            <div>
-              <label for="comment-name">Nombre (opcional)</label>
-              <input
-                id="comment-name"
-                type="text"
-                placeholder="Tu nombre o alias"
-              />
-            </div>
-            <div>
-              <label for="comment-text">Comentario</label>
-              <textarea
-                id="comment-text"
-                rows="3"
-                placeholder="¿Qué te gustaría aprender? ¿Qué mejorarías de la web?"
-              ></textarea>
-            </div>
-            <div class="feedback-actions">
-              <button type="submit" class="btn btn-primary">
-                Publicar comentario
-              </button>
-              <div class="likes-badge">
-                <button
-                  type="button"
-                  id="like-button"
-                  class="btn btn-ghost"
-                  style="padding-inline: 0.7rem"
-                >
-                  Dar like a la web
-                </button>
-                <span>
-                  Likes totales:
-                  <strong id="likes-counter">0</strong>
-                </span>
-              </div>
-            </div>
-          </form>
+          
+          <!-- Contenedor para el widget de Firebase (likes, visitas, comentarios) -->
+          <div id="firebase-widget" style="margin-bottom: 2rem;"></div>
+          
+
 
           <div class="comments-list" id="comments-list" aria-live="polite"></div>
         </article>
@@ -553,42 +521,69 @@
       </div>
     </footer>
 
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <!-- ===== FIREBASE SDK (IMPORTANTE: PRIMERO) ===== -->
+  <!-- SOLUCIÓN: Usar Firebase Compat Library (funciona sin type="module") -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
-        <script>
+  <!-- ===== TUS ARCHIVOS (EN ORDEN) ===== -->
+  <script src="config.js"></script>
+  <script src="firebase-service.js"></script>
+  <script src="firebase-ui.js"></script>
+
+  <!-- ===== INICIALIZAR FIREBASE ===== -->
+  <script>
             // Configuración Firebase por defecto (se puede sobrescribir en window.firebaseConfig)
             if (!window.firebaseConfig) {
                 window.firebaseConfig = {
-                    apiKey: "AIzaSyCbm7LYeDnXJTk9bJJs9FyOvkmqxMs7f8U",
-                    authDomain: "serie-educativa.firebaseapp.com",
-                    databaseURL: "https://serie-educativa-default-rtdb.firebaseio.com",
-                    projectId: "serie-educativa",
-                    storageBucket: "serie-educativa.firebasestorage.app",
-                    messagingSenderId: "419592658892",
-                    appId: "1:419592658892:web:11a70ffa88f853a4920769",
-                    measurementId: "G-81N5THENWD"
+                  apiKey: "AIzaSyCaWdZXzilLuZpicDYghG0P09vH0WKDzkA",
+                  authDomain: "academia-7b07b.firebaseapp.com",
+                  databaseURL: "https://academia-7b07b-default-rtdb.firebaseio.com",
+                  projectId: "academia-7b07b",
+                  storageBucket: "academia-7b07b.firebasestorage.app",
+                  messagingSenderId: "877002159008",
+                  appId: "1:877002159008:web:dc382da8c9142123ec6ac5",
+                  measurementId: "G-1K5DY72RHL"
                 };
             }
-
-            // Inicializar Firebase solo si el SDK está disponible
-            try {
-                if (typeof firebase !== 'undefined') {
-                    if (!firebase.apps || !firebase.apps.length) {
-                        firebase.initializeApp(window.firebaseConfig);
-                        window.LOG && window.LOG('Firebase inicializado');
-                    } else {
-                        window.LOG && window.LOG('Firebase ya inicializado');
-                    }
-                } else {
-                    console.warn('SDK de Firebase no cargado aún');
-                }
-            } catch (err) {
-                console.error('Error inicializando Firebase:', err);
-            }
-        </script>
-    <script src="app.js"></script>
+            
+    document.addEventListener('DOMContentLoaded', async () => {
+      const widgetContainer = document.getElementById('firebase-widget');
+      
+      try {
+        // Inicializar Firebase
+        console.log('🚀 Iniciando Firebase...');
+        const initialized = await initFirebaseService();
+        
+        if (initialized) {
+          console.log('✅ Firebase inicializado correctamente');
+          
+          // Crear el widget completo
+          // (Puedes cambiar 'ejemplo-1' por el ID que quieras)
+          widgetContainer.innerHTML = '';
+          await createInteractionWidget('ejemplo-1', widgetContainer);
+          
+          console.log('✅ Widget creado exitosamente');
+        } else {
+          throw new Error('No se pudo inicializar Firebase. Verifica config.js');
+        }
+      } catch (error) {
+        console.error('❌ Error:', error);
+        widgetContainer.innerHTML = `
+          <div class="error">
+            <strong>⚠️ Error al cargar Firebase</strong>
+            <p>${error.message}</p>
+            <p>Asegúrate de:</p>
+            <ul>
+              <li>✓ Haber configurado tus credenciales en config.js</li>
+              <li>✓ Tener internet activa</li>
+              <li>✓ Tener habilitada la Realtime Database en Firebase</li>
+            </ul>
+          </div>
+        `;
+      }
+    });
+  </script>
   </body>
 </html>
 

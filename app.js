@@ -1,26 +1,8 @@
 // ============================
-// Configuración (placeholder DB)
+// Configuración de Firebase
 // ============================
-// Aquí puedes poner las credenciales reales de tu backend / base de datos.
-// Ejemplo: una API REST, Firebase, Supabase, MongoDB, etc.
-const dbConfig = {
-  apiKey: "AIzaSyCbm7LYeDnXJTk9bJJs9FyOvkmqxMs7f8U",
-  authDomain: "serie-educativa.firebaseapp.com",
-  databaseURL: "https://serie-educativa-default-rtdb.firebaseio.com",
-  projectId: "serie-educativa",
-  storageBucket: "serie-educativa.firebasestorage.app",
-  messagingSenderId: "419592658892",
-  appId: "1:419592658892:web:11a70ffa88f853a4920769",
-  measurementId: "G-81N5THENWD"
-};
-
-// Interfaz esperada para el backend (esqueleto):
-// async function saveComment(comment) { ... }
-// async function registerLike(dateKey) { ... }
-// async function fetchComments() { ... }
-// async function fetchLikeStats() { ... }
-
-// En este archivo solo simulamos el comportamiento en memoria / localStorage.
+// Las credenciales se cargan desde config.js (ya no necesitas duplicarlas aquí)
+// FIREBASE_CONFIG está disponible globalmente
 
 // ============================
 // Utilidades
